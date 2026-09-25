@@ -1,34 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Halim Quran — Website 2.0
 
-## Getting Started
+Rebuild of halimquran.com as headless commerce: Next.js frontend + Scalev as
+the commerce backend (replacing Plugo). This repository currently contains
+only the **initial foundation** — design system, global layout, routing
+skeleton, and mock data. See the internal "Website 2.0 HQ" plan for full
+scope and phase gating.
 
-First, run the development server:
+## Requirements
+
+- Node.js and npm
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Other scripts:
 
-## Learn More
+```bash
+npm run build   # production build
+npm run lint     # lint
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Project structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+app/          routes (App Router)
+components/   ui/ (shadcn), layout/, product/, cart/, checkout/, tracking/, sections/
+lib/          scalev/, analytics/, seo/ (all stubs — deferred), utils/, mock-data/
+types/        shared TypeScript types
+config/       site + nav config
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Notes
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **`lib/mock-data/` is placeholder data, not production data.** Product
+  names/prices come from a verified live-crawl audit; category assignment
+  is inferred, not confirmed.
+- `lib/scalev/`, `lib/analytics/`, `lib/seo/`, and the `components/checkout/`,
+  `components/tracking/`, `components/sections/` folders are intentional
+  stubs — Scalev integration, real analytics/tracking, and CMS/content are
+  out of scope for this phase.
+- No production credentials belong in this repo. Copy `.env.example` to
+  `.env.local` for local development.
