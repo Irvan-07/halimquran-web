@@ -31,6 +31,8 @@ export interface Product {
   rating?: number;
   /** Approximate swatch colors observed on the live product card — illustrative, not pixel-sampled. */
   colors?: string[];
+  /** Color swatches paired with that variant's own real photo — lets the PDP gallery switch image on color select, like the live site. Only set where we actually have a per-variant photo (currently Scalev-sourced products); mock products show `colors` as plain swatches with no image swap. */
+  colorVariants?: { hex: string; imageUrl: string }[];
   /** Shown as "Cocok untuk Wakaf" on the live site's Wakaf page. */
   wakafEligible?: boolean;
   /** Shown in the live site's homepage "Hadiah/Gift" carousel. */

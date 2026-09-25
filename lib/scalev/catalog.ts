@@ -64,10 +64,22 @@ export function scalevProductToProduct(detail: ScalevProductDetail): Product {
   const variants: ScalevProductVariantDetail[] = detail.variants ?? [];
   const primary = variants[0];
 
-  const colors = detail.option1_name?.toLowerCase().includes("warna")
+  const isColorVariant = detail.option1_name?.toLowerCase().includes("warna");
+  const colors = isColorVariant
     ? variants
         .map((v) => (v.option1_value ? colorNameToHex(v.option1_value) : undefined))
         .filter((c): c is string => Boolean(c))
+    : undefined;
+  // Pair each variant's own hex with its own photo, so the PDP gallery can
+  // swap image on color select instead of just tinting a swatch dot.
+  const colorVariants = isColorVariant
+    ? variants
+        .map((v) => {
+          const hex = v.option1_value ? colorNameToHex(v.option1_value) : undefined;
+          const imageUrl = v.images?.[0];
+          return hex && imageUrl ? { hex, imageUrl } : undefined;
+        })
+        .filter((c): c is { hex: string; imageUrl: string } => Boolean(c))
     : undefined;
 
   return {
@@ -80,6 +92,7 @@ export function scalevProductToProduct(detail: ScalevProductDetail): Product {
     imageUrl: detail.images?.[0] ?? detail.featured_image_url,
     source: "scalev",
     ...(colors && colors.length > 0 ? { colors } : {}),
+    ...(colorVariants && colorVariants.length > 0 ? { colorVariants } : {}),
   };
 }
 

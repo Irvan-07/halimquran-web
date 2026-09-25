@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Star } from "lucide-react";
 import {
@@ -10,6 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ProductCard } from "@/components/product/ProductCard";
+import { ProductGallery } from "@/components/product/ProductGallery";
 import { PurchasePanel } from "@/components/product/PurchasePanel";
 import { TrackViewItem } from "@/components/tracking";
 import { getMergedCatalog, getMergedProductBySlug } from "@/lib/scalev/catalog";
@@ -174,23 +174,7 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
 
       <div className="grid gap-8 lg:grid-cols-2">
         {/* Product Gallery */}
-        <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-secondary">
-          {product.imageUrl && (
-            <Image
-              src={product.imageUrl}
-              alt={product.name}
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
-              priority
-            />
-          )}
-          {product.badge && (
-            <span className="absolute left-3 top-3 rounded bg-brand-yellow px-2.5 py-1 text-xs font-bold text-brand-yellow-foreground">
-              {product.badge}
-            </span>
-          )}
-        </div>
+        <ProductGallery product={product} />
 
         {/* Product Info + Purchase Panel */}
         <div className="flex flex-col gap-5">
