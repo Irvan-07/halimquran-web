@@ -5,16 +5,27 @@
 // auth/route families exist — don't merge them:
 //   - "Business" routes (product/order management): Authorization: Bearer
 //     <api_key or OAuth JWT>, e.g. GET /v3/products, GET /v3/orders/{id}.
+//     SECRET key, server-only — see lib/scalev/client.ts.
 //   - "Storefront" (public/guest) routes: X-Scalev-Storefront-Api-Key
-//     header, store-scoped under /v3/stores/{store_id}/public/..., e.g.
-//     GET .../cart, POST .../checkout. An optional X-Scalev-Guest-Token
-//     (UUID) carries a guest's cart/session across requests. NOT yet
-//     live-verified (no storefront key/store ID exists yet).
+//     header (a PUBLISHABLE `sfpk_...` key, safe client-side), store-scoped
+//     under /v3/stores/{store_id}/public/... using the store's `unique_id`
+//     (NOT the numeric dashboard URL id) as {store_id}. An optional
+//     X-Scalev-Guest-Token (UUID, read from a response header, not sent by
+//     the caller initially) carries a guest's cart/session across requests.
+//     Per dev.scalev.com/docs/storefront-api-overview (read 26 Sep 2026),
+//     these routes are meant to be called DIRECTLY from the browser, not
+//     proxied through our server — see lib/scalev/storefront-client.ts.
+//     Only functions on an active Basic/Pro/Ultimate Scalev plan; an
+//     unpaid/inactive plan returns "Store not found" regardless of key
+//     validity (Halim Quran's Pro plan is Unpaid as of 26 Sep 2026, so
+//     these routes are not yet live-testable).
 // Field lists below are what was actually observed; treat any field NOT
 // listed here as unconfirmed rather than assuming it's absent — both
 // product and variant objects have more fields than modeled (marketing/
 // affiliate/LMS-related ones omitted as unlikely to matter for the
-// storefront).
+// storefront). The storefront cart/checkout shapes below are inferred from
+// docs prose and endpoint descriptions, NOT from example JSON payloads —
+// treat every field as a best guess until checked against a real response.
 
 export type ScalevItemType =
   | "physical"
