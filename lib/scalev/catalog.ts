@@ -128,7 +128,13 @@ export async function getMergedCatalog(): Promise<Product[]> {
   const mockBySlug = new Map(mockProducts.map((p) => [p.slug, p]));
   const merged = scalevProducts.map((p) => {
     const mockMatch = mockBySlug.get(p.slug);
-    return mockMatch ? { ...p, category: mockMatch.category } : p;
+    if (!mockMatch) return p;
+    // Mock supplies every marketing/rich-content field Scalev has no
+    // equivalent for (badge, rating, colors, wakaf/gift/customName
+    // eligibility, description); Scalev overrides with its own
+    // commerce-critical fields (price, imageUrl, id, name); category stays
+    // mock's either way since Scalev has no category data at all.
+    return { ...mockMatch, ...p, category: mockMatch.category };
   });
 
   const scalevSlugs = new Set(scalevProducts.map((p) => p.slug));

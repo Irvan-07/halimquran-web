@@ -1,11 +1,20 @@
-// MOCK DATA — placeholder catalog for foundation UI work only. Not from Scalev.
-// Names, prices, badges and ratings below were read directly off the live
-// halimquran.com site (2026-09-16), including their real product URLs (kept
-// in `slug`) — products 5 and 6 from the live Wakaf Quran page specifically,
+// MOCK DATA — placeholder catalog for foundation UI work only. Not from
+// Scalev. Names, prices, badges and ratings below were read directly off
+// the live halimquran.com site, including their real product URLs (kept in
+// `slug`) — products 5 and 6 from the live Wakaf Quran page specifically,
 // where the site itself marks them "Cocok untuk Wakaf". Category assignment
 // is inferred from product naming/badges (e.g. "15 baris" -> Hafalan), not
 // confirmed against Halim Quran's internal taxonomy — recheck before
 // treating as authoritative. `colors` are illustrative, not pixel-sampled.
+//
+// Products 15-41 added 26 Sep 2026 by scrolling halimquran.com/products'
+// lazy-loaded grid to its end (41 real products total) — same
+// name/price/slug verification standard as products 1-14. `description` is
+// only set where the real PDP copy was actually read (product 3); every
+// other product's Deskripsi section is generated from category/size/badge
+// by getDescription() in the PDP page, not copied text, to avoid inventing
+// certifications or claims (e.g. "ditashih KDN Malaysia") this app can't
+// verify for that specific product.
 import type { Product } from "@/types/product";
 
 export const mockProducts: Product[] = [
@@ -41,6 +50,10 @@ export const mockProducts: Product[] = [
     rating: 5,
     colors: ["#E8DCC4", "#1E3A5F", "#7B2D26", "#111827", "#6B7280", "#C2417A", "#8B5E34"],
     customNameEligible: true,
+    // Real PDP copy, read verbatim from halimquran.com 26 Sep 2026 — kept
+    // as-is per instruction to copy real content where we actually have it.
+    description:
+      "Pernahkah kamu merasakan ketenangan saat membaca Al-Qur'an dengan mushaf yang digunakan di Masjid Nabawi dan Masjidil Haram? Kini, pengalaman itu bisa kamu dapatkan dalam Mushaf Madinah Huzaifi—mushaf dengan standar internasional terbitan Halim Qur'an yang telah ditashih oleh KDN Malaysia dan mengantongi izin edar dari Kemenag RI, aman syar'i aman regulasi!\n\nSpesifikasi:\n- Rasm Utsmani Standar Madinah – Susunan ayat 15 baris.\n- Ukuran A5 (14,5 x 20,5 cm) – Pas di tangan, nyaman dibaca kapan saja.\n- 6 Varian Warna Elegan – Biru Tua, Cream, Beige, Hitam, Maroon, dan Pink.\n\nKeunggulan yang Membuatnya Istimewa:\n✔ Tashih Resmi dari KDN Malaysia – Bacaan terjamin sesuai standar.\n✔ Izin Edar Kemenag RI – Aman dan legal digunakan di Indonesia.\n✔ Kertas QPP Premium – Halus, tahan lama, dan sejuk di mata, nyaman untuk tilawah dalam waktu lama.\n\nCocok untuk:\n- Hafalan dan tilawah sehari-hari.\n- Hadiah spesial untuk keluarga, sahabat, atau guru mengaji.\n- Koleksi mushaf berkualitas dengan standar internasional.",
   },
   {
     id: "4",
@@ -71,8 +84,8 @@ export const mockProducts: Product[] = [
     wakafEligible: true,
   },
   // Products 7-9: real bundle SKUs from the homepage's own "Hadiah/Gift"
-  // carousel (2026-09-17) — 2-piece box sets with free name engraving,
-  // positioned by the site itself as gift-appropriate.
+  // carousel — 2-piece box sets with free name engraving, positioned by
+  // the site itself as gift-appropriate.
   {
     id: "7",
     slug: "bundling-mushaf-al-quran-madinah-huzaifi-a5-2-pcs-box-exclusive-free-custom-nama",
@@ -103,9 +116,7 @@ export const mockProducts: Product[] = [
     badge: "Free Custom Nama",
     giftEligible: true,
   },
-  // Products 10-14: real Al Wafa line SKUs surfaced via the live site's own
-  // search for "wafa" (2026-09-17) — names, prices, and slugs (hence real
-  // product URLs) read directly from the search results/hrefs.
+  // Products 10-14: real Al Wafa line SKUs.
   {
     id: "10",
     slug: "mushaf-al-quran-al-wafa-a7-pocket-edition",
@@ -144,6 +155,229 @@ export const mockProducts: Product[] = [
     name: "Mushaf Al Qur'an Al Wafa A5 Resleting Premium",
     price: 76000,
     category: "quran-hafalan",
+    size: "A5",
+  },
+  // Products 15-41: full remainder of halimquran.com/products' real
+  // catalog (verified 26 Sep 2026) — see file header.
+  {
+    id: "15",
+    slug: "al-quran-hafalan-a7-resleting",
+    name: "Al Quran Hafalan A7 Resleting",
+    price: 42000,
+    category: "quran-hafalan",
+    size: "A7",
+  },
+  {
+    id: "16",
+    slug: "al-quran-hafalan-a6-hard-cover",
+    name: "Al Quran Hafalan A6 Hard Cover",
+    price: 52000,
+    category: "quran-hafalan",
+    size: "A6",
+  },
+  {
+    id: "17",
+    slug: "al-quran-terjemah-tajwid-samara-a6-resleting",
+    name: "Al Quran Terjemah Tajwid Samara A6 Resleting",
+    price: 75000,
+    category: "quran-terjemah",
+    size: "A6",
+  },
+  {
+    id: "18",
+    slug: "al-quran-terjemah-tajwid-samara-a6-dompet",
+    name: "Al Quran Terjemah Tajwid Samara A6 Dompet",
+    price: 85000,
+    category: "quran-terjemah",
+    size: "A6",
+  },
+  {
+    id: "19",
+    slug: "al-quran-hafalan-b7-per-5-juz",
+    name: "Al Quran Hafalan B7 Per 5 Juz",
+    price: 68000,
+    category: "quran-hafalan",
+    size: "B7",
+    rating: 5,
+  },
+  {
+    id: "20",
+    slug: "al-quran-hafalan-a6-resleting-batik",
+    name: "Al Quran Hafalan A6 Resleting Batik",
+    price: 66000,
+    category: "quran-hafalan",
+    size: "A6",
+  },
+  {
+    id: "21",
+    slug: "al-quran-hafalan-a6-agenda-metode-hafalan",
+    name: "Al Quran Hafalan A6 Agenda Metode Hafalan",
+    price: 63000,
+    category: "quran-hafalan",
+    size: "A6",
+    rating: 5,
+  },
+  {
+    id: "22",
+    slug: "al-quran-hafalan-a5-hard-cover",
+    name: "Al Quran Hafalan A5 Hard Cover",
+    price: 75000,
+    category: "quran-hafalan",
+    size: "A5",
+  },
+  {
+    id: "23",
+    slug: "al-quran-hafalan-a5-resleting",
+    name: "Al Quran Hafalan A5 Resleting",
+    price: 80000,
+    category: "quran-hafalan",
+    size: "A5",
+  },
+  {
+    id: "24",
+    slug: "al-quran-tajwid-al-mumtaz-a6-resleting",
+    name: "Al Quran Tajwid Al Mumtaz A6 Resleting",
+    price: 65000,
+    category: "quran-tajwid",
+    size: "A6",
+    rating: 5,
+  },
+  {
+    id: "25",
+    slug: "al-quran-tajwid-al-mumtaz-a5-resleting",
+    name: "Al Quran Tajwid Al Mumtaz A5 Resleting",
+    price: 98000,
+    category: "quran-tajwid",
+    size: "A5",
+  },
+  {
+    id: "26",
+    slug: "al-quran-tajwid-al-mumtaz-a5-hard-cover",
+    name: "Al Quran Tajwid Al Mumtaz A5 Hard Cover",
+    price: 70000,
+    category: "quran-tajwid",
+    size: "A5",
+  },
+  {
+    id: "27",
+    slug: "al-quran-kalimatul-ulya-a5-resleting",
+    name: "Al Quran Kalimatul Ulya A5 Resleting",
+    price: 60000,
+    category: "quran-lainnya",
+    size: "A5",
+  },
+  {
+    id: "28",
+    slug: "al-quran-terjemah-besar-al-haqq-a4-hard-cover-box",
+    name: "Al Quran Terjemah Besar Al Haqq A4 Hard Cover Box",
+    price: 160000,
+    category: "quran-terjemah",
+    size: "A4",
+  },
+  {
+    id: "29",
+    slug: "mushaf-al-quran-al-yasir-hafalan-a5-hard-cover",
+    name: "Mushaf Al Quran Al Yasir Hafalan A5 Hard Cover",
+    price: 79000,
+    category: "quran-hafalan",
+    size: "A5",
+  },
+  {
+    id: "30",
+    slug: "mushaf-al-quran-al-yasir-hafalan-a5-resleting",
+    name: "Mushaf Al Quran Al Yasir Hafalan A5 Resleting",
+    price: 109000,
+    category: "quran-hafalan",
+    size: "A5",
+    rating: 4,
+  },
+  {
+    id: "31",
+    slug: "al-quran-terjemah-al-halim-b7-rubu-qpp-resleting",
+    name: "Al Quran Terjemah Al Halim B7 Rubu QPP Resleting",
+    price: 47000,
+    category: "quran-terjemah",
+    size: "B7",
+  },
+  {
+    id: "32",
+    slug: "al-quran-terjemah-al-halim-b7-rubu-qpp-resleting-colorfull-edition",
+    name: "Al Quran Terjemah Al Halim B7 Rubu QPP Resleting Colorfull Edition",
+    price: 47000,
+    category: "quran-terjemah",
+    size: "B7",
+  },
+  {
+    id: "33",
+    slug: "al-quran-terjemah-al-halim-rubu-b7-pocket-series",
+    name: "Al Quran Terjemah Al Halim Rubu B7 Pocket Series",
+    price: 50000,
+    category: "quran-terjemah",
+    size: "B7",
+  },
+  {
+    id: "34",
+    slug: "al-quran-terjemah-al-halim-b7-rubu-hvs-resleting",
+    name: "Al Quran Terjemah Al Halim B7 Rubu HVS Resleting",
+    price: 43000,
+    category: "quran-terjemah",
+    size: "B7",
+  },
+  {
+    id: "35",
+    slug: "al-quran-terjemah-al-halim-a6-resleting",
+    name: "Al Quran Terjemah Al Halim A6 Resleting",
+    price: 55000,
+    category: "quran-terjemah",
+    size: "A6",
+  },
+  {
+    id: "36",
+    slug: "al-quran-terjemah-al-halim-a6-pocket-resleting",
+    name: "Al Quran Terjemah Al Halim A6 Pocket Resleting",
+    price: 59000,
+    category: "quran-terjemah",
+    size: "A6",
+    badge: "Terbaru",
+  },
+  {
+    id: "37",
+    slug: "al-quran-terjemah-al-halim-a5-resleting",
+    name: "Al Quran Terjemah Al Halim A5 Resleting",
+    price: 80000,
+    category: "quran-terjemah",
+    size: "A5",
+  },
+  {
+    id: "38",
+    slug: "al-quran-terjemah-al-halim-new-fancy-a5-resleting",
+    name: "Al Quran Terjemah Al Halim New Fancy A5 Resleting",
+    price: 65000,
+    category: "quran-terjemah",
+    size: "A5",
+  },
+  {
+    id: "39",
+    slug: "al-quran-terjemah-al-halim-a5-hard-cover",
+    name: "Al Quran Terjemah Al Halim A5 Hard Cover",
+    price: 67000,
+    category: "quran-terjemah",
+    size: "A5",
+  },
+  {
+    id: "40",
+    slug: "al-quran-terjemah-al-halim-klasik-emas-perak-a5-hard-cover",
+    name: "Al Quran Terjemah Al Halim Klasik Emas Perak A5 Hard Cover",
+    price: 57000,
+    category: "quran-terjemah",
+    size: "A5",
+  },
+  {
+    id: "41",
+    slug: "al-quran-terjemah-al-halim-a5-agenda",
+    name: "Al Quran Terjemah Al Halim A5 Agenda",
+    price: 60000,
+    category: "quran-terjemah",
     size: "A5",
   },
 ];

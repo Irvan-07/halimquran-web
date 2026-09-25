@@ -52,6 +52,64 @@ function getBenefits(product: Product, categoryLabel: string): string[] {
   return benefits;
 }
 
+// Generated (not copied) description text, in the same "intro paragraph +
+// labeled bullet blocks" shape as the one real PDP copy we have (product
+// id "3" — see lib/mock-data/products.ts). Deliberately sticks to claims
+// this app can actually back up from the product's own data — no invented
+// certifications, paper brand names, or specific regulatory claims.
+function generateDescriptionText(product: Product, categoryLabel: string): string {
+  const intro = `${product.name} hadir untuk menemani ibadah harian kamu — dipilih dari koleksi ${categoryLabel} Halim Quran dengan kualitas cetak yang nyaman dibaca kapan saja.`;
+
+  const specs = [`Kategori ${categoryLabel}`];
+  if (product.size) specs.push(`Ukuran ${product.size}, ringkas dan mudah dibawa`);
+  if (product.colors && product.colors.length > 0) {
+    specs.push(`Tersedia ${product.colors.length} pilihan warna`);
+  }
+
+  const useCases = ["Bacaan dan hafalan sehari-hari"];
+  if (product.wakafEligible) useCases.push("Wakaf Quran ke masjid, sekolah, atau pesantren");
+  if (product.giftEligible) useCases.push("Hadiah untuk keluarga, sahabat, atau guru mengaji");
+  if (!product.wakafEligible && !product.giftEligible) {
+    useCases.push("Koleksi pribadi atau hadiah untuk orang terdekat");
+  }
+
+  const benefits = ["Kertas berkualitas, nyaman untuk tilawah dalam waktu lama"];
+  if (product.customNameEligible) benefits.push("Tersedia opsi ukir nama untuk kesan personal");
+  if (product.badge) benefits.push(`Termasuk produk ${product.badge.toLowerCase()}`);
+
+  return [
+    intro,
+    `Spesifikasi:\n${specs.map((s) => `- ${s}`).join("\n")}`,
+    `Cocok untuk:\n${useCases.map((s) => `- ${s}`).join("\n")}`,
+    `Keunggulan:\n${benefits.map((s) => `- ${s}`).join("\n")}`,
+  ].join("\n\n");
+}
+
+/** Renders one `\n\n`-separated block of description text — either a plain
+ * paragraph, or a "Header:\n- bullet\n- bullet" block as a labeled list. */
+function DescriptionBlock({ block }: { block: string }) {
+  const lines = block.split("\n").filter(Boolean);
+  const [first, ...rest] = lines;
+  const isList = first.trim().endsWith(":") && rest.length > 0;
+
+  if (!isList) {
+    return (
+      <p className="max-w-3xl text-sm text-muted-foreground">{lines.join(" ")}</p>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-1.5">
+      <p className="text-sm font-medium text-foreground">{first}</p>
+      <ul className="flex max-w-3xl flex-col gap-1 pl-1 text-sm text-muted-foreground">
+        {rest.map((line, i) => (
+          <li key={i}>{line.replace(/^[-✔]\s*/, "")}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function getFaq(product: Product) {
   return [
     {
@@ -89,6 +147,7 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
 
   const benefits = getBenefits(product, categoryLabel);
   const faq = getFaq(product);
+  const descriptionText = product.description ?? generateDescriptionText(product, categoryLabel);
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-8 pb-24 sm:px-6 lg:px-8 sm:pb-8">
@@ -191,14 +250,13 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
       </div>
 
       {/* Description */}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-4">
         <h2 className="font-heading text-lg font-semibold text-foreground">
           Deskripsi
         </h2>
-        <p className="max-w-3xl text-sm text-muted-foreground">
-          {product.name} adalah mushaf Al-Quran kategori {categoryLabel}
-          {product.size ? ` dengan ukuran ${product.size}` : ""}.
-        </p>
+        {descriptionText.split("\n\n").map((block, i) => (
+          <DescriptionBlock key={i} block={block} />
+        ))}
       </div>
 
       {/* Specifications */}

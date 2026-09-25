@@ -39,6 +39,8 @@ export interface Product {
   customNameEligible?: boolean;
   /** Real product photo (currently only set for Scalev-sourced products). */
   imageUrl?: string;
+  /** Real PDP copy, verbatim from halimquran.com, when we actually have it — falls back to a generated description otherwise (see app/produk/[kategori]/[slug]/page.tsx). May contain literal "\n" line breaks. */
+  description?: string;
   /** "mock" (lib/mock-data) or "scalev" (live API) — which source this record came from. */
   source?: "mock" | "scalev";
 }
