@@ -32,9 +32,14 @@ export function HeroCarousel() {
 
   // 4:3 matches the source banners' native ratio (and the live site's own
   // display box) — a wider crop would cut off baked-in logo/text near the
-  // top and bottom of each graphic.
+  // top and bottom of each graphic. No max-height: capping height while
+  // staying full-bleed width forces a much wider effective crop than 4:3
+  // on large screens (e.g. 2000px wide at a 480px cap ≈ 4.2:1), which is
+  // exactly the over-crop this comment says to avoid — confirmed cropping
+  // the logo out on the deployed site, matching the live site's own
+  // (tall-on-wide-screens) behavior instead.
   return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden bg-secondary sm:max-h-[480px]">
+    <div className="relative aspect-[4/3] w-full overflow-hidden bg-secondary">
       {SLIDES.map((slide, i) => (
         <Image
           key={slide.src}
