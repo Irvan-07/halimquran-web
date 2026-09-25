@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ProductCard } from "@/components/product/ProductCard";
+import { CategoryTabs } from "@/components/product/CategoryTabs";
+import { ProductGridWithSort } from "@/components/product/ProductGridWithSort";
 import { getMergedCatalog } from "@/lib/scalev/catalog";
 import { productCategories } from "@/lib/mock-data/categories";
 
@@ -43,12 +44,10 @@ export default async function KategoriPage({ params }: KategoriPageProps) {
         </h1>
       </div>
 
+      <CategoryTabs active={category.slug} />
+
       {products.length > 0 ? (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        <ProductGridWithSort products={products} />
       ) : (
         <p className="text-sm text-muted-foreground">
           Belum ada produk untuk kategori ini.

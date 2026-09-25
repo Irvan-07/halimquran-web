@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { ProductCard } from "@/components/product/ProductCard";
+import { CategoryTabs } from "@/components/product/CategoryTabs";
+import { ProductGridWithSort } from "@/components/product/ProductGridWithSort";
 import { mockProducts } from "@/lib/mock-data/products";
 
 export const metadata: Metadata = {
@@ -25,12 +26,10 @@ export default function GiftPage() {
         </p>
       </div>
 
+      <CategoryTabs active="gift-set" />
+
       {giftProducts.length > 0 ? (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {giftProducts.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
+        <ProductGridWithSort products={giftProducts} />
       ) : (
         <p className="text-sm text-muted-foreground">
           Belum ada produk contoh untuk Gift & Souvenir.
