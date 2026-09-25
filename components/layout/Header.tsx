@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Search, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CartIcon } from "@/components/cart/CartIcon";
@@ -13,13 +14,15 @@ export function Header() {
           <MobileNav />
         </div>
 
-        <Link href="/" className="flex flex-col leading-none">
-          <span className="font-heading text-lg font-bold text-foreground">
-            Halim
-          </span>
-          <span className="font-heading text-lg font-bold text-primary">
-            Qur&apos;an
-          </span>
+        <Link href="/" className="shrink-0">
+          <Image
+            src="/logo.png"
+            alt="Halim Qur'an"
+            width={130}
+            height={52}
+            className="h-10 w-auto"
+            priority
+          />
         </Link>
 
         <div className="ml-6 hidden lg:block">
