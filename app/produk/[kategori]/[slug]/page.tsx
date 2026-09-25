@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Star } from "lucide-react";
+import { Heart, Star } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -179,16 +179,28 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
         {/* Product Info + Purchase Panel */}
         <div className="flex flex-col gap-5">
           <div className="flex flex-col gap-2">
+            <span className="w-fit rounded bg-destructive px-2 py-0.5 text-xs font-semibold text-white">
+              Ada Stok
+            </span>
             <span className="text-xs font-bold uppercase tracking-wide text-primary">
               {categoryLabel}
             </span>
-            <h1 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
-              {product.name}
-            </h1>
+            <div className="flex items-start justify-between gap-3">
+              <h1 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
+                {product.name}
+              </h1>
+              <button
+                type="button"
+                aria-label="Simpan ke wishlist"
+                className="shrink-0 text-muted-foreground transition-colors hover:text-destructive"
+              >
+                <Heart className="size-6" />
+              </button>
+            </div>
             {product.rating && (
               <span className="flex items-center gap-1 text-sm text-muted-foreground">
                 <Star className="size-4 fill-brand-yellow text-brand-yellow" />
-                {product.rating} dari 5
+                {product.rating.toFixed(1)} (1)
               </span>
             )}
             <p className="text-2xl font-semibold text-primary">

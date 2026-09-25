@@ -7,7 +7,6 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useCart } from "@/components/cart/CartProvider";
 import { track } from "@/lib/analytics";
 import type { Product } from "@/types/product";
@@ -89,32 +88,34 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
     <div className="flex flex-col gap-5">
       <div>
         <Label className="mb-2 block text-sm font-medium text-foreground">
-          Personalisasi
+          Pilihan Tambahan
         </Label>
-        <RadioGroup
-          value={customization}
-          onValueChange={(v) => setCustomization(v as CustomizationOption)}
-          className="flex flex-col gap-2"
-        >
+        <div className="flex flex-wrap gap-2">
           {customizationOptions.map((option) => (
-            <div key={option.value} className="flex items-center gap-2">
-              <RadioGroupItem value={option.value} id={option.value} />
-              <Label htmlFor={option.value} className="font-normal">
-                {option.label}
-              </Label>
-            </div>
+            <button
+              key={option.value}
+              type="button"
+              onClick={() => setCustomization(option.value)}
+              className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+                customization === option.value
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border text-foreground hover:border-primary"
+              }`}
+            >
+              {option.label.toUpperCase()}
+            </button>
           ))}
-        </RadioGroup>
+        </div>
         {needsName && (
           <div className="mt-3">
             <Label htmlFor="custom-name" className="mb-1.5 block text-sm">
-              Nama untuk diukir
+              Nama Ukiran (khusus Quran + Nama)
             </Label>
             <Input
               id="custom-name"
               value={customName}
               onChange={(e) => setCustomName(e.target.value)}
-              placeholder="Tulis nama sesuai keinginan"
+              placeholder="opsional"
               maxLength={30}
             />
           </div>

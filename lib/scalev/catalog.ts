@@ -77,9 +77,11 @@ export function scalevProductToProduct(detail: ScalevProductDetail): Product {
         .map((v) => {
           const hex = v.option1_value ? colorNameToHex(v.option1_value) : undefined;
           const imageUrl = v.images?.[0];
-          return hex && imageUrl ? { hex, imageUrl } : undefined;
+          return hex && imageUrl && v.option1_value
+            ? { hex, name: v.option1_value, imageUrl }
+            : undefined;
         })
-        .filter((c): c is { hex: string; imageUrl: string } => Boolean(c))
+        .filter((c): c is { hex: string; name: string; imageUrl: string } => Boolean(c))
     : undefined;
 
   return {

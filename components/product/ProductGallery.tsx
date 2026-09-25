@@ -2,15 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Check, Heart } from "lucide-react";
 import type { Product } from "@/types/product";
 
-// Matches the live halimquran.com PDP: selecting a color swatch swaps the
-// displayed photo to that variant's own image, with a checkmark on the
-// selected swatch. Only active when `colorVariants` has real per-color
-// photos (currently Scalev-sourced products) — plain `colors` still show
-// as swatches elsewhere (PDP spec table via the parent page) without a
-// photo to switch to.
+// Matches the live halimquran.com PDP gallery: a vertical thumbnail rail
+// (horizontal strip on mobile) next to one large main image, both driven
+// by the same selection. We only have one photo per color variant (no
+// separate angle shots or info-graphic images the live site also has), so
+// the rail is populated from colorVariants — a smaller but honest subset
+// of the real pattern rather than fabricated extra images.
 export function ProductGallery({ product }: { product: Product }) {
   const variants = product.colorVariants ?? [];
   const [selected, setSelected] = useState(0);
@@ -18,8 +17,26 @@ export function ProductGallery({ product }: { product: Product }) {
   const imageUrl = variants[selected]?.imageUrl ?? product.imageUrl;
 
   return (
-    <div className="flex flex-col gap-3">
-      <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-secondary">
+    <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+      {variants.length > 1 && (
+        <div className="order-2 flex shrink-0 gap-2 overflow-x-auto sm:order-1 sm:w-16 sm:flex-col sm:overflow-visible">
+          {variants.map((variant, i) => (
+            <button
+              key={variant.hex + i}
+              type="button"
+              aria-label={variant.name}
+              onClick={() => setSelected(i)}
+              className={`relative size-14 shrink-0 overflow-hidden rounded-md border sm:size-16 ${
+                i === selected ? "border-primary" : "border-border"
+              }`}
+            >
+              <Image src={variant.imageUrl} alt={variant.name} fill sizes="64px" className="object-cover" />
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div className="relative order-1 aspect-square w-full min-w-0 overflow-hidden rounded-lg bg-secondary sm:order-2 sm:flex-1">
         {imageUrl && (
           <Image
             key={imageUrl}
@@ -36,31 +53,32 @@ export function ProductGallery({ product }: { product: Product }) {
             {product.badge}
           </span>
         )}
-        <button
-          type="button"
-          aria-label="Simpan ke wishlist"
-          className="absolute right-3 top-3 rounded-full bg-background/80 p-2 text-muted-foreground transition-colors hover:text-destructive"
-        >
-          <Heart className="size-5" />
-        </button>
       </div>
 
-      {variants.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          {variants.map((variant, i) => (
-            <button
-              key={variant.hex + i}
-              type="button"
-              aria-label={`Pilih warna ${i + 1}`}
-              onClick={() => setSelected(i)}
-              className="flex size-8 items-center justify-center rounded-full border border-border"
-              style={{ backgroundColor: variant.hex }}
-            >
-              {i === selected && (
-                <Check className="size-4 text-white drop-shadow-[0_0_1px_rgba(0,0,0,0.8)]" />
-              )}
-            </button>
-          ))}
+      {variants.length > 1 && (
+        <div className="order-3 flex w-full flex-col gap-2 sm:basis-full">
+          <span className="text-sm font-medium text-foreground">Warna</span>
+          <div className="flex flex-wrap gap-3">
+            {variants.map((variant, i) => (
+              <button
+                key={variant.hex + i}
+                type="button"
+                onClick={() => setSelected(i)}
+                className="flex w-14 flex-col items-center gap-1"
+              >
+                <span
+                  className={`relative size-14 overflow-hidden rounded-md border ${
+                    i === selected ? "border-primary" : "border-border"
+                  }`}
+                >
+                  <Image src={variant.imageUrl} alt={variant.name} fill sizes="56px" className="object-cover" />
+                </span>
+                <span className="w-full truncate text-center text-[11px] text-muted-foreground">
+                  {variant.name}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>
