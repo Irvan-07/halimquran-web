@@ -88,7 +88,7 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
   const descriptionText = product.description ?? generateDescriptionText(product, categoryLabel);
 
   return (
-    <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-8 pb-24 sm:px-6 lg:px-8 sm:pb-8">
+    <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 pb-24 sm:px-6 sm:py-8 lg:px-8">
       <TrackViewItem product={product} />
 
       <ProductMediaProvider product={product}>

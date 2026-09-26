@@ -10,13 +10,13 @@ function DescriptionBlock({ block }: { block: string }) {
   const isList = first.trim().endsWith(":") && rest.length > 0;
 
   if (!isList) {
-    return <p className="max-w-3xl text-sm text-muted-foreground">{lines.join(" ")}</p>;
+    return <p className="max-w-3xl text-sm text-foreground">{lines.join(" ")}</p>;
   }
 
   return (
     <div className="flex flex-col gap-1.5">
       <p className="text-sm font-medium text-foreground">{first}</p>
-      <ul className="flex max-w-3xl flex-col gap-1 pl-1 text-sm text-muted-foreground">
+      <ul className="flex max-w-3xl flex-col gap-1 pl-1 text-sm text-foreground">
         {rest.map((line, i) => (
           <li key={i}>{line.replace(/^[-✔]\s*/, "")}</li>
         ))}
