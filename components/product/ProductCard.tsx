@@ -2,18 +2,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { Heart, Star } from "lucide-react";
 import type { Product } from "@/types/product";
-import { productCategories } from "@/lib/mock-data/categories";
 import { formatIDR } from "@/lib/utils/format";
 
 interface ProductCardProps {
   product: Product;
 }
 
+// Matches halimquran.com's real product card exactly (re-checked 26 Sep
+// 2026): no category label line, wishlist heart sits bottom-right of the
+// image (not top-right), and rating is its own line under the price
+// rather than inline with it.
 export function ProductCard({ product }: ProductCardProps) {
-  const categoryLabel = productCategories.find(
-    (c) => c.slug === product.category,
-  )?.label;
-
   return (
     <Link
       href={`/produk/${product.category}/${product.slug}`}
@@ -36,17 +35,11 @@ export function ProductCard({ product }: ProductCardProps) {
         )}
         <span
           aria-hidden="true"
-          className="absolute right-2 top-2 rounded-full bg-background/80 p-1.5 text-muted-foreground"
+          className="absolute bottom-2 right-2 rounded-full bg-background/80 p-1.5 text-muted-foreground"
         >
           <Heart className="size-4" />
         </span>
       </div>
-
-      {categoryLabel && (
-        <span className="text-[11px] font-bold uppercase tracking-wide text-primary">
-          {categoryLabel}
-        </span>
-      )}
 
       <h3 className="text-sm font-medium text-foreground">{product.name}</h3>
 
@@ -62,17 +55,15 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       )}
 
-      <div className="flex items-center justify-between">
-        <p className="text-sm font-semibold text-primary">
-          {formatIDR(product.price)}
-        </p>
-        {product.rating && (
-          <span className="flex items-center gap-0.5 text-xs text-muted-foreground">
-            <Star className="size-3.5 fill-brand-yellow text-brand-yellow" />
-            {product.rating}
-          </span>
-        )}
-      </div>
+      <p className="text-sm font-semibold text-primary">
+        {formatIDR(product.price)}
+      </p>
+      {product.rating && (
+        <span className="flex items-center gap-0.5 text-xs text-muted-foreground">
+          <Star className="size-3.5 fill-brand-yellow text-brand-yellow" />
+          {product.rating}
+        </span>
+      )}
     </Link>
   );
 }

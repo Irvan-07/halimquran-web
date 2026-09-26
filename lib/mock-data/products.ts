@@ -29,6 +29,7 @@ export const mockProducts: Product[] = [
     rating: 5,
     colors: ["#6B7280", "#111827", "#7B2D26", "#C9A876", "#8B5E34", "#0F7A5C", "#8E7CC3"],
     customNameEligible: true,
+    imageUrl: "/products/mushaf-al-quran-al-wafa-b7-pocket-edition.jpg",
   },
   {
     id: "2",
@@ -50,6 +51,7 @@ export const mockProducts: Product[] = [
     rating: 5,
     colors: ["#E8DCC4", "#1E3A5F", "#7B2D26", "#111827", "#6B7280", "#C2417A", "#8B5E34"],
     customNameEligible: true,
+    imageUrl: "/products/al-quran-madinah-huzaifi-a5-standar-internasional.jpg",
     // Real PDP copy, read verbatim from halimquran.com 26 Sep 2026 — kept
     // as-is per instruction to copy real content where we actually have it.
     description:
@@ -63,6 +65,7 @@ export const mockProducts: Product[] = [
     category: "quran-tajwid",
     size: "A7",
     rating: 5,
+    imageUrl: "/products/al-quran-tajwid-al-mumtaz-a7-resleting.jpg",
   },
   {
     id: "5",
@@ -72,6 +75,7 @@ export const mockProducts: Product[] = [
     category: "quran-harian",
     size: "A5",
     wakafEligible: true,
+    imageUrl: "/products/al-quran-al-azhim-a5-hard-cover.jpg",
   },
   {
     id: "6",
@@ -90,6 +94,7 @@ export const mockProducts: Product[] = [
     id: "7",
     slug: "bundling-mushaf-al-quran-madinah-huzaifi-a5-2-pcs-box-exclusive-free-custom-nama",
     name: "Bundling Mushaf Al Quran Madinah Huzaifi A5 2 pcs Box Exclusive Free Custom Nama",
+    imageUrl: "/products/bundling-mushaf-al-quran-madinah-huzaifi-a5-2-pcs-box-exclusive-free-custom-nama.jpg",
     price: 260800,
     category: "quran-harian",
     size: "A5",
@@ -100,6 +105,7 @@ export const mockProducts: Product[] = [
     id: "8",
     slug: "bundling-mushaf-al-quran-al-wafa-a6-pocket-2-pcs-box-exclusive-free-custom-nama",
     name: "Bundling Mushaf Al Quran Al Wafa A6 Pocket 2 pcs Box Exclusive Free Custom Nama",
+    imageUrl: "/products/bundling-mushaf-al-quran-al-wafa-a6-pocket-2-pcs-box-exclusive-free-custom-nama.jpg",
     price: 151800,
     category: "quran-hafalan",
     size: "A6",
@@ -110,6 +116,7 @@ export const mockProducts: Product[] = [
     id: "9",
     slug: "bundling-mushaf-al-quran-terjemah-al-halim-a6-pocket-2-pcs-box-exclusive-free-custom-nama",
     name: "Bundling Mushaf Al Quran Terjemah Al Halim A6 Pocket 2 pcs Box Exclusive Free Custom Nama",
+    imageUrl: "/products/bundling-mushaf-al-quran-terjemah-al-halim-a6-pocket-2-pcs-box-exclusive-free-custom-nama.jpg",
     price: 157800,
     category: "quran-terjemah",
     size: "A6",
@@ -124,6 +131,7 @@ export const mockProducts: Product[] = [
     price: 35000,
     category: "quran-hafalan",
     size: "A7",
+    imageUrl: "/products/mushaf-al-quran-al-wafa-a7-pocket-edition.jpg",
   },
   {
     id: "11",
@@ -140,6 +148,7 @@ export const mockProducts: Product[] = [
     price: 50000,
     category: "quran-hafalan",
     size: "B7",
+    imageUrl: "/products/mushaf-al-quran-al-wafa-b7-mujazza-per-5-juz.jpg",
   },
   {
     id: "13",
@@ -148,6 +157,7 @@ export const mockProducts: Product[] = [
     price: 45000,
     category: "quran-hafalan",
     size: "B7",
+    imageUrl: "/products/mushaf-al-quran-al-wafa-rubu-b7-resleting.jpg",
   },
   {
     id: "14",
@@ -166,6 +176,7 @@ export const mockProducts: Product[] = [
     price: 42000,
     category: "quran-hafalan",
     size: "A7",
+    imageUrl: "/products/al-quran-hafalan-a7-resleting.jpg",
   },
   {
     id: "16",
@@ -174,6 +185,7 @@ export const mockProducts: Product[] = [
     price: 52000,
     category: "quran-hafalan",
     size: "A6",
+    imageUrl: "/products/al-quran-hafalan-a6-hard-cover.jpg",
   },
   {
     id: "17",
@@ -190,6 +202,7 @@ export const mockProducts: Product[] = [
     price: 85000,
     category: "quran-terjemah",
     size: "A6",
+    imageUrl: "/products/al-quran-terjemah-tajwid-samara-a6-dompet.jpg",
   },
   {
     id: "19",
@@ -199,6 +212,7 @@ export const mockProducts: Product[] = [
     category: "quran-hafalan",
     size: "B7",
     rating: 5,
+    imageUrl: "/products/al-quran-hafalan-b7-per-5-juz.jpg",
   },
   {
     id: "20",
@@ -207,6 +221,7 @@ export const mockProducts: Product[] = [
     price: 66000,
     category: "quran-hafalan",
     size: "A6",
+    imageUrl: "/products/al-quran-hafalan-a6-resleting-batik.jpg",
   },
   {
     id: "21",
@@ -241,6 +256,7 @@ export const mockProducts: Product[] = [
     category: "quran-tajwid",
     size: "A6",
     rating: 5,
+    imageUrl: "/products/al-quran-tajwid-al-mumtaz-a6-resleting.jpg",
   },
   {
     id: "25",
@@ -249,6 +265,7 @@ export const mockProducts: Product[] = [
     price: 98000,
     category: "quran-tajwid",
     size: "A5",
+    imageUrl: "/products/al-quran-tajwid-al-mumtaz-a5-resleting.jpg",
   },
   {
     id: "26",
@@ -257,6 +274,7 @@ export const mockProducts: Product[] = [
     price: 70000,
     category: "quran-tajwid",
     size: "A5",
+    imageUrl: "/products/al-quran-tajwid-al-mumtaz-a5-hard-cover.jpg",
   },
   {
     id: "27",
@@ -265,6 +283,7 @@ export const mockProducts: Product[] = [
     price: 60000,
     category: "quran-lainnya",
     size: "A5",
+    imageUrl: "/products/al-quran-kalimatul-ulya-a5-resleting.jpg",
   },
   {
     id: "28",
@@ -273,6 +292,7 @@ export const mockProducts: Product[] = [
     price: 160000,
     category: "quran-terjemah",
     size: "A4",
+    imageUrl: "/products/al-quran-terjemah-besar-al-haqq-a4-hard-cover-box.jpg",
   },
   {
     id: "29",
@@ -298,6 +318,7 @@ export const mockProducts: Product[] = [
     price: 47000,
     category: "quran-terjemah",
     size: "B7",
+    imageUrl: "/products/al-quran-terjemah-al-halim-b7-rubu-qpp-resleting.jpg",
   },
   {
     id: "32",
@@ -306,6 +327,7 @@ export const mockProducts: Product[] = [
     price: 47000,
     category: "quran-terjemah",
     size: "B7",
+    imageUrl: "/products/al-quran-terjemah-al-halim-b7-rubu-qpp-resleting-colorfull-edition.jpg",
   },
   {
     id: "33",
@@ -314,6 +336,7 @@ export const mockProducts: Product[] = [
     price: 50000,
     category: "quran-terjemah",
     size: "B7",
+    imageUrl: "/products/al-quran-terjemah-al-halim-rubu-b7-pocket-series.jpg",
   },
   {
     id: "34",
@@ -322,6 +345,7 @@ export const mockProducts: Product[] = [
     price: 43000,
     category: "quran-terjemah",
     size: "B7",
+    imageUrl: "/products/al-quran-terjemah-al-halim-b7-rubu-hvs-resleting.jpg",
   },
   {
     id: "35",
