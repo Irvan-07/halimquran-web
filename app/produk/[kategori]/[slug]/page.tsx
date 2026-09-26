@@ -2,14 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Heart, Star } from "lucide-react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { ProductCard } from "@/components/product/ProductCard";
 import { ProductGallery } from "@/components/product/ProductGallery";
+import { ProductDescription } from "@/components/product/ProductDescription";
+import { ProductReviews } from "@/components/product/ProductReviews";
 import { PurchasePanel } from "@/components/product/PurchasePanel";
 import { TrackViewItem } from "@/components/tracking";
 import { getMergedCatalog, getMergedProductBySlug } from "@/lib/scalev/catalog";
@@ -36,20 +32,6 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = await getMergedProductBySlug(slug);
   return { title: product?.name ?? "Produk" };
-}
-
-// Factual, attribute-derived only — no invented marketing claims (no data
-// on paper quality, ink, etc. is available from Scalev or the live-site audit).
-function getBenefits(product: Product, categoryLabel: string): string[] {
-  const benefits: string[] = [];
-  if (product.badge === "Ukir Nama") {
-    benefits.push("Tersedia layanan ukir nama");
-  }
-  benefits.push(`Kategori ${categoryLabel}`);
-  if (product.size) {
-    benefits.push(`Ukuran ${product.size}`);
-  }
-  return benefits;
 }
 
 // Generated (not copied) description text, in the same "intro paragraph +
@@ -85,51 +67,6 @@ function generateDescriptionText(product: Product, categoryLabel: string): strin
   ].join("\n\n");
 }
 
-/** Renders one `\n\n`-separated block of description text — either a plain
- * paragraph, or a "Header:\n- bullet\n- bullet" block as a labeled list. */
-function DescriptionBlock({ block }: { block: string }) {
-  const lines = block.split("\n").filter(Boolean);
-  const [first, ...rest] = lines;
-  const isList = first.trim().endsWith(":") && rest.length > 0;
-
-  if (!isList) {
-    return (
-      <p className="max-w-3xl text-sm text-muted-foreground">{lines.join(" ")}</p>
-    );
-  }
-
-  return (
-    <div className="flex flex-col gap-1.5">
-      <p className="text-sm font-medium text-foreground">{first}</p>
-      <ul className="flex max-w-3xl flex-col gap-1 pl-1 text-sm text-muted-foreground">
-        {rest.map((line, i) => (
-          <li key={i}>{line.replace(/^[-✔]\s*/, "")}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function getFaq(product: Product) {
-  return [
-    {
-      q: "Bagaimana cara memesan?",
-      a: "Pilih personalisasi dan jumlah di atas, lalu klik Tambah ke Keranjang atau Beli Sekarang.",
-    },
-    {
-      q: "Apakah ukir nama tersedia?",
-      a:
-        product.badge === "Ukir Nama"
-          ? "Ya, pilih opsi Quran + Nama atau Quran + Nama + Box pada bagian Personalisasi."
-          : "Ketersediaan ukir nama dapat dipilih melalui opsi Personalisasi di atas.",
-    },
-    {
-      q: "Bagaimana estimasi pengiriman?",
-      a: "Estimasi pengiriman dihitung otomatis saat checkout, berdasarkan alamat tujuan.",
-    },
-  ];
-}
-
 export default async function ProductDetailPage({ params }: PdpPageProps) {
   const { slug } = await params;
 
@@ -145,8 +82,6 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
   const category = productCategories.find((c) => c.slug === product.category);
   const categoryLabel = category?.label ?? product.category;
 
-  const benefits = getBenefits(product, categoryLabel);
-  const faq = getFaq(product);
   const descriptionText = product.description ?? generateDescriptionText(product, categoryLabel);
 
   return (
@@ -181,9 +116,6 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
           <div className="flex flex-col gap-2">
             <span className="w-fit rounded bg-destructive px-2 py-0.5 text-xs font-semibold text-white">
               Ada Stok
-            </span>
-            <span className="text-xs font-bold uppercase tracking-wide text-primary">
-              {categoryLabel}
             </span>
             <div className="flex items-start justify-between gap-3">
               <h1 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
@@ -222,101 +154,34 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
             </Link>
           )}
 
-          <div className="flex flex-col gap-1.5 border-t border-border pt-4">
-            <span className="text-sm font-medium text-foreground">
-              Estimasi Pengiriman
-            </span>
-            <p className="text-sm text-muted-foreground">
-              Dihitung otomatis berdasarkan alamat tujuan saat checkout.
+          <div className="flex flex-col gap-2 border-t border-border pt-4">
+            <span className="text-sm font-medium text-foreground">Pengiriman</span>
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-muted-foreground">Dikirim ke:</span>
+              <span className="text-foreground">Pilih Area</span>
+            </div>
+            {product.weightGrams && (
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">Berat:</span>
+                <span className="text-foreground">{product.weightGrams}g</span>
+              </div>
+            )}
+            <p className="text-xs text-muted-foreground">
+              Dikirim dalam 24 jam, (Setelah pembayaran dikonfirmasi)
             </p>
           </div>
         </div>
       </div>
 
-      {/* Benefits */}
-      <div className="flex flex-wrap gap-2">
-        {benefits.map((b) => (
-          <span
-            key={b}
-            className="rounded-full border border-border px-3 py-1 text-xs text-foreground"
-          >
-            {b}
-          </span>
-        ))}
-      </div>
+      <ProductDescription text={descriptionText} />
 
-      {/* Description */}
-      <div className="flex flex-col gap-4">
-        <h2 className="font-heading text-lg font-semibold text-foreground">
-          Deskripsi
-        </h2>
-        {descriptionText.split("\n\n").map((block, i) => (
-          <DescriptionBlock key={i} block={block} />
-        ))}
-      </div>
-
-      {/* Specifications */}
-      <div className="flex flex-col gap-2">
-        <h2 className="font-heading text-lg font-semibold text-foreground">
-          Spesifikasi
-        </h2>
-        <table className="w-full max-w-md text-sm">
-          <tbody>
-            <tr className="border-b border-border">
-              <td className="py-2 text-muted-foreground">Kategori</td>
-              <td className="py-2 text-foreground">{categoryLabel}</td>
-            </tr>
-            {product.size && (
-              <tr className="border-b border-border">
-                <td className="py-2 text-muted-foreground">Ukuran</td>
-                <td className="py-2 text-foreground">{product.size}</td>
-              </tr>
-            )}
-            <tr>
-              <td className="py-2 text-muted-foreground">Kode Produk</td>
-              <td className="py-2 text-foreground">{product.slug}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      {/* Reviews */}
-      <div className="flex flex-col gap-2">
-        <h2 className="font-heading text-lg font-semibold text-foreground">
-          Ulasan
-        </h2>
-        {product.rating ? (
-          <p className="text-sm text-muted-foreground">
-            Rating {product.rating} dari 5. Detail ulasan pelanggan akan
-            tersedia setelah situs terhubung ke sistem review.
-          </p>
-        ) : (
-          <p className="text-sm text-muted-foreground">
-            Belum ada rating untuk produk ini.
-          </p>
-        )}
-      </div>
-
-      {/* FAQ */}
-      <div className="flex flex-col gap-2">
-        <h2 className="font-heading text-lg font-semibold text-foreground">
-          FAQ
-        </h2>
-        <Accordion type="single" collapsible className="max-w-2xl">
-          {faq.map((item, i) => (
-            <AccordionItem key={i} value={`faq-${i}`}>
-              <AccordionTrigger>{item.q}</AccordionTrigger>
-              <AccordionContent>{item.a}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
+      <ProductReviews product={product} />
 
       {/* Related Products */}
       {related.length > 0 && (
         <div className="flex flex-col gap-4">
           <h2 className="font-heading text-lg font-semibold text-foreground">
-            Produk Terkait
+            Rekomendasi lainnya
           </h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {related.map((p) => (

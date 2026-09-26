@@ -13,6 +13,13 @@ import type { Product } from "@/types/product";
 export function ProductGallery({ product }: { product: Product }) {
   const variants = product.colorVariants ?? [];
   const [selected, setSelected] = useState(0);
+  const [plainColorSelected, setPlainColorSelected] = useState(0);
+  // Plain hex + name colors, no per-variant photo (most of the catalog) —
+  // still shown as a "Warna" section, just without an image swap.
+  const plainColors =
+    variants.length === 0 && product.colors && product.colors.length > 0
+      ? product.colors.map((hex, i) => ({ hex, name: product.colorNames?.[i] ?? hex }))
+      : [];
 
   const imageUrl = variants[selected]?.imageUrl ?? product.imageUrl;
 
@@ -75,6 +82,32 @@ export function ProductGallery({ product }: { product: Product }) {
                 </span>
                 <span className="w-full truncate text-center text-[11px] text-muted-foreground">
                   {variant.name}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {plainColors.length > 0 && (
+        <div className="order-3 flex w-full flex-col gap-2 sm:basis-full">
+          <span className="text-sm font-medium text-foreground">Warna</span>
+          <div className="flex flex-wrap gap-3">
+            {plainColors.map((color, i) => (
+              <button
+                key={color.hex + i}
+                type="button"
+                onClick={() => setPlainColorSelected(i)}
+                className="flex w-14 flex-col items-center gap-1"
+              >
+                <span
+                  className={`size-14 rounded-md border-2 ${
+                    i === plainColorSelected ? "border-primary" : "border-border"
+                  }`}
+                  style={{ backgroundColor: color.hex }}
+                />
+                <span className="w-full truncate text-center text-[11px] text-muted-foreground">
+                  {color.name}
                 </span>
               </button>
             ))}

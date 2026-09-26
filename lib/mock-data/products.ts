@@ -27,9 +27,33 @@ export const mockProducts: Product[] = [
     size: "B7",
     badge: "Ukir Nama",
     rating: 5,
-    colors: ["#6B7280", "#111827", "#7B2D26", "#C9A876", "#8B5E34", "#0F7A5C", "#8E7CC3"],
+    // Real 9 colors + names, read verbatim off this exact PDP on
+    // halimquran.com (26 Sep 2026) — this product is the app's PDP
+    // fidelity template, see app/produk/[kategori]/[slug]/page.tsx.
+    colors: [
+      "#6B7280", "#111827", "#7B2D26", "#8B5E34", "#5C3A21",
+      "#0F7A5C", "#8E7CC3", "#E8DCC4", "#C2417A",
+    ],
+    colorNames: [
+      "Abu-Abu", "Hitam", "Maroon", "Coklat", "Coklat Tua",
+      "Hijau", "Lilac", "Cream", "Pink",
+    ],
     customNameEligible: true,
     imageUrl: "/products/mushaf-al-quran-al-wafa-b7-pocket-edition.jpg",
+    weightGrams: 230,
+    // Real, verbatim PDP copy from halimquran.com (26 Sep 2026).
+    description:
+      "Pengen baca Al-Qur'an setiap waktu tapi suka repot bawa Al-Qur'annya?? Nyari yang ringan dan mudah dibawa?? Sepertinya Anda perlu coba Al-Qur'an satu ini, Al-Qur'an Al-Wafa Rubu' Pocket Resleting, beratnya hanya 230gr, ringan dibawa ke mana saja. Penasaran apa saja keistimewaannya??\n\nSpesifikasi:\n- Ukuran B7 (9 x 12,5 cm)\n- Kertas QPP 50gr\n- Berat 230gr\n- Tebal 616 halaman\n\nFitur cover:\n- Desain cover casual, kalem, dan hangat.\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n- Tersedia dalam 9 pilihan warna.\n\nMaterial cover:\n- Cover terbuat dari kulit sintetis jenis cocoli berkualitas yang membuat warna cover lebih kuat dan tidak mudah pudar. Selain itu, cover dilapisi dengan foil yang memberi kesan mewah pada tampilan cover.\n- Resleting berbahan metal, sehingga lebih kokoh dan aman, serta memiliki gigitan resleting yang lebih kuat. Metal Zipper memberi kesan mahal dan eksklusif pada Al-Qur'an.\n\nMaterial inner:\n- Menggunakan kertas QPP 50gr dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan kamu mencari juz atau halaman tertentu.\n- Terdapat pewarnaan kata ganti Allah dan -Nya yang memudahkan kamu menemukan ayat-ayat pilihan.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
+    reviews: [
+      {
+        author: "I*** a***",
+        rating: 5,
+        tags: ["Produk Berkualitas", "Response Cepat", "Quick Delivery", "Harga Sesuai"],
+        text: "Alhamdulillah, Qurannya dh sampe kualitas terbaik. InsyaAllah order lg untuk keluarga",
+        date: "06 May 2026",
+        variant: "Hitam • QURAN + NAMA",
+      },
+    ],
   },
   {
     id: "2",

@@ -31,6 +31,8 @@ export interface Product {
   rating?: number;
   /** Approximate swatch colors observed on the live product card — illustrative, not pixel-sampled. */
   colors?: string[];
+  /** Indonesian color names, parallel to `colors` (same index), shown on the PDP's "Warna" section for products with no per-variant photo. */
+  colorNames?: string[];
   /** Color swatches paired with that variant's own real photo — lets the PDP gallery switch image on color select, like the live site. Only set where we actually have a per-variant photo (currently Scalev-sourced products); mock products show `colors` as plain swatches with no image swap. */
   colorVariants?: { hex: string; name: string; imageUrl: string }[];
   /** Shown as "Cocok untuk Wakaf" on the live site's Wakaf page. */
@@ -43,6 +45,17 @@ export interface Product {
   imageUrl?: string;
   /** Real PDP copy, verbatim from halimquran.com, when we actually have it — falls back to a generated description otherwise (see app/produk/[kategori]/[slug]/page.tsx). May contain literal "\n" line breaks. */
   description?: string;
+  /** Shipping weight in grams — shown on the PDP's "Pengiriman" block, matching the live site. */
+  weightGrams?: number;
+  /** Real customer reviews, verbatim from the live site where we have them (see ProductReviews). Not fabricated — omitted rather than invented for products we haven't scraped a review for yet. */
+  reviews?: {
+    author: string;
+    rating: number;
+    tags?: string[];
+    text: string;
+    date: string;
+    variant?: string;
+  }[];
   /** "mock" (lib/mock-data) or "scalev" (live API) — which source this record came from. */
   source?: "mock" | "scalev";
 }
