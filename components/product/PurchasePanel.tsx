@@ -29,14 +29,13 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
   const router = useRouter();
   const { addItem } = useCart();
   const [customization, setCustomization] =
-    useState<CustomizationOption>("quran-saja");
+    useState<CustomizationOption | null>(null);
   const [customName, setCustomName] = useState("");
   const [quantity, setQuantity] = useState(1);
 
-  const needsName = customization !== "quran-saja";
-  const canSubmit = !needsName || customName.trim().length > 0;
+  const needsName = customization !== null && customization !== "quran-saja";
 
-  function buildCartLine() {
+  function buildCartLine(selected: CustomizationOption) {
     return {
       productId: product.id,
       slug: product.slug,
@@ -44,10 +43,22 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
       name: product.name,
       price: product.price,
       size: product.size,
-      customization,
+      customization: selected,
       customName: needsName ? customName.trim() : undefined,
       quantity,
     };
+  }
+
+  function validate(): boolean {
+    if (!customization) {
+      toast.error("Pilih salah satu opsi terlebih dahulu");
+      return false;
+    }
+    if (needsName && customName.trim().length === 0) {
+      toast.error("Isi nama untuk diukir terlebih dahulu");
+      return false;
+    }
+    return true;
   }
 
   function trackAddToCart() {
@@ -67,21 +78,15 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
   }
 
   function handleAddToCart() {
-    if (!canSubmit) {
-      toast.error("Isi nama untuk diukir terlebih dahulu");
-      return;
-    }
-    addItem(buildCartLine());
+    if (!validate()) return;
+    addItem(buildCartLine(customization!));
     trackAddToCart();
     toast.success("Ditambahkan ke keranjang", { description: product.name });
   }
 
   function handleBuyNow() {
-    if (!canSubmit) {
-      toast.error("Isi nama untuk diukir terlebih dahulu");
-      return;
-    }
-    addItem(buildCartLine());
+    if (!validate()) return;
+    addItem(buildCartLine(customization!));
     trackAddToCart();
     router.push("/keranjang");
   }
