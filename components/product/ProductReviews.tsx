@@ -66,7 +66,9 @@ export function ProductReviews({ product }: { product: Product }) {
                     ))}
                   </div>
                 )}
-                <p className="text-sm text-muted-foreground">{review.text}</p>
+                {review.text && (
+                  <p className="text-sm text-muted-foreground">{review.text}</p>
+                )}
                 {review.media && review.media.length > 0 && (
                   <div className="flex gap-2">
                     {review.media.map((m, j) =>
