@@ -1,20 +1,20 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft } from "lucide-react";
 import { useProductMedia } from "@/components/product/ProductMediaContext";
 import type { Product } from "@/types/product";
 
 // Matches the live halimquran.com PDP gallery: full-bleed main image on
 // mobile (edge-to-edge, no rounded corners — the page's own side padding
-// is cancelled with a negative margin), with a floating back button over
-// it in place of the site header's usual hamburger. Contained/rounded
-// again from `sm:` up, where there's room for the normal 2-column layout.
-// The thumbnail strip below is the product's own real gallery photos
-// (lifestyle shots + a size-chart graphic) — separate from the "Warna"
-// color picker further down the page (see ProductColorPicker).
-export function ProductGallery({ product, backHref }: { product: Product; backHref: string }) {
+// is cancelled with a negative margin). The back button that goes with
+// it lives in the site Header (it replaces the hamburger there on PDP
+// pages), not floated over the image — see components/layout/Header.tsx.
+// Contained/rounded again from `sm:` up, where there's room for the
+// normal 2-column layout. The thumbnail strip below is the product's own
+// real gallery photos (lifestyle shots + a size-chart graphic) —
+// separate from the "Warna" color picker further down the page (see
+// ProductColorPicker).
+export function ProductGallery({ product }: { product: Product }) {
   const { gallery, selectedImage, setSelectedImage } = useProductMedia();
 
   return (
@@ -31,13 +31,6 @@ export function ProductGallery({ product, backHref }: { product: Product; backHr
             priority
           />
         )}
-        <Link
-          href={backHref}
-          aria-label="Kembali"
-          className="absolute left-3 top-3 flex size-9 items-center justify-center rounded-full bg-background/90 text-foreground shadow-sm sm:hidden"
-        >
-          <ArrowLeft className="size-5" />
-        </Link>
       </div>
 
       {gallery.length > 1 && (
