@@ -156,7 +156,7 @@ export default async function HomePage() {
               {rail.banner && (
                 <Link
                   href={rail.href}
-                  className="group relative w-full overflow-hidden rounded-lg bg-secondary"
+                  className="group relative -mx-4 w-[calc(100%+2rem)] overflow-hidden bg-secondary sm:mx-0 sm:w-full sm:rounded-lg"
                   style={{ aspectRatio: rail.banner.aspectRatio }}
                 >
                   <Image

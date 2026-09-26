@@ -68,11 +68,6 @@ export function ProductReviews({ product }: { product: Product }) {
                     ))}
                   </div>
                   <span className="text-sm font-medium text-foreground">{review.author}</span>
-                  {review.reviewSource && (
-                    <span className="rounded border border-border px-1.5 py-0.5 text-[10px] text-muted-foreground">
-                      {review.reviewSource}
-                    </span>
-                  )}
                 </div>
                 {review.tags && review.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1.5">

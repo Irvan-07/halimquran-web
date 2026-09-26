@@ -89,7 +89,7 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <Label className="mb-2 block text-base font-bold uppercase text-foreground">
+        <Label className="mb-2 block text-base font-bold text-foreground">
           Pilihan Tambahan
         </Label>
         <div className="flex gap-2">
