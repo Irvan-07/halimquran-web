@@ -98,7 +98,7 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
               key={option.value}
               type="button"
               onClick={() => setCustomization(option.value)}
-              className={`flex-1 whitespace-nowrap rounded-full border px-2 py-2 text-xs font-medium transition-colors sm:px-4 sm:text-sm ${
+              className={`flex-1 whitespace-nowrap rounded-md border px-2 py-2 text-xs font-medium transition-colors sm:px-4 sm:text-sm ${
                 customization === option.value
                   ? "border-primary bg-primary text-primary-foreground"
                   : "border-border text-foreground hover:border-primary"
@@ -118,7 +118,7 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
             onChange={(e) => setCustomName(e.target.value)}
             placeholder="opsional"
             maxLength={30}
-            className="rounded-full px-4"
+            className="rounded-md px-4"
           />
         </div>
       </div>
@@ -160,7 +160,7 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
           "Tambah Ke Keranjang" (not "Beli Sekarang") + a WhatsApp button,
           no price repeated here. */}
       <div className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-3 border-t border-border bg-background p-3 sm:hidden">
-        <Button onClick={handleAddToCart} className="flex-1 rounded-full">
+        <Button onClick={handleAddToCart} className="flex-1 rounded-xl">
           Tambah Ke Keranjang
         </Button>
         <Link
@@ -168,7 +168,7 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat via WhatsApp"
-          className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground"
+          className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground"
         >
           <svg viewBox="0 0 24 24" fill="currentColor" className="size-5">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
