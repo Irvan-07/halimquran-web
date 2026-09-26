@@ -39,6 +39,7 @@ export const mockProducts: Product[] = [
     category: "quran-hafalan",
     size: "A6",
     badge: "Terfavorit",
+    imageUrl: "/products/mushaf-al-quran-al-wafa-a6-pocket-edition.jpg",
   },
   {
     id: "3",

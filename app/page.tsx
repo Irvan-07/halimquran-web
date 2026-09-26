@@ -37,10 +37,23 @@ const RAILS: {
   // one ratio for every banner cropped the odd ones out on the sides
   // (object-cover fits the shorter dimension, so a 4/3 box on a wider
   // 16/9 source crops left/right — confirmed on the Gift banner).
-  banner?: { imageUrl: string; pillLabel: string; aspectRatio: string };
+  banner?: { imageUrl: string; pillLabel?: string; aspectRatio: string };
   href: string;
   productSlugs: string[];
 }[] = [
+  {
+    // Unlabeled row right after the hero on the live homepage — no banner,
+    // no heading, just 4 products (re-confirmed via full section-by-section
+    // DOM walk 26 Sep 2026: index 1, directly after the hero at index 0).
+    slug: "featured",
+    href: "/produk",
+    productSlugs: [
+      "mushaf-al-quran-al-wafa-b7-pocket-edition",
+      "al-quran-madinah-huzaifi-a5-standar-internasional",
+      "al-quran-tajwid-al-mumtaz-a7-resleting",
+      "mushaf-al-quran-al-wafa-a6-pocket-edition",
+    ],
+  },
   {
     slug: "gift",
     banner: { imageUrl: "/category-banners/gift.jpg", pillLabel: "Hadiah/Gift", aspectRatio: "3120/1752" },
@@ -103,6 +116,9 @@ const RAILS: {
   },
   {
     slug: "quran-lainnya",
+    // No pill label on the live site's own banner here either — not an
+    // omission on our part, matching that as-is.
+    banner: { imageUrl: "/category-banners/quran-lainnya.jpg", aspectRatio: "4/3" },
     href: "/produk/quran-lainnya",
     productSlugs: [
       "al-quran-madinah-huzaifi-a5-standar-internasional",
@@ -141,14 +157,16 @@ export default async function HomePage() {
                 >
                   <Image
                     src={rail.banner.imageUrl}
-                    alt={rail.banner.pillLabel}
+                    alt={rail.banner.pillLabel ?? ""}
                     fill
                     sizes="(min-width: 1024px) 1152px, 100vw"
                     className="object-cover"
                   />
-                  <span className="absolute bottom-3 left-3 rounded-full border border-white bg-background/20 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
-                    {rail.banner.pillLabel}
-                  </span>
+                  {rail.banner.pillLabel && (
+                    <span className="absolute bottom-3 left-3 rounded-full border border-white bg-background/20 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
+                      {rail.banner.pillLabel}
+                    </span>
+                  )}
                 </Link>
               )}
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
