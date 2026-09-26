@@ -93,7 +93,7 @@ export function ProductCard({ product }: ProductCardProps) {
               <Star className="size-3.5 fill-primary text-primary" />
               {product.rating}
             </span>
-            {product.ratingCount && <span>· Terjual {product.ratingCount}</span>}
+            {product.soldCount && <span>· Terjual {product.soldCount}</span>}
           </span>
         )}
       </div>

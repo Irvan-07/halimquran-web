@@ -31,6 +31,8 @@ export interface Product {
   rating?: number;
   /** Total number of ratings behind `rating` (e.g. from a marketplace listing's rating breakdown) — shown as "dari N peringkat", independent of how many individual reviews are listed in `reviews`. */
   ratingCount?: number;
+  /** Marketplace-style "Terjual N" trust signal on the product card — a separate figure from `ratingCount` (not everyone who buys leaves a rating), so it isn't derived from it. */
+  soldCount?: number;
   /** Approximate swatch colors observed on the live product card — illustrative, not pixel-sampled. */
   colors?: string[];
   /** Indonesian color names, parallel to `colors` (same index), shown on the PDP's "Warna" section for products with no per-variant photo. */

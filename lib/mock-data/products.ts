@@ -33,6 +33,9 @@ export const mockProducts: Product[] = [
     // but not shown, by the same choice most sellers make on their own
     // site's testimonial section).
     ratingCount: 219,
+    // "Terjual" figure for the product card — set directly by the project
+    // owner, independent of ratingCount above.
+    soldCount: 987,
     // Real per-color PHOTOS (not just hex chips) + the PDP's own 7-image
     // gallery (main shot, lifestyle/detail photos, size-chart graphic),
     // all downloaded straight from this exact product's real PDP on
