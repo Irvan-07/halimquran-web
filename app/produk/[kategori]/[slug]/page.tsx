@@ -9,6 +9,7 @@ import { ProductColorPicker } from "@/components/product/ProductColorPicker";
 import { ProductDescription } from "@/components/product/ProductDescription";
 import { ProductReviews } from "@/components/product/ProductReviews";
 import { PurchasePanel } from "@/components/product/PurchasePanel";
+import { ShippingAreaField } from "@/components/product/ShippingAreaField";
 import { TrackViewItem } from "@/components/tracking";
 import { getMergedCatalog, getMergedProductBySlug } from "@/lib/scalev/catalog";
 import { productCategories } from "@/lib/mock-data/categories";
@@ -163,7 +164,7 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
               <span className="text-sm font-medium text-foreground">Pengiriman</span>
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Dikirim ke:</span>
-                <span className="text-foreground">Pilih Area</span>
+                <ShippingAreaField />
               </div>
               {product.weightGrams && (
                 <div className="flex items-center justify-between text-sm">

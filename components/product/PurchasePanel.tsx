@@ -108,27 +108,22 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
             </button>
           ))}
         </div>
-        {needsName && (
-          <div className="mt-3">
-            <Label htmlFor="custom-name" className="mb-1.5 block text-base font-bold text-foreground">
-              Nama Ukiran (khusus Quran + Nama)
-            </Label>
-            <Input
-              id="custom-name"
-              value={customName}
-              onChange={(e) => setCustomName(e.target.value)}
-              placeholder="opsional"
-              maxLength={30}
-              className="rounded-full px-4"
-            />
-          </div>
-        )}
+        <div className="mt-3">
+          <Label htmlFor="custom-name" className="mb-1.5 block text-base font-bold text-foreground">
+            Nama Ukiran (khusus Quran + Nama)
+          </Label>
+          <Input
+            id="custom-name"
+            value={customName}
+            onChange={(e) => setCustomName(e.target.value)}
+            placeholder="opsional"
+            maxLength={30}
+            className="rounded-full px-4"
+          />
+        </div>
       </div>
 
       <div>
-        <Label className="mb-2 block text-base font-bold uppercase text-foreground">
-          Jumlah
-        </Label>
         <div className="inline-flex items-center divide-x divide-border rounded-full border border-input">
           <button
             type="button"
