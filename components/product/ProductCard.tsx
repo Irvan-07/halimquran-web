@@ -20,8 +20,9 @@ interface ProductCardProps {
 // per color (colorVariants); plain `colors` still render as static dots.
 export function ProductCard({ product }: ProductCardProps) {
   const variants = product.colorVariants ?? [];
-  const [selected, setSelected] = useState(0);
-  const imageUrl = variants[selected]?.imageUrl ?? product.imageUrl;
+  const [selected, setSelected] = useState<number | null>(null);
+  const imageUrl =
+    (selected !== null ? variants[selected]?.imageUrl : undefined) ?? product.imageUrl;
 
   return (
     <Link
