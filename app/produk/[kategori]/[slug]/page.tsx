@@ -159,28 +159,30 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
                 <span className="text-primary">Lihat Wakaf &rarr;</span>
               </Link>
             )}
-
-            <div className="flex flex-col gap-2 border-t border-border pt-4">
-              <span className="text-sm font-medium text-foreground">Pengiriman</span>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">Dikirim ke:</span>
-                <ShippingAreaField />
-              </div>
-              {product.weightGrams && (
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">Berat:</span>
-                  <span className="text-foreground">{product.weightGrams}g</span>
-                </div>
-              )}
-              <p className="text-xs text-muted-foreground">
-                Dikirim dalam 24 jam, (Setelah pembayaran dikonfirmasi)
-              </p>
-            </div>
           </div>
         </div>
       </ProductMediaProvider>
 
       <ProductDescription text={descriptionText} />
+
+      <div className="flex flex-col gap-2 rounded-lg border border-border p-4">
+        <span className="text-base font-bold text-foreground">Pengiriman</span>
+        <div className="flex items-center justify-between text-sm">
+          <span className="text-foreground">Dikirim ke:</span>
+          <ShippingAreaField />
+        </div>
+        {product.weightGrams && (
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-foreground">Berat:</span>
+            <span className="text-foreground">{product.weightGrams}g</span>
+          </div>
+        )}
+        <p className="text-sm text-muted-foreground">
+          Dikirim dalam 24 jam,
+          <br />
+          (Setelah pembayaran dikonfirmasi)
+        </p>
+      </div>
 
       <ProductReviews product={product} />
 
