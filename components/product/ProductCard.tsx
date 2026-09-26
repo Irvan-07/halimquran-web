@@ -88,9 +88,12 @@ export function ProductCard({ product }: ProductCardProps) {
           {formatIDR(product.price)}
         </p>
         {product.rating && (
-          <span className="flex items-center gap-0.5 text-xs text-muted-foreground">
-            <Star className="size-3.5 fill-primary text-primary" />
-            {product.rating}
+          <span className="flex items-center gap-1 text-xs text-muted-foreground">
+            <span className="flex items-center gap-0.5">
+              <Star className="size-3.5 fill-primary text-primary" />
+              {product.rating}
+            </span>
+            {product.ratingCount && <span>· Terjual {product.ratingCount}</span>}
           </span>
         )}
       </div>
