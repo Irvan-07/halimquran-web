@@ -59,6 +59,8 @@ export interface Product {
     variant?: string;
     /** Where this review was pulled from — shown as a small badge in ProductReviews. */
     reviewSource?: "halimquran.com" | "Shopee" | "TikTok Shop";
+    /** Photo/video the reviewer attached to their review (real, downloaded from the source listing) — shown as a thumbnail strip under the review text. */
+    media?: { type: "image" | "video"; src: string }[];
   }[];
   /** "mock" (lib/mock-data) or "scalev" (live API) — which source this record came from. */
   source?: "mock" | "scalev";

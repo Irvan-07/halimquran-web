@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Star } from "lucide-react";
 import type { Product } from "@/types/product";
 
@@ -86,6 +87,29 @@ export function ProductReviews({ product }: { product: Product }) {
                   </div>
                 )}
                 <p className="text-sm text-muted-foreground">{review.text}</p>
+                {review.media && review.media.length > 0 && (
+                  <div className="flex gap-2">
+                    {review.media.map((m, j) =>
+                      m.type === "video" ? (
+                        <video
+                          key={j}
+                          src={m.src}
+                          controls
+                          muted
+                          playsInline
+                          className="size-20 rounded-md border border-border object-cover"
+                        />
+                      ) : (
+                        <div
+                          key={j}
+                          className="relative size-20 shrink-0 overflow-hidden rounded-md border border-border"
+                        >
+                          <Image src={m.src} alt="" fill sizes="80px" className="object-cover" />
+                        </div>
+                      ),
+                    )}
+                  </div>
+                )}
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                   <span>{review.date}</span>
                   {review.variant && (
