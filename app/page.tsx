@@ -19,9 +19,20 @@ const LIFESTYLE_PHOTOS = [
   "/lifestyle/photo-4.png",
 ];
 
-// Homepage below the hero is a rail per category (heading + "Tampilkan
-// Semua" + horizontal-scroll row), matching halimquran.com's actual
-// structure (re-checked 26 Sep 2026) — not one flat "Produk Pilihan" grid.
+// Real per-category lifestyle banners from halimquran.com's homepage
+// (saved 26 Sep 2026) — each category rail there is heading + a banner
+// photo with the category name as a pill overlay + the product rail, not
+// just heading+rail as first built. "Quran Lainnya" has no banner on the
+// live site either (no matching pill found), so it's left out here too
+// rather than inventing one.
+const CATEGORY_BANNERS: Record<string, { imageUrl: string; pillLabel: string }> = {
+  "quran-harian": { imageUrl: "/category-banners/quran-harian.jpg", pillLabel: "Quran Daily" },
+  "quran-hafalan": { imageUrl: "/category-banners/quran-hafalan.jpg", pillLabel: "Quran Hafalan" },
+  "quran-tajwid": { imageUrl: "/category-banners/quran-tajwid.jpg", pillLabel: "Quran Tajwid" },
+  "quran-terjemah": { imageUrl: "/category-banners/quran-terjemah.jpg", pillLabel: "Quran Terjemah" },
+  "quran-tematik": { imageUrl: "/category-banners/quran-tematik.jpg", pillLabel: "Quran Tematik" },
+};
+
 export default async function HomePage() {
   const catalog = await getMergedCatalog();
 
@@ -35,6 +46,7 @@ export default async function HomePage() {
             .filter((p) => p.category === category.slug)
             .slice(0, 6);
           if (products.length === 0) return null;
+          const banner = CATEGORY_BANNERS[category.slug];
 
           return (
             <section
@@ -52,6 +64,23 @@ export default async function HomePage() {
                   Tampilkan Semua
                 </Link>
               </div>
+              {banner && (
+                <Link
+                  href={`/produk/${category.slug}`}
+                  className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-secondary sm:aspect-[16/9]"
+                >
+                  <Image
+                    src={banner.imageUrl}
+                    alt={category.label}
+                    fill
+                    sizes="(min-width: 1024px) 1152px, 100vw"
+                    className="object-cover"
+                  />
+                  <span className="absolute bottom-3 left-3 rounded-full bg-background/90 px-4 py-1.5 text-sm font-medium text-foreground">
+                    {banner.pillLabel}
+                  </span>
+                </Link>
+              )}
               <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
                 {products.map((product) => (
                   <div key={product.id} className="w-40 shrink-0 sm:w-48">
