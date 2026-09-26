@@ -32,13 +32,18 @@ const LIFESTYLE_PHOTOS = [
 // heading here, matching that inconsistency rather than inventing one).
 const RAILS: {
   slug: string;
-  banner?: { imageUrl: string; pillLabel: string };
+  // Each banner's real source aspect ratio (checked via `file` on the
+  // downloaded image) — most are 2048x1536 (4/3), but not all, and using
+  // one ratio for every banner cropped the odd ones out on the sides
+  // (object-cover fits the shorter dimension, so a 4/3 box on a wider
+  // 16/9 source crops left/right — confirmed on the Gift banner).
+  banner?: { imageUrl: string; pillLabel: string; aspectRatio: string };
   href: string;
   productSlugs: string[];
 }[] = [
   {
     slug: "gift",
-    banner: { imageUrl: "/category-banners/gift.jpg", pillLabel: "Hadiah/Gift" },
+    banner: { imageUrl: "/category-banners/gift.jpg", pillLabel: "Hadiah/Gift", aspectRatio: "3120/1752" },
     href: "/gift",
     productSlugs: [
       "bundling-mushaf-al-quran-madinah-huzaifi-a5-2-pcs-box-exclusive-free-custom-nama",
@@ -48,7 +53,7 @@ const RAILS: {
   },
   {
     slug: "quran-harian",
-    banner: { imageUrl: "/category-banners/quran-harian.jpg", pillLabel: "Quran Daily" },
+    banner: { imageUrl: "/category-banners/quran-harian.jpg", pillLabel: "Quran Daily", aspectRatio: "4/3" },
     href: "/produk/quran-harian",
     productSlugs: [
       "mushaf-al-quran-al-wafa-a7-pocket-edition",
@@ -59,7 +64,7 @@ const RAILS: {
   },
   {
     slug: "quran-hafalan",
-    banner: { imageUrl: "/category-banners/quran-hafalan.jpg", pillLabel: "Quran Hafalan" },
+    banner: { imageUrl: "/category-banners/quran-hafalan.jpg", pillLabel: "Quran Hafalan", aspectRatio: "4/3" },
     href: "/produk/quran-hafalan",
     productSlugs: [
       "al-quran-hafalan-a6-hard-cover",
@@ -70,7 +75,7 @@ const RAILS: {
   },
   {
     slug: "quran-tajwid",
-    banner: { imageUrl: "/category-banners/quran-tajwid.jpg", pillLabel: "Quran Tajwid" },
+    banner: { imageUrl: "/category-banners/quran-tajwid.jpg", pillLabel: "Quran Tajwid", aspectRatio: "4/3" },
     href: "/produk/quran-tajwid",
     productSlugs: [
       "al-quran-tajwid-al-mumtaz-a7-resleting",
@@ -81,7 +86,7 @@ const RAILS: {
   },
   {
     slug: "quran-terjemah",
-    banner: { imageUrl: "/category-banners/quran-terjemah.jpg", pillLabel: "Quran Terjemah" },
+    banner: { imageUrl: "/category-banners/quran-terjemah.jpg", pillLabel: "Quran Terjemah", aspectRatio: "3199/2133" },
     href: "/produk/quran-terjemah",
     productSlugs: [
       "al-quran-terjemah-al-halim-b7-rubu-qpp-resleting",
@@ -92,7 +97,7 @@ const RAILS: {
   },
   {
     slug: "quran-tematik",
-    banner: { imageUrl: "/category-banners/quran-tematik.jpg", pillLabel: "Quran Tematik" },
+    banner: { imageUrl: "/category-banners/quran-tematik.jpg", pillLabel: "Quran Tematik", aspectRatio: "4/3" },
     href: "/produk/quran-tematik",
     productSlugs: ["al-quran-terjemah-tajwid-samara-a6-dompet"],
   },
@@ -131,7 +136,8 @@ export default async function HomePage() {
               {rail.banner && (
                 <Link
                   href={rail.href}
-                  className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-secondary sm:aspect-[16/9]"
+                  className="relative w-full overflow-hidden rounded-lg bg-secondary"
+                  style={{ aspectRatio: rail.banner.aspectRatio }}
                 >
                   <Image
                     src={rail.banner.imageUrl}
@@ -145,11 +151,9 @@ export default async function HomePage() {
                   </span>
                 </Link>
               )}
-              <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
-                {products.map((product) => (
-                  <div key={product.id} className="w-40 shrink-0 sm:w-48">
-                    <ProductCard product={product} />
-                  </div>
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                {products.slice(0, 4).map((product) => (
+                  <ProductCard key={product.id} product={product} />
                 ))}
               </div>
               <Link
