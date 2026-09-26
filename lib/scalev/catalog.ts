@@ -98,6 +98,18 @@ export function scalevProductToProduct(detail: ScalevProductDetail): Product {
   };
 }
 
+// The live Scalev account has two separate product listings for the same
+// physical mushaf (Madinah Huzaifi A5) — confirmed 26 Sep 2026, not a merge
+// bug on our end: "al-quran-madinah-huzaifi-a5" (the complete one, now
+// merged with the mock catalog's rating/description/9 color variants) and
+// this one, a sparse duplicate with just 1 color variant and no
+// category/rating. Dropped here until the merchant deletes/merges it in
+// the Scalev dashboard directly — that's the real fix; this is a stopgap
+// so customers don't see the same mushaf listed twice.
+const KNOWN_DUPLICATE_SCALEV_SLUGS = new Set([
+  "al-quran-madinah-huzaifi-a5-standar-internasional",
+]);
+
 /**
  * Fetches the full real catalog (list -> per-product detail, in parallel,
  * since the list endpoint doesn't carry pricing — see types/scalev.ts).
@@ -112,7 +124,8 @@ export async function getScalevCatalog(): Promise<Product[]> {
   );
   return details
     .filter((d): d is ScalevProductDetail => d !== null)
-    .map(scalevProductToProduct);
+    .map(scalevProductToProduct)
+    .filter((p) => !KNOWN_DUPLICATE_SCALEV_SLUGS.has(p.slug));
 }
 
 export async function getScalevProductBySlug(slug: string): Promise<Product | null> {
