@@ -132,7 +132,7 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
             {product.rating && (
               <span className="flex items-center gap-1 text-sm text-muted-foreground">
                 <Star className="size-4 fill-brand-yellow text-brand-yellow" />
-                {product.rating.toFixed(1)} (1)
+                {product.rating.toFixed(1)} ({product.ratingCount ?? 1})
               </span>
             )}
             <p className="text-2xl font-semibold text-primary">
