@@ -90,17 +90,6 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-8 pb-24 sm:px-6 lg:px-8 sm:pb-8">
       <TrackViewItem product={product} />
-      <nav className="hidden text-xs text-muted-foreground sm:block">
-        <Link href="/produk" className="hover:text-primary">
-          Semua Produk
-        </Link>
-        {" / "}
-        <Link href={`/produk/${product.category}`} className="hover:text-primary">
-          {categoryLabel}
-        </Link>
-        {" / "}
-        <span className="text-foreground">{product.name}</span>
-      </nav>
 
       <ProductMediaProvider product={product}>
         <div className="grid gap-8 lg:grid-cols-2">

@@ -20,30 +20,15 @@ export function ProductReviews({ product }: { product: Product }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="font-heading text-lg font-semibold text-foreground">Rating</h2>
+      <h2 className="text-sm font-bold text-foreground">Rating</h2>
 
       {product.rating ? (
-        <div className="flex items-center gap-2">
-          <span className="text-2xl font-semibold text-foreground">
-            {product.rating.toFixed(1)}
+        <div className="flex items-center gap-1 text-sm">
+          <Star className="size-4 shrink-0 fill-primary text-primary" />
+          <span className="text-foreground">{product.rating}</span>
+          <span className="text-muted-foreground">
+            dari {product.ratingCount ?? reviews.length ?? 1} peringkat
           </span>
-          <div className="flex flex-col">
-            <div className="flex items-center gap-0.5">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                  key={i}
-                  className={`size-4 ${
-                    i < Math.round(product.rating!)
-                      ? "fill-brand-yellow text-brand-yellow"
-                      : "text-border"
-                  }`}
-                />
-              ))}
-            </div>
-            <span className="text-xs text-muted-foreground">
-              dari {product.ratingCount ?? reviews.length ?? 1} peringkat
-            </span>
-          </div>
         </div>
       ) : (
         <p className="text-sm text-muted-foreground">Belum ada rating untuk produk ini.</p>
@@ -61,7 +46,7 @@ export function ProductReviews({ product }: { product: Product }) {
                         key={j}
                         className={`size-3.5 ${
                           j < review.rating
-                            ? "fill-brand-yellow text-brand-yellow"
+                            ? "fill-primary text-primary"
                             : "text-border"
                         }`}
                       />
