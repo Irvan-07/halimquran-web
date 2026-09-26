@@ -39,11 +39,6 @@ export function ProductCard({ product }: ProductCardProps) {
             className="object-cover"
           />
         )}
-        {product.badge && (
-          <span className="absolute left-2 top-2 rounded bg-brand-yellow px-2 py-0.5 text-[11px] font-bold text-brand-yellow-foreground">
-            {product.badge}
-          </span>
-        )}
         <span
           aria-hidden="true"
           className="absolute bottom-2 right-2 rounded-full bg-background/80 p-1.5 text-muted-foreground"

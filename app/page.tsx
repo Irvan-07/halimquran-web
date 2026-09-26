@@ -3,24 +3,24 @@ import Image from "next/image";
 import { ProductCard } from "@/components/product/ProductCard";
 import { HeroCarousel } from "@/components/sections";
 import { Reveal } from "@/components/layout/Reveal";
+import { LifestyleMarquee, type LifestyleItem } from "@/components/layout/LifestyleMarquee";
 import { getMergedCatalog } from "@/lib/scalev/catalog";
 import type { Product } from "@/types/product";
 
-// Real lifestyle photos from the scrolling gallery strip halimquran.com
-// shows just above its footer (saved 26 Sep 2026). The live version
-// auto-scrolls continuously; this is a simpler manual horizontal-scroll
-// row with the same 4 real photos rather than reproducing that exact
-// animation. No specific link target was found for it on the live site
-// (no <a> inside that section), so "Lihat Semua Produk" points at /produk
-// as a reasonable stand-in for its implied intent.
-const LIFESTYLE_PHOTOS: { src: string; cta?: boolean }[] = [
-  { src: "/lifestyle/photo-1.png" },
-  { src: "/lifestyle/photo-2.png" },
-  { src: "/lifestyle/photo-3.png" },
-  // Only this specific photo carries the "All Product / Here" overlay on
+// Real lifestyle media from the scrolling gallery strip halimquran.com
+// shows just above its footer (saved 26 Sep 2026): 3 photos + 1 short
+// looping video (confirmed on the live site — the 4th slot is a <video>,
+// not a still photo; a frame of it was mistaken for a photo earlier).
+// The live strip is a step carousel (see LifestyleMarquee), looping this
+// same 4-item set back-to-back.
+const LIFESTYLE_ITEMS: LifestyleItem[] = [
+  { type: "image", src: "/lifestyle/photo-1.png" },
+  { type: "image", src: "/lifestyle/photo-2.png" },
+  { type: "image", src: "/lifestyle/photo-3.png" },
+  // Only this specific item carries the "All Product / Here" overlay on
   // the live site (confirmed by the user against the real homepage) — the
-  // other 3 are plain photos.
-  { src: "/lifestyle/photo-4.png", cta: true },
+  // other 3 are plain media.
+  { type: "video", src: "/lifestyle/video-1.mp4", cta: true },
 ];
 
 // Each rail below is hardcoded to the EXACT product set/order read off
@@ -141,7 +141,7 @@ export default async function HomePage() {
     <div className="flex flex-col">
       <HeroCarousel />
 
-      <div className="flex flex-col gap-10 pb-10 pt-6">
+      <div className="flex flex-col gap-10 pb-4 pt-6">
         {RAILS.map((rail) => {
           const products = rail.productSlugs
             .map((slug) => bySlug.get(slug))
@@ -156,7 +156,7 @@ export default async function HomePage() {
               {rail.banner && (
                 <Link
                   href={rail.href}
-                  className="relative w-full overflow-hidden rounded-lg bg-secondary"
+                  className="group relative w-full overflow-hidden rounded-lg bg-secondary"
                   style={{ aspectRatio: rail.banner.aspectRatio }}
                 >
                   <Image
@@ -167,7 +167,7 @@ export default async function HomePage() {
                     className="object-cover"
                   />
                   {rail.banner.pillLabel && (
-                    <span className="absolute bottom-3 left-3 rounded-full border border-foreground/70 bg-background px-4 py-1.5 text-sm font-medium text-foreground">
+                    <span className="absolute bottom-3 left-3 rounded-full border border-foreground/70 bg-background px-4 py-1.5 text-sm font-medium text-foreground transition-colors group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
                       {rail.banner.pillLabel}
                     </span>
                   )}
@@ -190,26 +190,7 @@ export default async function HomePage() {
       </div>
 
       <div className="flex flex-col items-center gap-6 pb-10">
-        <div className="flex w-full gap-1 overflow-x-auto sm:justify-center">
-          {LIFESTYLE_PHOTOS.map((photo) => (
-            <div key={photo.src} className="relative aspect-[2/3] w-1/3 shrink-0 sm:w-64">
-              <Image src={photo.src} alt="" fill sizes="256px" className="object-cover" />
-              {photo.cta && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-4 text-center">
-                  <span className="text-2xl font-semibold leading-tight text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.5)] sm:text-3xl">
-                    All Product
-                  </span>
-                  <Link
-                    href="/produk"
-                    className="rounded-2xl bg-secondary px-6 py-2.5 text-sm font-medium text-foreground"
-                  >
-                    Here
-                  </Link>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+        <LifestyleMarquee items={LIFESTYLE_ITEMS} />
       </div>
     </div>
   );
