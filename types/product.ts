@@ -29,6 +29,8 @@ export interface Product {
   badge?: string;
   /** Rating out of 5, when shown on the live site. */
   rating?: number;
+  /** Total number of ratings behind `rating` (e.g. from a marketplace listing's rating breakdown) — shown as "dari N peringkat", independent of how many individual reviews are listed in `reviews`. */
+  ratingCount?: number;
   /** Approximate swatch colors observed on the live product card — illustrative, not pixel-sampled. */
   colors?: string[];
   /** Indonesian color names, parallel to `colors` (same index), shown on the PDP's "Warna" section for products with no per-variant photo. */
@@ -47,7 +49,7 @@ export interface Product {
   description?: string;
   /** Shipping weight in grams — shown on the PDP's "Pengiriman" block, matching the live site. */
   weightGrams?: number;
-  /** Real customer reviews, verbatim from the live site where we have them (see ProductReviews). Not fabricated — omitted rather than invented for products we haven't scraped a review for yet. */
+  /** Real customer reviews, verbatim from the live site or marketplace listings where we have them (see ProductReviews). Not fabricated — omitted rather than invented for products we haven't scraped a review for yet. */
   reviews?: {
     author: string;
     rating: number;
@@ -55,6 +57,8 @@ export interface Product {
     text: string;
     date: string;
     variant?: string;
+    /** Where this review was pulled from — shown as a small badge in ProductReviews. */
+    reviewSource?: "halimquran.com" | "Shopee" | "TikTok Shop";
   }[];
   /** "mock" (lib/mock-data) or "scalev" (live API) — which source this record came from. */
   source?: "mock" | "scalev";

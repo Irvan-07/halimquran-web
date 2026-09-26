@@ -27,6 +27,12 @@ export const mockProducts: Product[] = [
     size: "B7",
     badge: "Ukir Nama",
     rating: 5,
+    // 218 five-star ratings on Shopee + 1 on halimquran.com itself — per
+    // project owner's direction, only 5-star ratings/reviews are surfaced
+    // here (the listing's small number of 4/3/2/1-star ratings are real
+    // but not shown, by the same choice most sellers make on their own
+    // site's testimonial section).
+    ratingCount: 219,
     // Real 9 colors + names, read verbatim off this exact PDP on
     // halimquran.com (26 Sep 2026) — this product is the app's PDP
     // fidelity template, see app/produk/[kategori]/[slug]/page.tsx.
@@ -44,6 +50,16 @@ export const mockProducts: Product[] = [
     // Real, verbatim PDP copy from halimquran.com (26 Sep 2026).
     description:
       "Pengen baca Al-Qur'an setiap waktu tapi suka repot bawa Al-Qur'annya?? Nyari yang ringan dan mudah dibawa?? Sepertinya Anda perlu coba Al-Qur'an satu ini, Al-Qur'an Al-Wafa Rubu' Pocket Resleting, beratnya hanya 230gr, ringan dibawa ke mana saja. Penasaran apa saja keistimewaannya??\n\nSpesifikasi:\n- Ukuran B7 (9 x 12,5 cm)\n- Kertas QPP 50gr\n- Berat 230gr\n- Tebal 616 halaman\n\nFitur cover:\n- Desain cover casual, kalem, dan hangat.\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n- Tersedia dalam 9 pilihan warna.\n\nMaterial cover:\n- Cover terbuat dari kulit sintetis jenis cocoli berkualitas yang membuat warna cover lebih kuat dan tidak mudah pudar. Selain itu, cover dilapisi dengan foil yang memberi kesan mewah pada tampilan cover.\n- Resleting berbahan metal, sehingga lebih kokoh dan aman, serta memiliki gigitan resleting yang lebih kuat. Metal Zipper memberi kesan mahal dan eksklusif pada Al-Qur'an.\n\nMaterial inner:\n- Menggunakan kertas QPP 50gr dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan kamu mencari juz atau halaman tertentu.\n- Terdapat pewarnaan kata ganti Allah dan -Nya yang memudahkan kamu menemukan ayat-ayat pilihan.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
+    // 1 review from halimquran.com itself + the 5-star subset of the 28
+    // "with comments" reviews pulled from this product's real Shopee
+    // listing (26 Sep 2026):
+    // https://shopee.co.id/Halim-Quran-MUSHAF-AL-QURAN-AL-WAFA-RUBU-B7-POCKET-RESLETING-i.229472472.41774667767
+    // Read via Shopee's own ratings API (the review widget itself didn't
+    // render in an automated session, but the underlying API — reachable
+    // with the logged-in owner's own session — returned the real data).
+    // Text kept verbatim; the listing's one 2-star and one 4-star review
+    // were dropped per the project owner's direction (5-star only), see
+    // `ratingCount` above for the true 219-rating total this represents.
     reviews: [
       {
         author: "I*** a***",
@@ -52,7 +68,34 @@ export const mockProducts: Product[] = [
         text: "Alhamdulillah, Qurannya dh sampe kualitas terbaik. InsyaAllah order lg untuk keluarga",
         date: "06 May 2026",
         variant: "Hitam • QURAN + NAMA",
+        reviewSource: "halimquran.com",
       },
+      { author: "g*****a", rating: 5, text: "Kegunaan: ukuran alquran kecil nyaman disimpan di tas. Bahan: bagus dan halus diluar ekspektasiii", date: "23 Apr 2026", variant: "Coklat Tua • QURAN SAJA", reviewSource: "Shopee" },
+      { author: "i*****t", rating: 5, text: "Maaf br review.. alhamdulillah Al quran nya bagus bgt, ukurannya sedang, ga terlalu kcl tulisannya. Cocok untuk di bawa traveling, haji umrah.. syukron", date: "15 Feb 2026", variant: "Hijau • QURAN SAJA", reviewSource: "Shopee" },
+      { author: "a*****v", rating: 5, text: "Kain: bagus. Desain: bagus. Alhamdulillah paketnya sudah sampai dengan selamat terimakasih", date: "29 Aug 2026", variant: "Coklat • QURAN + NAMA", reviewSource: "Shopee" },
+      { author: "d*****1", rating: 5, text: "Kualitas: sangat bagus dan memuaskan. Konten: sangat baik. Kegunaan: sangat bermanfaat. Alquraanya warna pink cantik, ukuran alquraan kecil enak dibawa kemana2 dan dimasukkan dalam tas karna ukurannya minimalis. Alquraan bisa costum nama. Harganya juga terjangkau. Good joob\u{1F49D}", date: "01 Mar 2026", variant: "Pink • QURAN + NAMA", reviewSource: "Shopee" },
+      { author: "utf_03it4j", rating: 5, text: "Kualitas: bagus banget. Sangat baik kk alqurannya", date: "27 Feb 2026", variant: "Coklat Tua • QURAN + NAMA + BOX", reviewSource: "Shopee" },
+      { author: "aiiariansyah", rating: 5, text: "Kualitas: bagus. Kegunaan: hafalan Al Qur'an", date: "19 Feb 2026", variant: "Hitam • QURAN SAJA", reviewSource: "Shopee" },
+      { author: "rizky_afrianda", rating: 5, text: "Kualitas: bagus", date: "04 Mar 2026", variant: "Cream • QURAN SAJA", reviewSource: "Shopee" },
+      { author: "s*****h", rating: 5, text: "Tinggal yang ukuran A4 aja yang belum ni, biar dapat yang ukuran besar nya buat baca Al-Qur'an lebih jelas, Alhamdulillah", date: "28 Jun 2026", variant: "Cream • QURAN + NAMA", reviewSource: "Shopee" },
+      { author: "mamaraffa1429", rating: 5, text: "Masya Allah Al-qur'an nya bagus\u{1F44D}\u{1F64F}", date: "06 Mar 2026", variant: "Lilac • QURAN + NAMA", reviewSource: "Shopee" },
+      { author: "r*****_", rating: 5, text: "Al Qurannya sudah sampai, alhamdulillah sesuai espektasi semoga berkah untuk saya dan sellernya", date: "23 Nov 2025", variant: "Coklat • QURAN + NAMA", reviewSource: "Shopee" },
+      { author: "afiqahayunindya", rating: 5, text: "Ukuran: ukuran pas bgt buat anak ku sekolah, tdk kebesaran dan tdk kekecilan pokoknya pas.... bisa dimasukan didalem tas dan enggak bikin berat. Bahan: bahan luar nya halus, lembut, bagus, tulisannya bagus mudah dimengerti dan mudah dibaca. Desain: desain cover keren bgt, warnanya pun soft bgt, enggak norak, dan enggak jadul..... keren deh pokoknya", date: "24 Jul 2026", variant: "Lilac • QURAN + NAMA", reviewSource: "Shopee" },
+      { author: "nazaratu07", rating: 5, text: "Alhamdulillah datang tepat waktu, tadinya udh pesimis.. Makasih seller\u{1F917}", date: "19 Jun 2026", variant: "Cream • QURAN SAJA", reviewSource: "Shopee" },
+      { author: "3f1d5pnlnw", rating: 5, text: "BAGUS BGT MASYAALLAH\u{1F60D}, packagingnya jugakk amann SUKAK BGT POKONYAAA", date: "23 Jan 2026", variant: "Pink • QURAN + NAMA + BOX", reviewSource: "Shopee" },
+      { author: "bayu.969", rating: 5, text: "Ukuran: saya suka karena Alquran kecil mudah di bawa kemana mana", date: "13 Jun 2026", variant: "Hijau • QURAN + NAMA", reviewSource: "Shopee" },
+      { author: "sitinurelina", rating: 5, text: "Kualitas: memuaskan. Konten: bagus. Kegunaan: di baca. Masyallah bagus banget udah sama nama cantik\u{1F970}", date: "07 Mar 2026", variant: "Pink • QURAN + NAMA", reviewSource: "Shopee" },
+      { author: "luay.ay_81", rating: 5, text: "Ukuran: cocok banget. Bahan: bahan bagus tulisannya jelas. Desain: cantik", date: "10 Aug 2026", variant: "Lilac • QURAN SAJA", reviewSource: "Shopee" },
+      { author: "farihanida22", rating: 5, text: "Bagus ok", date: "07 Mar 2026", variant: "Cream • QURAN + NAMA", reviewSource: "Shopee" },
+      { author: "abyzhar_.99", rating: 5, text: "Kain: mantap. Desain: bagus....", date: "18 Aug 2026", variant: "Hijau • QURAN + NAMA", reviewSource: "Shopee" },
+      { author: "zulmi03041991", rating: 5, text: "Ukuran: ukurannya pas dan nyaman dibawa. Bahan: bagus dan menarik. Desain: cakep dan estetik", date: "21 Jun 2026", variant: "Coklat • QURAN + NAMA", reviewSource: "Shopee" },
+      { author: "a*****w", rating: 5, text: "Kualitas: baguss. Aku slh beli harusnya yg terjemah, TAPI MASYA ALLAH INI CANTIK BANGETTT \u{1F60D}\u{1F60D} mimin nya jg baik, aku sempet kelupaan ngasih nama, syukron\u{2764}\u{FE0F}", date: "12 Mar 2026", variant: "Pink • QURAN + NAMA + BOX", reviewSource: "Shopee" },
+      { author: "h*****k", rating: 5, text: "Ukuran: ukurannya pas, mudah di bawa. Bahan: bahannya bagus. Pas di buka tidak kaku, tidak krak, jadi tidak merusak bagian bagian alquran.", date: "17 May 2026", variant: "Coklat • QURAN SAJA", reviewSource: "Shopee" },
+      { author: "kristinajedix", rating: 5, text: "Kualitas: sangat bagus. Konten: keren. Kegunaan: bermanfaat. Alquran saku yang istimewa bisa di ukir nama pemilik, warna kalem, kertas tebal, tulisan sangat jelas, warna sampul kalem dan elegan, sangat bermanfaat untuk sehari hari, pengiriman cepat, terimakasih", date: "08 Mar 2026", variant: "Pink • QURAN + NAMA", reviewSource: "Shopee" },
+      { author: "d*****6", rating: 5, text: "Kualitas: sangat bagus. MasyaAllah cantik bgt, jelas jugaa meskipun kecil tp ga kecil bangett", date: "07 Mar 2026", variant: "Pink • QURAN + NAMA", reviewSource: "Shopee" },
+      { author: "s*****3", rating: 5, text: "Kecil, pas banget buat dibawa kemana mana", date: "23 Aug 2026", variant: "Pink • QURAN + NAMA + BOX", reviewSource: "Shopee" },
+      { author: "zabearoke", rating: 5, text: "Ukuran: sesuai. Desain: sesuai dengan keinginan", date: "09 Aug 2026", variant: "Coklat • QURAN + NAMA", reviewSource: "Shopee" },
+      { author: "mayasarinf", rating: 5, text: "Ukuran: pas. Bahan: bagus", date: "08 Jun 2026", variant: "Hijau • QURAN + NAMA", reviewSource: "Shopee" },
     ],
   },
   {
