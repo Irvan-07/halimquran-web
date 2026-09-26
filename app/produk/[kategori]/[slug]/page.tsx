@@ -121,17 +121,28 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
               <span className="w-fit rounded bg-destructive px-2 py-0.5 text-xs font-semibold text-white">
                 Ada Stok
               </span>
-              <h1 className="font-heading text-xl font-semibold text-foreground">
+              <h1 className="font-heading text-lg font-semibold text-foreground">
                 {product.name}
               </h1>
               {product.rating && (
                 <span className="flex items-center gap-1 text-sm text-muted-foreground">
-                  <Star className="size-4 fill-primary text-primary" />
+                  <span className="flex items-center gap-0.5">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`size-4 ${
+                          i < Math.round(product.rating!)
+                            ? "fill-primary text-primary"
+                            : "text-border"
+                        }`}
+                      />
+                    ))}
+                  </span>
                   {product.rating.toFixed(1)} ({product.ratingCount ?? 1})
                 </span>
               )}
               <div className="flex items-center justify-between gap-3">
-                <p className="text-2xl font-semibold text-foreground">
+                <p className="text-lg font-bold text-foreground">
                   {formatIDR(product.price)}
                 </p>
                 <button

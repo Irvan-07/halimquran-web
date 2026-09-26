@@ -118,13 +118,13 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
             onChange={(e) => setCustomName(e.target.value)}
             placeholder="opsional"
             maxLength={30}
-            className="rounded-md px-4"
+            className="h-14 w-full rounded-md px-5 text-base"
           />
         </div>
       </div>
 
-      <div>
-        <div className="inline-flex items-center divide-x divide-border rounded-full border border-input">
+      <div className="flex justify-center">
+        <div className="inline-flex items-center divide-x divide-border rounded-md border border-input">
           <button
             type="button"
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
@@ -160,7 +160,7 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
           "Tambah Ke Keranjang" (not "Beli Sekarang") + a WhatsApp button,
           no price repeated here. */}
       <div className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-3 border-t border-border bg-background p-3 sm:hidden">
-        <Button onClick={handleAddToCart} className="flex-1 rounded-xl">
+        <Button onClick={handleAddToCart} className="h-11 flex-1 rounded-xl">
           Tambah Ke Keranjang
         </Button>
         <Link
