@@ -89,7 +89,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </p>
         {product.rating && (
           <span className="flex items-center gap-0.5 text-xs text-muted-foreground">
-            <Star className="size-3.5 fill-brand-yellow text-brand-yellow" />
+            <Star className="size-3.5 fill-primary text-primary" />
             {product.rating}
           </span>
         )}

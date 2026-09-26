@@ -53,7 +53,7 @@ const RAILS: {
     href: "/produk",
     productSlugs: [
       "mushaf-al-quran-al-wafa-b7-pocket-edition",
-      "al-quran-madinah-huzaifi-a5-standar-internasional",
+      "al-quran-madinah-huzaifi-a5",
       "al-quran-tajwid-al-mumtaz-a7-resleting",
       "mushaf-al-quran-al-wafa-a6-pocket-edition",
     ],
@@ -125,7 +125,7 @@ const RAILS: {
     banner: { imageUrl: "/category-banners/quran-lainnya.jpg", aspectRatio: "4/3" },
     href: "/produk/quran-lainnya",
     productSlugs: [
-      "al-quran-madinah-huzaifi-a5-standar-internasional",
+      "al-quran-madinah-huzaifi-a5",
       "al-quran-kalimatul-ulya-a5-resleting",
       "al-quran-al-azhim-a5-hard-cover",
       "al-quran-terjemah-besar-al-haqq-a4-hard-cover-box",

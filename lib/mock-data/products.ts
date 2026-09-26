@@ -124,7 +124,12 @@ export const mockProducts: Product[] = [
   },
   {
     id: "3",
-    slug: "al-quran-madinah-huzaifi-a5-standar-internasional",
+    // Slug must match the real Scalev product's own slug exactly (that's
+    // the join key getMergedCatalog() uses) — Scalev's entry for this
+    // product uses the shorter "al-quran-madinah-huzaifi-a5", not the old
+    // live site's longer URL slug, otherwise the two show up as separate
+    // duplicate products (confirmed happening before this fix).
+    slug: "al-quran-madinah-huzaifi-a5",
     name: "Al Quran Madinah Huzaifi A5 Standar Internasional",
     price: 109000,
     category: "quran-harian",
