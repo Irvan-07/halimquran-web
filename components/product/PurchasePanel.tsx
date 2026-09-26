@@ -148,7 +148,11 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
       </div>
 
       <div className="hidden gap-3 sm:flex">
-        <Button variant="outline" className="flex-1" onClick={handleAddToCart}>
+        <Button
+          variant="outline"
+          className="flex-1 border-primary text-primary hover:bg-primary/10 hover:text-primary"
+          onClick={handleAddToCart}
+        >
           Tambah ke Keranjang
         </Button>
         <Button className="flex-1" onClick={handleBuyNow}>
