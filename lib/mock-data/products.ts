@@ -33,16 +33,30 @@ export const mockProducts: Product[] = [
     // but not shown, by the same choice most sellers make on their own
     // site's testimonial section).
     ratingCount: 219,
-    // Real 9 colors + names, read verbatim off this exact PDP on
+    // Real per-color PHOTOS (not just hex chips) + the PDP's own 7-image
+    // gallery (main shot, lifestyle/detail photos, size-chart graphic),
+    // all downloaded straight from this exact product's real PDP on
     // halimquran.com (26 Sep 2026) — this product is the app's PDP
     // fidelity template, see app/produk/[kategori]/[slug]/page.tsx.
-    colors: [
-      "#6B7280", "#111827", "#7B2D26", "#8B5E34", "#5C3A21",
-      "#0F7A5C", "#8E7CC3", "#E8DCC4", "#C2417A",
+    galleryImages: [
+      "/products/wafa-b7-gallery/gallery-1-main.jpg",
+      "/products/wafa-b7-gallery/gallery-2.jpg",
+      "/products/wafa-b7-gallery/gallery-3.jpg",
+      "/products/wafa-b7-gallery/gallery-4.jpg",
+      "/products/wafa-b7-gallery/gallery-5.jpg",
+      "/products/wafa-b7-gallery/gallery-6.jpg",
+      "/products/wafa-b7-gallery/gallery-7-sizechart.jpg",
     ],
-    colorNames: [
-      "Abu-Abu", "Hitam", "Maroon", "Coklat", "Coklat Tua",
-      "Hijau", "Lilac", "Cream", "Pink",
+    colorVariants: [
+      { hex: "#6B7280", name: "Abu-Abu", imageUrl: "/products/wafa-b7-colors/color-abu-abu.jpg" },
+      { hex: "#111827", name: "Hitam", imageUrl: "/products/wafa-b7-colors/color-hitam.jpg" },
+      { hex: "#7B2D26", name: "Maroon", imageUrl: "/products/wafa-b7-colors/color-maroon.jpg" },
+      { hex: "#8B5E34", name: "Coklat", imageUrl: "/products/wafa-b7-colors/color-coklat.jpg" },
+      { hex: "#5C3A21", name: "Coklat Tua", imageUrl: "/products/wafa-b7-colors/color-coklat-tua.jpg" },
+      { hex: "#0F7A5C", name: "Hijau", imageUrl: "/products/wafa-b7-colors/color-hijau.jpg" },
+      { hex: "#8E7CC3", name: "Lilac", imageUrl: "/products/wafa-b7-colors/color-lilac.jpg" },
+      { hex: "#E8DCC4", name: "Cream", imageUrl: "/products/wafa-b7-colors/color-cream.jpg" },
+      { hex: "#C2417A", name: "Pink", imageUrl: "/products/wafa-b7-colors/color-pink.jpg" },
     ],
     customNameEligible: true,
     imageUrl: "/products/mushaf-al-quran-al-wafa-b7-pocket-edition.jpg",

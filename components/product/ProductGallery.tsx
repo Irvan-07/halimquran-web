@@ -1,53 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
+import { ArrowLeft } from "lucide-react";
+import { useProductMedia } from "@/components/product/ProductMediaContext";
 import type { Product } from "@/types/product";
 
-// Matches the live halimquran.com PDP gallery: a vertical thumbnail rail
-// (horizontal strip on mobile) next to one large main image, both driven
-// by the same selection. We only have one photo per color variant (no
-// separate angle shots or info-graphic images the live site also has), so
-// the rail is populated from colorVariants — a smaller but honest subset
-// of the real pattern rather than fabricated extra images.
-export function ProductGallery({ product }: { product: Product }) {
-  const variants = product.colorVariants ?? [];
-  const [selected, setSelected] = useState(0);
-  const [plainColorSelected, setPlainColorSelected] = useState(0);
-  // Plain hex + name colors, no per-variant photo (most of the catalog) —
-  // still shown as a "Warna" section, just without an image swap.
-  const plainColors =
-    variants.length === 0 && product.colors && product.colors.length > 0
-      ? product.colors.map((hex, i) => ({ hex, name: product.colorNames?.[i] ?? hex }))
-      : [];
-
-  const imageUrl = variants[selected]?.imageUrl ?? product.imageUrl;
+// Matches the live halimquran.com PDP gallery: full-bleed main image on
+// mobile (edge-to-edge, no rounded corners — the page's own side padding
+// is cancelled with a negative margin), with a floating back button over
+// it in place of the site header's usual hamburger. Contained/rounded
+// again from `sm:` up, where there's room for the normal 2-column layout.
+// The thumbnail strip below is the product's own real gallery photos
+// (lifestyle shots + a size-chart graphic) — separate from the "Warna"
+// color picker further down the page (see ProductColorPicker).
+export function ProductGallery({ product, backHref }: { product: Product; backHref: string }) {
+  const { gallery, selectedImage, setSelectedImage } = useProductMedia();
 
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-      {variants.length > 1 && (
-        <div className="order-2 flex shrink-0 gap-2 overflow-x-auto sm:order-1 sm:w-16 sm:flex-col sm:overflow-visible">
-          {variants.map((variant, i) => (
-            <button
-              key={variant.hex + i}
-              type="button"
-              aria-label={variant.name}
-              onClick={() => setSelected(i)}
-              className={`relative size-14 shrink-0 overflow-hidden rounded-md border sm:size-16 ${
-                i === selected ? "border-primary" : "border-border"
-              }`}
-            >
-              <Image src={variant.imageUrl} alt={variant.name} fill sizes="64px" className="object-cover" />
-            </button>
-          ))}
-        </div>
-      )}
-
-      <div className="relative order-1 aspect-square w-full min-w-0 overflow-hidden rounded-lg bg-secondary sm:order-2 sm:flex-1">
-        {imageUrl && (
+    <div className="flex flex-col gap-3">
+      <div className="relative -mx-4 aspect-square w-[calc(100%+2rem)] overflow-hidden bg-secondary sm:mx-0 sm:w-full sm:rounded-lg">
+        {selectedImage && (
           <Image
-            key={imageUrl}
-            src={imageUrl}
+            key={selectedImage}
+            src={selectedImage}
             alt={product.name}
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
@@ -55,63 +31,29 @@ export function ProductGallery({ product }: { product: Product }) {
             priority
           />
         )}
-        {product.badge && (
-          <span className="absolute left-3 top-3 rounded bg-brand-yellow px-2.5 py-1 text-xs font-bold text-brand-yellow-foreground">
-            {product.badge}
-          </span>
-        )}
+        <Link
+          href={backHref}
+          aria-label="Kembali"
+          className="absolute left-3 top-3 flex size-9 items-center justify-center rounded-full bg-background/90 text-foreground shadow-sm sm:hidden"
+        >
+          <ArrowLeft className="size-5" />
+        </Link>
       </div>
 
-      {variants.length > 1 && (
-        <div className="order-3 flex w-full flex-col gap-2 sm:basis-full">
-          <span className="text-sm font-medium text-foreground">Warna</span>
-          <div className="flex flex-wrap gap-3">
-            {variants.map((variant, i) => (
-              <button
-                key={variant.hex + i}
-                type="button"
-                onClick={() => setSelected(i)}
-                className="flex w-14 flex-col items-center gap-1"
-              >
-                <span
-                  className={`relative size-14 overflow-hidden rounded-md border ${
-                    i === selected ? "border-primary" : "border-border"
-                  }`}
-                >
-                  <Image src={variant.imageUrl} alt={variant.name} fill sizes="56px" className="object-cover" />
-                </span>
-                <span className="w-full truncate text-center text-[11px] text-muted-foreground">
-                  {variant.name}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {plainColors.length > 0 && (
-        <div className="order-3 flex w-full flex-col gap-2 sm:basis-full">
-          <span className="text-sm font-medium text-foreground">Warna</span>
-          <div className="flex flex-wrap gap-3">
-            {plainColors.map((color, i) => (
-              <button
-                key={color.hex + i}
-                type="button"
-                onClick={() => setPlainColorSelected(i)}
-                className="flex w-14 flex-col items-center gap-1"
-              >
-                <span
-                  className={`size-14 rounded-md border-2 ${
-                    i === plainColorSelected ? "border-primary" : "border-border"
-                  }`}
-                  style={{ backgroundColor: color.hex }}
-                />
-                <span className="w-full truncate text-center text-[11px] text-muted-foreground">
-                  {color.name}
-                </span>
-              </button>
-            ))}
-          </div>
+      {gallery.length > 1 && (
+        <div className="grid grid-cols-5 gap-2">
+          {gallery.map((src, i) => (
+            <button
+              key={src + i}
+              type="button"
+              onClick={() => setSelectedImage(src)}
+              className={`relative aspect-square overflow-hidden rounded-md border ${
+                src === selectedImage ? "border-primary" : "border-border"
+              }`}
+            >
+              <Image src={src} alt="" fill sizes="80px" className="object-cover" />
+            </button>
+          ))}
         </div>
       )}
     </div>

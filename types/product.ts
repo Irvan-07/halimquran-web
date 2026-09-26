@@ -35,8 +35,10 @@ export interface Product {
   colors?: string[];
   /** Indonesian color names, parallel to `colors` (same index), shown on the PDP's "Warna" section for products with no per-variant photo. */
   colorNames?: string[];
-  /** Color swatches paired with that variant's own real photo — lets the PDP gallery switch image on color select, like the live site. Only set where we actually have a per-variant photo (currently Scalev-sourced products); mock products show `colors` as plain swatches with no image swap. */
+  /** Color swatches paired with that variant's own real photo — lets the PDP gallery switch image on color select, like the live site. Only set where we actually have a per-variant photo (currently Scalev-sourced products, plus the PDP template product); other mock products show `colors` as plain swatches with no image swap. */
   colorVariants?: { hex: string; name: string; imageUrl: string }[];
+  /** The PDP gallery's own thumbnail strip — main shot, lifestyle/detail photos, and marketing infographics (size chart etc.), in display order. Separate from `colorVariants`, which drives the "Warna" section further down the page. Only set where we've scraped a product's real gallery (currently just the PDP template product). */
+  galleryImages?: string[];
   /** Shown as "Cocok untuk Wakaf" on the live site's Wakaf page. */
   wakafEligible?: boolean;
   /** Shown in the live site's homepage "Hadiah/Gift" carousel. */

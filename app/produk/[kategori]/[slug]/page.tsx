@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { Heart, Star } from "lucide-react";
 import { ProductCard } from "@/components/product/ProductCard";
 import { ProductGallery } from "@/components/product/ProductGallery";
+import { ProductMediaProvider } from "@/components/product/ProductMediaContext";
+import { ProductColorPicker } from "@/components/product/ProductColorPicker";
 import { ProductDescription } from "@/components/product/ProductDescription";
 import { ProductReviews } from "@/components/product/ProductReviews";
 import { PurchasePanel } from "@/components/product/PurchasePanel";
@@ -87,7 +89,7 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-8 pb-24 sm:px-6 lg:px-8 sm:pb-8">
       <TrackViewItem product={product} />
-      <div className="flex flex-col gap-1">
+      <div className="hidden flex-col gap-1 sm:flex">
         <Link
           href={`/produk/${product.category}`}
           className="w-fit text-sm text-muted-foreground hover:text-primary"
@@ -107,71 +109,75 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
         </nav>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-2">
-        {/* Product Gallery */}
-        <ProductGallery product={product} />
+      <ProductMediaProvider product={product}>
+        <div className="grid gap-8 lg:grid-cols-2">
+          {/* Product Gallery */}
+          <ProductGallery product={product} backHref={`/produk/${product.category}`} />
 
-        {/* Product Info + Purchase Panel */}
-        <div className="flex flex-col gap-5">
-          <div className="flex flex-col gap-2">
-            <span className="w-fit rounded bg-destructive px-2 py-0.5 text-xs font-semibold text-white">
-              Ada Stok
-            </span>
-            <div className="flex items-start justify-between gap-3">
+          {/* Product Info + Purchase Panel */}
+          <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-2">
+              <span className="w-fit rounded bg-destructive px-2 py-0.5 text-xs font-semibold text-white">
+                Ada Stok
+              </span>
               <h1 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
                 {product.name}
               </h1>
-              <button
-                type="button"
-                aria-label="Simpan ke wishlist"
-                className="shrink-0 text-muted-foreground transition-colors hover:text-destructive"
-              >
-                <Heart className="size-6" />
-              </button>
-            </div>
-            {product.rating && (
-              <span className="flex items-center gap-1 text-sm text-muted-foreground">
-                <Star className="size-4 fill-brand-yellow text-brand-yellow" />
-                {product.rating.toFixed(1)} ({product.ratingCount ?? 1})
-              </span>
-            )}
-            <p className="text-2xl font-semibold text-primary">
-              {formatIDR(product.price)}
-            </p>
-          </div>
-
-          <PurchasePanel product={product} />
-
-          {product.wakafEligible && (
-            <Link
-              href="/wakaf"
-              className="flex items-center justify-between rounded-lg border border-primary/30 bg-secondary px-4 py-3 text-sm text-foreground hover:border-primary"
-            >
-              <span>
-                Produk ini <strong>cocok untuk Wakaf Quran</strong>
-              </span>
-              <span className="text-primary">Lihat Wakaf &rarr;</span>
-            </Link>
-          )}
-
-          <div className="flex flex-col gap-2 border-t border-border pt-4">
-            <span className="text-sm font-medium text-foreground">Pengiriman</span>
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground">Dikirim ke:</span>
-              <span className="text-foreground">Pilih Area</span>
-            </div>
-            {product.weightGrams && (
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">Berat:</span>
-                <span className="text-foreground">{product.weightGrams}g</span>
+              {product.rating && (
+                <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                  <Star className="size-4 fill-brand-yellow text-brand-yellow" />
+                  {product.rating.toFixed(1)} ({product.ratingCount ?? 1})
+                </span>
+              )}
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-2xl font-semibold text-primary">
+                  {formatIDR(product.price)}
+                </p>
+                <button
+                  type="button"
+                  aria-label="Simpan ke wishlist"
+                  className="shrink-0 text-muted-foreground transition-colors hover:text-destructive"
+                >
+                  <Heart className="size-6" />
+                </button>
               </div>
+            </div>
+
+            <ProductColorPicker product={product} />
+
+            <PurchasePanel product={product} />
+
+            {product.wakafEligible && (
+              <Link
+                href="/wakaf"
+                className="flex items-center justify-between rounded-lg border border-primary/30 bg-secondary px-4 py-3 text-sm text-foreground hover:border-primary"
+              >
+                <span>
+                  Produk ini <strong>cocok untuk Wakaf Quran</strong>
+                </span>
+                <span className="text-primary">Lihat Wakaf &rarr;</span>
+              </Link>
             )}
-            <p className="text-xs text-muted-foreground">
-              Dikirim dalam 24 jam, (Setelah pembayaran dikonfirmasi)
-            </p>
+
+            <div className="flex flex-col gap-2 border-t border-border pt-4">
+              <span className="text-sm font-medium text-foreground">Pengiriman</span>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">Dikirim ke:</span>
+                <span className="text-foreground">Pilih Area</span>
+              </div>
+              {product.weightGrams && (
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">Berat:</span>
+                  <span className="text-foreground">{product.weightGrams}g</span>
+                </div>
+              )}
+              <p className="text-xs text-muted-foreground">
+                Dikirim dalam 24 jam, (Setelah pembayaran dikonfirmasi)
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </ProductMediaProvider>
 
       <ProductDescription text={descriptionText} />
 
