@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ProductCard } from "@/components/product/ProductCard";
 import { HeroCarousel } from "@/components/sections";
+import { Reveal } from "@/components/layout/Reveal";
 import { getMergedCatalog } from "@/lib/scalev/catalog";
 import type { Product } from "@/types/product";
 
@@ -12,11 +13,14 @@ import type { Product } from "@/types/product";
 // animation. No specific link target was found for it on the live site
 // (no <a> inside that section), so "Lihat Semua Produk" points at /produk
 // as a reasonable stand-in for its implied intent.
-const LIFESTYLE_PHOTOS = [
-  "/lifestyle/photo-1.png",
-  "/lifestyle/photo-2.png",
-  "/lifestyle/photo-3.png",
-  "/lifestyle/photo-4.png",
+const LIFESTYLE_PHOTOS: { src: string; cta?: boolean }[] = [
+  { src: "/lifestyle/photo-1.png" },
+  { src: "/lifestyle/photo-2.png" },
+  { src: "/lifestyle/photo-3.png" },
+  // Only this specific photo carries the "All Product / Here" overlay on
+  // the live site (confirmed by the user against the real homepage) — the
+  // other 3 are plain photos.
+  { src: "/lifestyle/photo-4.png", cta: true },
 ];
 
 // Each rail below is hardcoded to the EXACT product set/order read off
@@ -137,7 +141,7 @@ export default async function HomePage() {
     <div className="flex flex-col">
       <HeroCarousel />
 
-      <div className="flex flex-col gap-10 py-10">
+      <div className="flex flex-col gap-10 pb-10 pt-6">
         {RAILS.map((rail) => {
           const products = rail.productSlugs
             .map((slug) => bySlug.get(slug))
@@ -145,7 +149,7 @@ export default async function HomePage() {
           if (products.length === 0) return null;
 
           return (
-            <section
+            <Reveal
               key={rail.slug}
               className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 sm:px-6 lg:px-8"
             >
@@ -163,7 +167,7 @@ export default async function HomePage() {
                     className="object-cover"
                   />
                   {rail.banner.pillLabel && (
-                    <span className="absolute bottom-3 left-3 rounded-full border border-white bg-background/20 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
+                    <span className="absolute bottom-3 left-3 rounded-full border border-foreground/70 bg-background px-4 py-1.5 text-sm font-medium text-foreground">
                       {rail.banner.pillLabel}
                     </span>
                   )}
@@ -180,22 +184,29 @@ export default async function HomePage() {
               >
                 Tampilkan Semua
               </Link>
-            </section>
+            </Reveal>
           );
         })}
       </div>
 
       <div className="flex flex-col items-center gap-6 pb-10">
-        <Link
-          href="/produk"
-          className="rounded-full border border-primary px-6 py-2 text-sm font-medium text-primary hover:bg-primary hover:text-primary-foreground"
-        >
-          Lihat Semua Produk
-        </Link>
         <div className="flex w-full gap-1 overflow-x-auto sm:justify-center">
-          {LIFESTYLE_PHOTOS.map((src) => (
-            <div key={src} className="relative aspect-[2/3] w-1/3 shrink-0 sm:w-64">
-              <Image src={src} alt="" fill sizes="256px" className="object-cover" />
+          {LIFESTYLE_PHOTOS.map((photo) => (
+            <div key={photo.src} className="relative aspect-[2/3] w-1/3 shrink-0 sm:w-64">
+              <Image src={photo.src} alt="" fill sizes="256px" className="object-cover" />
+              {photo.cta && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-4 text-center">
+                  <span className="text-2xl font-semibold leading-tight text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.5)] sm:text-3xl">
+                    All Product
+                  </span>
+                  <Link
+                    href="/produk"
+                    className="rounded-2xl bg-secondary px-6 py-2.5 text-sm font-medium text-foreground"
+                  >
+                    Here
+                  </Link>
+                </div>
+              )}
             </div>
           ))}
         </div>

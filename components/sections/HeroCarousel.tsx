@@ -39,7 +39,7 @@ export function HeroCarousel() {
   // the logo out on the deployed site, matching the live site's own
   // (tall-on-wide-screens) behavior instead.
   return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden bg-secondary">
+    <div className="relative -mt-16 aspect-[4/3] w-full overflow-hidden bg-secondary">
       {SLIDES.map((slide, i) => (
         <Image
           key={slide.src}

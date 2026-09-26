@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/accordion";
 import { mainNav } from "@/config/nav";
 import { siteConfig } from "@/config/site";
+import { LocaleDialog } from "@/components/layout/LocaleDialog";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
@@ -35,10 +36,24 @@ export function MobileNav() {
           <Menu className="size-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-72 overflow-y-auto">
-        <SheetHeader>
+      <SheetContent side="left" className="flex w-72 flex-col overflow-y-auto">
+        {/* Title stays for screen readers; the live site's drawer shows a
+            search shortcut here instead of a text title. */}
+        <SheetHeader className="sr-only">
           <SheetTitle className="font-heading">{siteConfig.name}</SheetTitle>
         </SheetHeader>
+        <div className="px-4 pt-4">
+          <Button
+            variant="secondary"
+            size="icon"
+            asChild
+            aria-label="Cari produk"
+          >
+            <Link href="/pencarian" onClick={() => setOpen(false)}>
+              <Search className="size-5" />
+            </Link>
+          </Button>
+        </div>
         <nav className="flex flex-col gap-1 px-2">
           {mainNav.map((item) =>
             item.children ? (
@@ -75,6 +90,10 @@ export function MobileNav() {
             ),
           )}
         </nav>
+
+        <div className="mt-auto border-t border-border px-2 pb-2">
+          <LocaleDialog />
+        </div>
       </SheetContent>
     </Sheet>
   );
