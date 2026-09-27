@@ -332,7 +332,85 @@ export const mockProducts: Product[] = [
     category: "quran-harian",
     size: "A5",
     wakafEligible: true,
+    rating: 5,
+    // 2277 = 5-star (2137) + 4-star (140) ratings on this product's real
+    // Shopee listing, out of 2309 total — per the project owner's
+    // direction, 3/2/1-star ratings (32 total) are treated as 0.
+    ratingCount: 2277,
+    // Shopee's own "Terjual" figure showed as "10RB+" (rounded) — set
+    // directly per the project owner's screenshot/direction.
+    soldCount: 10000,
+    colorVariants: [
+      { hex: "#1E3A5F", name: "Biru", imageUrl: "/products/azhim-a5-colors/color-biru.jpg" },
+      { hex: "#8B5E34", name: "Cokelat", imageUrl: "/products/azhim-a5-colors/color-cokelat.jpg" },
+      { hex: "#E8DCC4", name: "Cream", imageUrl: "/products/azhim-a5-colors/color-cream.jpg" },
+      { hex: "#0F7A5C", name: "Hijau", imageUrl: "/products/azhim-a5-colors/color-hijau.jpg" },
+      { hex: "#111827", name: "Hitam", imageUrl: "/products/azhim-a5-colors/color-hitam.jpg" },
+      { hex: "#E8C547", name: "Kuning", imageUrl: "/products/azhim-a5-colors/color-kuning.jpg" },
+      { hex: "#B91C1C", name: "Merah", imageUrl: "/products/azhim-a5-colors/color-merah.jpg" },
+      { hex: "#14B8A6", name: "Tosca", imageUrl: "/products/azhim-a5-colors/color-tosca.jpg" },
+    ],
     imageUrl: "/products/al-quran-al-azhim-a5-hard-cover.jpg",
+    // Real PDP gallery (hero shot, detail photos, size-chart graphic, plus
+    // a wakaf-campaign graphic), downloaded from this exact product's live
+    // halimquran.com PDP 27 Sep 2026 — same pattern as the Wafa B7
+    // template. Note: this product's live PDP purchase panel differs from
+    // the standard template (wakaf-specific "Quran Saja"/"Quran + Cover
+    // Doa" pills + a penyaluran-wakaf destination picker + "Nama Wakif"
+    // field, instead of the usual Quran Saja/+Nama/+Nama+Box pattern) —
+    // not rebuilt here, only the standard data fields below are populated.
+    galleryImages: [
+      "/products/azhim-a5-gallery/gallery-1-main.jpg",
+      "/products/azhim-a5-gallery/gallery-2.jpg",
+      "/products/azhim-a5-gallery/gallery-3.jpg",
+      "/products/azhim-a5-gallery/gallery-4.jpg",
+      "/products/azhim-a5-gallery/gallery-5.jpg",
+      "/products/azhim-a5-gallery/gallery-6-sizechart.jpg",
+      "/products/azhim-a5-gallery/gallery-7.png",
+    ],
+    weightGrams: 405,
+    // Real PDP copy, read verbatim from halimquran.com 27 Sep 2026.
+    description:
+      "Siapa bilang wakaf itu modalnya mahal?? Semua itu cuma mitos setelah ada Al-Azhim, siapa saja bisa berwakaf Qur'an. Satu kali berwakaf, mengalir pahala sampai selamanya, Insya Allah..\n\nAl-Qur'an Al-'Azhim Tsumun Hard Cover Halim Qur'an, murah dan berkualitas, pilihan terbaik untuk wakaf pribadi atau lembaga. Yuk cek apa saja keistimewaannya !!\n\nSpesifikasi:\n- Ukuran A5 (14,5 x 20,5 cm)\n- Kertas CD/Kertas koran 42gr\n- Berat 405gr\n- Tebal 496 halaman\n\nFitur cover:\n- Desain elegan dengan khat kufi.\n- Style cover yang fresh dan cerah.\n- Tersedia dalam 8 pilihan warna.\n\nMaterial cover:\n- Cover dibuat dari jilid grey broad dengan finishing laminasi glossy, menghasilkan cover premium yang berkilau, memantulkan cahaya, dan gambar lebih kuat.\n\nFitur inner:\n- Rasm Utsmani 18 baris standar Kemenag RI.\n- Khat jelas dan sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan kamu mencari juz atau halaman tertentu.\n- Dilengkapi penjelasan tajwid praktis, singkat, dan mudah dipahami.\n\nMaterial inner:\n- Setiap lembar Al-Qur'an menggunakan kertas CD 42gr dengan warna redup, sehingga mata kamu terasa lebih teduh saat membacanya.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
+    // Curated subset of this product's real Shopee listing reviews (27 Sep
+    // 2026) — top ~30 by (has media, then like count) out of 2309 total
+    // ratings. Read via Shopee's own ratings API with the logged-in
+    // owner's session, kept verbatim:
+    // https://shopee.co.id/AL-QUR'AN-AL-'AZHIM-HARD-COVER-MURAH-BERKUALITAS-PILIHAN-TERBAIK-UNTUK-WAKAF-i.229472472.3419825439
+    reviews: [
+      { author: "nurhasanahumi", rating: 5, text: "Alhamdulillah packingnya rapiiiih saya suka banget dengan harga segitu lumayan banget laaaahhhh ga mengecewakan pokonyaaaa, dan alhamdulillah ibu aku suka sama Al-Qur'annyaaa.. Makasih yaaa kak", date: "13 Nov 2021", variant: "Merah", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r0-1.jpg" }, { type: "video", src: "/reviews/azhim-r0.mp4" }] },
+      { author: "sofianna1203", rating: 5, text: "Desain: bagus dan modern. Kualitas: terlihat jelas dan memuaskan. Kegunaan: sangat cocok untuk mengaji. Barangnya datang kemarin, gak kecewa, bagussss banget, tulisannya jelas mudah dibaca, ringan simple kalo dibawa kemana-mana ga berat", date: "28 Jul 2025", variant: "Biru", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r1-1.jpg" }, { type: "image", src: "/reviews/azhim-r1-2.jpg" }, { type: "video", src: "/reviews/azhim-r1.mp4" }] },
+      { author: "almashop31", rating: 5, text: "Barangnya bagus dan packing rapi, aman pokoknya. Seller amanah dan ramah. Syukron..semoga sukses selalu.", date: "06 Sep 2021", variant: "Coklat", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r2-1.jpg" }, { type: "video", src: "/reviews/azhim-r2.mp4" }] },
+      { author: "shintas367", rating: 5, text: "Desain: bagus. Kegunaan: untuk mengaji. Kualitas: sangat baik. Alqurannya bagus, dari segi desain dan tulisan Arabnya bagus... tapi sayang pengirimannya lama padahal masih satu Jawa Barat, yg dari luar daerah Jawa Timur malahan lebih cepat", date: "10 Aug 2024", variant: "Cream", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r3-1.jpg" }, { type: "image", src: "/reviews/azhim-r3-2.jpg" }, { type: "video", src: "/reviews/azhim-r3.mp4" }] },
+      { author: "a*****8", rating: 5, text: "Alhamdulillah Al-Qurannya sudah sampai, cover bagus, Al-Qurannya ada indeks disetiap juznya, tapi kecewa sedikit karena ternyata kertasnya tidak putih mirip seperti kertas buram agak gelap, saya yang tidak baca deskripsinya. Terima kasih penjual semoga tokonya barokah dan dilancarkan rejekinya. Aamiin", date: "05 Apr 2021", variant: "Biru", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r4-1.jpg" }, { type: "image", src: "/reviews/azhim-r4-2.jpg" }] },
+      { author: "albejshop", rating: 5, text: "Alhamdulillah... Pesanan sesuai, packing rapih... Kurirnya baik, menghubungi dulu pas mau ngirim \u{1F64F}\u{1F64F} Semoga jadi langganan keberkahan \u{1F91E}\u{1F91E}", date: "08 Oct 2021", variant: "Biru", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r5-1.jpg" }, { type: "image", src: "/reviews/azhim-r5-2.jpg" }, { type: "video", src: "/reviews/azhim-r5.mp4" }] },
+      { author: "by_agathachristy", rating: 5, text: "Desain: bagus. Kegunaan: untuk belajar. Kualitas: bagus. Packing aman dan rapi, kurir ramah, pengiriman cepat, seller baik, produk bagus dan sesuai", date: "02 Nov 2024", variant: "Cream", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r6-1.jpg" }, { type: "image", src: "/reviews/azhim-r6-2.jpg" }, { type: "video", src: "/reviews/azhim-r6.mp4" }] },
+      { author: "b*****r", rating: 5, text: "Pesanan sesuai, packing rapi, pengiriman cepat, jumlah sesuai, semoga bermanfaat terimakasih", date: "22 Feb 2022", variant: "Biru", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r7-1.jpg" }, { type: "video", src: "/reviews/azhim-r7.mp4" }] },
+      { author: "mohammad.reiza", rating: 5, text: "Alhamdulillah. Produk original berkualitas dengan harga terjangkau. Pengemasan rapih aman, pengiriman cepat. Mantap pokoknya. Terima kasih Halim Quran! \u{1F44D}\u{1F3FC}\u{2764}\u{FE0F}", date: "18 Jul 2024", variant: "Biru", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r8-1.jpg" }, { type: "video", src: "/reviews/azhim-r8.mp4" }] },
+      { author: "devialenda", rating: 5, text: "Desain: simple. Kegunaan: membaca dan memahami. Kualitas: sangat bagus. Alhamdulillah wakaf Alquran untuk almarhumah mamaku sudah sampai...semoga bermanfaat dan menjadi ladang pahala untuk mamaku", date: "21 Dec 2024", variant: "Hijau", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r9-1.jpg" }, { type: "image", src: "/reviews/azhim-r9-2.jpg" }, { type: "video", src: "/reviews/azhim-r9.mp4" }] },
+      { author: "venur19", rating: 5, text: "Desainnya sudah bagus. Hard covernya keren. Tapi alangkah baiknya sebelum packing diperiksa dulu Al-Qurannya. Itu ada yg lepas atau tidak kejahit.", date: "01 Sep 2024", variant: "Cream", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r10-1.jpg" }, { type: "image", src: "/reviews/azhim-r10-2.jpg" }] },
+      { author: "innesabreena", rating: 5, text: "Packing rapi, aman dan cepat...pengiriman cepat...terima kasih...", date: "07 Apr 2021", variant: "Biru", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r11-1.jpg" }, { type: "video", src: "/reviews/azhim-r11.mp4" }] },
+      { author: "milito16", rating: 5, text: "Alhamdulillah pesanan sudah sampai tepat waktu, Al-Qurannya bagus ga terlalu besar dan ga terlalu kecil, terimakasih", date: "14 Mar 2025", variant: "Tosca", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r12-1.jpg" }, { type: "image", src: "/reviews/azhim-r12-2.jpg" }, { type: "video", src: "/reviews/azhim-r12.mp4" }] },
+      { author: "e*****t", rating: 5, text: "Desain: memiliki desain yang menarik. Kualitas: sangat bagus dan baik. Penggunaan: sangat membantu. Toko amanah, packing bagus, sukses untuk tokonya", date: "14 Aug 2025", variant: "Biru", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r13-1.jpg" }, { type: "image", src: "/reviews/azhim-r13-2.jpg" }, { type: "video", src: "/reviews/azhim-r13.mp4" }] },
+      { author: "banimakmur", rating: 5, text: "Pesanan sesuai, packing rapi pengiriman cepat, jumlah sesuai semoga bermanfaat terimakasih", date: "22 Feb 2022", variant: "Hijau", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r14-1.jpg" }, { type: "video", src: "/reviews/azhim-r14.mp4" }] },
+      { author: "s*****9", rating: 5, text: "Desain: menarik. Kegunaan: sangat cocok untuk aktivitas belajar. Kualitas: bagus. Alhamdulillah pesanan sudah datang dalam keadaan baik. Terimakasih \u{1F64F}", date: "15 Nov 2024", variant: "Hitam", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r15-1.jpg" }, { type: "video", src: "/reviews/azhim-r15.mp4" }] },
+      { author: "farahsugiarto", rating: 5, text: "Alhamdulillah Al-Qurannya udah sampe bagus, cuma anaknya pengen kertas HVS putih, jadi kayanya beli lagi.. Overall bagus kok makasih sukses selalu", date: "11 Jul 2024", variant: "Tosca", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r16-1.jpg" }, { type: "video", src: "/reviews/azhim-r16.mp4" }] },
+      { author: "s13wx41du9", rating: 5, text: "Desain: menarik. Kualitas: baik. Kegunaan: belajar. Sesuai pesanan, pengirimannya lama banget, tapi gapapa", date: "15 Mar 2025", variant: "Tosca", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r17-1.jpg" }, { type: "image", src: "/reviews/azhim-r17-2.jpg" }, { type: "video", src: "/reviews/azhim-r17.mp4" }] },
+      { author: "y*****7", rating: 5, text: "Semoga bermanfaat bagi calon-calon hafiz.. Aamiin.", date: "24 Feb 2022", variant: "Coklat", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r18-1.jpg" }] },
+      { author: "banana18", rating: 5, text: "Desain: Saya suka desainnya yang sederhana namun tetap menarik. Kualitas: Kualitas cetakan sangat jelas dan mudah dibaca. Kegunaan: Cocok dipakai aktivitas belajar ataupun wakaf. Bagus banget.. sangat rekomendasi banget beli di toko ini.. pengiriman dari tokonya juga cepat", date: "02 Apr 2026", variant: "Hitam", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r19-1.jpg" }, { type: "image", src: "/reviews/azhim-r19-2.jpg" }, { type: "video", src: "/reviews/azhim-r19.mp4" }] },
+      { author: "ahksan92", rating: 5, text: "Desain: Menarik. Kualitas: Sangat worth it. Penggunaan: Untuk mengaji Al-Qur'an. Al-Qur'annya sesuai deskripsi, bagus dan menarik, cocok untuk anak saya belajar mengaji Al-Qur'an. Semoga manfaat dan berkah dunia akhirat!! Terimakasih \u{1F91D} Semoga sama-sama berkah \u{1F60A}", date: "22 Aug 2025", variant: "Cream", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r20-1.jpg" }, { type: "image", src: "/reviews/azhim-r20-2.jpg" }, { type: "video", src: "/reviews/azhim-r20.mp4" }] },
+      { author: "indosan.id", rating: 5, text: "Desain: Menarik. Kegunaan: Mengaji. Kualitas: Bagus. Sangat Recommended \u{1F44C}", date: "22 Jul 2024", variant: "Cream", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r21-1.jpg" }, { type: "image", src: "/reviews/azhim-r21-2.jpg" }, { type: "video", src: "/reviews/azhim-r21.mp4" }] },
+      { author: "rusmahmahrusmah08", rating: 5, text: "Desain: simple, modern dan cocok untuk berbagai usia. Kualitas: cetakan yang jelas dan mudah saat dibaca. Kegunaan: membantu untuk belajar mengaji. Alhamdulillah wasyukurillah sudah datang Alquran buat wakaf, semoga bermanfaat buat mereka dan Alqurannya bagus menurutku sesuai harganya \u{1F970}", date: "14 Jun 2026", variant: "Tosca", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r22-1.jpg" }, { type: "video", src: "/reviews/azhim-r22.mp4" }] },
+      { author: "aabd13", rating: 5, text: "Cakep banget, khatnya juga jelas. \u{1F60D}. Cuma kertasnya tipis", date: "08 Apr 2026", variant: "Merah", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r23-1.jpg" }, { type: "video", src: "/reviews/azhim-r23.mp4" }] },
+      { author: "dodiirawan89", rating: 5, text: "Desain: bagus. Kegunaan: pas untuk belajar. Kualitas: jelas. Semoga bermanfaat sampai dunia dan akhirat", date: "07 Nov 2024", variant: "Hitam", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r24-1.jpg" }, { type: "image", src: "/reviews/azhim-r24-2.jpg" }, { type: "video", src: "/reviews/azhim-r24.mp4" }] },
+      { author: "Pembeli Shopee", rating: 5, text: "Desain: menarik. Kualitas: biasa karena kertas koran. Kegunaan: untuk mengaji. Semua bagian bagus. Minusnya di bahan kertas koran yg rentan sobek jika tidak hati-hati. Tapi wajar karena harga murah", date: "12 Aug 2025", variant: "Kuning", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r25-1.jpg" }, { type: "image", src: "/reviews/azhim-r25-2.jpg" }, { type: "video", src: "/reviews/azhim-r25.mp4" }] },
+      { author: "a*****y", rating: 5, text: "Alhamdulillah paket sudah diterima. Terimakasih seller.", date: "28 May 2025", variant: "Tosca", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r26-1.jpg" }, { type: "video", src: "/reviews/azhim-r26.mp4" }] },
+      { author: "inzih", rating: 5, text: "Kualitas: Gooooddd. Desain: Keren. Al Quran 50 pcs sudah nyampe Alhamdulillah bagus semua. Gak ada yg lecet krn packingannya sangat aman. Di dalam kardus masih dilapisi kertas. Terus di tas paket ada tulisan Al Quran sehingga paketnya gak rusak dibanting. Terus Al-Qurannya juga di plastik ini 1/1. Jadi barang diterima sangat mulus padahal pengiriman jauh ke Sulawesi. Makasih seller... pelayanannya. Next time order disini lagi deh....", date: "28 Jul 2026", variant: "Hitam", reviewSource: "Shopee", media: [{ type: "video", src: "/reviews/azhim-r27.mp4" }] },
+      { author: "w*****1", rating: 5, text: "Desain: bagus. Kualitas: bagus sesuai harga. Kualitasnya sesuai dengan harga.", date: "16 Dec 2024", variant: "Coklat", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r28-1.jpg" }] },
+      { author: "abukhanifah055", rating: 5, text: "Desain: bagus elegan. Kualitas: emang dari kertas koran tp jelas sesuai harga. Kegunaan: untuk mengaji", date: "11 Aug 2025", variant: "Cream", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/azhim-r29-1.jpg" }] },
+      { author: "olyououtfitofficial", rating: 5, text: "Alhamdulillah Al-Qurannya sudah sampai sesuai pesanan.", date: "11 Mar 2022", variant: "Hijau", reviewSource: "Shopee", media: [{ type: "video", src: "/reviews/azhim-r30.mp4" }] },
+      { author: "olyououtfitofficial", rating: 5, text: "Alhamdulillah jazakallah khairan sudah sampai Al-Qurannya", date: "13 Mar 2022", variant: "Merah", reviewSource: "Shopee", media: [{ type: "video", src: "/reviews/azhim-r31.mp4" }] },
+    ],
   },
   {
     id: "6",
