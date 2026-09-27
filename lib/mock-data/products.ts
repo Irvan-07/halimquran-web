@@ -626,7 +626,56 @@ export const mockProducts: Product[] = [
     price: 45000,
     category: "quran-hafalan",
     size: "B7",
+    rating: 5,
+    // 74 = 5-star (70) + 4-star (4) ratings on this product's real
+    // Shopee listing, out of 77 total — per the project owner's
+    // direction, 3/2/1-star ratings (3 total) are treated as 0.
+    ratingCount: 74,
+    colorVariants: [
+      { hex: "#14B8A6", name: "Tosca", imageUrl: "/products/rubu-b7-colors/color-tosca.jpg" },
+      { hex: "#7B2D26", name: "Maroon", imageUrl: "/products/rubu-b7-colors/color-maroon.jpg" },
+      { hex: "#111827", name: "Hitam", imageUrl: "/products/rubu-b7-colors/color-hitam.jpg" },
+      { hex: "#0F7A5C", name: "Hijau", imageUrl: "/products/rubu-b7-colors/color-hijau.jpg" },
+      { hex: "#2563EB", name: "Biru", imageUrl: "/products/rubu-b7-colors/color-biru.jpg" },
+      { hex: "#6B7280", name: "Abu-Abu", imageUrl: "/products/rubu-b7-colors/color-abu-abu.jpg" },
+      { hex: "#1E3A5F", name: "Biru Tua", imageUrl: "/products/rubu-b7-colors/color-biru-tua.jpg" },
+      { hex: "#8B5E34", name: "Coklat", imageUrl: "/products/rubu-b7-colors/color-coklat.jpg" },
+    ],
+    customNameEligible: true,
     imageUrl: "/products/mushaf-al-quran-al-wafa-rubu-b7-resleting.jpg",
+    // Real PDP gallery (hero shot, detail photos, size-chart graphic),
+    // downloaded from this exact product's live halimquran.com PDP 27 Sep
+    // 2026 — same pattern as the Wafa B7 template.
+    galleryImages: [
+      "/products/rubu-b7-gallery/gallery-1-main.jpg",
+      "/products/rubu-b7-gallery/gallery-2.jpg",
+      "/products/rubu-b7-gallery/gallery-3.jpg",
+      "/products/rubu-b7-gallery/gallery-4.jpg",
+      "/products/rubu-b7-gallery/gallery-5.jpg",
+      "/products/rubu-b7-gallery/gallery-6.jpg",
+      "/products/rubu-b7-gallery/gallery-7-sizechart.jpg",
+    ],
+    weightGrams: 235,
+    // Real PDP copy, read verbatim from halimquran.com 27 Sep 2026.
+    description:
+      "Pengen baca Al-Qur'an setiap waktu tapi suka repot bawa Al-Qur'annya?? Nyari yang ringan dan mudah dibawa?? Sepertinya Anda perlu coba Al-Qur'an satu ini, Al-Qur'an Al-Wafa Rubu' Resleting, beratnya hanya ± 230 gr, ringan dibawa ke mana saja.\n\nPenasaran apa saja keistimewaannya??\n\nSpesifikasi Produk:\n- Dompet Resleting\n- Ukuran B7 (9 x 12,5 cm)\n- Kertas QPP 50 gr\n- Berat 235 gr\n- 616 Halaman\n\nFitur cover:\n- Desain cover casual, kalem, dan hangat.\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n- Tersedia dalam berbagai pilihan warna.\n\nMaterial inner:\n- Menggunakan kertas QPP dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan Anda mencari juz atau halaman tertentu.\n- Terdapat pewarnaan kata ganti Allah dan -Nya yang memudahkan Anda menemukan ayat-ayat pilihan.\n\nBagi kami, kualitas adalah hal utama. Al-Qur'an kami sudah melalui proses Quality Control yang ketat dan dikerjakan oleh tim profesional. Jika Anda menemukan kesalahan dalam Al-Qur'an cetakan kami, kami siap menggantinya dengan yang baru.\n\n\"Cari Quran dengan kualitas premium dan kekinian ya di Halim Quran\"",
+    // Real Shopee listing reviews (27 Sep 2026) — this listing is much
+    // smaller (77 ratings total) so every 4/5-star review with a comment
+    // is included, not a curated subset. Read via Shopee's own ratings
+    // API with the logged-in owner's session, kept verbatim:
+    // https://shopee.co.id/Halim-Qur'an-MUSHAF-AL-QUR'AN-AL-WAFA-RUBU'-B7-RESLETING-RINGAN-DAN-MUDAH-DIBAWA-i.229472472.3917664983
+    reviews: [
+      { author: "c*****d", rating: 5, text: "Tampilan: Sesuai. Kualitas: Sangat Baik. Cocok Untuk: Bepergian. Beli disini karna dapat rekomendasi dari teman, dan ternyata memang baik, pengemasannya sangat sangat sangat rapiiiii (ada himbauan jangan dilempar). Good job \u{1F44D}", date: "16 Feb 2023", variant: "Hitam • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/rubu-r0-1.jpg" }, { type: "video", src: "/reviews/rubu-r0.mp4" }] },
+      { author: "z*****1", rating: 5, text: "Kualitas: sangat baik. Konten: Al Quran. Kegunaan: mengaji. Warna maroonnya bagus, ukurannya cukup, mudah dibawa kemana-mana juga dan pakai dompet resleting, hurufnya masih terbaca jelas meskipun kecil qurannya, cuma sayang ternyata daftar suratnya pakai bahasa Arab bukan bahasa Indo, but overall is good, semoga menjadi berkah", date: "20 Dec 2024", variant: "Maroon • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/rubu-r1-1.jpg" }, { type: "image", src: "/reviews/rubu-r1-2.jpg" }, { type: "video", src: "/reviews/rubu-r1.mp4" }] },
+      { author: "b958civi37", rating: 5, text: "Alhamdulillah ukurannya sesuai yg diharapkan. Tadinya takut kekecilan. Pengemasan juga rapi dan aman.", date: "06 Nov 2025", variant: "Biru Tua • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/rubu-r2-1.jpg" }] },
+      { author: "3widodoichijyo", rating: 5, text: "Kualitas: bagus. Kegunaan: praktis dibawa kemana-mana. Bagus, rapi cetakannya. Untuk warna tosca di foto produk ternyata lebih ke hijau daripada biru. Beda dengan foto. Memang pas saya foto itu juga hasil fotonya jadi kebiruan, padahal agak hijau.", date: "17 Nov 2025", variant: "Tosca • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/rubu-r3-1.jpg" }] },
+      { author: "hikmahjaya1part", rating: 5, text: "Kualitas: bagus", date: "17 Apr 2023", variant: "Hitam • Tambah Custom Nama", reviewSource: "Shopee" },
+      { author: "ummizahra2012", rating: 5, text: "Bagus realisasi pick mau dibawa ke pondok, bismillah awet ga hilang", date: "08 Jan 2026", variant: "Tosca • Tanpa Nama", reviewSource: "Shopee" },
+      { author: "haniahsoraya", rating: 5, text: "Sesuai dengan harga", date: "20 Jun 2023", variant: "Maroon • Tambah Custom Nama", reviewSource: "Shopee" },
+      { author: "melakrismawati", rating: 5, text: "Sedikit salah memilih ukuran. Ini yg ukuran kecil. Maunya yg agak besaran dikit. Tapi gapapa, bagus juga kok", date: "14 Oct 2023", variant: "Biru • Tanpa Nama", reviewSource: "Shopee" },
+      { author: "endaidahlia", rating: 5, text: "Kualitas: bagus", date: "29 Jan 2025", variant: "Tosca • Tambah Custom Nama", reviewSource: "Shopee" },
+      { author: "belindajoang", rating: 5, text: "Padahal tulisannya free box tapi enggak dikasih box", date: "01 Mar 2023", variant: "Coklat • Tambah Custom Nama", reviewSource: "Shopee" },
+    ],
   },
   {
     id: "14",
