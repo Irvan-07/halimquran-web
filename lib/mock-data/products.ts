@@ -556,7 +556,68 @@ export const mockProducts: Product[] = [
     price: 50000,
     category: "quran-hafalan",
     size: "B7",
+    rating: 5,
+    // 572 = 5-star (533) + 4-star (39) ratings on this product's real
+    // Shopee listing, out of 578 total — per the project owner's
+    // direction, 3/2/1-star ratings (6 total) are treated as 0.
+    ratingCount: 572,
+    colorVariants: [
+      { hex: "#B91C1C", name: "Merah", imageUrl: "/products/mujazza-b7-colors/color-merah.jpg" },
+      { hex: "#1E3A5F", name: "Biru", imageUrl: "/products/mujazza-b7-colors/color-biru.jpg" },
+    ],
+    customNameEligible: true,
     imageUrl: "/products/mushaf-al-quran-al-wafa-b7-mujazza-per-5-juz.jpg",
+    // Real PDP gallery (hero shot, detail photos, size-chart graphic),
+    // downloaded from this exact product's live halimquran.com PDP 27 Sep
+    // 2026 — same pattern as the Wafa B7 template.
+    galleryImages: [
+      "/products/mujazza-b7-gallery/gallery-1-main.jpg",
+      "/products/mujazza-b7-gallery/gallery-2.jpg",
+      "/products/mujazza-b7-gallery/gallery-3.jpg",
+      "/products/mujazza-b7-gallery/gallery-4.jpg",
+      "/products/mujazza-b7-gallery/gallery-5.jpg",
+      "/products/mujazza-b7-gallery/gallery-6.jpg",
+      "/products/mujazza-b7-gallery/gallery-7-sizechart.jpg",
+    ],
+    weightGrams: 245,
+    // Real PDP copy, read verbatim from halimquran.com 27 Sep 2026.
+    description:
+      "Pengen baca Al-Qur'an setiap waktu tapi suka repot bawa Al-Qur'annya?? Nyari Al-Qur'an yang ukurannya pas di kantong?? Sepertinya kamu perlu coba Al-Qur'an satu ini, Al-Qur'an Al-Wafa Mujazza, praktis, ringan dibawa ke mana saja, dan bisa disimpan di saku. Penasaran apa saja keistimewaannya??\n\nSpesifikasi Produk:\n- Soft Cover + Box mika\n- Ukuran B7 (9 x 12,5 cm)\n- Kertas QPP 50gr\n- Berat 240gr\n- Tebal 638 halaman\n\nDetail material:\n- Menggunakan kertas QPP 50gr dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n- Dilengkapi dompet Al-Qur'an dari mika yang lentur, kuat, dan tahan lama.\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan kamu mencari juz atau halaman tertentu.\n- Terdapat pewarnaan kata ganti Allah dan -Nya yang memudahkan kamu menemukan ayat-ayat pilihan.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
+    // Curated subset of this product's real Shopee listing reviews (27 Sep
+    // 2026) — top ~28 by (has media, then like count) out of 578 total
+    // ratings. Read via Shopee's own ratings API with the logged-in
+    // owner's session, kept verbatim:
+    // https://shopee.co.id/Halim-Qur'an-MUSHAF-AL-QUR'AN-AL-WAFA-PER-5-JUZ-MUJAZZA'-CUKUP-DI-SAKU-i.229472472.7417574895
+    reviews: [
+      { author: "0cf5whdrvs", rating: 5, text: "Kemudahan: bagus. Keterbacaan: jelas. Kualitas: mantap oke lah. Pengiriman cepet banget recomended si\u{1F44F}", date: "07 Mar 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r0-1.jpg" }, { type: "video", src: "/reviews/mujazza-r0.mp4" }] },
+      { author: "zian_jaelani", rating: 5, text: "Kualitas: bagus. Kegunaan: meringankan hafalan. Alhamdulillah paketnya sampe sesuai pesanan dan harapan, semoga bermanfaat bisa meringankan hafalan anak saya di pondok. Bagus Al-Qurannya", date: "01 Jan 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r1-1.jpg" }, { type: "image", src: "/reviews/mujazza-r1-2.jpg" }] },
+      { author: "abdoelrani2611", rating: 5, text: "Keterbacaan: tulisan jelas. Kemudahan: sangat praktis. Kualitas: sangat baik. Rupanya saya sudah 2 kali belanja di toko ini.. baru tau saya lihat Al Qur'an kecil di rumah sama mereknya", date: "02 Apr 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r2-1.jpg" }, { type: "image", src: "/reviews/mujazza-r2-2.jpg" }, { type: "video", src: "/reviews/mujazza-r2.mp4" }] },
+      { author: "l*****n", rating: 5, text: "Kemudahan: khat jelas versi Utsmani yg familiar di Indonesia. Kualitas: bagus. Rekomended tuk yg mau menghafal Quran", date: "26 Feb 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r3-1.jpg" }, { type: "image", src: "/reviews/mujazza-r3-2.jpg" }] },
+      { author: "rifqilmujahid", rating: 5, text: "Ketebalan: bagus banget. Kemudahan: mudah dibawa ke mana-mana. Kualitas: kualitasnya bagus sekali", date: "22 Jun 2026", variant: "Biru", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r4-1.jpg" }, { type: "video", src: "/reviews/mujazza-r4.mp4" }] },
+      { author: "miftah.ulie", rating: 5, text: "Kemudahan: Quran lama dari model resleting. Keterbacaan: dipecah jadi per 5 juz. Kualitas: tempel pakai selotip aja. Akhirnya ilang kena banjir, beli baru", date: "13 Mar 2025", reviewSource: "Shopee", media: [{ type: "video", src: "/reviews/mujazza-r5.mp4" }] },
+      { author: "ahmadroziqinahmadroziqin", rating: 5, text: "Kemudahan: praktis. Kualitas: kualitas bagus. Bisa dipesan lagi lain waktu dengan skala yg lebih banyak lagi", date: "04 Feb 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r6-1.jpg" }] },
+      { author: "jaydul432", rating: 5, text: "Konten: baik. Kegunaan: mengaji. Keaslian: asli. Pengemasan sangat rapi. Pengiriman cepat. Al Qurannya tulisan jelas, bagus, rapi. Bapak kurir mengantar paket sesuai dengan alamat, ramah. Terimakasih", date: "24 Dec 2024", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r7-1.jpg" }, { type: "video", src: "/reviews/mujazza-r7.mp4" }] },
+      { author: "naila010800", rating: 5, text: "Kemudahan: sangat praktis dibawa kemana-mana. Kualitas: bagus tulisannya juga jelas", date: "19 Apr 2026", variant: "Merah", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r8-1.jpg" }] },
+      { author: "ranywati772", rating: 5, text: "Kualitas: cetakan bagus. Konten: bagus. Kegunaan: membaca lebih simpel praktis bisa dibawa kemana-mana makasih seller udah amanah moga berkah", date: "12 Jan 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r9-1.jpg" }] },
+      { author: "e*****h", rating: 5, text: "Keterbacaan: jelas. Kemudahan: mudah. Kualitas: baik. Tulisannya jelas, praktis,", date: "10 Jan 2026", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r10-1.jpg" }, { type: "image", src: "/reviews/mujazza-r10-2.jpg" }] },
+      { author: "wiwilastiawati", rating: 5, text: "Keterbacaan: tulisan jelas mudah untuk dibaca. Kemudahan: sangat praktis. Kualitas: memiliki detail yang jelas dan tajam. Maaf baru kasih ulasan, paket sudah diterima kemarin, Al-Qur'annya bagus kecil praktis bisa dibawa kemana-mana", date: "05 Sep 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r11-1.jpg" }, { type: "image", src: "/reviews/mujazza-r11-2.jpg" }] },
+      { author: "dewiramdaniyah", rating: 5, text: "Keterbacaan: tulisannya jelas. Kemudahan: sangat praktis. Kualitas: memiliki detail yang bagus dan tajam. Alhamdulillah sampai pesanannya, sesuai sama yang di gambar. Keterbacaannya tulisan sangat jelas. Kemudahan praktis dibawa kemana-mana cocok untuk anak pondok. Kualitasnya memiliki detail yg bagus dan tajam", date: "03 Jul 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r12-1.jpg" }] },
+      { author: "el_manar", rating: 5, text: "Ketebalan: Alhamdulillah ukuran & ketebalannya nyaman untuk dibawa sehari-hari. Kemudahan: Alhamdulillah sangat memudahkan untuk selalu dibaca. Kualitas: Alhamdulillah kualitas baik, kemasannya juga rapi. Silahkan pesan Al-Qur'an saku agar bisa selalu baca Alquran dimanapun", date: "28 May 2026", variant: "Merah", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r13-1.jpg" }, { type: "video", src: "/reviews/mujazza-r13.mp4" }] },
+      { author: "7*****4", rating: 5, text: "Keterbacaan: jelas enak dibaca. Kemudahan: praktis simple. Kualitas: bagus sesuai", date: "09 Oct 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r14-1.jpg" }, { type: "image", src: "/reviews/mujazza-r14-2.jpg" }, { type: "video", src: "/reviews/mujazza-r14.mp4" }] },
+      { author: "iismustakimah26", rating: 5, text: "Kemudahan: sangat praktis. Keterbacaan: tulisan sangat jelas. Kualitas: baik. Alhamdulilah pesanan sudah sampai, amanah tokonya, bagus Al Qurannya, terimakasih reseller lancar terus usahanya", date: "07 Mar 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r15-1.jpg" }, { type: "image", src: "/reviews/mujazza-r15-2.jpg" }] },
+      { author: "n*****a", rating: 5, text: "Bagus banget Al Qur'annya, pengiriman juga cepet dan aman poll. Thank you seller", date: "13 Feb 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r16-1.jpg" }] },
+      { author: "bang_raul", rating: 5, text: "Kemudahan: sangat simple. Kualitas: bagus. Konten: Quran per 5 juz. Bagus ringkas cepat sampai", date: "28 Feb 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r17-1.jpg" }] },
+      { author: "s*****0", rating: 5, text: "Akhirnya sampai juga. Pengiriman lumayan lama, tapi gapapa karena ga buru-buru pakainya. Khatnya enak dibaca, lihatnya kayak Quran Madinah. Ga bikin pusing tulisannya. Perpaduan warna kertas sama warna tampilan isinya bikin nyaman buat dibaca. Jazaakumullaahu khairan kak seller", date: "13 Sep 2026", variant: "Merah", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r18-1.jpg" }, { type: "image", src: "/reviews/mujazza-r18-2.jpg" }] },
+      { author: "i*****m", rating: 5, text: "Kemudahan: bagus banget suka bangettt semoga barokah. Kualitas: warnanya juga sesuai, makasii", date: "21 Apr 2026", variant: "Biru", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r19-1.jpg" }] },
+      { author: "dcyh6a4a_v", rating: 5, text: "Keterbacaan: kebaca. Kemudahan: simpel. Kualitas: bagus. Cuma kekecilan", date: "22 Jan 2026", variant: "Merah", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r20-1.jpg" }, { type: "video", src: "/reviews/mujazza-r20.mp4" }] },
+      { author: "atyrfauno3", rating: 5, text: "Kegunaan: untuk mengaji tiap hari. Keaslian: bagus", date: "20 Nov 2024", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r21-1.jpg" }, { type: "image", src: "/reviews/mujazza-r21-2.jpg" }] },
+      { author: "c*****m", rating: 5, text: "Barang udah sampe...paket sesuai...pas di saku kerja... Recomended...", date: "07 Mar 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r22-1.jpg" }, { type: "image", src: "/reviews/mujazza-r22-2.jpg" }] },
+      { author: "i*****s", rating: 5, text: "Keterbacaan: tulisan jelas dan mudah dibaca. Kemudahan: sangat praktis. Kualitas: bagus sekali", date: "21 Mar 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r23-1.jpg" }, { type: "video", src: "/reviews/mujazza-r23.mp4" }] },
+      { author: "ikaafiatussoleha", rating: 5, text: "Keterbacaan: tulisannya jelas. Bagus barangnya, tidak mengecewakan meskipun harganya murah", date: "15 Jan 2026", variant: "Biru", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r24-1.jpg" }] },
+      { author: "riddo21", rating: 5, text: "Alhamdulillah bagus", date: "14 Mar 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r25-1.jpg" }] },
+      { author: "nabyla00", rating: 5, text: "Pengemasan rapi banget", date: "21 Feb 2025", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r26-1.jpg" }] },
+      { author: "nor_hasanah17", rating: 5, text: "Ketebalan: pas. Kemudahan: mudah dibawa. Kualitas: bagus", date: "15 May 2026", variant: "Merah", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/mujazza-r27-1.jpg" }, { type: "image", src: "/reviews/mujazza-r27-2.jpg" }] },
+    ],
   },
   {
     id: "13",
