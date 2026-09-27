@@ -779,7 +779,59 @@ export const mockProducts: Product[] = [
     category: "quran-hafalan",
     size: "B7",
     rating: 5,
+    // 125 = 5-star (121) + 4-star (4) ratings on this product's real
+    // Shopee listing, out of 126 total — per the project owner's
+    // direction, 3-star ratings (1 total) are treated as 0.
+    ratingCount: 125,
+    // Shopee's own "Terjual" figure showed as "391" — set directly per
+    // the project owner's screenshot/direction.
+    soldCount: 391,
+    colorVariants: [
+      { hex: "#6B7280", name: "Abu-Abu", imageUrl: "/products/hafalan-b7-colors/color-abu-abu.jpg" },
+      { hex: "#2563EB", name: "Biru", imageUrl: "/products/hafalan-b7-colors/color-biru.jpg" },
+      { hex: "#1E3A5F", name: "Biru Tua", imageUrl: "/products/hafalan-b7-colors/color-biru-tua.jpg" },
+      { hex: "#8B5E34", name: "Coklat", imageUrl: "/products/hafalan-b7-colors/color-coklat.jpg" },
+      { hex: "#111827", name: "Hitam", imageUrl: "/products/hafalan-b7-colors/color-hitam.jpg" },
+      { hex: "#7B2D26", name: "Maroon", imageUrl: "/products/hafalan-b7-colors/color-maroon.jpg" },
+      { hex: "#F4A688", name: "Peach", imageUrl: "/products/hafalan-b7-colors/color-peach.jpg" },
+      { hex: "#14B8A6", name: "Tosca", imageUrl: "/products/hafalan-b7-colors/color-tosca.jpg" },
+    ],
+    customNameEligible: true,
     imageUrl: "/products/al-quran-hafalan-b7-per-5-juz.jpg",
+    // Real PDP gallery (hero shot, detail photos, size-chart graphic),
+    // downloaded from this exact product's live halimquran.com PDP 27 Sep
+    // 2026 — same pattern as the Wafa B7 template.
+    galleryImages: [
+      "/products/hafalan-b7-gallery/gallery-1-main.jpg",
+      "/products/hafalan-b7-gallery/gallery-2.jpg",
+      "/products/hafalan-b7-gallery/gallery-3.jpg",
+      "/products/hafalan-b7-gallery/gallery-4.jpg",
+      "/products/hafalan-b7-gallery/gallery-5.jpg",
+      "/products/hafalan-b7-gallery/gallery-6-sizechart.jpg",
+    ],
+    weightGrams: 285,
+    // Real PDP copy, read verbatim from halimquran.com 27 Sep 2026.
+    description:
+      "Menghafal Al-Qur'an bukan perkara sulit, karena Allah sudah jadikan Al-Qur'an mudah untuk dihafal. Apalagi sekarang sudah hadir, Qur'an Hafalan dengan fitur-fitur yang akan mempermudah proses menghafal Al-Qur'an. Mau tau apa saja keistimewaannya?\n\nSpesifikasi:\n- Ukuran B7 (8 x 10,5 cm)\n- Kertas QPP 50gr\n- Berat 285gr\n- Tebal 624 halaman\n\nFitur cover:\n- Desain cover luxury, menambah kepercayaan diri kamu saat membukanya di mana saja. Al-Qur'an dibagi per 5 juz sehingga lebih praktis dibawa.\n\nMaterial box:\n- Box Al-Qur'an terbuat dari kulit sintetis bottega berkualitas yang membuat warna cover lebih kuat dan tidak mudah pudar.\n\nMaterial inner:\n- Menggunakan kertas QPP 50gr dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dilengkapi navigasi awalan kalimat/ayat di kanan atau kiri halaman, menghafal Al-Qur'an jadi lebih mudah.\n- Dilengkapi lembar penutup teks Al-Qur'an, meningkatkan fokus kamu dalam menghafal.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan kamu mencari juz atau halaman tertentu.\n- Dilengkapi penjelasan tentang 13 keutamaan menghafal Al-Qur'an sehingga kamu akan semakin semangat menghafal.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
+    // Real Shopee listing reviews (27 Sep 2026) — this listing is small (126
+    // ratings total) so every 4/5-star review with a comment is included,
+    // not a curated subset. Read via Shopee's own ratings API with the
+    // logged-in owner's session, kept verbatim:
+    // https://shopee.co.id/AL-QUR'AN-HAFALAN-PER-5-JUZ-UKURAN-B7-(SAKU)-PRAKTIS-RINGAN-MUDAH-DIBAWA-i.229472472.18219771945
+    reviews: [
+      { author: "a*****l", rating: 5, text: "Kualitas: kualitas bagus, bahannya bagus. Tampilan: bagus dan mudah di baca. Ini kedua kalinya saya beli dan saran kalau bisa penempatan tulisan alqurannya jangan terlalu menjorok ke dalam jadi susah di bacanya, padahal space pinggirnya bisa di manfaatkan", date: "03 May 2026", variant: "Coklat • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/hafalanb7-r0-1.jpg" }, { type: "image", src: "/reviews/hafalanb7-r0-2.jpg" }] },
+      { author: "m*****n", rating: 4, text: "Kualitas: cetakan jelas. Konten: Font bagus. Kegunaan: Muroja'ah. Alhamdulillah Produk yg dipesan sebelumnya sudah sampai, Produk sangat baik dan fantastis, hanya saja di bagian luar kurang rapih tulisan namanya, agak buram dan tidak terlihat jelas dibaca. Udah gitu aja, selebihnya oke kok, Thanks seller.", date: "20 Mar 2025", variant: "Tosca • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/hafalanb7-r1-1.jpg" }, { type: "video", src: "/reviews/hafalanb7-r1.mp4" }] },
+      { author: "mbadrudduja99", rating: 4, text: "Al Qur'annya bagus Cuma agak kecewa tidak dapat boxnya soalnya tertulis free box ternyata cuma dibungkus dg plastik", date: "06 Jun 2024", variant: "Peach • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/hafalanb7-r2-1.jpg" }, { type: "video", src: "/reviews/hafalanb7-r2.mp4" }] },
+      { author: "alvheeza", rating: 5, text: "Kualitas: sangat baik. Kegunaan: mengaji. terima kasih ka, paketnya sampao tepat waktu. sukses selalu...", date: "18 Feb 2025", variant: "Peach • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/hafalanb7-r3-1.jpg" }] },
+      { author: "itanurdianah", rating: 5, text: "agak kaget pas datang koq ukuran nya kecil y?\u{1F64F}saya ga baca deskripsi nya...tp untuk kualitas kertas nya oke", date: "24 Aug 2026", variant: "Maroon • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/hafalanb7-r4-1.jpg" }] },
+      { author: "yantikratnasari", rating: 5, text: "Kualitas: Sangat baik. Konten: Pas. Kegunaan: Untuk membantu hafalan anak. Semoga penjual makin laris dan berkah", date: "09 Mar 2025", variant: "Coklat • Tambah Custom Nama", reviewSource: "Shopee" },
+      { author: "nadzifafaikhacomel25", rating: 5, text: "Kualitas: bagus cuma tulisan yang di pinggir agak tidak terlihat. Fungsi: memudahkan kegiatan menghafal", date: "01 Aug 2026", variant: "Biru Tua • Tanpa Nama", reviewSource: "Shopee" },
+      { author: "Pembeli Shopee", rating: 5, text: "Kualitas: Bagus. Tampilan: Keren", date: "26 Aug 2023", variant: "Hitam • Tanpa Nama", reviewSource: "Shopee" },
+      { author: "oq2rdcch8x", rating: 5, text: "Tampilan: bagus. Kualitas: bagus sekali, sesuai kiriman kak. Cocok Untuk: menghafal Al-Qura'an", date: "18 Apr 2023", variant: "Maroon • Tanpa Nama", reviewSource: "Shopee" },
+      { author: "hapshah", rating: 5, text: "Kualitas: tebal. Tampilan: keren dan premium. Fungsi: mudah dibawa. recomended serta ringan untuk dibawa", date: "15 Jun 2026", variant: "Tosca • Tanpa Nama", reviewSource: "Shopee" },
+      { author: "syahrisshobirin", rating: 5, text: "Kualitas: bagus", date: "19 Aug 2026", variant: "Hitam • Tanpa Nama", reviewSource: "Shopee" },
+      { author: "n*****m", rating: 5, text: "Bagus sesuai pesanan", date: "30 Aug 2026", variant: "Biru • Tambah Custom Nama", reviewSource: "Shopee" },
+    ],
   },
   {
     id: "20",
