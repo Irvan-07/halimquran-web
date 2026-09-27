@@ -419,8 +419,57 @@ export const mockProducts: Product[] = [
     price: 65000,
     category: "quran-hafalan",
     size: "A5",
-    rating: 4,
     wakafEligible: true,
+    rating: 5,
+    // 72 = 5-star (71) + 4-star (1) ratings on this product's real Shopee
+    // listing, out of 72 total — per the project owner's direction,
+    // 3/2/1-star ratings (0 total here) are treated as 0.
+    ratingCount: 72,
+    colorVariants: [
+      { hex: "#111827", name: "Hitam", imageUrl: "/products/wafa-a5-colors/color-hitam.jpg" },
+      { hex: "#0F7A5C", name: "Hijau", imageUrl: "/products/wafa-a5-colors/color-hijau.jpg" },
+      { hex: "#1E3A5F", name: "Biru", imageUrl: "/products/wafa-a5-colors/color-biru.jpg" },
+    ],
+    imageUrl: "/products/wafa-a5-gallery/gallery-1-main.jpg",
+    // Real PDP gallery (hero shot, detail photos, size-chart graphic),
+    // downloaded from this exact product's live halimquran.com PDP 27 Sep
+    // 2026 — same pattern as the Wafa B7 template. Note: this product's
+    // live PDP purchase panel differs from the standard template
+    // (wakaf-specific "Quran Saja"/"Quran + Cover Doa" pills + a
+    // penyaluran-wakaf destination picker + "Nama Wakif" field, instead of
+    // the usual Quran Saja/+Nama/+Nama+Box pattern) — not rebuilt here,
+    // only the standard data fields below are populated.
+    galleryImages: [
+      "/products/wafa-a5-gallery/gallery-1-main.jpg",
+      "/products/wafa-a5-gallery/gallery-2.jpg",
+      "/products/wafa-a5-gallery/gallery-3.jpg",
+      "/products/wafa-a5-gallery/gallery-4.jpg",
+      "/products/wafa-a5-gallery/gallery-5.jpg",
+      "/products/wafa-a5-gallery/gallery-6.jpg",
+      "/products/wafa-a5-gallery/gallery-7-sizechart.jpg",
+    ],
+    weightGrams: 595,
+    // Real PDP copy, read verbatim from halimquran.com 27 Sep 2026.
+    description:
+      "Gak betah lama-lama baca Al-Qur'an?? Seringnya suka ngantuk dan bahkan ketiduran?? Sayang banget ya, padahal pahala baca Al-Qur'an itu sangat besar. Kelelahan mata saat membaca Al-Qur'an bisa disebabkan oleh warna kertas yang tidak ramah bagi mata. Solusinya, kamu bisa pakai Al-Qur'an dengan bahan kertas Qur'an Paper Premium (QPP) dengan warna Yellowish yang ramah di mata. Mata Kamu tidak akan lelah walau membaca Al-Qur'an dalam waktu lama.\n\nSeperti Al-Qur'an Al-Wafa A5 Hardcover ini.. Penasaran apa saja keistimewaannya??\n\nSpesifikasi:\n- Ukuran A5 (14,5 x 20,5 cm)\n- Kertas QPP 50gr\n- Berat 595gr\n- Tebal 616 halaman\n\nFitur cover:\n- Desain cover luxury\n- Tersedia 3 pilihan warna\n\nMaterial cover:\n- Cover dicetak dengan laminasi doff yang menciptakan perlindungan pada cover sehingga cover lebih tahan lama dan tidak mudah kotor.\n\nMaterial inner:\n- Menggunakan kertas QPP 50gr dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan kamu mencari juz atau halaman tertentu.\n- Terdapat pewarnaan kata ganti Allah dan -Nya yang memudahkan kamu menemukan ayat-ayat pilihan.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
+    // Real Shopee listing reviews (27 Sep 2026) — this listing is small (72
+    // ratings total) so every 4/5-star review with a comment is included,
+    // not a curated subset. Read via Shopee's own ratings API with the
+    // logged-in owner's session, kept verbatim:
+    // https://shopee.co.id/Halim-Qur'an-MUSHAF-AL-QUR'AN-AL-WAFA-A5-HARD-COVER-UKURAN-SEDANG-DENGAN-COVER-KASUAL-i.229472472.3417659088
+    reviews: [
+      { author: "sytie93ronie90", rating: 5, text: "Alhamdulilah pesanan sudah datang sangat sesuai dan memuaskan.. semoga bermanfaat penjual nya jg ramah cepet bales chat nya terimakasih seller terimakasih shopee semoga berkah ..", date: "09 Jun 2024", variant: "Hitam", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafaa5-r0-1.jpg" }, { type: "image", src: "/reviews/wafaa5-r0-2.jpg" }, { type: "video", src: "/reviews/wafaa5-r0.mp4" }] },
+      { author: "s*****9", rating: 5, text: "Konten: bagus. Kegunaan: belajar. Keaslian: asli. Terima kasih seller al quran nya bagus membantu yg mau mempelajarinya jadi lebih mudah. smoga ke depannya ada yg tanpa terjemahan tp lbh sof cover dan warna cerah", date: "12 Oct 2025", variant: "Hijau", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafaa5-r1-1.jpg" }, { type: "image", src: "/reviews/wafaa5-r1-2.jpg" }, { type: "video", src: "/reviews/wafaa5-r1.mp4" }] },
+      { author: "w*****f", rating: 5, text: "Kenyamanan: lumayan nyaman buat ank2 yg baru mulai belajar mahroj supaya ga menghapal dr wrnanya makanya beli yg polosan, semoga JD berkah baroka", date: "28 Jul 2026", variant: "Biru", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafaa5-r2-1.jpg" }, { type: "video", src: "/reviews/wafaa5-r2.mp4" }] },
+      { author: "mardiana08115171982", rating: 5, text: "Kenyamanan: mudah dibaca, khoynya lumayan besar. KeteTahanan: kualitas kertasnya bagus. Fast respo, pengiriman cepat Terimakasih seller dn kurir", date: "18 Jul 2026", variant: "Hijau", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafaa5-r3-1.jpg" }, { type: "image", src: "/reviews/wafaa5-r3-2.jpg" }] },
+      { author: "apipah561", rating: 5, text: "Alhamdulillah", date: "24 Aug 2026", variant: "Hijau", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafaa5-r4-1.jpg" }, { type: "image", src: "/reviews/wafaa5-r4-2.jpg" }] },
+      { author: "adorableitems", rating: 5, text: "Alhamdulillah sampai dengan aman di surabaya, terima kasih Halim Quran sukses selalu\u{2728}", date: "21 Apr 2021", variant: "Hitam", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafaa5-r5-1.jpg" }] },
+      { author: "tiktu31", rating: 5, text: "Masya Allah suka sekali, ini sudah ke 4 kalinya beli di toko ini.. terimakasih", date: "24 Aug 2026", variant: "Hijau", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafaa5-r6-1.jpg" }] },
+      { author: "hakiiy", rating: 5, text: "Konten: Gud. Kegunaan: Masya Allah Habibi", date: "14 Sep 2025", variant: "Hitam", reviewSource: "Shopee", media: [{ type: "video", src: "/reviews/wafaa5-r7.mp4" }] },
+      { author: "m.abyfadillah", rating: 5, text: "Barang cepat mas tapi di bagian pinggir2 ada penyot dikitt mas...", date: "10 Apr 2021", variant: "Biru", reviewSource: "Shopee" },
+      { author: "bahtiar.wolulikur", rating: 5, text: "Quran yang saya cari. Khusus untuk tilawah, font bagus, kertas dan tulisan warna krem sehingga tidak cepat membuat mata lelah dan sakit, ada garis di bawah ayat terlihat lebih rapi, ada penanda juz di bagian samping Quran sehingga mudah untuk mencari, desain cover juga bagus. Tiada gading yang tak retak. Semua punya kelebihan dan kekurangan. Kekurangannya lapisan cover (plastik tipis) kurang bagus, baru digunakan sudah ada sedikit yang terkelupas, tidak menjadi masalah.", date: "09 Apr 2026", variant: "Biru", reviewSource: "Shopee" },
+      { author: "l*****o", rating: 5, text: "Kualitas: bagus. Tampilan: menarik. Cocok Untuk: mengaji. Masyaallah Al Qur'an nya sangat baguss", date: "19 Sep 2026", variant: "Hitam", reviewSource: "Shopee" },
+    ],
   },
   // Products 7-9: real bundle SKUs from the homepage's own "Hadiah/Gift"
   // carousel — 2-piece box sets with free name engraving, positioned by
