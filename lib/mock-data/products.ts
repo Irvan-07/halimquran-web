@@ -800,6 +800,33 @@ export const mockProducts: Product[] = [
     price: 76000,
     category: "quran-hafalan",
     size: "A5",
+    // No colorVariants: the live PDP shows 10 plain color swatches with no
+    // per-color photo (unlike most other products), so this uses the flat
+    // colors/colorNames fallback instead.
+    colors: ["#6B7280", "#2563EB", "#1E3A5F", "#8B5E34", "#0F7A5C", "#111827", "#7B2D26", "#14B8A6", "#B08968", "#14532D"],
+    colorNames: ["Abu-Abu", "Biru", "Biru Tua", "Cokelat", "Hijau", "Hitam", "Maroon", "Tosca", "Cokelat Muda", "Hijau Tua"],
+    customNameEligible: true,
+    imageUrl: "/products/wafa-a5-premium-gallery/gallery-1-main.jpg",
+    // Real PDP gallery (hero shot, detail photos, size-chart graphic),
+    // downloaded from this exact product's live halimquran.com PDP 28 Sep
+    // 2026 — same pattern as the Wafa B7 template. This product currently
+    // shows "Stok Habis" (out of stock) on the live site.
+    galleryImages: [
+      "/products/wafa-a5-premium-gallery/gallery-1-main.jpg",
+      "/products/wafa-a5-premium-gallery/gallery-2.jpg",
+      "/products/wafa-a5-premium-gallery/gallery-3.jpg",
+      "/products/wafa-a5-premium-gallery/gallery-4.jpg",
+      "/products/wafa-a5-premium-gallery/gallery-5.jpg",
+      "/products/wafa-a5-premium-gallery/gallery-6.jpg",
+      "/products/wafa-a5-premium-gallery/gallery-7-sizechart.jpg",
+    ],
+    weightGrams: 575,
+    // Real PDP copy, read verbatim from halimquran.com 28 Sep 2026.
+    description:
+      "Gak betah lama-lama baca Al-Qur'an?? Seringnya suka ngantuk dan bahkan ketiduran?? Sayang banget ya, padahal pahala baca Al-Qur'an itu sangat besar. Kelelahan mata saat membaca Al-Qur'an bisa disebabkan oleh warna kertas yang tidak ramah bagi mata. Solusinya, kamu bisa pakai Al-Qur'an dengan bahan kertas Qur'an Paper Premium (QPP) dengan warna Yellowish yang ramah di mata. Mata Kamu tidak akan lelah walau membaca Al-Qur'an dalam waktu lama.\n\nSeperti Al-Qur'an Al-Wafa A5 resleting ini.. Penasaran apa saja keistimewaannya??\n\nSpesifikasi:\n- Ukuran A5 (14,5 x 20,5 cm)\n- Kertas QPP 50gr\n- Berat 575gr\n- Tebal 616 halaman\n\nFitur cover:\n- Desain cover kasual dengan 9 pilihan warna.\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n\nMaterial cover:\n- Cover terbuat dari kulit sintetis berkualitas yang membuat warna cover lebih kuat dan tidak mudah pudar.\n- Resleting berbahan metal, sehingga lebih kokoh dan aman, serta memiliki gigitan resleting yang lebih kuat. Metal Zipper memberi kesan mahal dan eksklusif pada Al-Qur'an.\n\nMaterial inner:\n- Menggunakan kertas QPP 50gr dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan Kamu mencari juz atau halaman tertentu.\n- Terdapat pewarnaan kata ganti Allah dan -Nya yang memudahkan Kamu menemukan ayat-ayat pilihan.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
+    // No rating/reviews: halimquran.com shows no rating section for this
+    // product, and no matching listing was found on this shop's Shopee
+    // catalog either (searched 28 Sep 2026) — omitted rather than invented.
   },
   // Products 15-41: full remainder of halimquran.com/products' real
   // catalog (verified 26 Sep 2026) — see file header.
