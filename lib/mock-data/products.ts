@@ -916,7 +916,30 @@ export const mockProducts: Product[] = [
     price: 52000,
     category: "quran-hafalan",
     size: "A6",
+    // No colorVariants: the live PDP shows 8 plain color swatches with no
+    // per-color photo, so this uses the flat colors/colorNames fallback.
+    colors: ["#E8C547", "#0F7A5C", "#8B5E34", "#2563EB", "#E8DCC4", "#111827", "#F4A688", "#14B8A6"],
+    colorNames: ["Kuning", "Hijau", "Coklat", "Biru", "Cream", "Hitam", "Peach", "Tosca"],
     imageUrl: "/products/al-quran-hafalan-a6-hard-cover.jpg",
+    // Real PDP gallery (hero shot, detail photos, size-chart graphic),
+    // downloaded from this exact product's live halimquran.com PDP 28 Sep
+    // 2026 — same pattern as the Wafa B7 template. This product currently
+    // shows "Stok Habis" (out of stock) on the live site.
+    galleryImages: [
+      "/products/hafalan-a6-hc-gallery/gallery-1-main.jpg",
+      "/products/hafalan-a6-hc-gallery/gallery-2.jpg",
+      "/products/hafalan-a6-hc-gallery/gallery-3.jpg",
+      "/products/hafalan-a6-hc-gallery/gallery-4.jpg",
+      "/products/hafalan-a6-hc-gallery/gallery-5.jpg",
+      "/products/hafalan-a6-hc-gallery/gallery-6-sizechart.jpg",
+    ],
+    weightGrams: 320,
+    // Real PDP copy, read verbatim from halimquran.com 28 Sep 2026.
+    description:
+      "Menghafal Al-Qur'an bukan perkara sulit, karena Allah sudah jadikan Al-Qur'an mudah untuk dihafal. Apalagi sekarang sudah hadir, Qur'an Hafalan dengan fitur-fitur yang akan mempermudah proses menghafal Al-Qur'an. Mau tau apa saja keistimewaannya?\n\nSpesifikasi:\n- Ukuran A6 (10,5 x 14,5 cm)\n- Kertas QPP 50gr\n- Berat 320gr\n- Tebal 624 halaman\n\nFitur cover:\n- Desain mewah dan bagus.\n- Tersedia dalam 3 pilihan warna.\n\nMaterial cover:\n- Cover dicetak dengan laminasi doff yang menciptakan perlindungan pada cover sehingga cover lebih tahan lama dan tidak mudah kotor.\n\nMaterial inner:\n- Menggunakan kertas QPP 50gr dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dilengkapi navigasi awalan kalimat/ayat di kanan atau kiri halaman, menghafal Al-Qur'an jadi lebih mudah.\n- Dilengkapi lembar penutup teks Al-Qur'an, meningkatkan fokus kamu dalam menghafal.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan kamu mencari juz atau halaman tertentu.\n- Dilengkapi penjelasan tentang 13 keutamaan menghafal Al-Qur'an sehingga kamu akan semakin semangat menghafal.\n- Dilengkapi penjelasan tentang 13 langkah efektif menghafal Al-Qur'an. Ringkas dan mudah dipraktikkan.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
+    // No rating/reviews: halimquran.com shows no rating section for this
+    // product, and no matching listing was found on this shop's Shopee
+    // catalog either (searched 28 Sep 2026) — omitted rather than invented.
   },
   {
     id: "17",
