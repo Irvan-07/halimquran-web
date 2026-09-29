@@ -597,6 +597,73 @@ export const mockProducts: Product[] = [
     price: 83000,
     category: "quran-hafalan",
     size: "A5",
+    rating: 5,
+    // 135 = 5-star (129) + 4-star (6) ratings on this product's real
+    // Shopee listing, out of 135 total (read from the API's own
+    // item_rating_summary) — per the project owner's direction,
+    // 3/2/1-star ratings (0 total here) are treated as 0.
+    ratingCount: 135,
+    colorVariants: [
+      { hex: "#0F7A5C", name: "Hijau", imageUrl: "/products/muslimah-a5-colors/color-hijau.jpg" },
+      { hex: "#111827", name: "Hitam", imageUrl: "/products/muslimah-a5-colors/color-hitam.jpg" },
+      { hex: "#1E3A5F", name: "Navy", imageUrl: "/products/muslimah-a5-colors/color-navy.jpg" },
+      { hex: "#F4A688", name: "Peach", imageUrl: "/products/muslimah-a5-colors/color-peach.jpg" },
+    ],
+    customNameEligible: true,
+    imageUrl: "/products/muslimah-a5-gallery/gallery-1-main.jpg",
+    // Real PDP gallery (hero shot, detail photos, size-chart graphic),
+    // downloaded from this exact product's live halimquran.com PDP 28 Sep
+    // 2026 — same pattern as the Wafa B7 template.
+    galleryImages: [
+      "/products/muslimah-a5-gallery/gallery-1-main.jpg",
+      "/products/muslimah-a5-gallery/gallery-2.jpg",
+      "/products/muslimah-a5-gallery/gallery-3.jpg",
+      "/products/muslimah-a5-gallery/gallery-4.jpg",
+      "/products/muslimah-a5-gallery/gallery-5.jpg",
+      "/products/muslimah-a5-gallery/gallery-6.jpg",
+      "/products/muslimah-a5-gallery/gallery-7-sizechart.jpg",
+    ],
+    weightGrams: 650,
+    // Real PDP copy, read verbatim from halimquran.com 28 Sep 2026.
+    description:
+      "Hai sahabat shalihah, masih suka malas baca Al-Qur'an?? Sangat tidak wajar jika kita terus menerus merasa malas dalam membaca Qur'an. Karena jika itu terjadi, berarti ada yang salah pada diri kita. Salah satu kemungkinan penyebab kurang bergairahnya membaca Al-Qur'an adalah karena selama ini kita hanya membaca quran dengan desain yang itu itu saja. Tidak ada desain yang fresh dan unik, yang dapat mewakili pribadi kita sehingga kita lebih bisa lebih termotivasi untuk membaca Al-Qur'an.\n\nOleh karena itu, kami hadirkan produk Al-Qur'an spesial untuk kamu, Sahabat Shalihah. Al-Qur'an Al-Wafa Muslimah A5 Resleting dengan cover yang unik dan cantik penuh warna. Penasaran apa saja keistimewaannya??\n\nSpesifikasi:\n- Ukuran A5 (14,5 x 20,5 cm)\n- Kertas QPP 50gr\n- Berat 650gr\n- Tebal 616 halaman\n\nFitur cover:\n- Desain cover cantik, unik, dan penuh warna\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n- Tersedia dalam 4 pilihan warna.\n\nMaterial cover:\n- Punggung cover berbahan bottega yang kuat dan tahan lama.\n- Resleting berbahan metal, sehingga lebih kokoh dan aman, serta memiliki gigitan resleting yang lebih kuat. Metal Zipper memberi kesan mahal dan eksklusif pada Al-Qur'an.\n\nMaterial inner:\n- Menggunakan kertas QPP 50gr dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan kamu mencari juz atau halaman tertentu.\n- Terdapat pewarnaan kata ganti Allah dan -Nya yang memudahkan kamu menemukan ayat-ayat pilihan.\n- Dilengkapi konten keutamaan kaum wanita dan 22 ciri wanita teladan dan istri shalihah.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
+    // Real Shopee listing reviews (28 Sep 2026) — this listing is small (135
+    // ratings total) so every 4/5-star review with a comment is included,
+    // not a curated subset. Read via Shopee's own ratings API with the
+    // logged-in owner's session, kept verbatim. Listing found by searching
+    // this shop's own Shopee catalog (halimquran.com doesn't link out to
+    // marketplace listings), not supplied by the owner:
+    // https://shopee.co.id/Halim-Qur'an-MUSHAF-AL-QUR'AN-AL-WAFA-EDISI-MUSLIMAH-RESLETING-CANTIK-PENUH-WARNA-i.229472472.7617567260
+    reviews: [
+      { author: "m*****g", rating: 4, text: "Tampilan: sangat bagus. Kualitas: baik. Cocok Untuk: semua kalangan. Over all bagus, cuma pas pertama dibuka karna mungkin pake cover jd lem2 di covernya nempel ke halaman lembar Al-Qurannya ada bbrp lembar menyatu, jd saya pisahin pake cutter. Masih bisa diselamatkan. Qurannya bagus, thanks", date: "03 Dec 2022", variant: "Peach", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r0-1.jpg" }, { type: "image", src: "/reviews/ms-r0-2.jpg" }, { type: "video", src: "/reviews/ms-r0.mp4" }] },
+      { author: "bintu_halimih", rating: 5, text: "Warna: toska. Cocok untuk: wanita. Kualitas: bagus. Masyaallah cantik banget covernya tulisannya pun besar", date: "01 Feb 2025", variant: "Tosca", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r1-1.jpg" }, { type: "image", src: "/reviews/ms-r1-2.jpg" }, { type: "video", src: "/reviews/ms-r1.mp4" }] },
+      { author: "dewiriza_01", rating: 5, text: "Warna: hijau bunga. Cocok untuk: cwek muslimah. Ukuran Tulisan: standar. Alhamdulillah paketnya sudah sampai dengan baik dan benar sesuai dengan pesanan terima kasih kakak sukses semoga berkah", date: "10 Sep 2025", variant: "Hijau", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r2-1.jpg" }, { type: "image", src: "/reviews/ms-r2-2.jpg" }, { type: "video", src: "/reviews/ms-r2.mp4" }] },
+      { author: "sulistiyatukaljum738", rating: 5, text: "Warna: cerah dan sesuai gambar. Cocok untuk: semua. Ukuran Tulisan: tulisan berukuran jelas dan besar. Suka sekali dengan musafnya, jazakallah", date: "28 Dec 2025", variant: "Peach", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r3-1.jpg" }, { type: "image", src: "/reviews/ms-r3-2.jpg" }, { type: "video", src: "/reviews/ms-r3.mp4" }] },
+      { author: "aini54439", rating: 5, text: "Baguus banget ya Allah al Qur'annya. Cantiikk. Resletingnya bagus. Kertasnya bagus. Harga terjangkau. Terima kasih", date: "15 Nov 2021", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r4-1.jpg" }, { type: "video", src: "/reviews/ms-r4.mp4" }] },
+      { author: "agustinandriana", rating: 5, text: "Warna: cerah. Ukuran Tulisan: jelas. Cocok untuk: semua. Alhamdulillah barang sangat recommended cantik barang nya, cakep pula penjual nya.. Qur'an benar\u{00B2} aman... Saya sangat suka semua nya aman, packing good \u{1F64F}\u{1F44D}", date: "18 Mar 2025", variant: "Biru Tua", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r5-1.jpg" }, { type: "image", src: "/reviews/ms-r5-2.jpg" }] },
+      { author: "yani_oktaviaa", rating: 5, text: "Model dan warna menarik, anak jd tertarik untuk membaca Tulisan sangat enak dibaca", date: "16 Aug 2023", variant: "Hijau", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r6-1.jpg" }, { type: "video", src: "/reviews/ms-r6.mp4" }] },
+      { author: "yourfavogift", rating: 5, text: "Bagus Pengiriman cepat Murah sih ukuran segini dibawah 100 rb Ukuran arab pas utk lansia", date: "08 Mar 2022", variant: "Tosca", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r7-1.jpg" }, { type: "video", src: "/reviews/ms-r7.mp4" }] },
+      { author: "rahma17andin", rating: 5, text: "Warna: masyaallah cantik sesuai gambar warna dan tulisannya. Cocok untuk: semua. Ukuran Tulisan: ukuran besar jelas enak untuk tilawah", date: "08 Oct 2025", variant: "Peach", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r8-1.jpg" }, { type: "image", src: "/reviews/ms-r8-2.jpg" }] },
+      { author: "r*****r", rating: 5, text: "bagusssss bgt suka!! model covernya bunga2 cocok buat yg cewek bgt, warnanya juga ok\u{1F970}\u{2728}", date: "28 Feb 2022", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r9-1.jpg" }, { type: "video", src: "/reviews/ms-r9.mp4" }] },
+      { author: "t*****4", rating: 5, text: "Alhamdulillah sampe juga yang di tunggu tunggu \u{1F970} terimakasih \u{1F64F}", date: "31 Oct 2021", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r10-1.jpg" }, { type: "video", src: "/reviews/ms-r10.mp4" }] },
+      { author: "n*****4", rating: 4, text: "Warna: cerah dan sesuai gambar. Cocok untuk: semua. Kualitas: tebal dan tahan lama. Alhamdulillah alquran sudah kami Terima dengan aman. Terimakasih seller dan Shopee,, laris manis dan barokah untuk tokonya.. \u{1F60A}\u{1F60A}aamiin", date: "23 Jan 2025", variant: "Magenta", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r11-1.jpg" }, { type: "image", src: "/reviews/ms-r11-2.jpg" }] },
+      { author: "tosin86", rating: 5, text: "Cocok Untuk: membaca Al-Qur'an. Tampilan: bagus. Kualitas: bagus. Alhamdulillah sudah sampai, maaf baru kasih penilaian, pengiriman cepat, packing ok, terimakasih untuk toko dan kurirnya \u{1F64F}\u{1F3FB}", date: "06 May 2024", variant: "Hitam", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r12-1.jpg" }, { type: "video", src: "/reviews/ms-r12.mp4" }] },
+      { author: "k*****i", rating: 5, text: "Warna: sesuai gambar. Cocok untuk: semua. Kualitas: baik. Seller fast response, pengiriman cepat, kualitas bagus.. Barakallah..", date: "31 Jan 2025", variant: "Hitam", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r13-1.jpg" }] },
+      { author: "Pembeli Shopee", rating: 5, text: "Barang Sampai Dengan Selamat,,Produk Bagus,Kualitas Bagus,Packing Rapi.Senang Dehh Belanja Di Toko Ini,Sabi Lah Kalo Mau Langganan Trus Repeat Order,Terima Kasih Seller \u{1F607}", date: "30 Jan 2024", variant: "Hitam", reviewSource: "Shopee", media: [{ type: "video", src: "/reviews/ms-r14.mp4" }] },
+      { author: "rahayumulya98", rating: 5, text: "Warna: hitam. Ukuran Tulisan: jelas. Cocok untuk: semua. Al quraanya bagus banget suka.motifnya dalamnya juga jelass kalian harus beli si ayok dibeli", date: "28 Mar 2025", variant: "Hitam", reviewSource: "Shopee", media: [{ type: "video", src: "/reviews/ms-r15.mp4" }] },
+      { author: "r*****4", rating: 5, text: "Puas banget, insya Allah bisa berlangganan kalo gini sih.", date: "31 Oct 2024", variant: "Hijau", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r16-1.jpg" }] },
+      { author: "intanpramuda", rating: 5, text: "Pesanan telah diterima dgn baik\u{2764}\u{FE0F}", date: "06 Apr 2026", variant: "Peach", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r17-1.jpg" }] },
+      { author: "cintarissa18", rating: 5, text: "Desain: baguss desain nyaa.... cantik sekaliii. Kertas: halus dan tulisan kebaca jelas. cantikk bangettt, warnaa peach ke pink\" an gituuuu.... lucuuu dehhh. bisa buat jadi makin semangat baca quran", date: "22 Aug 2026", variant: "Peach", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r18-1.jpg" }] },
+      { author: "royaniroyanii201", rating: 4, text: "Desain: mantapp", date: "24 Feb 2026", variant: "Peach", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/ms-r19-1.jpg" }] },
+      { author: "elzaistore", rating: 5, text: "Bagus banget. Materialnya bagus Dari kertas Sampai covernya. Bahkan ritsliting nya juga yg kualitas bagus. Bikin semangat baca", date: "02 Feb 2025", variant: "Biru Tua", reviewSource: "Shopee" },
+      { author: "om_hm", rating: 5, text: "ماشاء الله بارك الله جزاكم الله خيرا ورفع قدركم في الدنيا والآخرة", date: "31 Mar 2022", reviewSource: "Shopee" },
+      { author: "faeyza.arrafif05", rating: 5, text: "Warna: sesuai. Ukuran Tulisan: jelas untuk d baca. Cocok untuk: semua usia", date: "29 Apr 2025", variant: "Magenta", reviewSource: "Shopee" },
+      { author: "h*****a", rating: 5, text: "Warna: cerah sesuai gambar. Cocok untuk: semua. Ukuran Tulisan: tulisan berukuran besar dan jelas. Bagus sekali", date: "21 May 2025", variant: "Magenta", reviewSource: "Shopee" },
+      { author: "nurulsyifa045", rating: 5, text: "Warna: peach. Cocok untuk: wanita Sholehah. Ukuran Tulisan: bagus banget, dulu aku hafal Qur'an juga pake Halim, dibeliin sama bapak ditahun 2018 silam. boleh bgt diorder, seller amanah Alhamdulillah paket aku sampai setelah ditunggu lamaa banget hehe", date: "13 Jan 2026", variant: "Peach", reviewSource: "Shopee" },
+      { author: "anggunlusiani", rating: 5, text: "Warna: pink. Alhamdulillah suka banget cantik", date: "10 Feb 2025", variant: "Peach", reviewSource: "Shopee" },
+      { author: "isuryadiwarung", rating: 5, text: "Bagus\u{1F44D}", date: "19 Sep 2026", variant: "Peach", reviewSource: "Shopee" },
+      { author: "hany015", rating: 5, text: "Bagus Al-Qur'an", date: "25 Aug 2025", variant: "Hijau", reviewSource: "Shopee" },
+    ],
   },
   {
     id: "12",
