@@ -484,6 +484,15 @@ export const mockProducts: Product[] = [
     size: "A5",
     badge: "Free Custom Nama",
     giftEligible: true,
+    weightGrams: 1250,
+    // No color/variant picker on this bundle's real PDP — just two
+    // free-text "Nama Ukir" fields (one per Quran), so there's nothing
+    // to migrate as Scalev color variants. No rating/reviews: no
+    // separate Shopee listing found (searched 2 Oct 2026) and
+    // halimquran.com shows no rating widget for it either.
+    // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
+    description:
+      "Pernahkah kamu merasakan ketenangan saat membaca Al-Qur'an dengan mushaf yang digunakan di Masjid Nabawi dan Masjidil Haram? Kini, pengalaman itu bisa kamu dapatkan dalam Mushaf Madinah Huzaifi, mushaf dengan standar internasional terbitan Halim Qur'an yang telah ditashih oleh KDN Malaysia dan mengantongi izin edar dari Kemenag RI, aman syar'i aman regulasi!\n\n2 Eks. Mushaf Madinah Huzaifi:\n- Cover unik dengan bahan kulit\n- Tashih resmi dari KDN Malaysia, bacaan terjamin sesuai standar.\n- Izin edar Kemenag RI, aman dan legal digunakan di Indonesia.\n- Kertas QPP Premium, halus, tahan lama, dan sejuk di mata, nyaman untuk tilawah dalam waktu lama.\n\nSelain itu, kamu sudah mendapatkan bonus-bonus istimewa lainnya:\n- Free box besar.\n- Free custom nama yang menjadikan Al-Qur'an semakin personal.\n\nSpesifikasi:\n- Hard Cover Kulit\n- Ukuran A5 (14,5 x 20,5 cm)\n- Kertas QPP 50gr\n- Berat 615gr (per eks.)\n- Tebal 616 halaman\n\nFitur cover:\n- Desain cover kasual. Cocok untuk siapa saja.\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n\nDetail material:\n- Menggunakan kertas QPP 50gr dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu lama.\n\nCocok untuk:\n- Hafalan dan tilawah sehari-hari.\n- Hadiah spesial untuk keluarga, sahabat, atau guru mengaji.\n- Koleksi mushaf berkualitas dengan standar internasional.",
   },
   {
     id: "8",
@@ -495,6 +504,15 @@ export const mockProducts: Product[] = [
     size: "A6",
     badge: "Free Custom Nama",
     giftEligible: true,
+    weightGrams: 700,
+    // No color/variant picker on this bundle's real PDP — just two
+    // free-text "Nama Ukir" fields (one per Quran), so there's nothing
+    // to migrate as Scalev color variants. No rating/reviews: no
+    // separate Shopee listing found (searched 2 Oct 2026) and
+    // halimquran.com shows no rating widget for it either.
+    // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
+    description:
+      "Butuh Al-Qur'an yang bisa melengkapi proses hijrah kamu? Pengen belajar baca Qur'an sekaligus memahami pesan-pesan di dalamnya? Jangan skip dulu, kami punya solusinya untukmu.\n\n2 Eks. Mushaf Al-Qur'an Al-Wafa A6 Pocket:\n- Cover unik dengan bentuk seperti dompet\n- Menggunakan kertas khusus Al-Qur'an yang tahan lama dan sejuk di mata\n- Ukuran handy, nyaman dipegang\n- Dicetak dengan khat yang jelas dan nyaman dibaca\n- Rasm Utsmani\n- Sangat sempurna menjadi hadiah\n\nSelain itu, kamu sudah mendapatkan bonus-bonus istimewa lainnya:\n- Free box besar.\n- Free custom nama yang menjadikan Al-Qur'an semakin personal.\n\nSpesifikasi:\n- Ukuran A6 (10,5 x 14,5 cm)\n- Kertas QPP 50gr\n- Berat 330gr (per eks.)\n- Tebal 616 halaman\n\nFitur cover:\n- Desain cover casual, kalem, dan hangat.\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n\nDetail material:\n- Cover terbuat dari kulit sintetis jenis cocoli berkualitas yang membuat warna cover lebih kuat dan tidak mudah pudar. Selain itu, cover dilapisi dengan foil yang memberi kesan mewah pada tampilan cover.\n- Resleting berbahan metal, sehingga lebih kokoh dan aman, serta memiliki gigitan resleting yang lebih kuat. Metal Zipper memberi kesan mahal dan eksklusif pada Al-Qur'an.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan kamu mencari juz atau halaman tertentu.\n- Terdapat pewarnaan kata ganti Allah dan -Nya yang memudahkan kamu menemukan ayat-ayat pilihan.",
   },
   {
     id: "9",
@@ -506,6 +524,15 @@ export const mockProducts: Product[] = [
     size: "A6",
     badge: "Free Custom Nama",
     giftEligible: true,
+    weightGrams: 700,
+    // No color/variant picker on this bundle's real PDP — just two
+    // free-text "Nama Ukir" fields (one per Quran), so there's nothing
+    // to migrate as Scalev color variants. No rating/reviews: no
+    // separate Shopee listing found (searched 2 Oct 2026) and
+    // halimquran.com shows no rating widget for it either.
+    // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
+    description:
+      "Butuh Al-Qur'an yang bisa melengkapi proses hijrah kamu? Pengen belajar baca Qur'an sekaligus memahami pesan-pesan di dalamnya? Jangan skip dulu, kami punya solusinya untukmu.\n\n2 Eks. Al-Qur'an Terjemah Al-Halim A6 Pocket:\n- Cover unik dengan bentuk seperti dompet\n- Menggunakan kertas khusus Al-Qur'an yang tahan lama dan sejuk di mata\n- Ukuran handy, nyaman dipegang\n- Dicetak dengan khat yang jelas dan nyaman dibaca\n- Rasm Utsmani\n- Sangat sempurna menjadi hadiah\n\nSelain itu, kamu sudah mendapatkan bonus-bonus istimewa lainnya:\n- Free box besar.\n- Free custom nama yang menjadikan Al-Qur'an semakin personal.\n\nSpesifikasi:\n- Ukuran A6 (10,5 x 14,5 cm)\n- Kertas QPP 50gr\n- Berat 330gr (per eks.)\n- Tebal 616 halaman\n\nFitur cover:\n- Desain cover kasual. Cocok untuk siapa saja.\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n\nDetail material:\n- Menggunakan kertas QPP 50gr dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu lama.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dilengkapi terjemah standar Kemenag RI.\n- Dilengkapi tema-tema pokok bahasan sehingga memudahkan kamu untuk memahami makna ayat yang dibaca.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi penjelasan adab dan fadhilah membaca Al-Qur'an. Ringkas dan mudah dipahami.\n- Dilengkapi dengan doa sujud tilawah di bagian pembatas, membantu kamu selalu ingat doa penting ini.\n- Dilengkapi indeks juz yang memudahkan kamu menemukan juz atau halaman tertentu.",
   },
   // Products 10-14: real Al Wafa line SKUs.
   {
