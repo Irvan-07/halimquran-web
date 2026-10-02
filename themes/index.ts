@@ -1,4 +1,5 @@
 import { halimTheme } from "./halim";
+import { blibliTheme } from "./blibli";
 import { shopeeTheme } from "./shopee";
 import type { Theme } from "./types";
 
@@ -11,8 +12,9 @@ import type { Theme } from "./types";
 const registry: Record<string, Theme> = {
   [halimTheme.id]: halimTheme,
   [shopeeTheme.id]: shopeeTheme,
+  [blibliTheme.id]: blibliTheme,
 };
 
 export const activeTheme: Theme = registry[process.env.NEXT_PUBLIC_THEME ?? ""] ?? halimTheme;
 
-export const { Header, Footer, ProductCard, ProductGrid, ProductDetail, Home } = activeTheme.slots;
+export const { Header, Footer, ProductCard, ProductGrid, ProductDetail, Home, ProductsIntro } = activeTheme.slots;

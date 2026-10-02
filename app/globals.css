@@ -160,3 +160,44 @@
 [data-theme="shopee"] body {
     background: #F5F5F5;
 }
+
+/* Blibli-style marketplace theme: bright blue primary, white pages, rounded
+   cards and pill buttons (see themes/blibli). */
+[data-theme="blibli"] {
+    --primary: #0072FF;
+    --primary-foreground: #FFFFFF;
+    --primary-dark: #0060D6;
+    --ring: #0072FF;
+    --foreground: #19222A;
+    --muted-foreground: #66727D;
+    --secondary: #F4F5F7;
+    --muted: #F4F5F7;
+    --accent: #E8F1FF;
+    --border: #E1E5EA;
+    --input: #D5DAE0;
+    --success: #1F912E;
+    --radius: 0.5rem;
+}
+
+[data-theme="blibli"] [data-slot="button"] {
+    border-radius: 9999px;
+}
+
+/* Ratings are yellow stars in this theme (components use fill-primary). */
+[data-theme="blibli"] svg.lucide-star.fill-primary {
+    fill: #FFC600;
+    color: #FFC600;
+}
+
+/* Phones have a fixed bottom tab bar, and product pages a fixed purchase
+   bar: lift the floating chat button above them. */
+@media (max-width: 1023px) {
+    [data-theme="blibli"] [data-wa-float],
+    [data-theme="shopee"] [data-wa-float] {
+        bottom: 4.75rem;
+    }
+}
+
+[data-theme="blibli"] [data-wa-float][data-pdp="true"] {
+    bottom: 5.5rem;
+}

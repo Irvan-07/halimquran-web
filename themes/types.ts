@@ -43,6 +43,8 @@ export interface ThemeSlots {
   ProductDetail: ComponentType<ProductDetailProps>;
   /** The whole homepage body. */
   Home: ComponentType<HomeProps>;
+  /** Optional block shown above the "Semua Produk" listing (e.g. a marketplace-style store card). */
+  ProductsIntro?: ComponentType;
 }
 
 export interface Theme {
