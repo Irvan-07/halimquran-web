@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Moment",
-};
+import { CmsPageView } from "@/components/content/CmsPageView";
+import { pageMetadata } from "@/sanity/lib/content";
 
 // On the live site, every "Moment" sub-item (Haji/Umroh, Wisuda, Memorial)
 // is itself a dead link (href="/") — the real site hasn't built these out
@@ -11,7 +9,7 @@ export const metadata: Metadata = {
 // destinations or content that don't exist yet.
 const momentTopics = ["Haji/Umroh", "Wisuda", "Memorial"];
 
-export default function MomentPage() {
+function MomentPageStatic() {
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-4 px-4 py-24 sm:px-6 lg:px-8">
       <h1 className="font-heading text-3xl font-semibold text-foreground">
@@ -32,4 +30,12 @@ export default function MomentPage() {
       </div>
     </div>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return pageMetadata("moment", "Moment");
+}
+
+export default function MomentPage() {
+  return <CmsPageView slug="moment" fallback={<MomentPageStatic />} />;
 }

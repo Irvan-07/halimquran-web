@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Promo",
-};
+import { CmsPageView } from "@/components/content/CmsPageView";
+import { pageMetadata } from "@/sanity/lib/content";
 
 // On the live site, every "Promo" sub-item is a dead link (href="/") — the
 // real site hasn't built these out either (verified 2026-09-17), and promo
@@ -17,7 +15,7 @@ const promoTopics = [
   "Clearance Sale",
 ];
 
-export default function PromoPage() {
+function PromoPageStatic() {
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-4 px-4 py-24 sm:px-6 lg:px-8">
       <h1 className="font-heading text-3xl font-semibold text-foreground">
@@ -38,4 +36,12 @@ export default function PromoPage() {
       </div>
     </div>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return pageMetadata("promo", "Promo");
+}
+
+export default function PromoPage() {
+  return <CmsPageView slug="promo" fallback={<PromoPageStatic />} />;
 }

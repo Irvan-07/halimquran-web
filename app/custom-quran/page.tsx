@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
+import { CmsPageView } from "@/components/content/CmsPageView";
+import { pageMetadata } from "@/sanity/lib/content";
 import Link from "next/link";
 import { PagePlaceholder } from "@/components/layout/PagePlaceholder";
 
-export const metadata: Metadata = {
-  title: "Custom Quran",
-};
-
-export default function CustomQuranPage() {
+function CustomQuranPageStatic() {
   return (
     <div className="flex flex-col">
       <PagePlaceholder
@@ -29,4 +27,12 @@ export default function CustomQuranPage() {
       </div>
     </div>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return pageMetadata("custom-quran", "Custom Quran");
+}
+
+export default function CustomQuranPage() {
+  return <CmsPageView slug="custom-quran" fallback={<CustomQuranPageStatic />} />;
 }

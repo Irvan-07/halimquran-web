@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/themes";
+import { CmsIntro } from "@/components/content/CmsPageView";
 import { mockProducts } from "@/lib/mock-data/products";
 
 // Content on this page is copied from the live halimquran.com Wakaf Quran
@@ -98,6 +99,7 @@ export default function WakafPage() {
 
   return (
     <div className="flex flex-col">
+      <CmsIntro slug="wakaf" />
       {/* Hero — real copy from the live page; no fabricated campaign photo. */}
       <section className="border-b border-border bg-secondary">
         <div className="mx-auto flex max-w-4xl flex-col items-start gap-3 px-4 py-16 sm:px-6 lg:px-8">

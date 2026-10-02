@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
+import { CmsPageView } from "@/components/content/CmsPageView";
+import { pageMetadata } from "@/sanity/lib/content";
 import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "Custom Quran — B2B",
-};
 
 // Positioning copy below is taken directly from the real qurancustom.com
 // (the actual B2B sub-brand site, verified 2026-09-16) — not invented.
@@ -16,7 +14,7 @@ const segments = [
   { label: "Portofolio", href: "/custom-quran/b2b/portofolio" },
 ];
 
-export default function CustomQuranB2BPage() {
+function CustomQuranB2BPageStatic() {
   return (
     <div className="flex flex-col">
       <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 pt-16 sm:px-6 lg:px-8">
@@ -48,4 +46,12 @@ export default function CustomQuranB2BPage() {
       </div>
     </div>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return pageMetadata("custom-quran-b2b", "Custom Quran — B2B");
+}
+
+export default function CustomQuranB2BPage() {
+  return <CmsPageView slug="custom-quran-b2b" fallback={<CustomQuranB2BPageStatic />} />;
 }

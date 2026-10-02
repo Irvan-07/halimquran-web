@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { PagePlaceholder } from "@/components/layout/PagePlaceholder";
+import { CmsPageView } from "@/components/content/CmsPageView";
+import { pageMetadata } from "@/sanity/lib/content";
 
-export const metadata: Metadata = {
-  title: "Custom Quran — Sekolah / Pesantren",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return pageMetadata("custom-quran-sekolah-pesantren", "Custom Quran — Sekolah / Pesantren");
+}
 
 export default function SekolahPesantrenPage() {
   return (
-    <PagePlaceholder
-      title="Sekolah / Pesantren"
-      description="Halaman Custom Quran untuk sekolah dan pesantren masih dalam pengembangan."
+    <CmsPageView
+      slug="custom-quran-sekolah-pesantren"
+      fallbackTitle="Sekolah / Pesantren"
+      fallbackDescription="Halaman Custom Quran untuk sekolah dan pesantren masih dalam pengembangan."
     />
   );
 }

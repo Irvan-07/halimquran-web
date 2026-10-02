@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
+import { CmsPageView } from "@/components/content/CmsPageView";
+import { pageMetadata } from "@/sanity/lib/content";
 import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "Media",
-};
 
 // On the live site, every "Media" sub-item is a dead link (href="/") except
 // "Artikel Lainnya", which points to the real blog (verified 2026-09-17).
@@ -24,7 +22,7 @@ const mediaTopics = [
   "Press Release",
 ];
 
-export default function MediaPage() {
+function MediaPageStatic() {
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-4 px-4 py-24 sm:px-6 lg:px-8">
       <h1 className="font-heading text-3xl font-semibold text-foreground">
@@ -52,4 +50,12 @@ export default function MediaPage() {
       </div>
     </div>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return pageMetadata("media", "Media");
+}
+
+export default function MediaPage() {
+  return <CmsPageView slug="media" fallback={<MediaPageStatic />} />;
 }

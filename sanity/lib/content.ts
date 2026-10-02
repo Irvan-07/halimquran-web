@@ -1,4 +1,5 @@
 import type { PortableTextBlock } from "next-sanity";
+import type { Metadata } from "next";
 import { sanityClient } from "./client";
 
 // Published content is public-read, so these run with the plain CDN client.
@@ -57,4 +58,10 @@ export async function getPage(slug: string): Promise<CmsPage | null> {
     { slug },
     OPTIONS,
   );
+}
+
+/** Title/description from the Sanity page when published, else the static fallback title. */
+export async function pageMetadata(slug: string, fallbackTitle: string): Promise<Metadata> {
+  const page = await getPage(slug).catch(() => null);
+  return { title: page?.title ?? fallbackTitle, description: page?.description };
 }

@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { PagePlaceholder } from "@/components/layout/PagePlaceholder";
+import { CmsPageView } from "@/components/content/CmsPageView";
+import { pageMetadata } from "@/sanity/lib/content";
 
-export const metadata: Metadata = {
-  title: "Custom Quran — Corporate / UMKM",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return pageMetadata("custom-quran-corporate-umkm", "Custom Quran — Corporate / UMKM");
+}
 
 export default function CorporateUmkmPage() {
   return (
-    <PagePlaceholder
-      title="Corporate / UMKM"
-      description="Halaman Custom Quran untuk corporate dan UMKM masih dalam pengembangan."
+    <CmsPageView
+      slug="custom-quran-corporate-umkm"
+      fallbackTitle="Corporate / UMKM"
+      fallbackDescription="Halaman Custom Quran untuk corporate dan UMKM masih dalam pengembangan."
     />
   );
 }

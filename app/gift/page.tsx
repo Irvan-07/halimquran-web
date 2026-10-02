@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CmsIntro } from "@/components/content/CmsPageView";
 import { CategoryTabs } from "@/components/product/CategoryTabs";
 import { ProductGridWithSort } from "@/components/product/ProductGridWithSort";
 import { mockProducts } from "@/lib/mock-data/products";
@@ -16,6 +17,7 @@ export default function GiftPage() {
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-12 sm:px-6 lg:px-8">
+      <CmsIntro slug="gift" />
       <div className="flex flex-col gap-2">
         <h1 className="font-heading text-3xl font-semibold text-foreground">
           Gift & Souvenir
