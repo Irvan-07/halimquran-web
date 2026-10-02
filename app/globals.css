@@ -140,3 +140,23 @@
     @apply font-heading;
     }
 }
+
+/* Theme: social commerce (gaya TikTok Shop). Active when NEXT_PUBLIC_THEME=tiktok. */
+[data-theme="tiktok"] {
+    --primary: #FE2C55;
+    --primary-foreground: #FFFFFF;
+    --primary-dark: #D91B42;
+    --ring: #FE2C55;
+    --foreground: #161823;
+    --muted-foreground: #8A8B91;
+    --secondary: #F1F1F2;
+    --muted: #F1F1F2;
+    --accent: #F1F1F2;
+    --border: #ECECEE;
+    --input: #ECECEE;
+    --radius: 0.5rem;
+}
+
+[data-theme="tiktok"] body {
+    background: #F5F5F6;
+}
