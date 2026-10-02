@@ -17,6 +17,8 @@ interface OrderDetail
   chat_message?: string;
   pg_payment_info?: Record<string, unknown>;
   unique_code_discount?: string | number;
+  shipment_receipt?: string | null;
+  shipment_status_history?: { at: string; status: string }[];
   store?: {
     payment_accounts?: {
       account_holder: string;
@@ -28,6 +30,19 @@ interface OrderDetail
   orderlines: { quantity: number; product_name: string; variant_price: string | number }[];
   courier_service?: { name: string; courier?: { name: string } };
 }
+
+const orderStatusLabel: Record<string, string> = {
+  draft: "Menunggu konfirmasi",
+  pending: "Menunggu pembayaran / konfirmasi",
+  confirmed: "Pesanan dikonfirmasi",
+  in_process: "Sedang diproses",
+  ready: "Siap dikirim",
+  shipped: "Dalam pengiriman",
+  completed: "Selesai",
+  canceled: "Dibatalkan",
+  rts: "Dikembalikan ke penjual",
+  closed: "Ditutup",
+};
 
 const statusLabel: Record<string, string> = {
   unpaid: "Menunggu pembayaran",
@@ -88,7 +103,8 @@ export function OrderStatus({ secretSlug }: { secretSlug: string }) {
   const total = Number(order.gross_revenue);
   const account = order.store?.payment_accounts?.find((a) => a.method === "bank_transfer");
   const link = payLink(order.pg_payment_info);
-  const unpaid = order.payment_status === "unpaid";
+  const inactive = ["canceled", "closed", "rts"].includes(order.status ?? "");
+  const unpaid = order.payment_status === "unpaid" && !inactive;
   const whatsapp = order.handler_phone
     ? `https://wa.me/${order.handler_phone}?text=${order.chat_message ?? ""}`
     : null;
@@ -96,10 +112,12 @@ export function OrderStatus({ secretSlug }: { secretSlug: string }) {
   return (
     <div className="mx-auto flex max-w-xl flex-col gap-6 px-4 py-10 sm:px-6">
       <div>
-        <h1 className="font-heading text-2xl font-semibold text-foreground">Terima kasih, pesanan diterima</h1>
+        <h1 className="font-heading text-2xl font-semibold text-foreground">
+          {inactive ? "Detail Pesanan" : "Terima kasih, pesanan diterima"}
+        </h1>
         <p className="mt-1 text-sm text-muted-foreground">
           No. pesanan <strong className="text-foreground">{order.order_id}</strong> ·{" "}
-          {statusLabel[order.payment_status] ?? order.payment_status}
+          {inactive ? (orderStatusLabel[order.status ?? ""] ?? order.status) : (statusLabel[order.payment_status] ?? order.payment_status)}
         </p>
       </div>
 
@@ -156,6 +174,30 @@ export function OrderStatus({ secretSlug }: { secretSlug: string }) {
           )}
         </section>
       )}
+
+      <section className="flex flex-col gap-2 rounded-lg border border-border p-4 text-sm">
+        <h2 className="text-base font-bold text-foreground">Status Pesanan</h2>
+        <p>
+          <strong className="text-foreground">
+            {orderStatusLabel[order.status ?? ""] ?? order.status ?? "—"}
+          </strong>
+        </p>
+        {order.shipment_receipt && (
+          <p className="text-muted-foreground">
+            No. resi{order.courier_service ? ` (${order.courier_service.courier?.name ?? ""} ${order.courier_service.name})` : ""}:{" "}
+            <strong className="text-foreground">{order.shipment_receipt}</strong>
+          </p>
+        )}
+        {order.shipment_status_history && order.shipment_status_history.length > 0 && (
+          <ul className="flex flex-col gap-1 text-xs text-muted-foreground">
+            {[...order.shipment_status_history].reverse().map((h, i) => (
+              <li key={i}>
+                {new Date(h.at).toLocaleString("id-ID", { dateStyle: "medium", timeStyle: "short" })} · {h.status}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
 
       <section className="flex flex-col gap-2 rounded-lg border border-border p-4 text-sm">
         <h2 className="text-base font-bold text-foreground">Rincian Pesanan</h2>

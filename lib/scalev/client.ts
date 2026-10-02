@@ -39,8 +39,9 @@ async function businessRequest<T>(path: string, init?: RequestInit): Promise<T> 
   const res = await fetch(`${API_BASE}${path}`, {
     ...init,
     // Revalidate every 60s so the catalog stays fresh without hitting the
-    // real API on every single page request.
-    next: { revalidate: 60 },
+    // real API on every single page request. Callers that must never see
+    // cached data (order lookups) pass `cache: "no-store"` instead.
+    ...(init?.cache === "no-store" ? {} : { next: { revalidate: 60 } }),
     headers: {
       Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
@@ -75,6 +76,20 @@ export const scalev = {
   /** GET /v3/products/{id} — business route, requires product:read scope. Variants include real pricing. */
   async getProduct(productId: number | string): Promise<ScalevProductDetail> {
     return businessRequest(`/v3/products/${productId}`);
+  },
+
+  /**
+   * GET /v3/orders?order_id=... — requires order:list. Exact match on the short
+   * order number (e.g. 261002QKOVIWM). Never cached. Returns only the fields the
+   * tracking lookup needs.
+   */
+  async findOrderByNumber(
+    orderNumber: string,
+  ): Promise<{ order_id: string; secret_slug: string; customer?: { phone?: string } } | null> {
+    const res = await businessRequest<{
+      data: { order_id: string; secret_slug: string; customer?: { phone?: string } }[];
+    }>(`/v3/orders?order_id=${encodeURIComponent(orderNumber)}`, { cache: "no-store" });
+    return res.data.find((o) => o.order_id === orderNumber) ?? null;
   },
 
   /** GET /v3/orders/{id} — business route, requires order:read scope. */
