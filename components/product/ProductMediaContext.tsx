@@ -14,6 +14,9 @@ interface ProductMediaState {
   gallery: string[];
   selectedImage: string;
   setSelectedImage: (src: string) => void;
+  /** Scalev variant id of the color the buyer picked in the "Warna" section (null until they pick one). */
+  selectedVariantId: number | null;
+  setSelectedVariantId: (id: number | null) => void;
 }
 
 const ProductMediaContext = createContext<ProductMediaState | null>(null);
@@ -30,9 +33,10 @@ export function ProductMediaProvider({
       ? product.galleryImages
       : (product.colorVariants?.map((v) => v.imageUrl) ?? (product.imageUrl ? [product.imageUrl] : []));
   const [selectedImage, setSelectedImage] = useState(gallery[0] ?? product.imageUrl ?? "");
+  const [selectedVariantId, setSelectedVariantId] = useState<number | null>(null);
 
   return (
-    <ProductMediaContext.Provider value={{ gallery, selectedImage, setSelectedImage }}>
+    <ProductMediaContext.Provider value={{ gallery, selectedImage, setSelectedImage, selectedVariantId, setSelectedVariantId }}>
       {children}
     </ProductMediaContext.Provider>
   );

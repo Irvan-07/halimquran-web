@@ -5,6 +5,10 @@ export interface CartItem {
   cartItemId: string;
   productId: string;
   slug: string;
+  /** Scalev variant to buy — absent only when the catalog fell back to mock data (Scalev unreachable). */
+  variantId?: number;
+  /** Human-readable color name for the chosen variant. */
+  colorName?: string;
   category: string;
   name: string;
   price: number;

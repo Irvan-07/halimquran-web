@@ -24,7 +24,7 @@ interface CartContextValue {
 const CartContext = createContext<CartContextValue | null>(null);
 
 function buildCartItemId(item: Omit<CartItem, "cartItemId">): string {
-  return [item.slug, item.customization, item.customName ?? ""].join("::");
+  return [item.slug, item.variantId ?? "", item.customization, item.customName ?? ""].join("::");
 }
 
 // Cart lives only in the browser for now — there's no backend yet.

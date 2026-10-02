@@ -165,6 +165,47 @@ export interface ScalevPublicCheckoutRequest {
   notes?: string;
 }
 
+export interface ScalevStorefrontPaymentMethod {
+  code: string;
+  label: string;
+  enabled: boolean;
+  requires_redirect: boolean;
+}
+
+export interface ScalevStorefrontLocation {
+  id: number;
+  subdistrict_name: string;
+  city_name: string;
+  province_name: string;
+  display: string;
+}
+
+export interface ScalevShippingOption {
+  courier_service_id: number;
+  courier_code: string;
+  service_code: string;
+  name: string;
+  cost: number;
+  etd: string;
+  is_cod: boolean;
+  warehouse_unique_id: string;
+  courier_aggregator_code: string | null;
+}
+
+export interface ScalevCheckoutDestination {
+  location_id: number;
+  postal_code: string;
+}
+
+export interface ScalevCheckoutSummary {
+  product_price: string;
+  shipping_cost: string;
+  other_income?: string;
+  other_income_name?: string;
+  service_fee?: string;
+  gross_revenue: string;
+}
+
 export interface ScalevPublicOrder {
   id: string;
   order_id: string;
@@ -175,8 +216,11 @@ export interface ScalevPublicOrder {
   product_price: number;
   shipping_cost: number;
   payment_method: string;
-  /** Redirect the customer here to complete payment. */
-  payment_url: string;
+  /** Server-selected next destination after checkout (payment page, WhatsApp, etc). Always prefer this over `payment_url`. */
+  redirect_url?: string;
+  public_order_url?: string;
+  /** Deprecated by Scalev — kept only so old shapes still type-check. */
+  payment_url?: string;
   orderlines: unknown[];
   customer: unknown;
   destination_address: unknown;

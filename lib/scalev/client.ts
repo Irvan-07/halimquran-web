@@ -56,7 +56,20 @@ export const scalev = {
    * NOTE: variants here have NO price — use getProduct() for a priced view.
    */
   async listProducts(): Promise<{ data: ScalevProduct[] }> {
-    return businessRequest("/v3/products");
+    // Cursor-paginated, 25 per page regardless of requested size. The cursor
+    // query param is `next_cursor` (not `cursor` — that one is silently
+    // ignored and returns page 1 forever). Bounded loop as a safety net.
+    const data: ScalevProduct[] = [];
+    let cursor: string | null = null;
+    for (let page = 0; page < 20; page++) {
+      const qs: string = cursor ? `?next_cursor=${encodeURIComponent(cursor)}` : "";
+      const res: { data: ScalevProduct[]; has_next?: boolean; next_cursor?: string | null } =
+        await businessRequest(`/v3/products${qs}`);
+      data.push(...res.data);
+      if (!res.has_next || !res.next_cursor) break;
+      cursor = res.next_cursor;
+    }
+    return { data };
   },
 
   /** GET /v3/products/{id} — business route, requires product:read scope. Variants include real pricing. */

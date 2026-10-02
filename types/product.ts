@@ -38,7 +38,7 @@ export interface Product {
   /** Indonesian color names, parallel to `colors` (same index), shown on the PDP's "Warna" section for products with no per-variant photo. */
   colorNames?: string[];
   /** Color swatches paired with that variant's own real photo — lets the PDP gallery switch image on color select, like the live site. Only set where we actually have a per-variant photo (currently Scalev-sourced products, plus the PDP template product); other mock products show `colors` as plain swatches with no image swap. */
-  colorVariants?: { hex: string; name: string; imageUrl: string }[];
+  colorVariants?: { hex: string; name: string; imageUrl: string; /** Scalev variant id this color maps to — needed to put the right SKU in the cart/checkout. */ variantId?: number }[];
   /** The PDP gallery's own thumbnail strip — main shot, lifestyle/detail photos, and marketing infographics (size chart etc.), in display order. Separate from `colorVariants`, which drives the "Warna" section further down the page. Only set where we've scraped a product's real gallery (currently just the PDP template product). */
   galleryImages?: string[];
   /** Shown as "Cocok untuk Wakaf" on the live site's Wakaf page. */
@@ -66,6 +66,8 @@ export interface Product {
     /** Photo/video the reviewer attached to their review (real, downloaded from the source listing) — shown as a thumbnail strip under the review text. */
     media?: { type: "image" | "video"; src: string }[];
   }[];
+  /** Scalev variant id to purchase when the product has no per-color variants (single-variant products). */
+  variantId?: number;
   /** "mock" (lib/mock-data) or "scalev" (live API) — which source this record came from. */
   source?: "mock" | "scalev";
 }

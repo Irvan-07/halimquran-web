@@ -26,30 +26,58 @@ import { mockProducts } from "@/lib/mock-data/products";
 const SIZE_PATTERN = /\b(A4|A5|A6|A7|B5|B7)\b/i;
 
 // Best-effort Indonesian color name -> hex, for the swatch UI. Approximate,
-// not pixel-sampled — same caveat as the earlier mock `colors` data.
+// not pixel-sampled. Two-tone names ("Biru Kuning", "Navy Orange") resolve
+// by their first word; anything still unknown falls back to neutral grey so
+// a variant is never silently dropped from the picker.
 const COLOR_NAME_TO_HEX: Record<string, string> = {
   cream: "#E8DCC4",
+  "light cream": "#F3EBD9",
+  biru: "#2563EB",
   "biru tua": "#1E3A5F",
+  "biru muda": "#7CB7F2",
   navy: "#1E3A5F",
   maroon: "#7B2D26",
+  merah: "#B91C1C",
   hitam: "#111827",
   black: "#111827",
   beige: "#C9A876",
-  pink: "#C2417A",
+  pink: "#EC4899",
+  "dusty pink": "#D8A7B1",
   coklat: "#8B5E34",
+  cokelat: "#8B5E34",
+  "coklat tua": "#5C3A21",
   brown: "#8B5E34",
   hijau: "#0F7A5C",
+  "hijau tua": "#0B4F3A",
   green: "#0F7A5C",
   ungu: "#8E7CC3",
+  lilac: "#8E7CC3",
   putih: "#F5F5F0",
   white: "#F5F5F0",
   abu: "#6B7280",
   grey: "#6B7280",
   gray: "#6B7280",
+  kuning: "#E8C547",
+  gold: "#C9A227",
+  emas: "#C9A227",
+  perak: "#B8BCC4",
+  tosca: "#14B8A6",
+  mint: "#8FD9B6",
+  peach: "#F4A688",
+  orange: "#F97316",
+  lime: "#A3C940",
 };
 
-function colorNameToHex(name: string): string | undefined {
-  return COLOR_NAME_TO_HEX[name.trim().toLowerCase()];
+const FALLBACK_HEX = "#9CA3AF";
+
+function colorNameToHex(name: string): string {
+  const key = name.trim().toLowerCase().replace(/[\s-]+/g, " ");
+  const compact = key.replace(/^abu abu$/, "abu");
+  return (
+    COLOR_NAME_TO_HEX[compact] ??
+    COLOR_NAME_TO_HEX[compact.split(" ")[0]] ??
+    FALLBACK_HEX
+  );
 }
 
 function detectSize(name: string): ProductSize | undefined {
@@ -65,34 +93,28 @@ export function scalevProductToProduct(detail: ScalevProductDetail): Product {
   const primary = variants[0];
 
   const isColorVariant = detail.option1_name?.toLowerCase().includes("warna");
-  const colors = isColorVariant
-    ? variants
-        .map((v) => (v.option1_value ? colorNameToHex(v.option1_value) : undefined))
-        .filter((c): c is string => Boolean(c))
-    : undefined;
-  // Pair each variant's own hex with its own photo, so the PDP gallery can
-  // swap image on color select instead of just tinting a swatch dot.
   const colorVariants = isColorVariant
     ? variants
-        .map((v) => {
-          const hex = v.option1_value ? colorNameToHex(v.option1_value) : undefined;
-          const imageUrl = v.images?.[0];
-          return hex && imageUrl && v.option1_value
-            ? { hex, name: v.option1_value, imageUrl }
-            : undefined;
-        })
-        .filter((c): c is { hex: string; name: string; imageUrl: string } => Boolean(c))
+        .filter((v) => v.option1_value && v.images?.[0])
+        .map((v) => ({
+          hex: colorNameToHex(v.option1_value!),
+          name: v.option1_value!,
+          imageUrl: v.images[0],
+          variantId: v.id,
+        }))
     : undefined;
+  const colors = colorVariants?.map((c) => c.hex);
 
   return {
     id: String(detail.id),
     slug: detail.slug,
     name: detail.name.trim(),
-    price: primary?.price ?? 0,
+    price: Number(primary?.price ?? 0),
     category: FALLBACK_CATEGORY,
     size: detectSize(detail.name),
     imageUrl: detail.images?.[0] ?? detail.featured_image_url,
     source: "scalev",
+    ...(isColorVariant ? {} : { variantId: primary?.id }),
     ...(colors && colors.length > 0 ? { colors } : {}),
     ...(colorVariants && colorVariants.length > 0 ? { colorVariants } : {}),
   };

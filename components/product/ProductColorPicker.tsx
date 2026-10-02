@@ -12,7 +12,7 @@ import type { Product } from "@/types/product";
 // thumbnail does. Falls back to plain color chips (no image swap) for
 // products we only have flat hex colors for, no per-variant photo.
 export function ProductColorPicker({ product }: { product: Product }) {
-  const { selectedImage, setSelectedImage } = useProductMedia();
+  const { setSelectedImage, selectedVariantId, setSelectedVariantId } = useProductMedia();
   const [plainSelected, setPlainSelected] = useState(0);
 
   if (product.colorVariants && product.colorVariants.length > 0) {
@@ -24,12 +24,15 @@ export function ProductColorPicker({ product }: { product: Product }) {
             <button
               key={variant.hex + i}
               type="button"
-              onClick={() => setSelectedImage(variant.imageUrl)}
+              onClick={() => {
+                setSelectedImage(variant.imageUrl);
+                setSelectedVariantId(variant.variantId ?? null);
+              }}
               className="flex flex-col items-center gap-1"
             >
               <span
                 className={`relative block aspect-square w-full overflow-hidden rounded-md border-2 ${
-                  variant.imageUrl === selectedImage ? "border-primary" : "border-border"
+                  variant.variantId !== undefined && variant.variantId === selectedVariantId ? "border-primary" : "border-border"
                 }`}
               >
                 <Image src={variant.imageUrl} alt={variant.name} fill sizes="120px" className="object-cover" />

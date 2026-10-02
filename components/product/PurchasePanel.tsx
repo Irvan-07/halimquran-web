@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useCart } from "@/components/cart/CartProvider";
+import { useProductMedia } from "@/components/product/ProductMediaContext";
 import { track } from "@/lib/analytics";
 import type { Product } from "@/types/product";
 import type { CustomizationOption } from "@/types/cart";
@@ -28,6 +29,9 @@ interface PurchasePanelProps {
 export function PurchasePanel({ product }: PurchasePanelProps) {
   const router = useRouter();
   const { addItem } = useCart();
+  const { selectedVariantId } = useProductMedia();
+  const hasColorChoice = (product.colorVariants?.length ?? 0) > 0;
+  const selectedColor = product.colorVariants?.find((v) => v.variantId === selectedVariantId);
   const [customization, setCustomization] =
     useState<CustomizationOption | null>(null);
   const [customName, setCustomName] = useState("");
@@ -39,6 +43,8 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
     return {
       productId: product.id,
       slug: product.slug,
+      variantId: hasColorChoice ? selectedColor?.variantId : product.variantId,
+      colorName: selectedColor?.name,
       category: product.category,
       name: product.name,
       price: product.price,
@@ -50,6 +56,10 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
   }
 
   function validate(): boolean {
+    if (hasColorChoice && !selectedColor) {
+      toast.error("Pilih warna terlebih dahulu");
+      return false;
+    }
     if (!customization) {
       toast.error("Pilih salah satu opsi terlebih dahulu");
       return false;

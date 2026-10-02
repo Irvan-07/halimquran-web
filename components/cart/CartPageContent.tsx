@@ -73,6 +73,7 @@ export function CartPageContent() {
                   {item.name}
                 </h3>
                 <p className="text-xs text-muted-foreground">
+                  {item.colorName ? `${item.colorName} · ` : ""}
                   {customizationLabels[item.customization]}
                   {item.size ? ` · Ukuran ${item.size}` : ""}
                   {item.customName ? ` · Nama: "${item.customName}"` : ""}

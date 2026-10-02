@@ -1,2 +1,2 @@
-// Checkout handoff components — deferred to a later phase (native Scalev checkout).
-export {};
+// Checkout UI lives in CheckoutForm.tsx.
+export { CheckoutForm } from "./CheckoutForm";
