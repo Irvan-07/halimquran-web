@@ -1,6 +1,26 @@
 import type { NextConfig } from "next";
 
+// Old Plugo category URLs (/categories/{id}/{slug}) -> new category pages.
+const legacyCategoryRedirects = [
+  ["40066", "quran-harian"],
+  ["40090", "quran-hafalan"],
+  ["21390", "quran-terjemah"],
+  ["40088", "quran-tajwid"],
+  ["40091", "quran-tematik"],
+  ["40093", "quran-lainnya"],
+].map(([id, slug]) => ({
+  source: `/categories/${id}/:rest*`,
+  destination: `/produk/${slug}`,
+  permanent: true,
+}));
+
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      ...legacyCategoryRedirects,
+      { source: "/categories/:path*", destination: "/produk", permanent: true },
+    ];
+  },
   images: {
     remotePatterns: [
       {
