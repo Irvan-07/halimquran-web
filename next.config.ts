@@ -23,6 +23,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "s3-ap-southeast-1.amazonaws.com",
       },
+      {
+        // A handful of products (e.g. Al Halim New Fancy A5 Resleting)
+        // have no live halimquran.com PDP any more but are still sold on
+        // this shop's Shopee listing — swatch images sourced from there
+        // instead (same migration, same reasoning).
+        protocol: "https",
+        hostname: "down-id.img.susercontent.com",
+      },
     ],
   },
 };
