@@ -315,7 +315,11 @@ export function CheckoutForm() {
         ) : shippingLoading && shippingOptions.length === 0 ? (
           <p className="text-sm text-muted-foreground">Memuat ongkos kirim…</p>
         ) : shippingOptions.length === 0 ? (
-          <p className="text-sm text-muted-foreground">Tidak ada layanan pengiriman untuk tujuan ini.</p>
+          <p className="text-sm text-muted-foreground">
+            {paymentMethod === "cod"
+              ? "COD tidak tersedia untuk tujuan ini. Pilih metode pembayaran lain."
+              : "Tidak ada layanan pengiriman untuk tujuan ini."}
+          </p>
         ) : (
           <div className="flex flex-col gap-2">
             {shippingOptions.map((o) => (

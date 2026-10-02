@@ -35,11 +35,12 @@ const statusLabel: Record<string, string> = {
   settled: "Sudah dibayar",
 };
 
-function paymentLinks(info: Record<string, unknown> | undefined): { label: string; url: string }[] {
-  if (!info) return [];
-  return Object.entries(info)
-    .filter(([, v]) => typeof v === "string" && /^https?:\/\//.test(v as string))
-    .map(([k, v]) => ({ label: k.replace(/_/g, " "), url: v as string }));
+function payLink(info: Record<string, unknown> | undefined): string | null {
+  for (const key of ["checkout_url", "payment_url"]) {
+    const v = info?.[key];
+    if (typeof v === "string" && /^https?:\/\//.test(v)) return v;
+  }
+  return null;
 }
 
 export function OrderStatus({ secretSlug }: { secretSlug: string }) {
@@ -86,7 +87,7 @@ export function OrderStatus({ secretSlug }: { secretSlug: string }) {
 
   const total = Number(order.gross_revenue);
   const account = order.store?.payment_accounts?.find((a) => a.method === "bank_transfer");
-  const links = paymentLinks(order.pg_payment_info);
+  const link = payLink(order.pg_payment_info);
   const unpaid = order.payment_status === "unpaid";
   const whatsapp = order.handler_phone
     ? `https://wa.me/${order.handler_phone}?text=${order.chat_message ?? ""}`
@@ -126,13 +127,21 @@ export function OrderStatus({ secretSlug }: { secretSlug: string }) {
                 Scan dengan aplikasi bank atau e-wallet apa pun yang mendukung QRIS.
               </span>
             </div>
-          ) : links.length > 0 ? (
+          ) : link ? (
+            <Button asChild>
+              <a href={link}>Lanjut Bayar</a>
+            </Button>
+          ) : order.payment_method === "ovo" ? (
             <div className="flex flex-col gap-2">
-              {links.map((l) => (
-                <Button key={l.url} asChild>
-                  <a href={l.url}>Lanjut bayar ({l.label})</a>
+              <p>
+                Buka aplikasi OVO dan setujui permintaan pembayaran yang dikirim ke nomor yang Anda
+                daftarkan. Belum muncul? Lanjutkan lewat halaman pembayaran di bawah.
+              </p>
+              {order.public_order_url && (
+                <Button asChild variant="outline">
+                  <a href={order.public_order_url}>Buka halaman pembayaran</a>
                 </Button>
-              ))}
+              )}
             </div>
           ) : order.public_order_url ? (
             <Button asChild>
