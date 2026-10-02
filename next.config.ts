@@ -44,6 +44,11 @@ const nextConfig: NextConfig = {
         hostname: "s3-ap-southeast-1.amazonaws.com",
       },
       {
+        // Images uploaded through the Sanity Studio (articles, pages).
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+      {
         // A handful of products (e.g. Al Halim New Fancy A5 Resleting)
         // have no live halimquran.com PDP any more but are still sold on
         // this shop's Shopee listing — swatch images sourced from there
