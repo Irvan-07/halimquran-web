@@ -1382,7 +1382,15 @@ export const mockProducts: Product[] = [
     price: 50000,
     category: "quran-terjemah",
     size: "B7",
+    customNameEligible: true,
     imageUrl: "/products/al-quran-terjemah-al-halim-rubu-b7-pocket-series.jpg",
+    weightGrams: 245,
+    // No rating/reviews: this product has no listing on this shop's
+    // Shopee catalog (searched 2 Oct 2026) and halimquran.com shows no
+    // rating widget for it either — omitted rather than invented.
+    // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
+    description:
+      "Pengen baca Al-Qur'an setiap waktu tapi suka repot bawa Al-Qur'annya? Nyari yang pas di kantong? Pas banget, kamu bisa coba pakai Al-Qur'an Terjemah Al-Halim Rubu' QPP Halim Qur'an, covernya kasual dan bagus, cocok untuk siapa saja. Beratnya hanya 245gr, ringan dibawa ke mana saja, bisa disimpan di saku. Apa sih yang istimewa dari Al-Qur'an ini?\n\nSpesifikasi:\n- Ukuran B7 (9 x 12,5 cm)\n- Kertas QPP 50gr\n- Berat 245gr\n- Tebal 616 halaman\n\nFitur cover:\n- Desain cover kasual. Cocok untuk siapa saja.\n- Tersedia dalam 7 pilihan warna.\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n\nDetail material:\n- Menggunakan kertas QPP 50gr dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu lama.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dilengkapi terjemah standar Kemenag RI.\n- Dilengkapi tema-tema pokok bahasan sehingga memudahkan kamu untuk memahami makna ayat yang dibaca.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi penjelasan adab dan fadhilah membaca Al-Qur'an. Ringkas dan mudah dipahami.\n- Dilengkapi dengan doa sujud tilawah di bagian pembatas, membantu kamu selalu ingat doa penting ini.\n- Dilengkapi indeks juz yang memudahkan kamu menemukan juz atau halaman tertentu.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
   },
   {
     id: "34",
@@ -1391,7 +1399,20 @@ export const mockProducts: Product[] = [
     price: 43000,
     category: "quran-terjemah",
     size: "B7",
+    customNameEligible: true,
     imageUrl: "/products/al-quran-terjemah-al-halim-b7-rubu-hvs-resleting.jpg",
+    weightGrams: 270,
+    // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
+    description:
+      "Pengen baca Al-Qur'an setiap waktu tapi suka repot bawa Al-Qur'annya? Nyari yang ringan dan mudah dibawa? Kamu sudah menemukan solusinya, Al-Qur'an Terjemah Al-Halim resleting HVS, cocok untuk siapa saja. Apa sih yang istimewa dari Al-Qur'an ini?\n\nSpesifikasi:\n- Ukuran B7 (9 x 12,5 cm)\n- Kertas HVS 60gr\n- Berat 270gr\n- Tebal 616 halaman\n\nFitur cover:\n- Desain cover kasual. Cocok untuk siapa saja.\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n- Tersedia dalam 8 pilihan warna.\n\nDetail material:\n- Cover terbuat dari kulit sintetis bottega yang tebal dan berkualitas, membuat warna cover lebih kuat dan tidak mudah pudar. Cover dilengkapi foil silver yang menambah kesan mewah pada cover.\n- Resleting berbahan metal, sehingga lebih kokoh dan aman, serta memiliki gigitan resleting yang lebih kuat. Metal Zipper memberi kesan mahal dan eksklusif pada Al-Qur'an.\n- Setiap lembar Al-Qur'an dicetak menggunakan kertas HVS 60gr.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dilengkapi terjemah standar Kemenag RI.\n- Dilengkapi tema-tema pokok bahasan sehingga memudahkan kamu untuk memahami makna ayat yang dibaca.\n- Dicetak dengan khat super jelas, sangat nyaman dibaca.\n- Dilengkapi penjelasan adab dan fadhilah membaca Al-Qur'an. Ringkas dan mudah dipahami.\n- Dilengkapi dengan doa sujud tilawah di bagian pembatas, membantu kamu selalu ingat doa penting ini.\n- Dilengkapi indeks juz yang memudahkan kamu menemukan juz atau halaman tertentu.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
+    // Real testimonials shown directly on this product's halimquran.com
+    // PDP ("Galeri Testimoni" section), read verbatim 2 Oct 2026. No
+    // star rating shown there, so rating/ratingCount are omitted.
+    reviews: [
+      { author: "raelygs", rating: 5, text: "Tulisan nya jelas, ukuran nya pas, kertas dan cover nya bagus, gak nyesel pesen disini buat seserahan. Makasih seller sukses selalu", date: "20 Jan 2024", reviewSource: "halimquran.com" },
+      { author: "f*****i", rating: 5, text: "Kualitas produk baik, respon penjual baik, pengiriman cepat dan aman", date: "17 Mei 2023", reviewSource: "halimquran.com" },
+      { author: "s*****d", rating: 5, text: "Alhamdulillah aku kira bakalan lama ternyata cepet jugaaa MasyaAllaah Allahumma baariik, semogaa amalanku diterima dan jadi pahala untuk sellernya semua suksess selalu, Alqurannya gemeccc cantik gemesin", date: "1 Mar 2024", reviewSource: "halimquran.com" },
+    ],
   },
   {
     id: "35",
@@ -1400,6 +1421,15 @@ export const mockProducts: Product[] = [
     price: 55000,
     category: "quran-terjemah",
     size: "A6",
+    customNameEligible: true,
+    // Shopee's own "Terjual" figure showed as "1RB+" (rounded) — set
+    // directly per this listing's own page (2 Oct 2026). No rating: this
+    // listing shows "Belum Ada Penilaian" (no ratings yet).
+    soldCount: 1000,
+    weightGrams: 315,
+    // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
+    description:
+      "Gak betah lama-lama baca Al-Qur'an? Seringnya suka ngantuk dan bahkan ketiduran? Sayang banget ya, padahal pahala baca Al-Qur'an itu sangat besar. Kelelahan mata saat membaca Al-Qur'an bisa disebabkan oleh warna kertas yang tidak ramah bagi mata. Solusinya, kamu bisa pakai Al-Qur'an dengan bahan kertas Qur'an Paper Premium (QPP) dengan warna Yellowish yang ramah di mata. Mata kamu tidak akan lelah walau membaca Al-Qur'an dalam waktu lama.\n\nSeperti Al-Qur'an Terjemah Al-Halim resleting Halim Qur'an, kasual dan bagus, cocok untuk siapa saja. Apa sih yang istimewa dari Al-Qur'an ini?\n\nSpesifikasi:\n- Ukuran A6 (10,5 x 14,5 cm)\n- Kertas QPP 50gr\n- Berat 315gr\n- Tebal 616 halaman\n\nFitur cover:\n- Desain cover kasual. Cocok untuk siapa saja.\n- Tersedia dalam 6 pilihan warna.\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n\nMaterial cover:\n- Cover terbuat dari kulit sintetis yang tebal dan berkualitas, membuat warna cover lebih kuat dan tidak mudah pudar. Cover dilengkapi foil gold yang menambah kesan mewah pada cover.\n- Resleting berbahan metal, sehingga lebih kokoh dan aman, serta memiliki gigitan resleting yang lebih kuat. Metal Zipper memberi kesan mahal dan eksklusif pada Al-Qur'an.\n\nDetail material:\n- Menggunakan kertas QPP 50gr dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dilengkapi terjemah standar Kemenag RI.\n- Dilengkapi tema-tema pokok bahasan sehingga memudahkan kamu untuk memahami makna ayat yang dibaca.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi penjelasan adab dan fadhilah membaca Al-Qur'an. Ringkas dan mudah dipahami.\n- Dilengkapi dengan doa sujud tilawah di bagian pembatas, membantu kamu selalu ingat doa penting ini.\n- Dilengkapi indeks juz yang memudahkan kamu menemukan juz atau halaman tertentu.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
   },
   {
     id: "36",
