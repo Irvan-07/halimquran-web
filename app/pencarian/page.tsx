@@ -5,6 +5,12 @@ export const metadata: Metadata = {
   title: "Pencarian",
 };
 
-export default function PencarianPage() {
-  return <SearchPageContent />;
+export default async function PencarianPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string | string[] }>;
+}) {
+  const { q } = await searchParams;
+  const initialQuery = (Array.isArray(q) ? q[0] : q) ?? "";
+  return <SearchPageContent initialQuery={initialQuery} />;
 }

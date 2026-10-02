@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Heart, Star } from "lucide-react";
-import { ProductCard } from "@/themes";
+import { ProductCard, ProductGrid } from "@/themes";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductMediaProvider } from "@/components/product/ProductMediaContext";
 import { ProductColorPicker } from "@/components/product/ProductColorPicker";
 import { ProductDescription } from "@/components/product/ProductDescription";
 import { ProductReviews } from "@/components/product/ProductReviews";
 import { PurchasePanel } from "@/components/product/PurchasePanel";
+import { StockBadge } from "@/components/product/StockBadge";
 import { ShippingAreaField } from "@/components/product/ShippingAreaField";
 import { TrackViewItem } from "@/components/tracking";
 import { getMergedCatalog, getMergedProductBySlug } from "@/lib/scalev/catalog";
@@ -99,9 +100,7 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
           {/* Product Info + Purchase Panel */}
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-2">
-              <span className="w-fit rounded bg-destructive px-2 py-0.5 text-xs font-semibold text-white">
-                Ada Stok
-              </span>
+              <StockBadge product={product} />
               <h1 className="font-heading text-lg font-semibold text-foreground">
                 {product.name}
               </h1>
@@ -184,11 +183,11 @@ export default async function ProductDetailPage({ params }: PdpPageProps) {
           <h2 className="font-heading text-lg font-semibold text-foreground">
             Rekomendasi lainnya
           </h2>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          <ProductGrid>
             {related.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
-          </div>
+          </ProductGrid>
         </div>
       )}
     </div>

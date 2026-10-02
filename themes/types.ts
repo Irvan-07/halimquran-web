@@ -1,4 +1,4 @@
-import type { ComponentType } from "react";
+import type { ComponentType, ReactNode } from "react";
 import type { Product } from "@/types/product";
 
 /**
@@ -11,6 +11,8 @@ export interface ThemeSlots {
   Header: ComponentType;
   Footer: ComponentType;
   ProductCard: ComponentType<{ product: Product }>;
+  /** Wrapper for any list of ProductCards — owns the column counts/gaps per breakpoint. */
+  ProductGrid: ComponentType<{ children: ReactNode }>;
 }
 
 export interface Theme {

@@ -140,3 +140,23 @@
     @apply font-heading;
     }
 }
+
+/* Theme: marketplace (gaya Shopee). Active when NEXT_PUBLIC_THEME=shopee. */
+[data-theme="shopee"] {
+    --primary: #EE4D2D;
+    --primary-foreground: #FFFFFF;
+    --primary-dark: #D73211;
+    --ring: #EE4D2D;
+    --foreground: #222222;
+    --muted-foreground: #757575;
+    --secondary: #FAFAFA;
+    --muted: #F5F5F5;
+    --accent: #FFF1EE;
+    --border: #E8E8E8;
+    --input: #E8E8E8;
+    --radius: 0.125rem;
+}
+
+[data-theme="shopee"] body {
+    background: #F5F5F5;
+}

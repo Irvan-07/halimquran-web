@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ProductCard } from "@/themes";
+import { ProductCard, ProductGrid } from "@/themes";
 import { getMergedCatalog } from "@/lib/scalev/catalog";
 import { productCategories } from "@/lib/mock-data/categories";
 
@@ -35,11 +35,11 @@ export default async function ProdukPage() {
         ))}
       </nav>
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+      <ProductGrid>
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
-      </div>
+      </ProductGrid>
     </div>
   );
 }

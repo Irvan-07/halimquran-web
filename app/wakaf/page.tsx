@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { ProductCard } from "@/themes";
+import { ProductCard, ProductGrid } from "@/themes";
 import { CmsIntro } from "@/components/content/CmsPageView";
 import { mockProducts } from "@/lib/mock-data/products";
 
@@ -208,11 +208,11 @@ export default function WakafPage() {
           ingin Anda wakafkan sesuai kebutuhan dan preferensi Anda.
         </p>
         {wakafProducts.length > 0 ? (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          <ProductGrid>
             {wakafProducts.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
-          </div>
+          </ProductGrid>
         ) : (
           <p className="text-sm text-muted-foreground">
             Belum ada produk contoh yang ditandai cocok untuk wakaf.

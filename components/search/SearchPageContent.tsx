@@ -3,15 +3,15 @@
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { ProductCard } from "@/themes";
+import { ProductCard, ProductGrid } from "@/themes";
 import { mockProducts } from "@/lib/mock-data/products";
 
 // "Pencarian Populer" tags are the real ones shown on the live search
 // overlay (verified 2026-09-17): wafa, mawaddah, ta'lim.
 const popularSearches = ["wafa", "mawaddah", "ta'lim"];
 
-export function SearchPageContent() {
-  const [query, setQuery] = useState("");
+export function SearchPageContent({ initialQuery = "" }: { initialQuery?: string }) {
+  const [query, setQuery] = useState(initialQuery);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -58,11 +58,11 @@ export function SearchPageContent() {
             {results.length} Hasil Ditemukan
           </p>
           {results.length > 0 ? (
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            <ProductGrid>
               {results.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}
-            </div>
+            </ProductGrid>
           ) : (
             <p className="text-sm text-muted-foreground">
               Tidak ada produk yang cocok dengan &quot;{query}&quot;.

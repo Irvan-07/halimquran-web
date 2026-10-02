@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ProductCard } from "@/themes";
+import { ProductCard, ProductGrid } from "@/themes";
 import { mockProducts } from "@/lib/mock-data/products";
 
 export const metadata: Metadata = {
@@ -63,11 +63,11 @@ export default function CustomQuranPersonalPage() {
           Produk dengan Layanan Ukir Nama
         </h2>
         {eligibleProducts.length > 0 ? (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          <ProductGrid>
             {eligibleProducts.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
-          </div>
+          </ProductGrid>
         ) : (
           <p className="text-sm text-muted-foreground">
             Belum ada produk contoh dengan layanan ukir nama.
