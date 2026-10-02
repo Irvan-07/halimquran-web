@@ -948,6 +948,16 @@ export const mockProducts: Product[] = [
     price: 75000,
     category: "quran-terjemah",
     size: "A6",
+    customNameEligible: true,
+    weightGrams: 335,
+    // No rating/reviews: this product has no listing on this shop's
+    // Shopee catalog (searched 2 Oct 2026) and halimquran.com shows no
+    // rating widget for it either — omitted rather than invented. No
+    // per-color swatch photos exist on the live PDP either, so every
+    // Scalev variant below reuses the same hero shot.
+    // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
+    description:
+      "Hai, Sahabat Shalihah! Pengen punya Al-Qur'an cantik? Ini dia Al-Qur'an Samara Resleting. Bukan cuma desainnya yang cantik, fiturnya juga menarik. Cocok untuk kamu pakai sendiri, atau kamu hadiahkan kepada orang tercinta. Apa saja keistimewaan Al-Qur'an Samara?\n\nSpesifikasi:\n- Ukuran A6 (10,5 x 14,5 cm)\n- Kertas QPP 50gr\n- Berat 335gr\n- Tebal 656 halaman\n\nFitur cover:\n- Desain cover yang unik dan cantik dengan hiasan renda, eksklusif untuk wanita muslimah.\n- Tersedia dalam 8 pilihan warna.\n\nMaterial cover:\n- Cover terbuat dari kain jacquard dengan motif yang ditenun di atas permukaan kainnya. Kain jacquard dikenal karena kualitas dan karakternya yang ringan dan fleksibel.\n- Cover juga dilengkapi dengan bahan bottega yang menimbulkan warna lebih kuat dan tidak mudah pudar.\n- Renda bordir berbahan katun yang menambah kesan girly pada cover.\n- Terdapat emblem sablon rubber berbahan dasar karet dengan kualitas elastisitas dan kerapatan yang tinggi.\n\nMaterial inner:\n- Menggunakan kertas QPP dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Terjemah standar Kemenag RI.\n- Tanda tajwid berwarna standar Kemenag RI, memudahkan kamu membaca sesuai kaidah yang benar.\n- Dilengkapi indeks juz yang memudahkan kamu mencari juz atau halaman tertentu.\n- Dilengkapi pembahasan lengkap seputar wanita dalam Islam, pengetahuan penting bagi muslimah.\n- Dilengkapi penjelasan adab dan fadhilah membaca Al-Qur'an.\n- Dilengkapi dengan doa sujud tilawah di bagian pembatas, membantu kamu selalu ingat doa penting ini.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
   },
   {
     id: "18",
@@ -956,7 +966,15 @@ export const mockProducts: Product[] = [
     price: 85000,
     category: "quran-terjemah",
     size: "A6",
+    customNameEligible: true,
     imageUrl: "/products/al-quran-terjemah-tajwid-samara-a6-dompet.jpg",
+    weightGrams: 350,
+    // No rating/reviews: this product has no listing on this shop's
+    // Shopee catalog (searched 2 Oct 2026) and halimquran.com shows no
+    // rating widget for it either — omitted rather than invented.
+    // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
+    description:
+      "Hai, Sahabat Shalihah! Pengen punya Al-Qur'an cantik? Ini dia Al-Qur'an Samara Dompet. Bukan cuma desainnya yang cantik, fiturnya juga menarik. Cocok untuk kamu pakai sendiri, atau kamu hadiahkan kepada orang tercinta. Apa saja keistimewaan Al-Qur'an Samara?\n\nSpesifikasi:\n- Dompet Flip + Resleting\n- Ukuran A6 (10,5 x 14,5 cm)\n- Kertas QPP 50gr\n- Berat 350gr\n- 656 halaman\n\nFitur cover:\n- Desain cover yang unik dan cantik seperti dompet, eksklusif untuk wanita muslimah.\n- Tersedia dalam 9 pilihan warna.\n\nMaterial cover:\n- Cover terbuat dari kain jacquard dengan motif yang ditenun di atas permukaan kainnya. Kain jacquard dikenal karena kualitas dan karakternya yang ringan dan fleksibel.\n- Cover juga dilengkapi dengan bahan bottega yang menimbulkan warna lebih kuat dan tidak mudah pudar.\n- Renda bordir berbahan katun yang menambah kesan girly pada cover.\n- Terdapat emblem sablon rubber berbahan dasar karet dengan kualitas elastisitas dan kerapatan yang tinggi.\n\nMaterial inner:\n- Menggunakan kertas QPP dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Terjemah standar Kemenag RI.\n- Tanda tajwid berwarna standar Kemenag RI, memudahkan kamu membaca sesuai kaidah yang benar.\n- Dilengkapi indeks juz yang memudahkan kamu mencari juz atau halaman tertentu.\n- Dilengkapi pembahasan lengkap seputar wanita dalam Islam, pengetahuan penting bagi muslimah.\n- Dilengkapi penjelasan adab dan fadhilah membaca Al-Qur'an.\n- Dilengkapi dengan doa sujud tilawah di bagian pembatas, membantu kamu selalu ingat doa penting ini.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
   },
   {
     id: "19",
