@@ -16,6 +16,13 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "d2kchovjbwl1tk.cloudfront.net",
       },
+      {
+        // Some halimquran.com color-swatch images resolve from the
+        // underlying S3 bucket directly rather than through the CloudFront
+        // host above (same migration, same reasoning).
+        protocol: "https",
+        hostname: "s3-ap-southeast-1.amazonaws.com",
+      },
     ],
   },
 };
