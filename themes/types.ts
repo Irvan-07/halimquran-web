@@ -1,6 +1,32 @@
 import type { ComponentType, ReactNode } from "react";
 import type { Product } from "@/types/product";
 
+/** Props the product page hands to a theme's ProductDetail layout. */
+export interface ProductDetailProps {
+  product: Product;
+  /** A few other products for the "rekomendasi" block. */
+  related: Product[];
+  /** Real PDP copy, or generated text when we have none. */
+  descriptionText: string;
+  categoryLabel: string;
+}
+
+/** One homepage product rail, already resolved against the live catalog. */
+export interface HomeRail {
+  slug: string;
+  /** Plain section title ("Quran Harian") — themes that don't overlay it on the banner use this. */
+  title: string;
+  href: string;
+  banner?: { imageUrl: string; pillLabel?: string; aspectRatio: string };
+  products: Product[];
+}
+
+export interface HomeProps {
+  rails: HomeRail[];
+  /** The whole merged catalog, for themes that show an "all products" grid. */
+  catalog: Product[];
+}
+
 /**
  * The presentation pieces a theme can replace. Everything behind them —
  * Scalev catalog/stock, cart, checkout, order tracking, CMS content — is
@@ -13,6 +39,10 @@ export interface ThemeSlots {
   ProductCard: ComponentType<{ product: Product }>;
   /** Wrapper for any list of ProductCards — owns the column counts/gaps per breakpoint. */
   ProductGrid: ComponentType<{ children: ReactNode }>;
+  /** The whole product page body (below the header, above the footer). */
+  ProductDetail: ComponentType<ProductDetailProps>;
+  /** The whole homepage body. */
+  Home: ComponentType<HomeProps>;
 }
 
 export interface Theme {

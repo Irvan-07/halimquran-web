@@ -13,14 +13,14 @@ const INITIAL_COUNT = 5;
 // fabricated testimonials. Most of these come from the product's real
 // Shopee listing (see lib/mock-data/products.ts), shown as a small source
 // badge per review so it's clear which platform it's from.
-export function ProductReviews({ product }: { product: Product }) {
+export function ProductReviews({ product, hideTitle = false }: { product: Product; hideTitle?: boolean }) {
   const reviews = product.reviews ?? [];
   const [showAll, setShowAll] = useState(false);
   const visible = showAll ? reviews : reviews.slice(0, INITIAL_COUNT);
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-sm font-bold text-foreground">Rating</h2>
+      {!hideTitle && <h2 className="text-sm font-bold text-foreground">Rating</h2>}
 
       {product.rating ? (
         <div className="flex items-center gap-1 text-sm">

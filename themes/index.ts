@@ -15,4 +15,4 @@ const registry: Record<string, Theme> = {
 
 export const activeTheme: Theme = registry[process.env.NEXT_PUBLIC_THEME ?? ""] ?? halimTheme;
 
-export const { Header, Footer, ProductCard, ProductGrid } = activeTheme.slots;
+export const { Header, Footer, ProductCard, ProductGrid, ProductDetail, Home } = activeTheme.slots;

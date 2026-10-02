@@ -8,7 +8,7 @@ import Image from "next/image";
 // filenames Artboard_6 through Artboard_11 plus HALIMOMENT_SEKOLAH). The
 // text/logo seen in each banner is baked into the image itself (the
 // business's own design asset), not rendered by this component.
-const SLIDES = [
+export const HERO_SLIDES = [
   { src: "/hero/banner-1.jpg", alt: "Siswa berprestasi selalu punya waktu untuk mengaji" },
   { src: "/hero/banner-2.jpg", alt: "Promo Halim Quran" },
   { src: "/hero/banner-3.jpg", alt: "Promo Halim Quran" },
@@ -25,7 +25,7 @@ export function HeroCarousel() {
 
   useEffect(() => {
     const id = setInterval(() => {
-      setIndex((i) => (i + 1) % SLIDES.length);
+      setIndex((i) => (i + 1) % HERO_SLIDES.length);
     }, AUTO_ADVANCE_MS);
     return () => clearInterval(id);
   }, []);
@@ -40,7 +40,7 @@ export function HeroCarousel() {
   // (tall-on-wide-screens) behavior instead.
   return (
     <div className="relative -mt-16 aspect-[4/3] w-full overflow-hidden bg-secondary">
-      {SLIDES.map((slide, i) => (
+      {HERO_SLIDES.map((slide, i) => (
         <Image
           key={slide.src}
           src={slide.src}
@@ -55,7 +55,7 @@ export function HeroCarousel() {
       ))}
 
       <div className="absolute inset-x-0 bottom-4 flex justify-center gap-1.5">
-        {SLIDES.map((slide, i) => (
+        {HERO_SLIDES.map((slide, i) => (
           <button
             key={slide.src}
             type="button"

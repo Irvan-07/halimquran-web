@@ -28,13 +28,13 @@ function DescriptionBlock({ block }: { block: string }) {
 // Matches the live PDP's collapsed-by-default description with a "Lihat
 // Selengkapnya" toggle (the real copy is long — specs + several labeled
 // feature blocks — so collapsing it keeps the page scannable).
-export function ProductDescription({ text }: { text: string }) {
+export function ProductDescription({ text, hideTitle = false }: { text: string; hideTitle?: boolean }) {
   const [expanded, setExpanded] = useState(false);
   const blocks = text.split("\n\n");
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="font-heading text-lg font-semibold text-foreground">Deskripsi</h2>
+      {!hideTitle && <h2 className="font-heading text-lg font-semibold text-foreground">Deskripsi</h2>}
       <div className={`relative flex flex-col gap-4 ${!expanded ? "max-h-40 overflow-hidden" : ""}`}>
         {blocks.map((block, i) => (
           <DescriptionBlock key={i} block={block} />
