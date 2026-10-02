@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { QRCodeSVG } from "qrcode.react";
 import { Button } from "@/components/ui/button";
 import { scalevStorefront } from "@/lib/scalev/storefront-client";
 import { formatIDR } from "@/lib/utils/format";
@@ -118,6 +119,13 @@ export function OrderStatus({ secretSlug }: { secretSlug: string }) {
             </div>
           ) : order.payment_method === "cod" ? (
             <p>Bayar tunai ke kurir saat pesanan tiba.</p>
+          ) : typeof order.pg_payment_info?.qr_string === "string" ? (
+            <div className="flex flex-col items-center gap-2 rounded-md bg-white p-4">
+              <QRCodeSVG value={order.pg_payment_info.qr_string} size={220} marginSize={2} />
+              <span className="text-center text-xs text-muted-foreground">
+                Scan dengan aplikasi bank atau e-wallet apa pun yang mendukung QRIS.
+              </span>
+            </div>
           ) : links.length > 0 ? (
             <div className="flex flex-col gap-2">
               {links.map((l) => (
