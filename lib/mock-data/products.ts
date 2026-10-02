@@ -1027,7 +1027,15 @@ export const mockProducts: Product[] = [
     price: 66000,
     category: "quran-hafalan",
     size: "A6",
+    customNameEligible: true,
     imageUrl: "/products/al-quran-hafalan-a6-resleting-batik.jpg",
+    weightGrams: 330,
+    // No rating/reviews: this product has no listing on this shop's
+    // Shopee catalog (searched 2 Oct 2026) and halimquran.com shows no
+    // rating widget for it either — omitted rather than invented.
+    // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
+    description:
+      "Menghafal Al-Qur'an bukan perkara sulit, karena Allah sudah jadikan Al-Qur'an mudah untuk dihafal. Apalagi sekarang sudah hadir, Qur'an Hafalan dengan fitur-fitur yang akan mempermudah proses menghafal Al-Qur'an. Mau tau apa saja keistimewaannya?\n\nSpesifikasi:\n- Ukuran A6 (10,5 x 14,5 cm)\n- Kertas QPP 50gr\n- Berat 330gr\n- Tebal 624 halaman\n\nFitur cover:\n- Desain unik dan elegan dengan corak batik.\n- Tersedia dalam 8 pilihan warna.\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n\nMaterial cover:\n- Cover dicetak dengan laminasi doff yang menciptakan perlindungan pada cover sehingga cover lebih tahan lama dan tidak mudah kotor.\n\nMaterial inner:\n- Cover terbuat dari kulit sintetis miniso berkualitas yang membuat warna cover lebih kuat dan tidak mudah pudar.\n- Cover dicetak dengan finishing sablon yang menghasilkan corak yang cerah dan jelas.\n- Resleting berbahan metal, sehingga lebih kokoh dan aman, serta memiliki gigitan resleting yang lebih kuat. Metal Zipper memberi kesan mahal dan eksklusif pada Al-Qur'an.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dilengkapi navigasi awalan kalimat/ayat di kanan atau kiri halaman, menghafal Al-Qur'an jadi lebih mudah.\n- Dilengkapi lembar penutup teks Al-Qur'an, meningkatkan fokus kamu dalam menghafal.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan kamu mencari juz atau halaman tertentu.\n- Dilengkapi penjelasan tentang 13 keutamaan menghafal Al-Qur'an sehingga kamu akan semakin semangat menghafal.\n- Dilengkapi penjelasan tentang 13 langkah efektif menghafal Al-Qur'an. Ringkas dan mudah dipraktikkan.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
   },
   {
     id: "21",
@@ -1130,8 +1138,31 @@ export const mockProducts: Product[] = [
     price: 65000,
     category: "quran-tajwid",
     size: "A6",
-    rating: 5,
+    rating: 4.9,
+    // 693 = 5-star (666) + 4-star (27) ratings on this product's real
+    // Shopee listing, out of 698 total — per the project owner's
+    // direction, 3/2/1-star ratings (5 total) are treated as 0.
+    ratingCount: 693,
+    // Shopee's own "Terjual" figure showed as "1RB+" (rounded) — set
+    // directly per the project owner's screenshot/direction.
+    soldCount: 1000,
+    customNameEligible: true,
     imageUrl: "/products/al-quran-tajwid-al-mumtaz-a6-resleting.jpg",
+    weightGrams: 325,
+    // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
+    description:
+      "Belajar tajwid itu mudah, selama ada kemauan dan bersungguh-bersungguh. Apalagi sekarang banyak sekali fasilitas yang menunjang kemudahan belajar tajwid. Salah satunya Al-Qur'an Tajwid Al-Mumtaz ini. Kemudahan belajar dan membaca Al-Qur'an dengan tajwid yang benar ada di tanganmu. Apa saja keistimewaannya?\n\nSpesifikasi:\n- Ukuran A6 (10,5 x 14,5 cm)\n- Kertas QPP 50gr\n- Berat 325gr\n- Tebal 616 halaman\n\nFitur cover:\n- Desain cover elegan dengan emblem acrylic yang memberikan sentuhan indah pada cover.\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n- Tersedia dalam 9 pilihan warna.\n\nMaterial inner:\n- Menggunakan kertas QPP dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur inner:\n- Rasm Utsmani standar Kemenag RI.\n- Tanda tajwid berwarna standar Kemenag RI, memudahkan kamu membaca sesuai kaidah yang benar.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz untuk memudahkan kamu mencari juz atau halaman tertentu.\n- Dilengkapi penjelasan adab dan fadhilah membaca Al-Qur'an.\n\nCari Al-Qur'an premium, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
+    // Real Shopee listing reviews (2 Oct 2026), read via Shopee's own
+    // product page with the logged-in owner's session, kept verbatim:
+    // https://shopee.co.id/Halim-Qur'an-QUR'AN-TAJWID-AL-MUMTAZ-A6-RESLETING-DENGAN-COVER-KEREN-DAN-ELEGAN-UKURAN-SEDANG-i.229472472.4419727933
+    reviews: [
+      { author: "g*****v", rating: 5, text: "Cocok Untuk: semua kalangan. Kualitas: bagus. Tampilan: bagus. Ternyata tulisanny gabegitu keliahatan utk nama. Dan cpt jg sih utk proses namanya jg. Ku kira yg ada terjemahan artinya trnyta engga dalemnya. Packing aman banget ada tulisan al quran jd pasti kurir bawa dg hati2", date: "25 Jun 2023", variant: "Biru, Dengan Custom Nama", reviewSource: "Shopee" },
+      { author: "m*****5", rating: 5, text: "Tampilan: keren, minimalist. Kualitas: bagus. Kualitas produknya ok banget, pengiriman juga cepet, minimalis bisa dbawa kemana mana", date: "31 Jul 2022", variant: "Maroon, Dengan Custom Nama", reviewSource: "Shopee" },
+      { author: "arisw5", rating: 5, text: "barang baguss nyampe dengan aman dan cepat", date: "15 Nov 2021", reviewSource: "Shopee" },
+      { author: "kurniadyeko", rating: 5, text: "Desain: Tampilan Quran bagus, siiip. Kualitas: Bahan kertasnya halus banget. Tulisan huruf ukurannya jelas, dan bagus. Jadi enak untuk ngaji. Tajwidnya jg jelas, terhindar dari kekeliruan membaca. Alhamdulillah, mantap. Selalu amanah sj buat sellernya...", date: "26 Mei 2024", variant: "Coklat, Dengan Custom Nama", reviewSource: "Shopee" },
+      { author: "nurikaaprianti31", rating: 5, text: "Alquran telah sampai sesuai pesanan. Tampilannya sangat mewah dan elegant. Bismillah mudah2an barokah", date: "3 Sep 2023", variant: "Cream, Tanpa Nama", reviewSource: "Shopee" },
+      { author: "l*****i", rating: 5, text: "Cocok untuk: semua. Desain: bagus banget. Kualitas: excellent! Alhamdulillah.... Saya sangat puas! Desainnya bagus, warnanya juga bagus, kualitas kertas dan cetakannya jg sangat baik. Sesuai dengan yg di katalog. Benar-benar tidak menyesal telah membelinya dan ini benar-benar layak mendapatkan bintang lima. Syukron, seller...", date: "9 Jan 2025", variant: "Gold, Tanpa Nama", reviewSource: "Shopee" },
+    ],
   },
   {
     id: "25",
@@ -1140,7 +1171,15 @@ export const mockProducts: Product[] = [
     price: 98000,
     category: "quran-tajwid",
     size: "A5",
+    customNameEligible: true,
     imageUrl: "/products/al-quran-tajwid-al-mumtaz-a5-resleting.jpg",
+    weightGrams: 620,
+    // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026. No
+    // rating/reviews: this product has no separate Shopee listing of its
+    // own (only the Hard Cover edition is listed there) and halimquran.com
+    // shows no rating widget for it either — omitted rather than invented.
+    description:
+      "Belajar tajwid itu mudah, selama ada kemauan dan bersungguh-bersungguh. Apalagi sekarang banyak sekali fasilitas yang menunjang kemudahan belajar tajwid. Salah satunya Al-Qur'an Tajwid Al-Mumtaz ini. Kemudahan belajar dan membaca Al-Qur'an dengan tajwid yang benar ada di tanganmu. Apa saja keistimewaannya?\n\nSpesifikasi:\n- Dompet Resleting\n- Ukuran A5 (14,5 x 20,5 cm)\n- Kertas QPP 50gr\n- Berat 620gr\n- Tebal 616 halaman\n\nFitur cover:\n- Desain cover elegan dengan emblem acrylic yang memberikan sentuhan indah pada cover.\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n- Tersedia dalam 9 pilihan warna.\n\nMaterial inner:\n- Menggunakan kertas QPP dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur inner:\n- Rasm Utsmani standar Kemenag RI.\n- Tanda tajwid berwarna standar Kemenag RI, memudahkan kamu membaca sesuai kaidah yang benar.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz untuk memudahkan kamu mencari juz atau halaman tertentu.\n- Dilengkapi penjelasan adab dan fadhilah membaca Al-Qur'an.\n\nCari Al-Qur'an premium, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
   },
   {
     id: "26",
@@ -1149,7 +1188,15 @@ export const mockProducts: Product[] = [
     price: 70000,
     category: "quran-tajwid",
     size: "A5",
+    // Shopee's own "Terjual" figure showed as "266" — set directly per
+    // this listing's own page (2 Oct 2026). No rating: this listing shows
+    // "Belum Ada Penilaian" (no ratings yet).
+    soldCount: 266,
     imageUrl: "/products/al-quran-tajwid-al-mumtaz-a5-hard-cover.jpg",
+    weightGrams: 500,
+    // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
+    description:
+      "Belajar tajwid itu mudah, selama ada kemauan dan bersungguh-bersungguh. Apalagi sekarang banyak sekali fasilitas yang menunjang kemudahan belajar tajwid. Salah satunya Al-Qur'an Tajwid Al-Mumtaz ini. Kemudahan belajar dan membaca Al-Qur'an dengan tajwid yang benar ada di tanganmu. Apa saja keistimewaannya?\n\nSpesifikasi:\n- Ukuran A5 (14,5 x 20,5 cm)\n- Kertas QPP 50gr\n- Berat 590gr\n- Tebal 616 halaman\n\nFitur cover:\n- Desain cover luxury dan premium. Makin percaya diri tilawah di mana saja.\n- Tersedia dalam 4 pilihan warna.\n\nMaterial cover:\n- Cover dicetak dengan laminasi doff yang menciptakan perlindungan pada cover sehingga cover lebih tahan lama dan tidak mudah kotor.\n\nMaterial inner:\n- Menggunakan kertas QPP dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur inner:\n- Rasm Utsmani standar Kemenag RI.\n- Tanda tajwid berwarna standar Kemenag RI, memudahkan kamu membaca sesuai kaidah yang benar.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz untuk memudahkan kamu mencari juz atau halaman tertentu.\n- Dilengkapi penjelasan adab dan fadhilah membaca Al-Qur'an.\n\nCari Al-Qur'an premium, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
   },
   {
     id: "27",
@@ -1158,7 +1205,16 @@ export const mockProducts: Product[] = [
     price: 60000,
     category: "quran-lainnya",
     size: "A5",
+    customNameEligible: true,
+    // Shopee's own "Terjual" figure showed as "50" — set directly per
+    // this listing's own page (2 Oct 2026). No rating: this listing shows
+    // "Belum Ada Penilaian" (no ratings yet).
+    soldCount: 50,
     imageUrl: "/products/al-quran-kalimatul-ulya-a5-resleting.jpg",
+    weightGrams: 570,
+    // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
+    description:
+      "Klasik bukan berarti jadul ya, klasik itu gaya tradisional yang indah, seperti style-nya Al-Qur'an Kalimatul 'Ulya yang satu ini. Mau tau apa saja keistimewaannya?\n\nSpesifikasi:\n- Ukuran A5 (14,5 x 20,5 cm)\n- Kertas HVS 60gr\n- Berat 570gr\n- Tebal 496 halaman\n\nFitur cover:\n- Desain cover klasik.\n- Tersedia pilihan style gold dan silver.\n\nFitur inner:\n- Rasm Utsmani 18 baris standar Kemenag RI.\n- Khat jelas dan sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan kamu mencari juz atau halaman tertentu.\n- Dilengkapi penjelasan tajwid praktis, singkat, dan mudah dipahami.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
   },
   {
     id: "28",
@@ -1167,7 +1223,15 @@ export const mockProducts: Product[] = [
     price: 160000,
     category: "quran-terjemah",
     size: "A4",
+    // Shopee's own "Terjual" figure showed as "30" — set directly per
+    // this listing's own page (2 Oct 2026). No rating: this listing shows
+    // "Belum Ada Penilaian" (no ratings yet).
+    soldCount: 30,
     imageUrl: "/products/al-quran-terjemah-besar-al-haqq-a4-hard-cover-box.jpg",
+    weightGrams: 2400,
+    // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
+    description:
+      "Memahami isi Al-Qur'an adalah salah satu cara menemukan petunjuk. Dengan memahami kandungan ayat Al-Qur'an, hidup kita akan menjadi terarah dan sesuai dengan keinginan Sang Maha Pencipta, Allah subhanahu wa ta'ala. Kini, kamu gak perlu bingung lagi mencari Al-Qur'an yang lengkap untuk teman tadabbur kamu karena kami sudah punya solusinya.\n\nAl-Qur'an Al-Haqq, Al-Qur'an ukuran besar A4 Halim Qur'an, fitur lengkap memberikan kenyamanan pada mata saat membaca Al-Qur'an. Apa yang bisa kamu temukan di Al-Qur'an ini?\n\nSpesifikasi:\n- Hard Cover Lux\n- Ukuran A4 (21 x 29 cm)\n- Kertas HVS 60gr\n- Berat 2.400gr\n- 1.008 halaman\n\nMaterial cover:\n- Cover dibuat dari kertas Art Paper yang tahan air, tidak mudah rusak, dan tidak mudah sobek. Cover dicetak dengan finishing laminasi doff yang menciptakan perlindungan pada cover sehingga cover lebih tahan lama dan tidak mudah kotor.\n\nFitur inner:\n- Terjemah Al-Qur'an lengkap standar Kemenag RI di halaman terpisah dari teks Al-Qur'an, lebih jelas dan nyaman dibaca.\n- Rasm Utsmani 18 baris standar Kemenag RI.\n- Dilengkapi hadits-hadits pilihan.\n- Dicetak dengan khat super jelas, sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan kamu menemukan juz atau halaman tertentu.\n- Dilengkapi ringkasan tafsir Ibnu Katsir, sehingga kamu bisa memahami kandungan ayat yang kamu baca.\n- Dilengkapi Asbabun Nuzul.\n- Dilengkapi penjelasan komprehensif seputar Al-Qur'an, mulai dari definisi, kunci tadabbur, keutamaan-keutamaan Al-Qur'an, hingga sejarah kodifikasi Al-Qur'an.\n- Tanda tajwid berwarna standar Kemenag RI, memudahkan kamu membaca sesuai kaidah yang benar.\n\nMaterial inner:\n- Setiap lembar dicetak di media kertas HVS dengan berat 60gr.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
   },
   {
     id: "29",
