@@ -40,7 +40,12 @@ function buildNotes(items: CartItem[], extra: string): string {
 }
 
 function errorMessage(e: unknown): string {
-  return e instanceof Error ? e.message : "Terjadi kesalahan, coba lagi.";
+  const raw = e instanceof Error ? e.message : "";
+  if (/out of stock/i.test(raw)) {
+    return "Ada produk di keranjang yang stoknya habis. Hapus produk tersebut dari keranjang lalu coba lagi.";
+  }
+  const detail = raw.match(/"error"\s*:\s*"([^"]+)"/)?.[1];
+  return detail ?? (raw ? "Terjadi kesalahan, coba lagi." : "Terjadi kesalahan, coba lagi.");
 }
 
 export function CheckoutForm() {
@@ -126,7 +131,7 @@ export function CheckoutForm() {
       .catch((e) => {
         if (cancelled) return;
         setShippingOptions([]);
-        toast.error(`Gagal memuat ongkos kirim: ${errorMessage(e)}`);
+        toast.error(errorMessage(e));
       })
       .finally(() => !cancelled && setShippingLoading(false));
     return () => {
