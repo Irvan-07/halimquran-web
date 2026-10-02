@@ -180,6 +180,14 @@ export interface ScalevStorefrontLocation {
   display: string;
 }
 
+export interface ScalevVariantAvailability {
+  variant_id: number;
+  available: boolean;
+  /** null when the product doesn't track inventory (always sellable). */
+  available_qty: number | null;
+  stock_status: "in_stock" | "low_stock" | "out_of_stock";
+}
+
 export interface ScalevShippingOption {
   courier_service_id: number;
   courier_code: string;

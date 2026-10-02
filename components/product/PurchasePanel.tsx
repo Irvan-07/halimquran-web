@@ -29,9 +29,18 @@ interface PurchasePanelProps {
 export function PurchasePanel({ product }: PurchasePanelProps) {
   const router = useRouter();
   const { addItem } = useCart();
-  const { selectedVariantId } = useProductMedia();
+  const { selectedVariantId, availability } = useProductMedia();
   const hasColorChoice = (product.colorVariants?.length ?? 0) > 0;
   const selectedColor = product.colorVariants?.find((v) => v.variantId === selectedVariantId);
+  const buyableVariantIds = hasColorChoice
+    ? (product.colorVariants ?? []).map((v) => v.variantId)
+    : [product.variantId];
+  const allSoldOut =
+    buyableVariantIds.length > 0 &&
+    buyableVariantIds.every((id) => id !== undefined && availability[id]?.available === false);
+  const activeVariantId = hasColorChoice ? selectedColor?.variantId : product.variantId;
+  const activeStock = activeVariantId !== undefined ? availability[activeVariantId] : undefined;
+  const maxQty = Math.min(20, activeStock?.available_qty ?? 20);
   const [customization, setCustomization] =
     useState<CustomizationOption | null>(null);
   const [customName, setCustomName] = useState("");
@@ -56,12 +65,20 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
   }
 
   function validate(): boolean {
+    if (allSoldOut) {
+      toast.error("Stok produk ini sedang habis");
+      return false;
+    }
     if (hasColorChoice && !selectedColor) {
       toast.error("Pilih warna terlebih dahulu");
       return false;
     }
     if (!customization) {
       toast.error("Pilih salah satu opsi terlebih dahulu");
+      return false;
+    }
+    if (activeStock && quantity > (activeStock.available_qty ?? Infinity)) {
+      toast.error(`Stok tersisa ${activeStock.available_qty}`);
       return false;
     }
     if (needsName && customName.trim().length === 0) {
@@ -138,6 +155,14 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
         </div>
       </div>
 
+      {allSoldOut ? (
+        <p className="text-center text-sm font-semibold text-destructive">Stok Habis</p>
+      ) : activeStock?.stock_status === "low_stock" ? (
+        <p className="text-center text-sm font-medium text-amber-600">
+          Stok terbatas{activeStock.available_qty != null ? ` — sisa ${activeStock.available_qty}` : ""}
+        </p>
+      ) : null}
+
       <div className="flex justify-center">
         <div className="inline-flex items-center divide-x divide-border rounded-md border border-input">
           <button
@@ -153,7 +178,7 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
           </span>
           <button
             type="button"
-            onClick={() => setQuantity((q) => Math.min(20, q + 1))}
+            onClick={() => setQuantity((q) => Math.min(maxQty, q + 1))}
             aria-label="Tambah jumlah"
             className="flex size-11 items-center justify-center text-primary"
           >
@@ -167,11 +192,12 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
           variant="outline"
           className="flex-1 border-primary text-primary hover:bg-primary/10 hover:text-primary"
           onClick={handleAddToCart}
+          disabled={allSoldOut}
         >
           Tambah ke Keranjang
         </Button>
-        <Button className="flex-1" onClick={handleBuyNow}>
-          Beli Sekarang
+        <Button className="flex-1" onClick={handleBuyNow} disabled={allSoldOut}>
+          {allSoldOut ? "Stok Habis" : "Beli Sekarang"}
         </Button>
       </div>
 
@@ -179,8 +205,8 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
           "Tambah Ke Keranjang" (not "Beli Sekarang") + a WhatsApp button,
           no price repeated here. */}
       <div className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-3 border-t border-border bg-background p-3 sm:hidden">
-        <Button onClick={handleAddToCart} className="h-11 flex-1 rounded-xl">
-          Tambah Ke Keranjang
+        <Button onClick={handleAddToCart} disabled={allSoldOut} className="h-11 flex-1 rounded-xl">
+          {allSoldOut ? "Stok Habis" : "Tambah Ke Keranjang"}
         </Button>
         <Link
           href={`https://wa.me/${WHATSAPP_NUMBER}`}

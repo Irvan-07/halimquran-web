@@ -12,7 +12,7 @@ import type { Product } from "@/types/product";
 // thumbnail does. Falls back to plain color chips (no image swap) for
 // products we only have flat hex colors for, no per-variant photo.
 export function ProductColorPicker({ product }: { product: Product }) {
-  const { setSelectedImage, selectedVariantId, setSelectedVariantId } = useProductMedia();
+  const { setSelectedImage, selectedVariantId, setSelectedVariantId, availability } = useProductMedia();
   const [plainSelected, setPlainSelected] = useState(0);
 
   if (product.colorVariants && product.colorVariants.length > 0) {
@@ -20,13 +20,16 @@ export function ProductColorPicker({ product }: { product: Product }) {
       <div className="flex flex-col gap-2">
         <span className="text-sm font-medium text-foreground">Warna</span>
         <div className="grid grid-cols-4 gap-3">
-          {product.colorVariants.map((variant, i) => (
+          {product.colorVariants.map((variant, i) => {
+            const soldOut =
+              variant.variantId !== undefined && availability[variant.variantId]?.available === false;
+            return (
             <button
               key={variant.hex + i}
               type="button"
               onClick={() => {
                 setSelectedImage(variant.imageUrl);
-                setSelectedVariantId(variant.variantId ?? null);
+                setSelectedVariantId(soldOut ? null : (variant.variantId ?? null));
               }}
               className="flex flex-col items-center gap-1"
             >
@@ -35,13 +38,25 @@ export function ProductColorPicker({ product }: { product: Product }) {
                   variant.variantId !== undefined && variant.variantId === selectedVariantId ? "border-primary" : "border-border"
                 }`}
               >
-                <Image src={variant.imageUrl} alt={variant.name} fill sizes="120px" className="object-cover" />
+                <Image
+                  src={variant.imageUrl}
+                  alt={variant.name}
+                  fill
+                  sizes="120px"
+                  className={`object-cover ${soldOut ? "opacity-40 grayscale" : ""}`}
+                />
+                {soldOut && (
+                  <span className="absolute inset-x-0 bottom-0 bg-foreground/70 py-0.5 text-center text-[10px] font-semibold uppercase text-background">
+                    Habis
+                  </span>
+                )}
               </span>
-              <span className="w-full truncate text-center text-xs text-muted-foreground">
+              <span className={`w-full truncate text-center text-xs ${soldOut ? "text-muted-foreground/60 line-through" : "text-muted-foreground"}`}>
                 {variant.name}
               </span>
             </button>
-          ))}
+            );
+          })}
         </div>
       </div>
     );

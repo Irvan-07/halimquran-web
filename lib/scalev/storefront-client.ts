@@ -9,6 +9,7 @@ import type {
   ScalevShippingOption,
   ScalevStorefrontLocation,
   ScalevStorefrontPaymentMethod,
+  ScalevVariantAvailability,
 } from "@/types/scalev";
 
 // Storefront API v3 client — deliberately NOT server-only. Per
@@ -112,6 +113,10 @@ export const scalevStorefront = {
       method: "POST",
       body: JSON.stringify(item),
     });
+  },
+
+  async getVariantAvailability(variantId: number): Promise<ScalevVariantAvailability> {
+    return scalevStorefrontFetch(`/variants/${variantId}/availability`);
   },
 
   async listPaymentMethods(): Promise<ScalevStorefrontPaymentMethod[]> {

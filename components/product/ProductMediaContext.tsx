@@ -1,6 +1,8 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { scalevStorefront } from "@/lib/scalev/storefront-client";
+import type { ScalevVariantAvailability } from "@/types/scalev";
 import type { Product } from "@/types/product";
 
 // Shared "which image is showing" state between ProductGallery (top of
@@ -17,6 +19,8 @@ interface ProductMediaState {
   /** Scalev variant id of the color the buyer picked in the "Warna" section (null until they pick one). */
   selectedVariantId: number | null;
   setSelectedVariantId: (id: number | null) => void;
+  /** Live Scalev stock per variant id. A variant missing here means "not loaded yet" (treated as buyable). */
+  availability: Record<number, ScalevVariantAvailability>;
 }
 
 const ProductMediaContext = createContext<ProductMediaState | null>(null);
@@ -34,9 +38,32 @@ export function ProductMediaProvider({
       : (product.colorVariants?.map((v) => v.imageUrl) ?? (product.imageUrl ? [product.imageUrl] : []));
   const [selectedImage, setSelectedImage] = useState(gallery[0] ?? product.imageUrl ?? "");
   const [selectedVariantId, setSelectedVariantId] = useState<number | null>(null);
+  const [availability, setAvailability] = useState<Record<number, ScalevVariantAvailability>>({});
+
+  useEffect(() => {
+    const ids = product.colorVariants?.length
+      ? product.colorVariants.map((v) => v.variantId).filter((id): id is number => id !== undefined)
+      : product.variantId !== undefined
+        ? [product.variantId]
+        : [];
+    let cancelled = false;
+    Promise.all(
+      ids.map((id) =>
+        scalevStorefront.getVariantAvailability(id).catch(() => null),
+      ),
+    ).then((results) => {
+      if (cancelled) return;
+      const next: Record<number, ScalevVariantAvailability> = {};
+      for (const r of results) if (r) next[r.variant_id] = r;
+      setAvailability(next);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [product]);
 
   return (
-    <ProductMediaContext.Provider value={{ gallery, selectedImage, setSelectedImage, selectedVariantId, setSelectedVariantId }}>
+    <ProductMediaContext.Provider value={{ gallery, selectedImage, setSelectedImage, selectedVariantId, setSelectedVariantId, availability }}>
       {children}
     </ProductMediaContext.Provider>
   );
