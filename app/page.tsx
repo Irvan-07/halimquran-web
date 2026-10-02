@@ -1,27 +1,7 @@
-import Link from "next/link";
-import Image from "next/image";
-import { ProductCard } from "@/themes";
-import { HeroCarousel } from "@/components/sections";
-import { Reveal } from "@/components/layout/Reveal";
-import { LifestyleMarquee, type LifestyleItem } from "@/components/layout/LifestyleMarquee";
+import { Home } from "@/themes";
+import type { HomeRail } from "@/themes/types";
 import { getMergedCatalog } from "@/lib/scalev/catalog";
 import type { Product } from "@/types/product";
-
-// Real lifestyle media from the scrolling gallery strip halimquran.com
-// shows just above its footer (saved 26 Sep 2026): 3 photos + 1 short
-// looping video (confirmed on the live site — the 4th slot is a <video>,
-// not a still photo; a frame of it was mistaken for a photo earlier).
-// The live strip is a step carousel (see LifestyleMarquee), looping this
-// same 4-item set back-to-back.
-const LIFESTYLE_ITEMS: LifestyleItem[] = [
-  { type: "image", src: "/lifestyle/photo-1.png" },
-  { type: "image", src: "/lifestyle/photo-2.png" },
-  { type: "image", src: "/lifestyle/photo-3.png" },
-  // Only this specific item carries the "All Product / Here" overlay on
-  // the live site (confirmed by the user against the real homepage) — the
-  // other 3 are plain media.
-  { type: "video", src: "/lifestyle/video-1.mp4", cta: true },
-];
 
 // Each rail below is hardcoded to the EXACT product set/order read off
 // halimquran.com's real homepage (26 Sep 2026) — not derived from our own
@@ -36,6 +16,8 @@ const LIFESTYLE_ITEMS: LifestyleItem[] = [
 // heading here, matching that inconsistency rather than inventing one).
 const RAILS: {
   slug: string;
+  /** Plain section title for themes that don't overlay the banner's pill label. */
+  title: string;
   // Each banner's real source aspect ratio (checked via `file` on the
   // downloaded image) — most are 2048x1536 (4/3), but not all, and using
   // one ratio for every banner cropped the odd ones out on the sides
@@ -50,6 +32,7 @@ const RAILS: {
     // no heading, just 4 products (re-confirmed via full section-by-section
     // DOM walk 26 Sep 2026: index 1, directly after the hero at index 0).
     slug: "featured",
+    title: "Produk Pilihan",
     href: "/produk",
     productSlugs: [
       "mushaf-al-quran-al-wafa-b7-pocket-edition",
@@ -60,6 +43,7 @@ const RAILS: {
   },
   {
     slug: "gift",
+    title: "Hadiah / Gift",
     banner: { imageUrl: "/category-banners/gift.jpg", pillLabel: "Hadiah/Gift", aspectRatio: "3120/1752" },
     href: "/gift",
     productSlugs: [
@@ -70,6 +54,7 @@ const RAILS: {
   },
   {
     slug: "quran-harian",
+    title: "Quran Harian",
     banner: { imageUrl: "/category-banners/quran-harian.jpg", pillLabel: "Quran Daily", aspectRatio: "4/3" },
     href: "/produk/quran-harian",
     productSlugs: [
@@ -81,6 +66,7 @@ const RAILS: {
   },
   {
     slug: "quran-hafalan",
+    title: "Quran Hafalan",
     banner: { imageUrl: "/category-banners/quran-hafalan.jpg", pillLabel: "Quran Hafalan", aspectRatio: "4/3" },
     href: "/produk/quran-hafalan",
     productSlugs: [
@@ -92,6 +78,7 @@ const RAILS: {
   },
   {
     slug: "quran-tajwid",
+    title: "Quran Tajwid",
     banner: { imageUrl: "/category-banners/quran-tajwid.jpg", pillLabel: "Quran Tajwid", aspectRatio: "4/3" },
     href: "/produk/quran-tajwid",
     productSlugs: [
@@ -103,6 +90,7 @@ const RAILS: {
   },
   {
     slug: "quran-terjemah",
+    title: "Quran Terjemah",
     banner: { imageUrl: "/category-banners/quran-terjemah.jpg", pillLabel: "Quran Terjemah", aspectRatio: "3199/2133" },
     href: "/produk/quran-terjemah",
     productSlugs: [
@@ -114,12 +102,14 @@ const RAILS: {
   },
   {
     slug: "quran-tematik",
+    title: "Quran Tematik",
     banner: { imageUrl: "/category-banners/quran-tematik.jpg", pillLabel: "Quran Tematik", aspectRatio: "4/3" },
     href: "/produk/quran-tematik",
     productSlugs: ["al-quran-terjemah-tajwid-samara-a6-dompet"],
   },
   {
     slug: "quran-lainnya",
+    title: "Quran Lainnya",
     // No pill label on the live site's own banner here either — not an
     // omission on our part, matching that as-is.
     banner: { imageUrl: "/category-banners/quran-lainnya.jpg", aspectRatio: "4/3" },
@@ -137,61 +127,12 @@ export default async function HomePage() {
   const catalog = await getMergedCatalog();
   const bySlug = new Map(catalog.map((p) => [p.slug, p]));
 
-  return (
-    <div className="flex flex-col">
-      <HeroCarousel />
+  const rails: HomeRail[] = RAILS.map(({ productSlugs, ...rail }) => ({
+    ...rail,
+    products: productSlugs
+      .map((slug) => bySlug.get(slug))
+      .filter((p): p is Product => Boolean(p)),
+  })).filter((rail) => rail.products.length > 0);
 
-      <div className="flex flex-col gap-10 pb-4 pt-6">
-        {RAILS.map((rail) => {
-          const products = rail.productSlugs
-            .map((slug) => bySlug.get(slug))
-            .filter((p): p is Product => Boolean(p));
-          if (products.length === 0) return null;
-
-          return (
-            <Reveal
-              key={rail.slug}
-              className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 sm:px-6 lg:px-8"
-            >
-              {rail.banner && (
-                <Link
-                  href={rail.href}
-                  className="group relative -mx-4 w-[calc(100%+2rem)] overflow-hidden bg-secondary sm:mx-0 sm:w-full sm:rounded-lg"
-                  style={{ aspectRatio: rail.banner.aspectRatio }}
-                >
-                  <Image
-                    src={rail.banner.imageUrl}
-                    alt={rail.banner.pillLabel ?? ""}
-                    fill
-                    sizes="(min-width: 1024px) 1152px, 100vw"
-                    className="object-cover"
-                  />
-                  {rail.banner.pillLabel && (
-                    <span className="absolute bottom-3 left-3 rounded-full border border-foreground/70 bg-background px-4 py-1.5 text-sm font-medium text-foreground transition-colors group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
-                      {rail.banner.pillLabel}
-                    </span>
-                  )}
-                </Link>
-              )}
-              <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-                {products.slice(0, 4).map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-              <Link
-                href={rail.href}
-                className="mx-auto w-fit rounded-full border border-primary px-6 py-2 text-sm font-medium text-primary hover:bg-primary hover:text-primary-foreground"
-              >
-                Tampilkan Semua
-              </Link>
-            </Reveal>
-          );
-        })}
-      </div>
-
-      <div className="flex flex-col items-center gap-6 pb-10">
-        <LifestyleMarquee items={LIFESTYLE_ITEMS} />
-      </div>
-    </div>
-  );
+  return <Home rails={rails} catalog={catalog} />;
 }
