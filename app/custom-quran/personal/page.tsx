@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ProductCard } from "@/components/product/ProductCard";
+import { ProductCard } from "@/themes";
 import { mockProducts } from "@/lib/mock-data/products";
 
 export const metadata: Metadata = {

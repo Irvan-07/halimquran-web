@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Open_Sans } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { Header, Footer, activeTheme } from "@/themes";
 import { Toaster } from "@/components/ui/sonner";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { CartProvider } from "@/components/cart/CartProvider";
@@ -41,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className={`${archivo.variable} ${openSans.variable}`}>
+    <html lang="id" data-theme={activeTheme.id} className={`${archivo.variable} ${openSans.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
         <GoogleTagManager />
         <CartProvider>

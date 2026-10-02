@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ProductCard } from "@/components/product/ProductCard";
+import { ProductCard } from "@/themes";
 import { SortMenu, sortProducts, type SortOption } from "@/components/product/SortMenu";
 import type { Product } from "@/types/product";
 

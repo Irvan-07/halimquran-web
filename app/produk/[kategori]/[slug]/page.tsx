@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Heart, Star } from "lucide-react";
-import { ProductCard } from "@/components/product/ProductCard";
+import { ProductCard } from "@/themes";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductMediaProvider } from "@/components/product/ProductMediaContext";
 import { ProductColorPicker } from "@/components/product/ProductColorPicker";

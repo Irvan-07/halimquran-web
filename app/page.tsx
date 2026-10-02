@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ProductCard } from "@/components/product/ProductCard";
+import { ProductCard } from "@/themes";
 import { HeroCarousel } from "@/components/sections";
 import { Reveal } from "@/components/layout/Reveal";
 import { LifestyleMarquee, type LifestyleItem } from "@/components/layout/LifestyleMarquee";

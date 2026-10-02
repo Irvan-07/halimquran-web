@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ProductCard } from "@/components/product/ProductCard";
+import { ProductCard } from "@/themes";
 import { getMergedCatalog } from "@/lib/scalev/catalog";
 import { productCategories } from "@/lib/mock-data/categories";
 

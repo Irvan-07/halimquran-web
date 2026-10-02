@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { ProductCard } from "@/components/product/ProductCard";
+import { ProductCard } from "@/themes";
 import { mockProducts } from "@/lib/mock-data/products";
 
 // "Pencarian Populer" tags are the real ones shown on the live search

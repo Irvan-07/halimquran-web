@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { ProductCard } from "@/components/product/ProductCard";
+import { ProductCard } from "@/themes";
 import { mockProducts } from "@/lib/mock-data/products";
 
 // Content on this page is copied from the live halimquran.com Wakaf Quran
