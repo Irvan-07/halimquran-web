@@ -9,6 +9,8 @@ import { BlibliProductGrid } from "./blibli/ProductGrid";
 import { DEFAULT_THEME_ID, type ThemeId } from "./meta";
 import { ShopeeProductCard } from "./shopee/ProductCard";
 import { ShopeeProductGrid } from "./shopee/ProductGrid";
+import { TokopediaProductCard } from "./tokopedia/ProductCard";
+import { TokopediaProductGrid } from "./tokopedia/ProductGrid";
 
 // Client components can't await the CMS, so the server layout passes the
 // chosen theme id down through this provider. Only the slots client
@@ -23,6 +25,7 @@ const clientSlots: Record<ThemeId, ClientSlots> = {
   halim: { ProductCard: HalimProductCard, ProductGrid: HalimProductGrid },
   shopee: { ProductCard: ShopeeProductCard, ProductGrid: ShopeeProductGrid },
   blibli: { ProductCard: BlibliProductCard, ProductGrid: BlibliProductGrid },
+  tokopedia: { ProductCard: TokopediaProductCard, ProductGrid: TokopediaProductGrid },
 };
 
 const ThemeContext = createContext<ThemeId>(DEFAULT_THEME_ID);

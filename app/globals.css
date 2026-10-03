@@ -183,18 +183,46 @@
     border-radius: 9999px;
 }
 
-/* Ratings are yellow stars in this theme (components use fill-primary). */
+/* Tokopedia-style marketplace theme: green primary, white pages, 8px cards
+   (see themes/tokopedia). */
+[data-theme="tokopedia"] {
+    --primary: #00AA5B;
+    --primary-foreground: #FFFFFF;
+    --primary-dark: #008F4D;
+    --ring: #00AA5B;
+    --foreground: #212121;
+    --muted-foreground: #6D7588;
+    --secondary: #F3F4F5;
+    --muted: #F3F4F5;
+    --accent: #EFFAF4;
+    --border: #E5E7E9;
+    --input: #D6DFEB;
+    --success: #00AA5B;
+    --radius: 0.5rem;
+}
+
+/* Ratings are yellow stars in these themes (components use fill-primary). */
 [data-theme="blibli"] svg.lucide-star.fill-primary {
     fill: #FFC600;
     color: #FFC600;
+}
+
+[data-theme="tokopedia"] svg.lucide-star.fill-primary {
+    fill: #FFC400;
+    color: #FFC400;
 }
 
 /* Phones have a fixed bottom tab bar, and product pages a fixed purchase
    bar: lift the floating chat button above them. */
 @media (max-width: 1023px) {
     [data-theme="blibli"] [data-wa-float],
-    [data-theme="shopee"] [data-wa-float] {
+    [data-theme="shopee"] [data-wa-float],
+    [data-theme="tokopedia"] [data-wa-float] {
         bottom: 4.75rem;
+    }
+
+    [data-theme="tokopedia"] [data-wa-float][data-pdp="true"] {
+        bottom: 5.5rem;
     }
 }
 

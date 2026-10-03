@@ -19,6 +19,11 @@ export const themeOptions = [
     title: "Marketplace — gaya Blibli",
     hint: "Biru cerah, kartu membulat, bar beli menempel",
   },
+  {
+    id: "tokopedia",
+    title: "Marketplace — gaya Tokopedia",
+    hint: "Hijau, kartu \"Atur jumlah\" menempel di desktop, bar beli di HP",
+  },
 ] as const;
 
 export type ThemeId = (typeof themeOptions)[number]["id"];
