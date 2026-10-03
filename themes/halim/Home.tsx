@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { ProductCard } from "@/components/product/ProductCard";
 import { HeroCarousel } from "@/components/sections";
 import { Reveal } from "@/components/layout/Reveal";
@@ -63,9 +64,10 @@ export function HalimHome({ rails }: HomeProps) {
             </div>
             <Link
               href={rail.href}
-              className="mx-auto w-fit rounded-full border border-primary px-6 py-2 text-sm font-medium text-primary hover:bg-primary hover:text-primary-foreground"
+              className="group mx-auto flex w-fit items-center gap-2 rounded-full border border-primary px-6 py-2 text-sm font-medium text-primary hover:bg-primary hover:text-primary-foreground"
             >
-              Tampilkan Semua
+              Lihat Selengkapnya
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </Reveal>
         ))}
