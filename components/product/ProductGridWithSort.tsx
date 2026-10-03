@@ -1,11 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ProductCard, ProductGrid } from "@/themes";
+import { useThemeSlots } from "@/themes/client";
 import { SortMenu, sortProducts, type SortOption } from "@/components/product/SortMenu";
 import type { Product } from "@/types/product";
 
 export function ProductGridWithSort({ products }: { products: Product[] }) {
+  const { ProductCard, ProductGrid } = useThemeSlots();
   const [sort, setSort] = useState<SortOption>("default");
   const sorted = useMemo(() => sortProducts(products, sort), [products, sort]);
 

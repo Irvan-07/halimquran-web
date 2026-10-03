@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ProductCard, ProductGrid } from "@/themes";
+import { getActiveTheme } from "@/themes/server";
 import { mockProducts } from "@/lib/mock-data/products";
 
 export const metadata: Metadata = {
@@ -27,7 +27,8 @@ const options = [
   },
 ];
 
-export default function CustomQuranPersonalPage() {
+export default async function CustomQuranPersonalPage() {
+  const { ProductCard, ProductGrid } = (await getActiveTheme()).slots;
   const eligibleProducts = mockProducts.filter((p) => p.customNameEligible);
 
   return (

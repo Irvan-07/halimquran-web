@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { ProductCard, ProductGrid } from "@/themes";
+import { useThemeSlots } from "@/themes/client";
 import { mockProducts } from "@/lib/mock-data/products";
 
 // "Pencarian Populer" tags are the real ones shown on the live search
@@ -11,6 +11,7 @@ import { mockProducts } from "@/lib/mock-data/products";
 const popularSearches = ["wafa", "mawaddah", "ta'lim"];
 
 export function SearchPageContent({ initialQuery = "" }: { initialQuery?: string }) {
+  const { ProductCard, ProductGrid } = useThemeSlots();
   const [query, setQuery] = useState(initialQuery);
 
   const results = useMemo(() => {

@@ -1,4 +1,4 @@
-import { Home } from "@/themes";
+import { getActiveTheme } from "@/themes/server";
 import type { HomeRail } from "@/themes/types";
 import { getMergedCatalog } from "@/lib/scalev/catalog";
 import type { Product } from "@/types/product";
@@ -124,6 +124,7 @@ const RAILS: {
 ];
 
 export default async function HomePage() {
+  const { Home } = (await getActiveTheme()).slots;
   const catalog = await getMergedCatalog();
   const bySlug = new Map(catalog.map((p) => [p.slug, p]));
 
