@@ -167,6 +167,16 @@ export async function getScalevProductBySlug(slug: string): Promise<Product | nu
  * Scalev. Never throws: a Scalev failure just means 0 real products and an
  * all-mock result, so callers don't need their own try/catch.
  */
+/**
+ * Listing/card photo = the product's hero shot (first image of its real
+ * gallery) when we have that gallery; otherwise the Scalev product photo,
+ * which is usually just the first colour variant.
+ */
+function withHeroImage(product: Product): Product {
+  const hero = product.galleryImages?.[0];
+  return hero ? { ...product, imageUrl: hero } : product;
+}
+
 export async function getMergedCatalog(): Promise<Product[]> {
   let scalevProducts: Product[] = [];
   try {
@@ -190,7 +200,7 @@ export async function getMergedCatalog(): Promise<Product[]> {
   const scalevSlugs = new Set(scalevProducts.map((p) => p.slug));
   const mockFallback = mockProducts.filter((p) => !scalevSlugs.has(p.slug));
 
-  return [...merged, ...mockFallback];
+  return [...merged, ...mockFallback].map(withHeroImage);
 }
 
 export async function getMergedProductBySlug(slug: string): Promise<Product | null> {
