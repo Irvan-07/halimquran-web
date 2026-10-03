@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { MediaLightbox } from "@/components/product/MediaLightbox";
 import { useProductMedia } from "@/components/product/ProductMediaContext";
 import type { Product } from "@/types/product";
 
@@ -23,6 +24,7 @@ export function ProductGallery({ product }: { product: Product }) {
   const { gallery, selectedImage, setSelectedImage, setAutoplayHold } = useProductMedia();
   const slides = !selectedImage || gallery.includes(selectedImage) ? gallery : [...gallery, selectedImage];
   const index = Math.max(0, slides.indexOf(selectedImage));
+  const [viewerOpen, setViewerOpen] = useState(false);
 
   const trackRef = useRef<HTMLDivElement>(null);
   const programmatic = useRef(false);
@@ -72,7 +74,11 @@ export function ProductGallery({ product }: { product: Product }) {
           className="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {slides.map((src, i) => (
-            <div key={src + i} className="relative aspect-square w-full shrink-0 snap-center">
+            <div
+              key={src + i}
+              className="relative aspect-square w-full shrink-0 cursor-zoom-in snap-center"
+              onClick={() => setViewerOpen(true)}
+            >
               <Image
                 src={src}
                 alt={i === 0 ? product.name : `${product.name} — foto ${i + 1}`}
@@ -110,6 +116,14 @@ export function ProductGallery({ product }: { product: Product }) {
           </>
         )}
       </div>
+
+      {viewerOpen && (
+        <MediaLightbox
+          items={slides.map((src) => ({ type: "image" as const, src }))}
+          startIndex={index}
+          onClose={() => setViewerOpen(false)}
+        />
+      )}
 
       {gallery.length > 1 && (
         <div className="grid grid-cols-5 gap-2">

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Star } from "lucide-react";
+import { Play, Star } from "lucide-react";
+import { MediaLightbox, type LightboxItem } from "@/components/product/MediaLightbox";
 import type { Product } from "@/types/product";
 
 const INITIAL_COUNT = 5;
@@ -16,6 +17,7 @@ const INITIAL_COUNT = 5;
 export function ProductReviews({ product, hideTitle = false }: { product: Product; hideTitle?: boolean }) {
   const reviews = product.reviews ?? [];
   const [showAll, setShowAll] = useState(false);
+  const [viewer, setViewer] = useState<{ items: LightboxItem[]; index: number } | null>(null);
   const visible = showAll ? reviews : reviews.slice(0, INITIAL_COUNT);
 
   return (
@@ -71,25 +73,26 @@ export function ProductReviews({ product, hideTitle = false }: { product: Produc
                 )}
                 {review.media && review.media.length > 0 && (
                   <div className="flex gap-2">
-                    {review.media.map((m, j) =>
-                      m.type === "video" ? (
-                        <video
-                          key={j}
-                          src={m.src}
-                          controls
-                          muted
-                          playsInline
-                          className="size-20 rounded-md border border-border object-cover"
-                        />
-                      ) : (
-                        <div
-                          key={j}
-                          className="relative size-20 shrink-0 overflow-hidden rounded-md border border-border"
-                        >
+                    {review.media.map((m, j) => (
+                      <button
+                        key={j}
+                        type="button"
+                        aria-label={m.type === "video" ? "Putar video ulasan" : "Perbesar foto ulasan"}
+                        onClick={() => setViewer({ items: review.media!, index: j })}
+                        className="relative size-20 shrink-0 cursor-zoom-in overflow-hidden rounded-md border border-border"
+                      >
+                        {m.type === "video" ? (
+                          <>
+                            <video src={m.src} muted playsInline preload="metadata" className="size-full object-cover" />
+                            <span className="absolute inset-0 flex items-center justify-center bg-black/25">
+                              <Play className="size-6 fill-white text-white" />
+                            </span>
+                          </>
+                        ) : (
                           <Image src={m.src} alt="" fill sizes="80px" className="object-cover" />
-                        </div>
-                      ),
-                    )}
+                        )}
+                      </button>
+                    ))}
                   </div>
                 )}
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -115,6 +118,7 @@ export function ProductReviews({ product, hideTitle = false }: { product: Produc
           )}
         </>
       )}
+      {viewer && <MediaLightbox items={viewer.items} startIndex={viewer.index} onClose={() => setViewer(null)} />}
     </div>
   );
 }
