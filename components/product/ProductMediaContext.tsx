@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { scalevStorefront } from "@/lib/scalev/storefront-client";
 import type { ScalevVariantAvailability } from "@/types/scalev";
 import type { Product } from "@/types/product";
@@ -19,6 +19,8 @@ interface ProductMediaState {
   /** Scalev variant id of the color the buyer picked in the "Warna" section (null until they pick one). */
   selectedVariantId: number | null;
   setSelectedVariantId: (id: number | null) => void;
+  /** Hold the photo auto-advance while the pointer is over the main photo. */
+  setAutoplayHold: (hold: boolean) => void;
   /** Live Scalev stock per variant id. A variant missing here means "not loaded yet" (treated as buyable). */
   availability: Record<number, ScalevVariantAvailability>;
 }
@@ -32,12 +34,38 @@ export function ProductMediaProvider({
   product: Product;
   children: ReactNode;
 }) {
-  const gallery =
-    product.galleryImages && product.galleryImages.length > 0
-      ? product.galleryImages
-      : (product.colorVariants?.map((v) => v.imageUrl) ?? (product.imageUrl ? [product.imageUrl] : []));
-  const [selectedImage, setSelectedImage] = useState(gallery[0] ?? product.imageUrl ?? "");
+  const gallery = useMemo(
+    () =>
+      product.galleryImages && product.galleryImages.length > 0
+        ? product.galleryImages
+        : (product.colorVariants?.map((v) => v.imageUrl) ?? (product.imageUrl ? [product.imageUrl] : [])),
+    [product],
+  );
+  const [selectedImage, setSelectedImageRaw] = useState(gallery[0] ?? product.imageUrl ?? "");
   const [selectedVariantId, setSelectedVariantId] = useState<number | null>(null);
+
+  // The photos advance by themselves; anything the shopper does (tapping a
+  // thumbnail, swiping, picking a colour) calls this wrapper, which holds
+  // the auto-advance for a while — and it stays off once a colour is chosen.
+  const pausedUntil = useRef(0);
+  const hovering = useRef(false);
+  const setSelectedImage = useCallback((src: string) => {
+    pausedUntil.current = Date.now() + 10_000;
+    setSelectedImageRaw(src);
+  }, []);
+  const setAutoplayHold = useCallback((hold: boolean) => {
+    hovering.current = hold;
+  }, []);
+
+  useEffect(() => {
+    if (gallery.length < 2 || selectedVariantId !== null) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => {
+      if (hovering.current || document.hidden || Date.now() < pausedUntil.current) return;
+      setSelectedImageRaw((cur) => gallery[(gallery.indexOf(cur) + 1) % gallery.length] ?? gallery[0]);
+    }, 4500);
+    return () => clearInterval(id);
+  }, [gallery, selectedVariantId]);
   const [availability, setAvailability] = useState<Record<number, ScalevVariantAvailability>>({});
 
   useEffect(() => {
@@ -63,7 +91,7 @@ export function ProductMediaProvider({
   }, [product]);
 
   return (
-    <ProductMediaContext.Provider value={{ gallery, selectedImage, setSelectedImage, selectedVariantId, setSelectedVariantId, availability }}>
+    <ProductMediaContext.Provider value={{ gallery, selectedImage, setSelectedImage, selectedVariantId, setSelectedVariantId, setAutoplayHold, availability }}>
       {children}
     </ProductMediaContext.Provider>
   );

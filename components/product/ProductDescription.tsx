@@ -15,7 +15,7 @@ function DescriptionBlock({ block }: { block: string }) {
 
   return (
     <div className="flex flex-col gap-1.5">
-      <p className="text-sm font-medium text-foreground">{first}</p>
+      <p className="text-sm font-bold text-foreground">{first}</p>
       <ul className="flex max-w-3xl flex-col gap-1 pl-1 text-sm text-foreground">
         {rest.map((line, i) => (
           <li key={i}>{line.replace(/^[-✔]\s*/, "")}</li>
