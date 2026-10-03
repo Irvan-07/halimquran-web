@@ -25,6 +25,8 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat via WhatsApp"
+      data-wa-float=""
+      data-pdp={isPdp}
       className={`fixed bottom-4 right-4 z-50 size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-105 ${
         isPdp ? "hidden sm:flex" : "flex"
       }`}
