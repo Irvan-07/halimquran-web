@@ -73,7 +73,7 @@ export function BlibliHome({ rails, catalog }: HomeProps) {
             <li key={href} className="shrink-0">
               <Link
                 href={href}
-                className="group flex w-[72px] flex-col items-center gap-1.5 text-center lg:w-auto lg:flex-row lg:gap-2.5 lg:whitespace-nowrap lg:rounded-xl lg:px-3 lg:py-2 lg:text-left lg:hover:bg-accent"
+                className="group flex w-[72px] flex-col items-center gap-1.5 text-center lg:w-auto lg:whitespace-nowrap lg:rounded-xl lg:px-2 lg:py-2 lg:hover:bg-accent xl:flex-row xl:gap-2.5 xl:px-3 xl:text-left"
               >
                 <span className="flex size-12 items-center justify-center rounded-2xl bg-accent text-primary lg:size-10 lg:rounded-xl">
                   <Icon className="size-6 lg:size-5" />
