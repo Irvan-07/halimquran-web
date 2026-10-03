@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Heart, Star } from "lucide-react";
 import type { Product } from "@/types/product";
-import { formatIDR } from "@/lib/utils/format";
+import { formatIDR, formatSoldCount } from "@/lib/utils/format";
 
 interface ProductCardProps {
   product: Product;
@@ -43,13 +43,16 @@ export function ProductCard({ product }: ProductCardProps) {
         <p className="text-sm font-semibold text-primary">
           {formatIDR(product.price)}
         </p>
-        {product.rating && (
+        {(product.rating || product.soldCount) && (
           <span className="flex items-center gap-1 text-xs text-muted-foreground">
-            <span className="flex items-center gap-0.5">
-              <Star className="size-3.5 fill-primary text-primary" />
-              {product.rating}
-            </span>
-            {product.soldCount && <span>· Terjual {product.soldCount}</span>}
+            {product.rating ? (
+              <span className="flex items-center gap-0.5">
+                <Star className="size-3.5 fill-primary text-primary" />
+                {product.rating}
+              </span>
+            ) : null}
+            {product.rating && product.soldCount ? <span>·</span> : null}
+            {product.soldCount ? <span>Terjual {formatSoldCount(product.soldCount)}</span> : null}
           </span>
         )}
       </div>

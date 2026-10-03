@@ -3,6 +3,7 @@ import { scalev } from "./client";
 import type { ScalevProductDetail, ScalevProductVariantDetail } from "@/types/scalev";
 import type { Product, ProductCategorySlug, ProductSize } from "@/types/product";
 import { mockProducts } from "@/lib/mock-data/products";
+import { shopeeSoldCounts } from "@/lib/mock-data/sold-counts";
 
 // Adapter: real Scalev API data -> this app's existing `Product` shape, so
 // every UI component built against mock data (ProductCard, PurchasePanel,
@@ -170,11 +171,17 @@ export async function getScalevProductBySlug(slug: string): Promise<Product | nu
 /**
  * Listing/card photo = the product's hero shot (first image of its real
  * gallery) when we have that gallery; otherwise the Scalev product photo,
- * which is usually just the first colour variant.
+ * which is usually just the first colour variant. Also applies the Shopee
+ * "terjual" total from lib/mock-data/sold-counts.ts.
  */
 function withHeroImage(product: Product): Product {
   const hero = product.galleryImages?.[0];
-  return hero ? { ...product, imageUrl: hero } : product;
+  const sold = shopeeSoldCounts[product.slug] ?? product.soldCount;
+  return {
+    ...product,
+    ...(hero ? { imageUrl: hero } : {}),
+    ...(sold !== undefined ? { soldCount: sold } : {}),
+  };
 }
 
 export async function getMergedCatalog(): Promise<Product[]> {
