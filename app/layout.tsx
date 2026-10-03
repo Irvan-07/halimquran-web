@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Open_Sans } from "next/font/google";
 import "./globals.css";
-import { Header, Footer, activeTheme } from "@/themes";
+import { ThemeProvider } from "@/themes/client";
+import { getActiveTheme } from "@/themes/server";
 import { Toaster } from "@/components/ui/sonner";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { CartProvider } from "@/components/cart/CartProvider";
@@ -34,22 +35,27 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const theme = await getActiveTheme();
+  const { Header, Footer } = theme.slots;
+
   return (
-    <html lang="id" data-theme={activeTheme.id} className={`${archivo.variable} ${openSans.variable}`}>
+    <html lang="id" data-theme={theme.id} className={`${archivo.variable} ${openSans.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
         <GoogleTagManager />
-        <CartProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <Toaster />
-          <WhatsAppButton />
-        </CartProvider>
+        <ThemeProvider themeId={theme.id}>
+          <CartProvider>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <Toaster />
+            <WhatsAppButton />
+          </CartProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

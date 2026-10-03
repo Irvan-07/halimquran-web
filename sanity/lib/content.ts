@@ -60,6 +60,16 @@ export async function getPage(slug: string): Promise<CmsPage | null> {
   );
 }
 
+/** The theme id picked in the CMS ("Pengaturan Situs"), or null when nothing is published yet. */
+export async function getSiteThemeId(): Promise<string | null> {
+  const settings = await sanityClient.fetch<{ activeTheme?: string } | null>(
+    `*[_id == "siteSettings"][0]{ activeTheme }`,
+    {},
+    OPTIONS,
+  );
+  return settings?.activeTheme ?? null;
+}
+
 /** Title/description from the Sanity page when published, else the static fallback title. */
 export async function pageMetadata(slug: string, fallbackTitle: string): Promise<Metadata> {
   const page = await getPage(slug).catch(() => null);

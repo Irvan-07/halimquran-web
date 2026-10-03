@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { ProductCard, ProductGrid } from "@/themes";
+import { getActiveTheme } from "@/themes/server";
 import { CmsIntro } from "@/components/content/CmsPageView";
 import { mockProducts } from "@/lib/mock-data/products";
 
@@ -94,7 +94,8 @@ const faq = [
 
 const WHATSAPP_NUMBER = "6281128018990"; // published on qurancustom.com (Halim Quran)
 
-export default function WakafPage() {
+export default async function WakafPage() {
+  const { ProductCard, ProductGrid } = (await getActiveTheme()).slots;
   const wakafProducts = mockProducts.filter((p) => p.wakafEligible);
 
   return (
