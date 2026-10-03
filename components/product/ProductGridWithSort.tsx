@@ -77,7 +77,7 @@ export function ProductGridWithSort({ products }: { products: Product[] }) {
   const activeCount = activeFilterCount(filters);
 
   const toolbarButton =
-    "flex flex-1 items-center justify-center gap-2 rounded-xl bg-secondary px-4 py-3 text-base text-foreground transition-colors hover:bg-muted";
+    "flex flex-1 items-center justify-center gap-2 rounded-xl bg-secondary px-4 py-3 text-base text-foreground transition-colors hover:bg-primary/10 hover:text-primary";
 
   return (
     <div className="flex flex-col gap-4">
