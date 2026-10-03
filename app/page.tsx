@@ -1,3 +1,4 @@
+import { getHeroSlides } from "@/sanity/lib/content";
 import { getActiveTheme } from "@/themes/server";
 import type { HomeRail } from "@/themes/types";
 import { getMergedCatalog } from "@/lib/scalev/catalog";
@@ -125,7 +126,7 @@ const RAILS: {
 
 export default async function HomePage() {
   const { Home } = (await getActiveTheme()).slots;
-  const catalog = await getMergedCatalog();
+  const [catalog, banners] = await Promise.all([getMergedCatalog(), getHeroSlides()]);
   const bySlug = new Map(catalog.map((p) => [p.slug, p]));
 
   const rails: HomeRail[] = RAILS.map(({ productSlugs, ...rail }) => ({
@@ -135,5 +136,5 @@ export default async function HomePage() {
       .filter((p): p is Product => Boolean(p)),
   })).filter((rail) => rail.products.length > 0);
 
-  return <Home rails={rails} catalog={catalog} />;
+  return <Home rails={rails} catalog={catalog} banners={banners} />;
 }

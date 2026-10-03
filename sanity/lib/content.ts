@@ -1,5 +1,6 @@
 import type { PortableTextBlock } from "next-sanity";
 import type { Metadata } from "next";
+import { DEFAULT_HERO_SLIDES, builtinHeroBanners, type HeroSlide } from "@/components/sections/hero-slides";
 import { sanityClient } from "./client";
 
 // Published content is public-read, so these run with the plain CDN client.
@@ -68,6 +69,39 @@ export async function getSiteThemeId(): Promise<string | null> {
     OPTIONS,
   );
   return settings?.activeTheme ?? null;
+}
+
+/** Keep only destinations we can safely link to: a site path or an http(s) URL. */
+function cleanLink(link?: string | null): string | undefined {
+  const l = link?.trim();
+  if (!l) return undefined;
+  return l.startsWith("/") || /^https?:\/\//i.test(l) ? l : undefined;
+}
+
+/**
+ * Homepage banners from the CMS ("Pengaturan Situs" > "Banner beranda"), in
+ * the order set there. Falls back to the built-in set (not clickable) when
+ * none are published or the CMS can't be reached.
+ */
+export async function getHeroSlides(): Promise<HeroSlide[]> {
+  try {
+    const rows = await sanityClient.fetch<
+      { imageUrl?: string | null; builtin?: string | null; alt?: string | null; link?: string | null }[] | null
+    >(
+      `*[_id == "siteSettings"][0].heroBanners[]{ "imageUrl": image.asset->url, builtin, alt, link }`,
+      {},
+      OPTIONS,
+    );
+    const slides = (rows ?? []).flatMap((row) => {
+      const built = builtinHeroBanners.find((b) => b.id === row.builtin);
+      const src = row.imageUrl ?? built?.src;
+      if (!src) return [];
+      return [{ src, alt: row.alt?.trim() || built?.alt || "Banner Halim Quran", href: cleanLink(row.link) }];
+    });
+    return slides.length > 0 ? slides : DEFAULT_HERO_SLIDES;
+  } catch {
+    return DEFAULT_HERO_SLIDES;
+  }
 }
 
 /** Title/description from the Sanity page when published, else the static fallback title. */

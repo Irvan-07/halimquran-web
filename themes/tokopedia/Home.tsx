@@ -38,7 +38,7 @@ const cardShadow = "shadow-[0_1px_6px_rgba(141,150,170,0.4)]";
 //    scrolling chip row of categories, and every rail as a horizontal
 //    scroller (the first one in a green panel).
 // Ends with an "Untuk Kamu" feed of the products not already shown above.
-export function TokopediaHome({ rails, catalog }: HomeProps) {
+export function TokopediaHome({ rails, catalog, banners }: HomeProps) {
   const categories = rails.filter((r) => r.banner);
   const shown = new Set(rails.flatMap((r) => r.products.map((p) => p.slug)));
   const more = catalog.filter((p) => !shown.has(p.slug)).slice(0, 20);
@@ -47,7 +47,7 @@ export function TokopediaHome({ rails, catalog }: HomeProps) {
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-3 pb-6 pt-0 lg:gap-6 lg:px-8 lg:pt-5">
       {/* Banner */}
       <div className="-mx-3 sm:mx-0">
-        <TokopediaBanner />
+        <TokopediaBanner slides={banners} />
       </div>
 
       {/* Phone: shop card */}

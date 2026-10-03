@@ -1,5 +1,6 @@
 import type { ComponentType, ReactNode } from "react";
 import type { Product } from "@/types/product";
+import type { HeroSlide } from "@/components/sections/hero-slides";
 import type { ThemeId } from "./meta";
 
 /** Props the product page hands to a theme's ProductDetail layout. */
@@ -26,6 +27,8 @@ export interface HomeProps {
   rails: HomeRail[];
   /** The whole merged catalog, for themes that show an "all products" grid. */
   catalog: Product[];
+  /** Top-of-page banners (from the CMS, else the built-in set); each may carry a click destination. */
+  banners: HeroSlide[];
 }
 
 /**

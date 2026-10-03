@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { HERO_SLIDES } from "@/components/sections/HeroCarousel";
+import { SlideLink } from "@/components/sections/SlideLink";
+import type { HeroSlide } from "@/components/sections/hero-slides";
 
 const AUTO_ADVANCE_MS = 5000;
 
@@ -11,11 +12,11 @@ const AUTO_ADVANCE_MS = 5000;
 // scroll-snap, so it swipes on phones, plus arrows on desktop and a gentle
 // auto-advance (paused while hovered or touched). Same real campaign
 // banners as the default homepage.
-export function BlibliHeroScroller() {
+export function BlibliHeroScroller({ slides }: { slides: HeroSlide[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const paused = useRef(false);
   const [active, setActive] = useState(0);
-  const count = HERO_SLIDES.length;
+  const count = slides.length;
 
   function scrollToIndex(i: number) {
     const track = trackRef.current;
@@ -64,9 +65,11 @@ export function BlibliHeroScroller() {
         onScroll={onScroll}
         className="relative flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {HERO_SLIDES.map((slide, i) => (
-          <div
-            key={slide.src}
+        {slides.map((slide, i) => (
+          <SlideLink
+            key={slide.src + i}
+            href={slide.href}
+            label={slide.alt}
             className="relative aspect-[4/3] w-[88%] shrink-0 snap-start overflow-hidden rounded-2xl bg-secondary sm:w-[60%] lg:w-[calc((100%-1.5rem)/2.4)]"
           >
             <Image
@@ -77,7 +80,7 @@ export function BlibliHeroScroller() {
               sizes="(min-width: 1024px) 520px, (min-width: 640px) 60vw, 88vw"
               className="object-cover"
             />
-          </div>
+          </SlideLink>
         ))}
       </div>
 
@@ -99,7 +102,7 @@ export function BlibliHeroScroller() {
       </button>
 
       <div className="mt-3 flex justify-center gap-1.5">
-        {HERO_SLIDES.map((slide, i) => (
+        {slides.map((slide, i) => (
           <button
             key={slide.src}
             type="button"

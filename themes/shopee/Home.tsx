@@ -35,7 +35,7 @@ const quickLinks = [
 //    thumbnails you scroll sideways, and each rail as a horizontal
 //    product scroller under its title.
 // Finishes with an "all products" grid (items not already shown above).
-export function ShopeeHome({ rails, catalog }: HomeProps) {
+export function ShopeeHome({ rails, catalog, banners }: HomeProps) {
   const categories = rails.filter((r) => r.banner);
   const shown = new Set(rails.flatMap((r) => r.products.map((p) => p.slug)));
   const more = catalog.filter((p) => !shown.has(p.slug)).slice(0, 20);
@@ -44,7 +44,7 @@ export function ShopeeHome({ rails, catalog }: HomeProps) {
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 pb-6 lg:gap-4 lg:px-8 lg:py-5">
       {/* Banner (+ category panel on desktop) */}
       <section className="flex flex-col lg:grid lg:grid-cols-[480px_minmax(0,1fr)] lg:gap-1">
-        <ShopeeHeroBanner className="lg:aspect-auto lg:h-full lg:rounded-sm" />
+        <ShopeeHeroBanner slides={banners} className="lg:aspect-auto lg:h-full lg:rounded-sm" />
         <div className="hidden flex-col bg-card lg:flex lg:rounded-sm lg:shadow-sm">
           <h2 className="border-b border-border/60 px-5 py-3 text-sm font-medium uppercase text-foreground/80">
             Kategori

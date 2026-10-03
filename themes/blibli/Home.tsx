@@ -45,14 +45,14 @@ const hideScrollbar = "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden";
 //    labels underneath, category tiles you swipe, and every rail as a
 //    horizontal card scroller inside the blue panel.
 // Ends with an "all products" grid (items not already shown above).
-export function BlibliHome({ rails, catalog }: HomeProps) {
+export function BlibliHome({ rails, catalog, banners }: HomeProps) {
   const categories = rails.filter((r) => r.banner);
   const shown = new Set(rails.flatMap((r) => r.products.map((p) => p.slug)));
   const more = catalog.filter((p) => !shown.has(p.slug)).slice(0, 20);
 
   return (
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 pb-8 pt-3 lg:gap-8 lg:px-8 lg:pt-5">
-      <BlibliHeroScroller />
+      <BlibliHeroScroller slides={banners} />
 
       {/* Trust line */}
       <ul className={`-mx-4 flex gap-6 overflow-x-auto px-4 text-xs text-foreground lg:mx-0 lg:justify-center lg:gap-10 lg:px-0 lg:text-sm ${hideScrollbar}`}>

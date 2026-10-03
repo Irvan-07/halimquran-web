@@ -2,33 +2,24 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-
-// Real campaign banners from halimquran.com's homepage carousel (saved
-// 26 Sep 2026 — the live site rotates through these same images, source
-// filenames Artboard_6 through Artboard_11 plus HALIMOMENT_SEKOLAH). The
-// text/logo seen in each banner is baked into the image itself (the
-// business's own design asset), not rendered by this component.
-export const HERO_SLIDES = [
-  { src: "/hero/banner-1.jpg", alt: "Siswa berprestasi selalu punya waktu untuk mengaji" },
-  { src: "/hero/banner-2.jpg", alt: "Promo Halim Quran" },
-  { src: "/hero/banner-3.jpg", alt: "Promo Halim Quran" },
-  { src: "/hero/banner-4.jpg", alt: "Promo Halim Quran" },
-  { src: "/hero/banner-5.jpg", alt: "Promo Halim Quran" },
-  { src: "/hero/banner-6.jpg", alt: "Promo Halim Quran" },
-  { src: "/hero/banner-7.jpg", alt: "Promo Halim Quran" },
-];
+import { DEFAULT_HERO_SLIDES, type HeroSlide } from "./hero-slides";
+import { SlideLink } from "./SlideLink";
 
 const AUTO_ADVANCE_MS = 5000;
 
-export function HeroCarousel() {
+// The slides come from the CMS (see getHeroSlides) and each may be a link;
+// without any they fall back to the built-in banners.
+export function HeroCarousel({ slides = DEFAULT_HERO_SLIDES }: { slides?: HeroSlide[] }) {
   const [index, setIndex] = useState(0);
+  const count = slides.length;
 
   useEffect(() => {
+    if (count < 2) return;
     const id = setInterval(() => {
-      setIndex((i) => (i + 1) % HERO_SLIDES.length);
+      setIndex((i) => (i + 1) % count);
     }, AUTO_ADVANCE_MS);
     return () => clearInterval(id);
-  }, []);
+  }, [count]);
 
   // 4:3 matches the source banners' native ratio (and the live site's own
   // display box) — a wider crop would cut off baked-in logo/text near the
@@ -40,24 +31,30 @@ export function HeroCarousel() {
   // (tall-on-wide-screens) behavior instead.
   return (
     <div className="relative -mt-16 aspect-[4/3] w-full overflow-hidden bg-secondary">
-      {HERO_SLIDES.map((slide, i) => (
-        <Image
-          key={slide.src}
-          src={slide.src}
-          alt={slide.alt}
-          fill
-          priority={i === 0}
-          sizes="100vw"
-          className={`object-cover transition-opacity duration-700 ${
-            i === index ? "opacity-100" : "opacity-0"
+      {slides.map((slide, i) => (
+        <SlideLink
+          key={slide.src + i}
+          href={slide.href}
+          label={slide.alt}
+          className={`absolute inset-0 transition-opacity duration-700 ${
+            i === index ? "opacity-100" : "pointer-events-none opacity-0"
           }`}
-        />
+        >
+          <Image
+            src={slide.src}
+            alt={slide.alt}
+            fill
+            priority={i === 0}
+            sizes="100vw"
+            className="object-cover"
+          />
+        </SlideLink>
       ))}
 
-      <div className="absolute inset-x-0 bottom-4 flex justify-center gap-1.5">
-        {HERO_SLIDES.map((slide, i) => (
+      <div className="absolute inset-x-0 bottom-4 z-10 flex justify-center gap-1.5">
+        {slides.map((slide, i) => (
           <button
-            key={slide.src}
+            key={slide.src + i}
             type="button"
             aria-label={`Slide ${i + 1}`}
             onClick={() => setIndex(i)}

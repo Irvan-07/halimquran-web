@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { HERO_SLIDES } from "@/components/sections/HeroCarousel";
+import { SlideLink } from "@/components/sections/SlideLink";
+import type { HeroSlide } from "@/components/sections/hero-slides";
 
 const AUTO_ADVANCE_MS = 5000;
 
@@ -13,11 +14,11 @@ const AUTO_ADVANCE_MS = 5000;
 //  - phone: one full-bleed banner at a time with a segment bar on top of it;
 //  - desktop: three banners side by side (each keeps its 4:3 design), dots
 //    underneath.
-export function TokopediaBanner() {
+export function TokopediaBanner({ slides }: { slides: HeroSlide[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const paused = useRef(false);
   const [active, setActive] = useState(0);
-  const [positions, setPositions] = useState(HERO_SLIDES.length);
+  const [positions, setPositions] = useState(slides.length);
 
   const measure = useCallback(() => {
     const track = trackRef.current;
@@ -83,9 +84,11 @@ export function TokopediaBanner() {
         onScroll={onScroll}
         className="relative flex snap-x snap-mandatory gap-3 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {HERO_SLIDES.map((slide, i) => (
-          <div
-            key={slide.src}
+        {slides.map((slide, i) => (
+          <SlideLink
+            key={slide.src + i}
+            href={slide.href}
+            label={slide.alt}
             className="relative aspect-[4/3] w-full shrink-0 snap-start overflow-hidden bg-secondary sm:w-[calc((100%-0.75rem)/2)] sm:rounded-xl lg:w-[calc((100%-1.5rem)/3)]"
           >
             <Image
@@ -96,13 +99,13 @@ export function TokopediaBanner() {
               sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
               className="object-cover"
             />
-          </div>
+          </SlideLink>
         ))}
       </div>
 
       {/* Phone: segment bar over the banner */}
       <div className="pointer-events-none absolute inset-x-0 bottom-3 flex justify-center gap-1 sm:hidden">
-        {HERO_SLIDES.map((slide, i) => (
+        {slides.map((slide, i) => (
           <span
             key={slide.src}
             className={`h-1 rounded-full transition-all ${i === active ? "w-6 bg-primary" : "w-2 bg-background/70"}`}

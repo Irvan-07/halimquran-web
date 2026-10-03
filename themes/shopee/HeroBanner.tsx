@@ -3,17 +3,18 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { HERO_SLIDES } from "@/components/sections/HeroCarousel";
+import { SlideLink } from "@/components/sections/SlideLink";
+import type { HeroSlide } from "@/components/sections/hero-slides";
 
 const AUTO_ADVANCE_MS = 5000;
 
 // Same real campaign banners as the default homepage, in a marketplace
 // frame: arrows on hover (desktop), swipe (mobile), dots, auto-advance.
 // Unlike the default hero it sits below the solid header, not under it.
-export function ShopeeHeroBanner({ className = "" }: { className?: string }) {
+export function ShopeeHeroBanner({ slides, className = "" }: { slides: HeroSlide[]; className?: string }) {
   const [index, setIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
-  const count = HERO_SLIDES.length;
+  const count = slides.length;
 
   useEffect(() => {
     const id = setInterval(() => setIndex((i) => (i + 1) % count), AUTO_ADVANCE_MS);
@@ -35,16 +36,22 @@ export function ShopeeHeroBanner({ className = "" }: { className?: string }) {
         if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
       }}
     >
-      {HERO_SLIDES.map((slide, i) => (
-        <Image
-          key={slide.src}
-          src={slide.src}
-          alt={slide.alt}
-          fill
-          priority={i === 0}
-          sizes="(min-width: 1024px) 480px, 100vw"
-          className={`object-cover transition-opacity duration-500 ${i === index ? "opacity-100" : "opacity-0"}`}
-        />
+      {slides.map((slide, i) => (
+        <SlideLink
+          key={slide.src + i}
+          href={slide.href}
+          label={slide.alt}
+          className={`absolute inset-0 transition-opacity duration-500 ${i === index ? "opacity-100" : "pointer-events-none opacity-0"}`}
+        >
+          <Image
+            src={slide.src}
+            alt={slide.alt}
+            fill
+            priority={i === 0}
+            sizes="(min-width: 1024px) 480px, 100vw"
+            className="object-cover"
+          />
+        </SlideLink>
       ))}
 
       <button
@@ -65,7 +72,7 @@ export function ShopeeHeroBanner({ className = "" }: { className?: string }) {
       </button>
 
       <div className="absolute inset-x-0 bottom-2.5 flex justify-center gap-1.5">
-        {HERO_SLIDES.map((slide, i) => (
+        {slides.map((slide, i) => (
           <button
             key={slide.src}
             type="button"

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { ProductCard } from "@/components/product/ProductCard";
 import { HeroCarousel } from "@/components/sections";
 import { Reveal } from "@/components/layout/Reveal";
@@ -26,10 +26,10 @@ const LIFESTYLE_ITEMS: LifestyleItem[] = [
 // The original halimquran.com homepage (moved here unchanged from the
 // route file so other themes can swap it out). The rail contents/order are
 // defined in app/page.tsx.
-export function HalimHome({ rails }: HomeProps) {
+export function HalimHome({ rails, banners }: HomeProps) {
   return (
     <div className="flex flex-col">
-      <HeroCarousel />
+      <HeroCarousel slides={banners} />
 
       <div className="flex flex-col gap-10 pb-4 pt-6">
         {rails.map((rail) => (
@@ -64,10 +64,10 @@ export function HalimHome({ rails }: HomeProps) {
             </div>
             <Link
               href={rail.href}
-              className="group mx-auto flex w-fit items-center gap-2 rounded-full border border-primary px-6 py-2 text-sm font-medium text-primary hover:bg-primary hover:text-primary-foreground"
+              className="ml-auto flex items-center gap-0.5 text-sm font-medium text-primary hover:underline"
             >
-              Lihat Selengkapnya
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+              Lihat Semua
+              <ChevronRight className="size-4" />
             </Link>
           </Reveal>
         ))}
