@@ -17,10 +17,9 @@ const LIFESTYLE_ITEMS: LifestyleItem[] = [
   { type: "image", src: "/lifestyle/photo-1.png" },
   { type: "image", src: "/lifestyle/photo-2.png" },
   { type: "image", src: "/lifestyle/photo-3.png" },
-  // Only this specific item carries the "All Product / Here" overlay on
-  // the live site (confirmed by the user against the real homepage) — the
-  // other 3 are plain media.
-  { type: "video", src: "/lifestyle/video-1.mp4", cta: true },
+  // The video used to carry an "All Product / Here" overlay (as on the old
+  // live site); removed on request — every item is plain media now.
+  { type: "video", src: "/lifestyle/video-1.mp4" },
 ];
 
 // The original halimquran.com homepage (moved here unchanged from the
