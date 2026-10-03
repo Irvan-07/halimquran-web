@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ProductCard, ProductGrid, ProductsIntro } from "@/themes";
+import { getActiveTheme } from "@/themes/server";
 import { getMergedCatalog } from "@/lib/scalev/catalog";
 import { productCategories } from "@/lib/mock-data/categories";
 
@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ProdukPage() {
+  const { ProductCard, ProductGrid, ProductsIntro } = (await getActiveTheme()).slots;
   const products = await getMergedCatalog();
 
   return (

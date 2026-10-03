@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ProductDetail } from "@/themes";
+import { getActiveTheme } from "@/themes/server";
 import { getMergedCatalog, getMergedProductBySlug } from "@/lib/scalev/catalog";
 import { productCategories } from "@/lib/mock-data/categories";
 import type { Product } from "@/types/product";
@@ -61,6 +61,7 @@ function generateDescriptionText(product: Product, categoryLabel: string): strin
 
 export default async function ProductDetailPage({ params }: PdpPageProps) {
   const { slug } = await params;
+  const { ProductDetail } = (await getActiveTheme()).slots;
 
   const catalog = await getMergedCatalog();
   const product = catalog.find((p) => p.slug === slug) ?? null;

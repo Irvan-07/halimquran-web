@@ -1,5 +1,6 @@
 import type { ComponentType, ReactNode } from "react";
 import type { Product } from "@/types/product";
+import type { ThemeId } from "./meta";
 
 /** Props the product page hands to a theme's ProductDetail layout. */
 export interface ProductDetailProps {
@@ -49,7 +50,7 @@ export interface ThemeSlots {
 
 export interface Theme {
   /** Matches the `data-theme` attribute on <html>, where a theme's design-token overrides in globals.css hang. */
-  id: string;
+  id: ThemeId;
   name: string;
   slots: ThemeSlots;
 }
