@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ArrowLeft, Search, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CartIcon } from "@/components/cart/CartIcon";
@@ -18,10 +18,15 @@ import { DesktopNav } from "@/components/layout/DesktopNav";
 // shows a back button in place of the hamburger — confirmed against the
 // real site's own PDP, not guessed.
 const PDP_PATTERN = /^\/produk\/[^/]+\/[^/]+/;
+// A category page (/produk/{kategori}) gets the same back button, which
+// goes back in the browser history (or to all products when there is none).
+const CATEGORY_PATTERN = /^\/produk\/[^/]+\/?$/;
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const onCategory = CATEGORY_PATTERN.test(pathname);
   const pdpMatch = pathname.match(PDP_PATTERN);
   const backHref = pdpMatch ? `/produk/${pathname.split("/")[2]}` : null;
 
@@ -48,6 +53,15 @@ export function Header() {
             >
               <ArrowLeft className="size-5" />
             </Link>
+          ) : onCategory ? (
+            <button
+              type="button"
+              aria-label="Kembali"
+              onClick={() => (window.history.length > 1 ? router.back() : router.push("/produk"))}
+              className="flex size-9 items-center justify-center text-foreground"
+            >
+              <ArrowLeft className="size-5" />
+            </button>
           ) : (
             <MobileNav />
           )}

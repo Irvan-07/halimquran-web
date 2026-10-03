@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CategoryTabs } from "@/components/product/CategoryTabs";
 import { ProductGridWithSort } from "@/components/product/ProductGridWithSort";
@@ -34,15 +33,10 @@ export default async function KategoriPage({ params }: KategoriPageProps) {
   const products = catalog.filter((p) => p.category === category.slug);
 
   return (
-    <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="flex flex-col gap-2">
-        <Link href="/produk" className="text-sm text-muted-foreground hover:text-primary">
-          &larr; Semua Produk
-        </Link>
-        <h1 className="font-heading text-3xl font-semibold text-foreground">
-          {category.label}
-        </h1>
-      </div>
+    <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 pb-12 pt-3 sm:px-6 sm:pt-6 lg:px-8">
+      {/* Matches halimquran.com: no visible headline — the category row says
+          where you are. Kept for screen readers and search engines. */}
+      <h1 className="sr-only">{category.label}</h1>
 
       <CategoryTabs active={category.slug} />
 

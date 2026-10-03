@@ -8,7 +8,8 @@ interface ProductCardProps {
   product: Product;
 }
 
-// Matches halimquran.com's product card: no category label line, wishlist
+// Matches halimquran.com's product card: borderless (only the photo is
+// rounded, hovering tints the whole card), no category label line, wishlist
 // heart bottom-right of the image, rating as its own line under the price.
 // The photo is always the product's hero image (see withHeroImage in
 // lib/scalev/catalog.ts); colours are chosen on the product page, so the
@@ -17,9 +18,9 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <Link
       href={`/produk/${product.category}/${product.slug}`}
-      className="flex flex-col overflow-hidden rounded-lg border border-border bg-background transition-shadow hover:shadow-md"
+      className="flex flex-col gap-2 overflow-hidden bg-background transition-colors hover:bg-black/5"
     >
-      <div className="relative aspect-square w-full bg-secondary">
+      <div className="relative aspect-square w-full overflow-hidden rounded bg-secondary">
         {product.imageUrl && (
           <Image
             src={product.imageUrl}
@@ -37,7 +38,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </span>
       </div>
 
-      <div className="flex flex-col gap-2 p-3">
+      <div className="flex flex-col gap-2 px-2 pb-2">
         <h3 className="text-sm font-medium text-foreground">{product.name}</h3>
 
         <p className="text-sm font-semibold text-primary">
