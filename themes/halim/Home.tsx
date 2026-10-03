@@ -73,7 +73,7 @@ export function HalimHome({ rails }: HomeProps) {
         ))}
       </div>
 
-      <div className="flex flex-col items-center gap-6 pb-10">
+      <div className="flex flex-col items-center gap-6">
         <LifestyleMarquee items={LIFESTYLE_ITEMS} />
       </div>
     </div>
