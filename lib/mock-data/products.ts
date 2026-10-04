@@ -1657,4 +1657,85 @@ export const mockProducts: Product[] = [
       { author: "l*****i", rating: 5, text: "Cocok Untuk: anak santri. Tampilan: elegan. Kualitas: ok. Makasih banyak ya gan,Alquran nya bagus banget desain covernya\u{1F64F}respon penjual dan pengiriman sangat cepat ,dan makasih kurirnya ramah banget jg\u{1F64F}", date: "08 Oct 2022", variant: "Abu-Abu • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/tsumun-r29-1.jpg" }] },
     ],
   },
+  {
+    id: "43",
+    slug: "mushaf-al-quran-al-wafa-a6-resleting",
+    name: "Mushaf Al Quran Al Wafa A6 Resleting",
+    price: 52000,
+    category: "quran-harian",
+    size: "A6",
+    badge: "Ukir Nama",
+    rating: 5,
+    // 317 = 5-star (305) + 4-star (12) ratings on this product's real
+    // Shopee listing, out of 320 total (4 Oct 2026) — per the project
+    // owner's direction, 3/2/1-star ratings (3 total) are treated as 0.
+    // Shopee titles it "...AL-WAFA A6 RESLETING UKURAN SEDANG MATERIAL
+    // PREMIUM"; its hero photo calls it "Al-Wafa Nisfu A6 Resleting".
+    ratingCount: 317,
+    // No colorVariants: no per-colour photos were supplied (Shopee lists 11
+    // colours, 6 of them greyed out = out of stock there), so this uses the
+    // flat colors/colorNames fallback. Replace with colorVariants once
+    // Scalev has the variants.
+    colors: ["#6B7280", "#1E3A5F", "#B08968", "#5C3A21", "#0F7A5C", "#111827", "#7B2D26", "#14B8A6", "#2563EB", "#14532D", "#E8DCC4"],
+    colorNames: ["Abu-Abu", "Biru Tua", "Coklat Muda", "Coklat Tua", "Hijau", "Hitam", "Maroon", "Tosca", "Biru", "Hijau Tua", "Cream"],
+    customNameEligible: true,
+    imageUrl: "/products/mushaf-al-quran-al-wafa-a6-resleting.jpg",
+    // Gallery photos supplied by the owner (exported from the product's own
+    // Shopee listing, 4 Oct 2026): hero, colour picker, detail, inner
+    // features, service graphic, size chart.
+    galleryImages: [
+      "/products/wafa-a6-resleting-gallery/gallery-1-main.jpg",
+      "/products/wafa-a6-resleting-gallery/gallery-2.jpg",
+      "/products/wafa-a6-resleting-gallery/gallery-3.jpg",
+      "/products/wafa-a6-resleting-gallery/gallery-4.jpg",
+      "/products/wafa-a6-resleting-gallery/gallery-5.jpg",
+      "/products/wafa-a6-resleting-gallery/gallery-6-sizechart.jpg",
+    ],
+    weightGrams: 315,
+    // Real listing copy supplied by the owner 4 Oct 2026; section titles got
+    // a trailing ":" and numbered items became "-" bullets so the PDP
+    // renders them as bold headings with lists.
+    description:
+      "Gak betah lama-lama baca Al-Qur'an?? Seringnya suka ngantuk dan bahkan ketiduran?? Sayang banget ya, padahal pahala baca Al-Qur'an itu sangat besar. Kelelahan mata saat membaca Al-Qur'an bisa disebabkan oleh warna kertas yang tidak ramah bagi mata. Solusinya, kamu bisa pakai Al-Qur'an dengan bahan kertas Qur'an Paper Premium (QPP) dengan warna Yellowish yang ramah di mata. Mata Kamu tidak akan lelah walau membaca Al-Qur'an dalam waktu lama.\n\nSeperti Al-Qur'an Al-Wafa A6 resleting ini. Ukurannya sedang dengan material kualitas premium. Penasaran apa saja keistimewaannya??\n\nSpesifikasi:\n- Dompet Resleting\n- Ukuran A6 (10,5 x 14,5 cm)\n- Kertas QPP 50gr\n- Berat 315gr\n- Tebal 616 halaman\n\nFitur Cover:\n- Desain cover casual, kalem, dan hangat.\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n- Tersedia dalam 9 pilihan warna.\n\nMaterial Cover:\n- Cover terbuat dari kulit sintetis berkualitas yang membuat warna cover lebih kuat dan tidak mudah pudar. Selain itu, cover dilapisi dengan foil yang memberi kesan mewah pada tampilan cover.\n- Resleting berbahan metal, sehingga lebih kokoh dan aman, serta memiliki gigitan resleting yang lebih kuat. Metal Zipper memberi kesan mahal dan eksklusif pada Al-Qur'an.\n\nMaterial Inner:\n- Menggunakan kertas QPP 50gr dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas Yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur Inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan kamu mencari juz atau halaman tertentu.\n- Terdapat pewarnaan kata ganti Allah dan -Nya yang memudahkan kamu menemukan ayat-ayat pilihan.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
+    // Curated subset of this product's real Shopee listing reviews (4 Oct
+    // 2026): 320 ratings in total, so this is the top 30 by like count among
+    // the 4-5 star reviews that have a comment AND photos/video (34 qualify),
+    // not literally every review. Read via Shopee's own ratings API with the
+    // logged-in owner's session, kept verbatim except that the structured
+    // "Label:value" lines were joined into sentences like the other
+    // products. The seller's replies are not included. Source listing:
+    // https://shopee.co.id/Halim-Qur'an-MUSHAF-AL-QURAN-AL-WAFA-A6-RESLETING-UKURAN-SEDANG-MATERIAL-PREMIUM-i.229472472.7317568108
+    reviews: [
+      { author: "lidaramadani002", rating: 5, text: "Tampilan: okk. Kualitas: bagus. Cocok Untuk: d bawa kemana -mana. Alhamdulillah barangnya sudah sya terima, tulisannya jelas walaupun kecil packingnya rapi dan barangnya bagus keliatan mewah , murah tapi gak murahan pengirimanya jga cepat makasih\u{1F64F} semoga selalu amanah dan berkah", date: "28 May 2023", variant: "Biru Tua • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r0-1.jpg" }, { type: "image", src: "/reviews/wafa-a6-r0-2.jpg" }, { type: "video", src: "/reviews/wafa-a6-r0.mp4" }] },
+      { author: "s*****3", rating: 5, text: "Kegunaan: buat ngaji. Kualitas: ok bangett. Dijamin 100% original Seller nya sangat ramah bangett chat dibalas Terima kasih ka Semoga sehat selalu murah rezeki ka Puas bangett belanja disini", date: "23 Oct 2024", variant: "Abu-Abu • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r1-1.jpg" }, { type: "image", src: "/reviews/wafa-a6-r1-2.jpg" }] },
+      { author: "n*****d", rating: 5, text: "Tampilan: good. Kualitas: good. Cocok Untuk: traveling. MasyaaAllah, Alhamdulillah puas sekali dengan hasilnya, tulisannya pun standar untuk yang pemula. thank you admin\u{2728}", date: "01 Apr 2023", variant: "Abu-Abu • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r2-1.jpg" }, { type: "video", src: "/reviews/wafa-a6-r2.mp4" }] },
+      { author: "anshee.id", rating: 5, text: "Maasyaa Allah, Al Quran-nya bagus cetakan sendiri.. Ada diskon dan adab-adab baca quran juga.. Syukron, Jazakumullahu khairan, Semoga Allah lancarkan segala urusan Tim Halim Quran", date: "27 Apr 2022", variant: "Hitam • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r3-1.jpg" }, { type: "image", src: "/reviews/wafa-a6-r3-2.jpg" }] },
+      { author: "d*****g", rating: 5, text: "Bagus... Puas dengan kualitas nya quran nya! Tapi ekspedisinya lama banget\u{1F62B} mungkin karna 4.4..... Terimakasih seller\u{2728}\u{2728}", date: "07 Apr 2022", variant: "Coklat Tua • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r4-1.jpg" }, { type: "video", src: "/reviews/wafa-a6-r4.mp4" }] },
+      { author: "uminiswa", rating: 5, text: "Ukuran: pas dan sesua.", date: "23 Mar 2025", variant: "Biru • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "video", src: "/reviews/wafa-a6-r5.mp4" }] },
+      { author: "yqnx3zylp6", rating: 5, text: "Size A5 & A6 sejauh itu ya perbandingannya. Warna Abunya lebih ke mendekati putih. Barang oke sama seperti sebelumnya dan penulisan namanya pun lebih jelas. Pesan kemarin eh sekarang udah datang aja. Terimakasih \u{1F64F}", date: "12 Sep 2024", variant: "Abu-Abu • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r6-1.jpg" }, { type: "image", src: "/reviews/wafa-a6-r6-2.jpg" }] },
+      { author: "s*****4", rating: 4, text: "Tampilan: mewah. Kualitas: bagus. Bagus, sesuai ekspetasi", date: "22 Aug 2023", variant: "Coklat Muda • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r7-1.jpg" }, { type: "video", src: "/reviews/wafa-a6-r7.mp4" }] },
+      { author: "w*****b", rating: 5, text: "Tampilan: bagus. Cocok Untuk: mengaji. Kualitas: bagus. Pesanan saya telah sampai. Semuanya aman. Terima kasih yaa kak.", date: "17 Jul 2023", variant: "Hitam • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r8-1.jpg" }, { type: "video", src: "/reviews/wafa-a6-r8.mp4" }] },
+      { author: "m*****5", rating: 5, text: "MasyaALLAH, semoga bermanfaat.", date: "17 Mar 2023", variant: "Biru Tua • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "video", src: "/reviews/wafa-a6-r9.mp4" }] },
+      { author: "virgosari", rating: 5, text: "Terima kasih barang sudah diterima Alquran bagus kertasnya Bisa custom nama", date: "01 Oct 2026", variant: "Maroon • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r10-1.jpg" }, { type: "video", src: "/reviews/wafa-a6-r10.mp4" }] },
+      { author: "fifiys_", rating: 5, text: "Tampilan: bagus. Kualitas: bagus.", date: "27 Sep 2026", variant: "Hitam • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r11-1.jpg" }, { type: "video", src: "/reviews/wafa-a6-r11.mp4" }] },
+      { author: "syukurramadani.siregar", rating: 5, text: "kualitas kertas: Alhamdulillah bagus. portabilitas: Alhamdulillah bagus. tampilan mewah: Alhamdulillah bagus. Alhamdulillah bagus", date: "24 Sep 2026", variant: "Coklat Muda • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r12-1.jpg" }] },
+      { author: "sofiyatun421", rating: 5, text: "tampilan mewah: tampilan mewah. portabilitas: ukurannya pas enak dibawa kemana-mana. kualitas kertas: kertasnya bagus tebal dan halus. Al-Qurannya bagus menurut saya ukurannya juga pas sejengkal kayak difoto yg saya upload dan warna kertasnya kuning, tulisan jelas masih enak untuk dibaca, covernya lembut pokoknya cocok buat saya", date: "22 Sep 2026", variant: "Tosca • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r13-1.jpg" }, { type: "image", src: "/reviews/wafa-a6-r13-2.jpg" }, { type: "video", src: "/reviews/wafa-a6-r13.mp4" }] },
+      { author: "ahsantaagus", rating: 5, text: "Pembelian ke 3 kalinya. yang pertama buat aku. yang kedua buat kakak yang ke 3 buat ibu. Jazaakumullahu khairan", date: "04 Sep 2026", variant: "Coklat Muda • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r14-1.jpg" }] },
+      { author: "susigisani", rating: 5, text: "Bgus Alhamdulillah suka..buat kado anak santriku...", date: "14 Aug 2026", variant: "Coklat Muda • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r15-1.jpg" }] },
+      { author: "u*****7", rating: 5, text: "Sama dg gambar nya", date: "28 Jul 2026", variant: "Hitam • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r16-1.jpg" }] },
+      { author: "amanah8285", rating: 5, text: "Kualitas: baik. Penampilan: meqah. Ukuran: pas A6. Alhamdulillah sudah sampai sebelum anak balik ke pondok.", date: "03 Jul 2026", variant: "Maroon • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r17-1.jpg" }, { type: "image", src: "/reviews/wafa-a6-r17-2.jpg" }, { type: "video", src: "/reviews/wafa-a6-r17.mp4" }] },
+      { author: "han185", rating: 5, text: "Kegunaan: untuk mengaji. Ukuran: pas. Warna: sesuai. Alhamdulillah Alquran nya sangat bagus dan jelas \u{1F44D}", date: "26 Jun 2025", variant: "Hijau Tua • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r18-1.jpg" }, { type: "image", src: "/reviews/wafa-a6-r18-2.jpg" }] },
+      { author: "hosiyehcaem89", rating: 5, text: "Kegunaan: masa allah.", date: "20 May 2025", variant: "Tosca • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r19-1.jpg" }] },
+      { author: "niamasrokatinkhasana", rating: 5, text: "Pengemasan aman realpick bagus amanah tulisan jelas mudah dbaca", date: "08 May 2025", variant: "Abu-Abu • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r20-1.jpg" }, { type: "image", src: "/reviews/wafa-a6-r20-2.jpg" }] },
+      { author: "n*****5", rating: 5, text: "Kegunaan: sangat bermanfaat. Ukuran: A6, mudah untuk dibawa kemana\". Kualitas: cukup bagus. Kualitas bagus, ukuran tulisan sedang tidak terlalu kecil nyaman untuk dibaca. Mantapp", date: "19 Mar 2025", variant: "Hitam • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r21-1.jpg" }, { type: "image", src: "/reviews/wafa-a6-r21-2.jpg" }] },
+      { author: "aliyahcomel17", rating: 5, text: "Kegunaan: sangat cocok untuk mengaji. Ukuran: pas dan sesuai. Kualitas: produk terbaik dalam kategorinya.", date: "08 Mar 2025", variant: "Hitam • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r22-1.jpg" }] },
+      { author: "enyekazr95", rating: 5, text: "Kegunaan: ngaji. Ukuran: pas. Kualitas: bagus. Ini terbaik dengan harga murah di online store serta sangat bermanfaat", date: "06 Mar 2025", variant: "Hitam • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r23-1.jpg" }, { type: "video", src: "/reviews/wafa-a6-r23.mp4" }] },
+      { author: "astritimothy", rating: 5, text: "Bagus..", date: "03 Mar 2025", variant: "Abu-Abu • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r24-1.jpg" }] },
+      { author: "alifiys", rating: 5, text: "Kegunaan: sangat baik untuk mengaji. Ukuran: sangat pas. Kualitas: sangat baguss. Adikku sangat sukaa, terimakasih sudah amanahh, alhamdulillah sesuai dengan yang diharapkan", date: "06 Jan 2025", variant: "Tosca • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r25-1.jpg" }] },
+      { author: "f*****m", rating: 5, text: "barang sudah sampai, kualitas bagus, ukuran pas, mantepppp", date: "13 Sep 2024", variant: "Hitam • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r26-1.jpg" }, { type: "video", src: "/reviews/wafa-a6-r26.mp4" }] },
+      { author: "fauzanrez", rating: 5, text: "Mantap, pengiriman cepat dan barang sesuai ekspetasi", date: "27 Jul 2024", variant: "Biru Tua • Tanpa Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r27-1.jpg" }, { type: "image", src: "/reviews/wafa-a6-r27-2.jpg" }] },
+      { author: "h.asnawi", rating: 5, text: "Kegunaan: sangat cocok untuk mengaji. Kualitas: baik. Konten: mantap. Sesuai yg diharapkan mantaaap barokalloh\u{1F932}\u{1F932}\u{1F932}", date: "29 Apr 2024", variant: "Biru • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r28-1.jpg" }] },
+      { author: "nuralifah_123", rating: 5, text: "Kualitas: Bagus banget. Tampilan: keren. Cocok Untuk: dibawa dalam tas. Masya Allah bagus bgt, pengiriman sangat cepat, puas dg kualitas barang dan pengirimannya", date: "24 Apr 2024", variant: "Biru Tua • Tambah Custom Nama", reviewSource: "Shopee", media: [{ type: "image", src: "/reviews/wafa-a6-r29-1.jpg" }, { type: "image", src: "/reviews/wafa-a6-r29-2.jpg" }, { type: "video", src: "/reviews/wafa-a6-r29.mp4" }] },
+    ],
+  },
 ];
