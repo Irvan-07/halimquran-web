@@ -25,10 +25,10 @@ import type {
 // Products must be attached to the store in the Scalev dashboard (Stores ->
 // Products Offered) or add-to-cart returns 404 "not available in this store".
 
-const API_BASE = "https://api.scalev.com";
+export const API_BASE = "https://api.scalev.com";
 const GUEST_TOKEN_STORAGE_KEY = "halimquran_scalev_guest_token";
 
-function storeId(): string {
+export function storeId(): string {
   const id = process.env.NEXT_PUBLIC_SCALEV_STORE_ID;
   if (!id) {
     throw new Error(
@@ -38,7 +38,7 @@ function storeId(): string {
   return id;
 }
 
-function storefrontApiKey(): string {
+export function storefrontApiKey(): string {
   const key = process.env.NEXT_PUBLIC_SCALEV_STOREFRONT_API_KEY;
   if (!key) {
     throw new Error(

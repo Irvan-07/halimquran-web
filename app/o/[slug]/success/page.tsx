@@ -8,9 +8,12 @@ export const metadata: Metadata = {
 
 export default async function OrderSuccessPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ from?: string }>;
 }) {
   const { slug } = await params;
-  return <OrderStatus secretSlug={slug} />;
+  const { from } = await searchParams;
+  return <OrderStatus secretSlug={slug} fromAccount={from === "akun"} />;
 }

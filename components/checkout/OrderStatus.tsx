@@ -58,7 +58,14 @@ function payLink(info: Record<string, unknown> | undefined): string | null {
   return null;
 }
 
-export function OrderStatus({ secretSlug }: { secretSlug: string }) {
+export function OrderStatus({
+  secretSlug,
+  fromAccount = false,
+}: {
+  secretSlug: string;
+  /** Opened from the order list in Akun Saya: plain "Detail Pesanan" instead of the post-checkout thank-you. */
+  fromAccount?: boolean;
+}) {
   const [order, setOrder] = useState<OrderDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -113,7 +120,7 @@ export function OrderStatus({ secretSlug }: { secretSlug: string }) {
     <div className="mx-auto flex max-w-xl flex-col gap-6 px-4 py-10 sm:px-6">
       <div>
         <h1 className="font-heading text-2xl font-semibold text-foreground">
-          {inactive ? "Detail Pesanan" : "Terima kasih, pesanan diterima"}
+          {inactive || fromAccount ? "Detail Pesanan" : "Terima kasih, pesanan diterima"}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
           No. pesanan <strong className="text-foreground">{order.order_id}</strong> ·{" "}
