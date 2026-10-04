@@ -36,8 +36,8 @@ const RAILS: {
     // of its Shopee shop sorted by "Terlaris" (checked 4 Oct 2026). Shopee
     // shows a 15%-off price, so each product was matched by its normal price
     // (Shopee price / 0.85) plus its photo. Two Shopee best sellers are not in
-    // the Scalev catalog yet, so they stay hidden until the products exist
-    // there (their page content is already staged in the mock data):
+    // the Scalev catalog yet, so they are listed as "Stok Habis" until the
+    // products exist there (page content is already in the mock data):
     //   #3 Al-Wafa Tsumun A7 Resleting (Rp33.000)
     //   #6 Al-Wafa Nisfu A6 Resleting  (Rp52.000, slug ...-wafa-a6-resleting)
     slug: "featured",
@@ -47,14 +47,14 @@ const RAILS: {
     productSlugs: [
       "al-quran-al-azhim-a5-hard-cover", // 1
       "mushaf-al-quran-al-wafa-a7-pocket-edition", // 2
-      // 3: Al-Wafa Tsumun A7 Resleting. Its page content is ready in
-      // lib/mock-data/products.ts; it shows here automatically once a Scalev
-      // product with this exact slug exists (missing slugs are skipped).
+      // 3: Al-Wafa Tsumun A7 Resleting. Page content is ready in
+      // lib/mock-data/products.ts; it becomes buyable once a Scalev product
+      // with this exact slug exists (until then it shows as "Stok Habis").
       "mushaf-al-quran-al-wafa-tsumun-a7-resleting",
       "al-quran-terjemah-al-halim-b7-rubu-hvs-resleting", // 4
       "al-quran-terjemah-al-halim-a6-resleting", // 5
       // 6: Al-Wafa (Nisfu) A6 Resleting. Content ready in
-      // lib/mock-data/products.ts; shows up once Scalev has this exact slug.
+      // lib/mock-data/products.ts; buyable once Scalev has this exact slug.
       "mushaf-al-quran-al-wafa-a6-resleting",
       "al-quran-tajwid-al-mumtaz-a7-resleting", // 7
       "mushaf-al-quran-al-wafa-b7-mujazza-per-5-juz", // 8

@@ -32,9 +32,14 @@ export function usePurchase(product: Product) {
   const buyableVariantIds = hasColorChoice
     ? (product.colorVariants ?? []).map((v) => v.variantId)
     : [product.variantId];
+  // A product that has no Scalev variant yet (its page content is ready but
+  // the product isn't created in Scalev) can't be bought: checkout refuses
+  // cart lines without a variant id. It is shown, but as unavailable.
+  const linkedToScalev = buyableVariantIds.some((id) => id !== undefined);
   const allSoldOut =
-    buyableVariantIds.length > 0 &&
-    buyableVariantIds.every((id) => id !== undefined && availability[id]?.available === false);
+    !linkedToScalev ||
+    (buyableVariantIds.length > 0 &&
+      buyableVariantIds.every((id) => id !== undefined && availability[id]?.available === false));
   const activeVariantId = hasColorChoice ? selectedColor?.variantId : product.variantId;
   const activeStock = activeVariantId !== undefined ? availability[activeVariantId] : undefined;
   const maxQty = Math.min(20, activeStock?.available_qty ?? 20);

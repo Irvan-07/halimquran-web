@@ -1446,6 +1446,17 @@ export const mockProducts: Product[] = [
     size: "B7",
     customNameEligible: true,
     imageUrl: "/products/al-quran-terjemah-al-halim-b7-rubu-hvs-resleting.jpg",
+    // Gallery photos supplied by the owner (exported from this product's own
+    // Shopee listing, 4 Oct 2026): hero banner, colour picker, name engraving,
+    // inner details, service graphic, size chart. The card photo follows the hero.
+    galleryImages: [
+      "/products/al-halim-b7-hvs-gallery/gallery-1-main.jpg",
+      "/products/al-halim-b7-hvs-gallery/gallery-2.jpg",
+      "/products/al-halim-b7-hvs-gallery/gallery-3.jpg",
+      "/products/al-halim-b7-hvs-gallery/gallery-4.jpg",
+      "/products/al-halim-b7-hvs-gallery/gallery-5.jpg",
+      "/products/al-halim-b7-hvs-gallery/gallery-6-sizechart.jpg",
+    ],
     weightGrams: 270,
     // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
     description:
