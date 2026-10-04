@@ -29,6 +29,10 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  // "./" = each page's own address (no query string), on the canonical host
+  // from NEXT_PUBLIC_SITE_URL, so Google settles on halimquran.com/... for
+  // every page instead of guessing between the old www/apex duplicates.
+  alternates: { canonical: "./" },
 };
 
 export const viewport: Viewport = {
