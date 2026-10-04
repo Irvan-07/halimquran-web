@@ -30,23 +30,26 @@ export function HalimHome({ rails, banners }: HomeProps) {
     <div className="flex flex-col">
       <HeroCarousel slides={banners} />
 
-      <div className="flex flex-col gap-10 pb-4 pt-6">
+      {/* Spacing measured off the live home: 25px under the hero, 12px
+          between every banner / product block, 8px page gutter, 8px (phone) or
+          15px (tablet+) between cards, 2 columns on phones and 4 from md up. */}
+      <div className="flex flex-col gap-3 pb-3 pt-[25px]">
         {rails.map((rail) => (
           <Reveal
             key={rail.slug}
-            className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 sm:px-6 lg:px-8"
+            className="mx-auto flex w-full max-w-[1280px] flex-col gap-3 px-2"
           >
             {rail.banner && (
               <Link
                 href={rail.href}
-                className="group relative -mx-4 w-[calc(100%+2rem)] overflow-hidden bg-secondary sm:mx-0 sm:w-full sm:rounded-lg"
+                className="group relative -mx-2 w-[calc(100%+1rem)] overflow-hidden bg-secondary"
                 style={{ aspectRatio: rail.banner.aspectRatio }}
               >
                 <Image
                   src={rail.banner.imageUrl}
                   alt={rail.banner.pillLabel ?? ""}
                   fill
-                  sizes="(min-width: 1024px) 1152px, 100vw"
+                  sizes="(min-width: 1280px) 1280px, 100vw"
                   className="object-cover"
                 />
                 {rail.banner.pillLabel && (
@@ -56,18 +59,20 @@ export function HalimHome({ rails, banners }: HomeProps) {
                 )}
               </Link>
             )}
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-              {rail.products.slice(0, 4).map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+            <div className="flex flex-col">
+              <div className="grid grid-cols-2 gap-2 sm:gap-[15px] md:grid-cols-4">
+                {rail.products.slice(0, 4).map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+              <Link
+                href={rail.href}
+                className="-mt-[5px] ml-auto flex h-9 items-center gap-0.5 px-2 text-sm font-medium text-primary hover:underline"
+              >
+                Lihat Semua
+                <ChevronRight className="size-4" />
+              </Link>
             </div>
-            <Link
-              href={rail.href}
-              className="ml-auto flex items-center gap-0.5 text-sm font-medium text-primary hover:underline"
-            >
-              Lihat Semua
-              <ChevronRight className="size-4" />
-            </Link>
           </Reveal>
         ))}
       </div>

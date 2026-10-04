@@ -87,7 +87,7 @@ export function HeroCarousel({ slides = DEFAULT_HERO_SLIDES }: { slides?: HeroSl
   return (
     <div
       ref={frame}
-      className="relative -mt-16 aspect-[4/3] w-full cursor-grab touch-pan-y select-none overflow-hidden bg-secondary active:cursor-grabbing"
+      className="relative -mt-14 aspect-[4/3] lg:-mt-[86px] w-full touch-pan-y select-none overflow-hidden bg-secondary"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}

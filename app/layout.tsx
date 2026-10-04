@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/themes/client";
 import { getActiveTheme } from "@/themes/server";
 import { Toaster } from "@/components/ui/sonner";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
+import { InAppNavigationTracker } from "@/components/layout/BackButton";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { GoogleTagManager } from "@/components/tracking";
 import { siteConfig } from "@/config/site";
@@ -49,6 +50,7 @@ export default async function RootLayout({
         <GoogleTagManager />
         <ThemeProvider themeId={theme.id}>
           <CartProvider>
+            <InAppNavigationTracker />
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowLeft, ChevronDown, MapPin, Search, ShoppingCart } from "lucide-react";
 import { useCart } from "@/components/cart/CartProvider";
+import { BackButton } from "@/components/layout/BackButton";
 import { productCategories } from "@/lib/mock-data/categories";
 
 const PDP_PATTERN = /^\/produk\/[^/]+\/[^/]+/;
@@ -57,9 +58,12 @@ export function TokopediaHeader() {
         {/* Phone bar */}
         <div className="flex h-14 items-center gap-2 lg:hidden">
           {onPdp ? (
-            <Link href={`/produk/${pathname.split("/")[2]}`} aria-label="Kembali" className="flex size-9 shrink-0 items-center justify-center">
+            <BackButton
+              fallbackHref={`/produk/${pathname.split("/")[2]}`}
+              className="flex size-9 shrink-0 items-center justify-center"
+            >
               <ArrowLeft className="size-6" />
-            </Link>
+            </BackButton>
           ) : (
             <Link href="/" aria-label="Beranda" className="shrink-0">
               <Image src="/logo.png" alt="Halim Qur'an" width={80} height={32} className="h-8 w-auto" priority />

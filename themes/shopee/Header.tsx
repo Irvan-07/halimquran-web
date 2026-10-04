@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowLeft, Search, ShoppingCart, User } from "lucide-react";
 import { useCart } from "@/components/cart/CartProvider";
+import { BackButton } from "@/components/layout/BackButton";
 
 const PDP_PATTERN = /^\/produk\/[^/]+\/[^/]+/;
 
@@ -71,9 +72,9 @@ export function ShopeeHeader() {
         {/* Mobile bar */}
         <div className="flex h-14 items-center gap-3 lg:hidden">
           {backHref ? (
-            <Link href={backHref} aria-label="Kembali" className="flex size-8 shrink-0 items-center justify-center">
+            <BackButton fallbackHref={backHref} className="flex size-8 shrink-0 items-center justify-center">
               <ArrowLeft className="size-6" />
-            </Link>
+            </BackButton>
           ) : (
             <Link href="/" aria-label="Beranda" className="shrink-0">
               <Image src="/logo-white.png" alt="Halim Qur'an" width={36} height={36} className="size-9" />

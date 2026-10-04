@@ -29,7 +29,7 @@ export function MobileNav() {
       <SheetTrigger asChild>
         <Button
           variant="ghost"
-          size="icon"
+          size="icon-lg"
           className="lg:hidden"
           aria-label="Buka menu navigasi"
         >

@@ -3,29 +3,33 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { ArrowLeft, Search, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CartIcon } from "@/components/cart/CartIcon";
+import { BackButton } from "@/components/layout/BackButton";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { DesktopNav } from "@/components/layout/DesktopNav";
 
 // On halimquran.com the header starts transparent, overlapping the hero
-// image (see HeroCarousel's matching -mt-16), then gets a solid white
-// background as soon as you scroll past it — confirmed by testing the
-// live site directly, not just looking at a screenshot.
+// image (see HeroCarousel's matching negative margin), then gets a solid
+// white background as soon as you scroll past it — confirmed by testing the
+// live site directly, not just looking at a screenshot. Sizes below are
+// measured off the live home: bar 56px (phone) / 86px (desktop), 8px side
+// padding, 109x44 logo, 36px icon buttons. The separator is a box-shadow
+// rather than a border so the bar's height is exactly that.
 // On a PDP (/produk/{kategori}/{slug}) the live site's mobile header
 // shows a back button in place of the hamburger — confirmed against the
 // real site's own PDP, not guessed.
 const PDP_PATTERN = /^\/produk\/[^/]+\/[^/]+/;
-// A category page (/produk/{kategori}) gets the same back button, which
-// goes back in the browser history (or to all products when there is none).
+// A category page (/produk/{kategori}) gets the same back button. On both,
+// it returns to the page the visitor came from (see BackButton), falling
+// back to the category / all products when the page was opened directly.
 const CATEGORY_PATTERN = /^\/produk\/[^/]+\/?$/;
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
   const onCategory = CATEGORY_PATTERN.test(pathname);
   const pdpMatch = pathname.match(PDP_PATTERN);
   const backHref = pdpMatch ? `/produk/${pathname.split("/")[2]}` : null;
@@ -39,29 +43,19 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b transition-colors duration-200 ${
-        scrolled ? "border-border bg-background" : "border-transparent bg-transparent"
+      className={`sticky top-0 z-40 transition-colors duration-200 ${
+        scrolled ? "bg-background shadow-[0_1px_0_0_var(--color-border)]" : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-2 lg:hidden">
-          {backHref ? (
-            <Link
-              href={backHref}
-              aria-label="Kembali"
+      <div className="flex h-14 items-center gap-1 px-2 lg:h-[86px]">
+        <div className="flex items-center lg:hidden">
+          {backHref || onCategory ? (
+            <BackButton
+              fallbackHref={backHref ?? "/produk"}
               className="flex size-9 items-center justify-center text-foreground"
             >
               <ArrowLeft className="size-5" />
-            </Link>
-          ) : onCategory ? (
-            <button
-              type="button"
-              aria-label="Kembali"
-              onClick={() => (window.history.length > 1 ? router.back() : router.push("/produk"))}
-              className="flex size-9 items-center justify-center text-foreground"
-            >
-              <ArrowLeft className="size-5" />
-            </button>
+            </BackButton>
           ) : (
             <MobileNav />
           )}
@@ -73,19 +67,19 @@ export function Header() {
             alt="Halim Qur'an"
             width={130}
             height={52}
-            className="h-10 w-auto"
+            className="h-11 w-auto"
             priority
           />
         </Link>
 
-        <div className="ml-6 hidden lg:block">
+        <div className="ml-8 hidden lg:block">
           <DesktopNav />
         </div>
 
         <div className="ml-auto flex items-center gap-1">
           <Button
             variant="ghost"
-            size="icon"
+            size="icon-lg"
             asChild
             aria-label="Cari produk"
           >
@@ -96,7 +90,7 @@ export function Header() {
           <CartIcon />
           <Button
             variant="ghost"
-            size="icon"
+            size="icon-lg"
             asChild
             aria-label="Akun saya"
           >

@@ -11,7 +11,7 @@ export function CartIcon() {
   return (
     <Button
       variant="ghost"
-      size="icon"
+      size="icon-lg"
       asChild
       aria-label={`Lihat keranjang${itemCount > 0 ? `, ${itemCount} item` : ""}`}
       className="relative"
