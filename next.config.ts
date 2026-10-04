@@ -14,10 +14,21 @@ const legacyCategoryRedirects = [
   permanent: true,
 }));
 
+// The two old categories that live outside /produk, and the old static
+// pages (all from the old site's sitemap).
+const legacyPageRedirects = [
+  { source: "/categories/40520/:rest*", destination: "/gift", permanent: true },
+  { source: "/categories/41264/:rest*", destination: "/wakaf", permanent: true },
+  { source: "/info", destination: "/tentang-kami", permanent: true },
+  { source: "/testimonial", destination: "/tentang-kami", permanent: true },
+  { source: "/featured-products", destination: "/produk", permanent: true },
+];
+
 const nextConfig: NextConfig = {
   async redirects() {
     return [
       ...legacyCategoryRedirects,
+      ...legacyPageRedirects,
       { source: "/categories/:path*", destination: "/produk", permanent: true },
     ];
   },
