@@ -7,4 +7,5 @@
 export const shopeeSoldCounts: Record<string, number> = {
   "al-quran-terjemah-al-halim-b7-rubu-hvs-resleting": 3000,
   "mushaf-al-quran-al-wafa-a7-pocket-edition": 7000,
+  "mushaf-al-quran-al-wafa-tsumun-a7-resleting": 6000,
 };

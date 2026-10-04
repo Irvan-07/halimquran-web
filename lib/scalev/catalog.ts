@@ -205,7 +205,14 @@ export async function getMergedCatalog(): Promise<Product[]> {
   });
 
   const scalevSlugs = new Set(scalevProducts.map((p) => p.slug));
-  const mockFallback = mockProducts.filter((p) => !scalevSlugs.has(p.slug));
+  // Mock-only entries stand in for the catalog ONLY while Scalev is
+  // unreachable. Once Scalev answers, a product that isn't in it cannot be
+  // bought (no variant id, so checkout refuses the cart line), so it stays
+  // hidden until it exists there — its mock entry (photos, copy, ratings) is
+  // then picked up by the merge above, matched by slug. This is how a product
+  // can be prepared ahead of its Scalev listing (e.g. Al-Wafa Tsumun A7).
+  const mockFallback =
+    scalevProducts.length > 0 ? [] : mockProducts.filter((p) => !scalevSlugs.has(p.slug));
 
   return [...merged, ...mockFallback].map(withHeroImage);
 }

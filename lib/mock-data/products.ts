@@ -1574,4 +1574,47 @@ export const mockProducts: Product[] = [
     description:
       "Gak betah lama-lama baca Al-Qur'an? Seringnya suka ngantuk dan bahkan ketiduran? Sayang banget ya, padahal pahala baca Al-Qur'an itu sangat besar. Kelelahan mata saat membaca Al-Qur'an bisa disebabkan oleh warna kertas yang tidak ramah bagi mata. Solusinya, kamu bisa pakai Al-Qur'an dengan bahan kertas Qur'an Paper Premium (QPP) dengan warna Yellowish yang ramah di mata. Mata kamu tidak akan lelah walau membaca Al-Qur'an dalam waktu lama.\n\nSeperti Al-Qur'an Terjemah Al-Halim agenda Halim Qur'an, kasual dan bagus, cocok untuk siapa saja. Apa sih yang istimewa dari Al-Qur'an ini?\n\nSpesifikasi:\n- Ukuran A5 (14,5 x 20,5 cm)\n- Kertas HVS 60gr\n- Berat 745gr\n- Tebal 608 halaman\n\nFitur cover:\n- Desain cover unik seperti agenda.\n- Tersedia dalam 6 pilihan warna.\n- Jahitan super rapi.\n\nMaterial cover:\n- Cover terbuat dari kulit sintetis bottega yang tebal dan berkualitas, membuat warna cover lebih kuat dan tidak mudah pudar.\n- Setiap lembar dicetak di media kertas HVS dengan berat 60gr.\n\nFitur inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dilengkapi terjemah standar Kemenag RI.\n- Dilengkapi tema-tema pokok bahasan sehingga memudahkan kamu untuk memahami makna ayat yang dibaca.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi penjelasan adab dan fadhilah membaca Al-Qur'an. Ringkas dan mudah dipahami.\n- Dilengkapi dengan doa sujud tilawah di bagian pembatas, membantu kamu selalu ingat doa penting ini.\n- Dilengkapi indeks juz yang memudahkan kamu menemukan juz atau halaman tertentu.\n\nCari Al-Qur'an premium, kekinian, terjangkau, dan bergaransi? Halim Qur'an aja.. Yuk check out sekarang!",
   },
+  {
+    id: "42",
+    slug: "mushaf-al-quran-al-wafa-tsumun-a7-resleting",
+    name: "Mushaf Al Quran Al Wafa Tsumun A7 Resleting",
+    price: 33000,
+    category: "quran-harian",
+    size: "A7",
+    badge: "Ukir Nama",
+    rating: 5,
+    // 1418 = 5-star (1322) + 4-star (96) ratings on this product's real
+    // Shopee listing, out of 1432 total (4 Oct 2026) — per the project
+    // owner's direction, 3/2/1-star ratings (14 total) are treated as 0.
+    ratingCount: 1418,
+    // No colorVariants: no per-colour photos were supplied for this product
+    // (Shopee lists 11 colours), so this uses the flat colors/colorNames
+    // fallback. Replace with colorVariants once Scalev has the variants.
+    colors: ["#2563EB", "#8B5E34", "#E8DCC4", "#C9A227", "#111827", "#7B2D26", "#DC2626", "#6B7280", "#14B8A6", "#1E3A5F", "#F4A688"],
+    colorNames: ["Biru", "Coklat", "Cream", "Gold", "Hitam", "Maroon", "Merah", "Abu-Abu", "Tosca", "Biru Tua", "Peach"],
+    customNameEligible: true,
+    imageUrl: "/products/mushaf-al-quran-al-wafa-tsumun-a7-resleting.jpg",
+    // Gallery photos supplied by the owner (exported from the product's own
+    // Shopee listing, 4 Oct 2026): hero, colour picker, colour line-ups,
+    // inner details, service graphic, size chart.
+    galleryImages: [
+      "/products/tsumun-a7-gallery/gallery-1-main.jpg",
+      "/products/tsumun-a7-gallery/gallery-2.jpg",
+      "/products/tsumun-a7-gallery/gallery-3.jpg",
+      "/products/tsumun-a7-gallery/gallery-4.jpg",
+      "/products/tsumun-a7-gallery/gallery-5.jpg",
+      "/products/tsumun-a7-gallery/gallery-6.jpg",
+      "/products/tsumun-a7-gallery/gallery-7.jpg",
+      "/products/tsumun-a7-gallery/gallery-8.jpg",
+      "/products/tsumun-a7-gallery/gallery-9-sizechart.jpg",
+    ],
+    weightGrams: 160,
+    // Real listing copy supplied by the owner 4 Oct 2026; section titles got
+    // a trailing ":" and numbered items became "-" bullets so the PDP
+    // renders them as bold headings with lists. No reviews: Shopee blocked
+    // further access (anti-bot) before any review text could be read, so the
+    // list is omitted rather than invented.
+    description:
+      "Quran Saku 15 Baris Al Wafa Tsumun Ukuran A7 Resleting\n\nPengen baca Al-Qur'an setiap waktu tapi suka repot bawa Al-Qur'annya?? Nyari Al-Qur'an yang ukurannya pas di kantong?? Sepertinya Anda perlu coba Al-Qur'an satu ini, Al-Qur'an Al-Wafa Tsumun Resleting, beratnya hanya ± 155 gr, ringan dibawa ke mana saja, bisa disimpan di saku.\n\nPenasaran apa saja keistimewaannya??\n\nSpesifikasi Produk:\n- Dompet Resleting\n- Ukuran A7 (7 x 10 cm)\n- Kertas QPP 50 gr\n- Berat 160 gr\n- 616 Halaman\n\nFitur Cover:\n- Desain cover casual, kalem, dan hangat.\n- Tersedia dalam berbagai pilihan warna.\n- Jahitan super rapi.\n- Zipper kuat dan tahan lama.\n\nDetail Material:\n- Menggunakan kertas QPP dengan tingkat kehalusan tinggi, high smoothies dan tahan hingga 100 tahun.\n- Bahan kertas sudah teruji lab dan terbukti halalan thayyiban.\n- Warna kertas yellowish, membuat mata tidak lelah walaupun membaca dalam waktu yang lama.\n\nFitur Inner:\n- Rasm Utsmani 15 baris standar Kemenag RI.\n- Dicetak dengan khat yang jelas ditambah bahan kertas dengan daya serap tinta yang baik, sangat nyaman dibaca.\n- Dilengkapi indeks juz yang memudahkan Anda mencari juz atau halaman tertentu.\n- Terdapat pewarnaan kata ganti Allah dan -Nya yang memudahkan Anda menemukan ayat-ayat pilihan.\n\nBagi kami, kualitas adalah hal utama. Al-Qur'an kami sudah melalui proses Quality Control yang ketat dan dikerjakan oleh tim profesional. Jika Anda menemukan kesalahan dalam Al-Qur'an cetakan kami, kami siap menggantinya dengan yang baru.\n\n\"Cari Quran dengan kualitas premium dan kekinian ya di Halim Quran\"",
+  },
 ];

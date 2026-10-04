@@ -37,9 +37,9 @@ const RAILS: {
     // shows a 15%-off price, so each product was matched by its normal price
     // (Shopee price / 0.85) plus its photo. Two Shopee best sellers are not in
     // the Scalev catalog yet, so they are skipped until the products exist:
-    //   #3 Al-Wafa Tsumun A7 Resleting (Rp33.000)
-    //   #6 Al-Wafa Nisfu A6 Resleting  (Rp52.000)
-    // When they are added, put them back at positions 3 and 6.
+    //   #3 Al-Wafa Tsumun A7 Resleting (Rp33.000) — listed below, content ready
+    //   #6 Al-Wafa Nisfu A6 Resleting  (Rp52.000) — still needs content + Scalev
+    // When #6 is added, put its slug back at position 6.
     slug: "featured",
     title: "Produk Terlaris",
     href: "/produk",
@@ -47,7 +47,10 @@ const RAILS: {
     productSlugs: [
       "al-quran-al-azhim-a5-hard-cover", // 1
       "mushaf-al-quran-al-wafa-a7-pocket-edition", // 2
-      // 3: Al-Wafa Tsumun A7 Resleting (not in catalog yet)
+      // 3: Al-Wafa Tsumun A7 Resleting. Its page content is ready in
+      // lib/mock-data/products.ts; it shows here automatically once a Scalev
+      // product with this exact slug exists (missing slugs are skipped).
+      "mushaf-al-quran-al-wafa-tsumun-a7-resleting",
       "al-quran-terjemah-al-halim-b7-rubu-hvs-resleting", // 4
       "al-quran-terjemah-al-halim-a6-resleting", // 5
       // 6: Al-Wafa Nisfu A6 Resleting (not in catalog yet)
