@@ -8,7 +8,9 @@ interface ProductCardProps {
   product: Product;
 }
 
-// Matches halimquran.com's product card: borderless (only the photo is
+// Matches halimquran.com's product card (text colours and weights measured
+// off the live site: #333 title, regular-weight blue price, 60% #333
+// rating line): borderless (only the photo is
 // rounded, hovering tints the whole card), no category label line, wishlist
 // heart bottom-right of the image, rating as its own line under the price.
 // The photo is always the product's hero image (see withHeroImage in
@@ -39,13 +41,13 @@ export function ProductCard({ product }: ProductCardProps) {
       </div>
 
       <div className="flex flex-col gap-2 px-2 pb-2">
-        <h3 className="text-sm font-medium text-foreground">{product.name}</h3>
+        <h3 className="text-sm font-medium text-[#333]">{product.name}</h3>
 
-        <p className="text-sm font-semibold text-primary">
+        <p className="text-sm text-primary">
           {formatIDR(product.price)}
         </p>
         {(product.rating || product.soldCount) && (
-          <span className="flex items-center gap-1 text-xs text-muted-foreground">
+          <span className="flex items-center gap-1 text-xs text-[#333]/60">
             {product.rating ? (
               <span className="flex items-center gap-0.5">
                 <Star className="size-3.5 fill-primary text-primary" />
