@@ -27,20 +27,34 @@ const RAILS: {
   // 16/9 source crops left/right — confirmed on the Gift banner).
   banner?: { imageUrl: string; pillLabel?: string; aspectRatio: string };
   href: string;
+  /** How many products the default theme shows (4 when omitted). */
+  limit?: number;
   productSlugs: string[];
 }[] = [
   {
-    // Unlabeled row right after the hero on the live homepage — no banner,
-    // no heading, just 4 products (re-confirmed via full section-by-section
-    // DOM walk 26 Sep 2026: index 1, directly after the hero at index 0).
+    // The block right after the hero: Halim Quran's best sellers, in the order
+    // of its Shopee shop sorted by "Terlaris" (checked 4 Oct 2026). Shopee
+    // shows a 15%-off price, so each product was matched by its normal price
+    // (Shopee price / 0.85) plus its photo. Two Shopee best sellers are not in
+    // the Scalev catalog yet, so they are skipped until the products exist:
+    //   #3 Al-Wafa Tsumun A7 Resleting (Rp33.000)
+    //   #6 Al-Wafa Nisfu A6 Resleting  (Rp52.000)
+    // When they are added, put them back at positions 3 and 6.
     slug: "featured",
-    title: "Produk Pilihan",
+    title: "Produk Terlaris",
     href: "/produk",
+    limit: 10,
     productSlugs: [
-      "mushaf-al-quran-al-wafa-b7-pocket-edition",
-      "al-quran-madinah-huzaifi-a5",
-      "al-quran-tajwid-al-mumtaz-a7-resleting",
-      "mushaf-al-quran-al-wafa-a6-pocket-edition",
+      "al-quran-al-azhim-a5-hard-cover", // 1
+      "mushaf-al-quran-al-wafa-a7-pocket-edition", // 2
+      // 3: Al-Wafa Tsumun A7 Resleting (not in catalog yet)
+      "al-quran-terjemah-al-halim-b7-rubu-hvs-resleting", // 4
+      "al-quran-terjemah-al-halim-a6-resleting", // 5
+      // 6: Al-Wafa Nisfu A6 Resleting (not in catalog yet)
+      "al-quran-tajwid-al-mumtaz-a7-resleting", // 7
+      "mushaf-al-quran-al-wafa-b7-mujazza-per-5-juz", // 8
+      "al-quran-madinah-huzaifi-a5", // 9
+      "mushaf-al-quran-al-wafa-b7-pocket-edition", // 10
     ],
   },
   {

@@ -20,6 +20,8 @@ export interface HomeRail {
   title: string;
   href: string;
   banner?: { imageUrl: string; pillLabel?: string; aspectRatio: string };
+  /** How many products the default theme shows (4 when omitted). */
+  limit?: number;
   products: Product[];
 }
 
