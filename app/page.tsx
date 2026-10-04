@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getHeroSlides } from "@/sanity/lib/content";
 import { getActiveTheme } from "@/themes/server";
 import type { HomeRail } from "@/themes/types";
@@ -123,6 +124,10 @@ const RAILS: {
     ],
   },
 ];
+
+// The home route's internal pathname is "/index" in production, which the
+// layout's relative canonical ("./") would turn into /index — pin it.
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default async function HomePage() {
   const { Home } = (await getActiveTheme()).slots;
