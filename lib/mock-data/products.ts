@@ -1471,6 +1471,19 @@ export const mockProducts: Product[] = [
     // directly per this listing's own page (2 Oct 2026). No rating: this
     // listing shows "Belum Ada Penilaian" (no ratings yet).
     soldCount: 1000,
+    // Gallery photos supplied by the owner (exported from this product's own
+    // Shopee listing, 4 Oct 2026): hero, "8 warna", name engraving, inner
+    // details, service graphic, size chart. The card photo becomes the hero.
+    galleryImages: [
+      "/products/al-halim-a6-resleting-gallery/gallery-1-main.jpg",
+      "/products/al-halim-a6-resleting-gallery/gallery-2.jpg",
+      "/products/al-halim-a6-resleting-gallery/gallery-3.jpg",
+      "/products/al-halim-a6-resleting-gallery/gallery-4.jpg",
+      "/products/al-halim-a6-resleting-gallery/gallery-5.jpg",
+      "/products/al-halim-a6-resleting-gallery/gallery-6.jpg",
+      "/products/al-halim-a6-resleting-gallery/gallery-7.jpg",
+      "/products/al-halim-a6-resleting-gallery/gallery-8-sizechart.jpg",
+    ],
     weightGrams: 315,
     // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
     description:
