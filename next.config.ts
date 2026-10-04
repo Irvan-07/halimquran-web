@@ -27,6 +27,14 @@ const legacyPageRedirects = [
 const nextConfig: NextConfig = {
   async redirects() {
     return [
+      // One canonical host: the old Plugo site answered on both, so links to
+      // www.halimquran.com (all of Google's) keep working and land on the apex.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.halimquran.com" }],
+        destination: "https://halimquran.com/:path*",
+        permanent: true,
+      },
       ...legacyCategoryRedirects,
       ...legacyPageRedirects,
       { source: "/categories/:path*", destination: "/produk", permanent: true },
