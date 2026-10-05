@@ -1,0 +1,12 @@
+{
+  "name": "halimquran-studio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Hosted Sanity Studio entry point; dependencies resolve from the storefront's node_modules one level up.",
+  "dependencies": {
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "sanity": "^6.17.0",
+    "styled-components": "^6.5.3"
+  }
+}

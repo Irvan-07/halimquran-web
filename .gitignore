@@ -46,3 +46,7 @@ next-env.d.ts
 /.open-next
 /.wrangler
 .dev.vars
+
+# hosted Sanity Studio build output
+/studio-hosted/dist
+/studio-hosted/.sanity

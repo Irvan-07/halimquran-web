@@ -43,6 +43,10 @@ const nextConfig: NextConfig = {
         destination: "https://halimquran.com/:path+",
         permanent: true,
       },
+      // The Studio now lives on Sanity's own hosting (see studio-hosted/); old
+      // /studio bookmarks land there. Not permanent, in case it moves again.
+      { source: "/studio", destination: "https://halimquran.sanity.studio", permanent: false },
+      { source: "/studio/:path+", destination: "https://halimquran.sanity.studio", permanent: false },
       ...legacyCategoryRedirects,
       ...legacyPageRedirects,
       { source: "/categories/:path*", destination: "/produk", permanent: true },
