@@ -40,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# generated image variants + Cloudflare build output
+/public/_img
+/.open-next
+/.wrangler
+.dev.vars

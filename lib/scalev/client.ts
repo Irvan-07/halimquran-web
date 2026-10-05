@@ -38,10 +38,14 @@ async function businessRequest<T>(path: string, init?: RequestInit): Promise<T> 
   const apiKey = requireEnv("SCALEV_API_KEY");
   const res = await fetch(`${API_BASE}${path}`, {
     ...init,
-    // Revalidate every 60s so the catalog stays fresh without hitting the
-    // real API on every single page request. Callers that must never see
-    // cached data (order lookups) pass `cache: "no-store"` instead.
-    ...(init?.cache === "no-store" ? {} : { next: { revalidate: 60 } }),
+    // Revalidate (default every 60s) so the catalog stays fresh without hitting
+    // the real API on every single page request. Hosts with a small write quota
+    // for the page cache (Cloudflare KV free plan) raise it with
+    // SCALEV_REVALIDATE_SECONDS. Callers that must never see cached data
+    // (order lookups) pass `cache: "no-store"` instead.
+    ...(init?.cache === "no-store"
+      ? {}
+      : { next: { revalidate: Number(process.env.SCALEV_REVALIDATE_SECONDS) || 60 } }),
     headers: {
       Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",

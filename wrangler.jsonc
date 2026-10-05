@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "halimquran-web",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": { "directory": ".open-next/assets", "binding": "ASSETS" },
+  "services": [{ "binding": "WORKER_SELF_REFERENCE", "service": "halimquran-web" }],
+  // Page/ISR cache. KV's free plan allows ~1K writes a day, so the catalog is
+  // revalidated every 10 minutes instead of every minute.
+  "kv_namespaces": [{ "binding": "NEXT_INC_CACHE_KV", "id": "83911550f83b4977b5c10eed50ed16ed" }],
+  "vars": { "SCALEV_REVALIDATE_SECONDS": "600" }
+}

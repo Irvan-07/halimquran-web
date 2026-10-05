@@ -29,10 +29,18 @@ const nextConfig: NextConfig = {
     return [
       // One canonical host: the old Plugo site answered on both, so links to
       // www.halimquran.com (all of Google's) keep working and land on the apex.
+      // Two rules, not one `/:path*`: on Cloudflare (OpenNext) an empty match
+      // leaves the literal ":path*" in the destination, so www/ landed on a 404.
       {
-        source: "/:path*",
+        source: "/",
         has: [{ type: "host", value: "www.halimquran.com" }],
-        destination: "https://halimquran.com/:path*",
+        destination: "https://halimquran.com/",
+        permanent: true,
+      },
+      {
+        source: "/:path+",
+        has: [{ type: "host", value: "www.halimquran.com" }],
+        destination: "https://halimquran.com/:path+",
         permanent: true,
       },
       ...legacyCategoryRedirects,
@@ -41,6 +49,11 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    // No request-time resizing: Cloudflare Workers has no Next image optimizer,
+    // and Vercel's Hobby quota was what took the site down. Local photos are
+    // pre-generated at build time (scripts/build-image-variants.mjs).
+    loader: "custom",
+    loaderFile: "./lib/image-loader.ts",
     remotePatterns: [
       {
         // Real Scalev product images (verified 26 Sep 2026).
