@@ -7,7 +7,9 @@ import { Toaster } from "@/components/ui/sonner";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { InAppNavigationTracker } from "@/components/layout/BackButton";
 import { CartProvider } from "@/components/cart/CartProvider";
-import { GoogleTagManager } from "@/components/tracking";
+import Script from "next/script";
+import { GoogleTagManager, MetaPixelPageView } from "@/components/tracking";
+import { META_PIXEL_BASE_CODE } from "@/lib/analytics/meta-pixel";
 import { siteConfig } from "@/config/site";
 
 const archivo = Archivo({
@@ -51,6 +53,10 @@ export default async function RootLayout({
   return (
     <html lang="id" data-theme={theme.id} className={`${archivo.variable} ${openSans.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
+        {/* Meta Pixel base code: must sit in the root layout to run before hydration (so fbq exists
+            when a page fires its first event). Only active on the real storefront hosts. */}
+        <Script id="meta-pixel" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: META_PIXEL_BASE_CODE }} />
+        <MetaPixelPageView />
         <GoogleTagManager />
         <ThemeProvider themeId={theme.id}>
           <CartProvider>
