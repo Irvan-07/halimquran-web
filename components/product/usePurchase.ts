@@ -1,5 +1,6 @@
 "use client";
 
+import { setBuyNowItem } from "@/components/cart/buy-now";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -114,9 +115,11 @@ export function usePurchase(product: Product) {
 
   function handleBuyNow() {
     if (!validate()) return;
-    addItem(buildCartLine(customization!));
-    trackAddToCart();
-    router.push("/keranjang");
+    if (!setBuyNowItem(buildCartLine(customization!))) {
+      toast.error("Tidak dapat menyiapkan checkout. Coba tambah ke keranjang.");
+      return;
+    }
+    router.push("/checkout/beli-sekarang");
   }
 
   return {

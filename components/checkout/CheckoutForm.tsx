@@ -7,7 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { clearBuyNow, useBuyNowItems } from "@/components/cart/buy-now";
 import { useCart } from "@/components/cart/CartProvider";
+import { PaymentMethodLogo, paymentLabel, sortPaymentMethods } from "@/components/checkout/PaymentMethodLogo";
 import { scalevStorefront } from "@/lib/scalev/storefront-client";
 import { formatIDR } from "@/lib/utils/format";
 import type { CartItem, CustomizationOption } from "@/types/cart";
@@ -48,8 +50,19 @@ function errorMessage(e: unknown): string {
   return detail ?? (raw ? "Terjadi kesalahan, coba lagi." : "Terjadi kesalahan, coba lagi.");
 }
 
-export function CheckoutForm() {
-  const { items, subtotal, clearCart } = useCart();
+// Scalev's checkout requires an email, but most buyers here only use
+// WhatsApp, so the field is optional. When it is left empty a placeholder that
+// can never receive mail (.invalid is reserved for that) is sent instead,
+// derived from the phone number so the same buyer maps to the same customer.
+function guestEmail(phone: string): string {
+  return `${phone.replace(/\D/g, "")}@noemail.invalid`;
+}
+
+export function CheckoutForm({ buyNow = false }: { buyNow?: boolean }) {
+  const cart = useCart();
+  const buyNowItems = useBuyNowItems();
+  const items = buyNow ? buyNowItems : cart.items;
+  const subtotal = buyNow ? items.reduce((total, item) => total + item.price * item.quantity, 0) : cart.subtotal;
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -92,8 +105,13 @@ export function CheckoutForm() {
       .listPaymentMethods()
       .then((methods) => {
         if (cancelled) return;
-        setPaymentMethods(methods);
-        setPaymentMethod((current) => current || methods[0]?.code || "");
+        const availableMethods = sortPaymentMethods(methods.filter((method) => method.code !== "bank_transfer"));
+        setPaymentMethods(availableMethods);
+        setPaymentMethod((current) =>
+          availableMethods.some((method) => method.code === current)
+            ? current
+            : availableMethods.find((method) => method.code === "qris")?.code ?? availableMethods[0]?.code ?? "",
+        );
       })
       .catch((e) => toast.error(`Gagal memuat metode pembayaran: ${errorMessage(e)}`));
     return () => {
@@ -123,9 +141,18 @@ export function CheckoutForm() {
       .getShippingOptions({ items: checkoutItems, destination, payment_method: paymentMethod || undefined })
       .then((options) => {
         if (cancelled) return;
-        setShippingOptions(options);
+        // Instant couriers currently have no usable quote from Scalev.
+        // Keep pickup and regular couriers, including valid zero-cost pickup.
+        const availableOptions = options.filter((option) => {
+          const courier = option.courier_code.toLowerCase().replace(/[^a-z0-9]/g, "");
+          const label = `${option.name} ${option.service_code}`.toLowerCase().replace(/[^a-z0-9]/g, "");
+          return !courier.startsWith("grab") && !courier.startsWith("gojek") &&
+            !courier.startsWith("gosend") && !label.includes("grabexpress") &&
+            !label.includes("gosend");
+        });
+        setShippingOptions(availableOptions);
         setShipping((current) =>
-          options.find((o) => o.courier_service_id === current?.courier_service_id) ?? null,
+          availableOptions.find((o) => o.courier_service_id === current?.courier_service_id) ?? null,
         );
       })
       .catch((e) => {
@@ -192,7 +219,7 @@ export function CheckoutForm() {
     !submitting &&
     !missingVariant &&
     name.trim() &&
-    /\S+@\S+\.\S+/.test(email) &&
+    (email.trim() === "" || /\S+@\S+\.\S+/.test(email.trim())) &&
     phone.trim().length >= 9 &&
     address.trim() &&
     destination &&
@@ -207,7 +234,7 @@ export function CheckoutForm() {
       const order = await scalevStorefront.createCheckout({
         items: checkoutItems,
         customer_name: name.trim(),
-        customer_email: email.trim(),
+        customer_email: email.trim() || guestEmail(phone),
         customer_phone: phone.trim(),
         shipping_address: address.trim(),
         shipping_location_id: destination.location_id,
@@ -219,7 +246,8 @@ export function CheckoutForm() {
         payment_method: paymentMethod,
         notes: buildNotes(items, note),
       });
-      clearCart();
+      if (buyNow) clearBuyNow();
+      else cart.clearCart();
       const next =
         order.redirect_url ??
         order.public_order_url ??
@@ -246,7 +274,7 @@ export function CheckoutForm() {
   const total = summary ? Number(summary.gross_revenue) : subtotal;
 
   return (
-    <form onSubmit={handleSubmit} className="mx-auto flex max-w-2xl flex-col gap-8 px-4 py-10 pb-32 sm:px-6">
+    <form onSubmit={handleSubmit} className="mx-auto flex max-w-3xl flex-col gap-8 px-3 py-10 pb-32 sm:px-6">
       <h1 className="font-heading text-2xl font-semibold text-foreground">Checkout</h1>
 
       {missingVariant && (
@@ -260,16 +288,18 @@ export function CheckoutForm() {
         <h2 className="text-base font-bold text-foreground">Data Pemesan</h2>
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="name">Nama lengkap</Label>
-          <Input id="name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" />
+          <Input id="name" className="h-11" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" />
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="flex flex-col gap-1.5">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
+            <Label htmlFor="phone">No. WhatsApp</Label>
+            <Input id="phone" type="tel" className="h-11" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" placeholder="08123456789" />
           </div>
           <div className="flex flex-col gap-1.5">
-            <Label htmlFor="phone">No. WhatsApp</Label>
-            <Input id="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" placeholder="08123456789" />
+            <Label htmlFor="email">
+              Email <span className="font-normal text-muted-foreground">(opsional)</span>
+            </Label>
+            <Input id="email" type="email" className="h-11" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
           </div>
         </div>
       </section>
@@ -280,6 +310,7 @@ export function CheckoutForm() {
           <Label htmlFor="location">Kecamatan / Kelurahan</Label>
           <Input
             id="location"
+            className="h-11"
             value={locationQuery}
             onChange={(e) => changeLocation(e.target.value)}
             placeholder="Ketik minimal 3 huruf, mis. Cempaka Putih"
@@ -304,7 +335,7 @@ export function CheckoutForm() {
         <div className="grid gap-4 sm:grid-cols-[1fr_2fr]">
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="postal">Kode pos</Label>
-            <Input id="postal" inputMode="numeric" value={postalCode} onChange={(e) => changePostal(e.target.value)} placeholder="10510" />
+            <Input id="postal" className="h-11" inputMode="numeric" value={postalCode} onChange={(e) => changePostal(e.target.value)} placeholder="10510" />
           </div>
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="address">Alamat lengkap</Label>
@@ -364,7 +395,8 @@ export function CheckoutForm() {
               }`}
             >
               <input type="radio" name="payment" checked={paymentMethod === m.code} onChange={() => setPaymentMethod(m.code)} />
-              {m.label}
+              <PaymentMethodLogo code={m.code} />
+              <span className="font-medium">{paymentLabel(m.code, m.label)}</span>
             </label>
           ))}
         </div>

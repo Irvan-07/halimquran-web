@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -49,6 +49,7 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
             </button>
           ))}
         </div>
+        {customization !== null && customization !== "quran-saja" && (
         <div className="mt-3">
           <Label htmlFor="custom-name" className="mb-1.5 block text-base font-bold text-foreground">
             Nama Ukiran (khusus Quran + Nama)
@@ -57,11 +58,12 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
             id="custom-name"
             value={customName}
             onChange={(e) => setCustomName(e.target.value)}
-            placeholder="opsional"
+            placeholder="Nama yang ingin diukir"
             maxLength={30}
             className="h-14 w-full rounded-md px-5 text-base"
           />
         </div>
+        )}
       </div>
 
       {allSoldOut ? (
@@ -110,12 +112,14 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
         </Button>
       </div>
 
-      {/* Mobile sticky purchase bar — matches the real halimquran.com PDP:
-          "Tambah Ke Keranjang" (not "Beli Sekarang") + a WhatsApp button,
-          no price repeated here. */}
-      <div className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-3 border-t border-border bg-background p-3 sm:hidden">
-        <Button onClick={handleAddToCart} disabled={allSoldOut} className="h-11 flex-1 rounded-xl">
-          {allSoldOut ? "Stok Habis" : "Tambah Ke Keranjang"}
+      {/* Keep both purchase actions available on mobile. */}
+      <div className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-3 border-t border-border bg-background p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:hidden">
+        <Button variant="outline" onClick={handleAddToCart} disabled={allSoldOut}
+          aria-label="Tambah ke Keranjang" className="size-11 shrink-0 rounded-xl border-primary text-primary">
+          <ShoppingCart className="size-5" />
+        </Button>
+        <Button onClick={handleBuyNow} disabled={allSoldOut} className="h-11 flex-1 rounded-xl">
+          {allSoldOut ? "Stok Habis" : "Beli Sekarang"}
         </Button>
         <Link
           href={`https://wa.me/${WHATSAPP_NUMBER}`}
