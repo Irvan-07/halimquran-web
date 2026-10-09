@@ -66,6 +66,18 @@ export function usePurchase(product: Product) {
     };
   }
 
+  // Bring the missing choice into view (and flash it) so a buyer who taps the
+  // sticky bar without choosing sees what to do, not just a message. Does
+  // nothing on themes whose markup has no such section.
+  function pointTo(sectionId: string) {
+    const el = document.getElementById(sectionId);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+    const flash = ["rounded-lg", "ring-2", "ring-destructive", "ring-offset-4", "ring-offset-background"];
+    el.classList.add(...flash);
+    window.setTimeout(() => el.classList.remove(...flash), 1800);
+  }
+
   function validate(): boolean {
     if (allSoldOut) {
       toast.error("Stok produk ini sedang habis");
@@ -73,10 +85,12 @@ export function usePurchase(product: Product) {
     }
     if (hasColorChoice && !selectedColor) {
       toast.error("Pilih warna terlebih dahulu");
+      pointTo("pilih-warna");
       return false;
     }
     if (!customization) {
       toast.error("Pilih salah satu opsi terlebih dahulu");
+      pointTo("pilih-opsi");
       return false;
     }
     if (activeStock && quantity > (activeStock.available_qty ?? Infinity)) {

@@ -10,6 +10,9 @@ const Toaster = ({ ...props }: ToasterProps) => {
   return (
     <Sonner
       theme={theme as ToasterProps["theme"]}
+      // Top of the screen: at the bottom the messages cover the sticky
+      // "Beli Sekarang" bar on phones.
+      position="top-center"
       className="toaster group"
       icons={{
         success: (

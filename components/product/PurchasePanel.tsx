@@ -29,7 +29,7 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
 
   return (
     <div className="flex flex-col gap-5">
-      <div>
+      <div id="pilih-opsi" className="scroll-mt-20">
         <Label className="mb-2 block text-base font-bold text-foreground">
           Pilihan Tambahan
         </Label>

@@ -17,7 +17,7 @@ export function ProductColorPicker({ product }: { product: Product }) {
 
   if (product.colorVariants && product.colorVariants.length > 0) {
     return (
-      <div className="flex flex-col gap-2">
+      <div id="pilih-warna" className="flex flex-col gap-2 scroll-mt-20">
         <span className="text-sm font-medium text-foreground">Warna</span>
         <div className="grid grid-cols-4 gap-3">
           {product.colorVariants.map((variant, i) => {
