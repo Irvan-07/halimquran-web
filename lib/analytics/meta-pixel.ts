@@ -36,6 +36,59 @@ export const META_PIXEL_BASE_CODE = `if(${JSON.stringify(PIXEL_HOSTS)}.indexOf(l
 
 const CURRENCY = "IDR";
 
+const SCALEV_API = "https://api.scalev.com";
+
+function readCookie(name: string): string | undefined {
+  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+  return match ? decodeURIComponent(match[1]) : undefined;
+}
+
+// Ad-click id. The pixel writes the _fbc cookie from ?fbclid=, but not always
+// before the first event of a visit, so rebuild it from the address when the
+// cookie is not there yet.
+function fbcValue(): string | undefined {
+  const cookie = readCookie("_fbc");
+  if (cookie) return cookie;
+  const fbclid = new URLSearchParams(window.location.search).get("fbclid");
+  return fbclid ? `fb.1.${Date.now()}.${fbclid}` : undefined;
+}
+
+function newEventId(): string {
+  return typeof crypto !== "undefined" && "randomUUID" in crypto
+    ? crypto.randomUUID()
+    : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+// One event, two routes: the pixel (browser) and Meta's Conversions API through
+// Scalev (server, which already holds the Meta access token). Both carry the
+// same event_id, so Meta counts the event once, yet still has it when an ad
+// blocker or browser privacy setting stops the pixel. The server copy also
+// carries the full page address (the pixel only reports the bare domain) plus
+// the fbp / fbc browser ids. The server call is fire-and-forget: it can fail
+// without any effect on the page.
+function sendMetaEvent(name: string, parameters: Record<string, unknown>): void {
+  const eventId = newEventId();
+  window.fbq?.("track", name, parameters, { eventID: eventId });
+
+  const storeId = process.env.NEXT_PUBLIC_SCALEV_STORE_ID;
+  const key = process.env.NEXT_PUBLIC_SCALEV_STOREFRONT_API_KEY;
+  if (!storeId || !key) return;
+  const fbp = readCookie("_fbp");
+  const fbc = fbcValue();
+  fetch(`${SCALEV_API}/v3/stores/${storeId}/public/analytics/meta/events`, {
+    method: "POST",
+    keepalive: true,
+    credentials: "omit",
+    headers: { "X-Scalev-Storefront-Api-Key": key, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      event_source_url: window.location.origin + window.location.pathname,
+      referrer_url: document.referrer || undefined,
+      user_data: { ...(fbp ? { fbp } : {}), ...(fbc ? { fbc } : {}) },
+      events: [{ event_id: eventId, event_name: name, parameters }],
+    }),
+  }).catch(() => {});
+}
+
 function contentsOf(items: { item_id: string; price: number; quantity?: number }[]) {
   return items.map((item) => ({ id: item.item_id, quantity: item.quantity ?? 1, item_price: item.price }));
 }
@@ -50,7 +103,7 @@ export function trackMetaPixel(event: AnalyticsEvent): void {
 
   switch (event.name) {
     case "view_item":
-      window.fbq("track", "ViewContent", {
+      sendMetaEvent("ViewContent", {
         content_type: "product",
         content_ids: event.items.map((i) => i.item_id),
         content_name: event.items[0]?.item_name,
@@ -61,7 +114,7 @@ export function trackMetaPixel(event: AnalyticsEvent): void {
       });
       break;
     case "add_to_cart":
-      window.fbq("track", "AddToCart", {
+      sendMetaEvent("AddToCart", {
         content_type: "product",
         content_ids: event.items.map((i) => i.item_id),
         content_name: event.items[0]?.item_name,
@@ -71,7 +124,7 @@ export function trackMetaPixel(event: AnalyticsEvent): void {
       });
       break;
     case "begin_checkout":
-      window.fbq("track", "InitiateCheckout", {
+      sendMetaEvent("InitiateCheckout", {
         content_type: "product",
         content_ids: event.items.map((i) => i.item_id),
         contents: contentsOf(event.items),
