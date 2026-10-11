@@ -36,6 +36,8 @@ export const META_PIXEL_BASE_CODE = `if(${JSON.stringify(PIXEL_HOSTS)}.indexOf(l
 
 const CURRENCY = "IDR";
 
+const FBP_WAIT_MS = 1500;
+
 function readCookie(name: string): string | undefined {
   const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
   return match ? decodeURIComponent(match[1]) : undefined;
@@ -68,21 +70,38 @@ function sendMetaEvent(name: string, parameters: Record<string, unknown>): void 
   const eventId = newEventId();
   window.fbq?.("track", name, parameters, { eventID: eventId });
 
-  const fbp = readCookie("_fbp");
-  const fbc = fbcValue();
-  fetch("/api/meta/events", {
-    method: "POST",
-    keepalive: true,
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      event_id: eventId,
-      event_name: name,
-      event_source_url: window.location.origin + window.location.pathname,
-      fbp,
-      fbc,
-      parameters,
-    }),
-  }).catch(() => {});
+  const send = () => {
+    const fbp = readCookie("_fbp");
+    const fbc = fbcValue();
+    fetch("/api/meta/events", {
+      method: "POST",
+      keepalive: true,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        event_id: eventId,
+        event_name: name,
+        event_source_url: window.location.origin + window.location.pathname,
+        fbp,
+        fbc,
+        parameters,
+      }),
+    }).catch(() => {});
+  };
+
+  // A first-time visitor has no _fbp cookie yet when the first event fires: the
+  // pixel writes it a moment later. Waiting briefly (at most FBP_WAIT_MS) lets
+  // the server copy carry it, which Meta uses to match the event to the browser.
+  if (readCookie("_fbp")) {
+    send();
+    return;
+  }
+  const startedAt = Date.now();
+  const timer = window.setInterval(() => {
+    if (readCookie("_fbp") || Date.now() - startedAt >= FBP_WAIT_MS) {
+      window.clearInterval(timer);
+      send();
+    }
+  }, 100);
 }
 
 function contentsOf(items: { item_id: string; price: number; quantity?: number }[]) {
