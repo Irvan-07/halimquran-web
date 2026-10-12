@@ -9,6 +9,8 @@ const PAYMENT_ORDER = ["qris", "cod", "invoice", "dana", "ovo", "shopeepay", "ba
 const PAYMENT_LABELS: Record<string, string> = {
   qris: "QRIS",
   cod: "Cash on Delivery (COD)",
+  // Scalev's own label also lists DANA, which has its own option below.
+  invoice: "Virtual Account / GoPay",
   bank_transfer: "Transfer Bank",
 };
 
@@ -32,8 +34,6 @@ const LOGOS: Record<string, string[]> = {
   dana: ["dana"],
   ovo: ["ovo"],
   shopeepay: ["shopee"],
-  // Scalev's "Virtual Account / GoPay / DANA" page: show the two e-wallets.
-  invoice: ["gopay", "dana"],
 };
 
 export function PaymentMethodLogo({ code }: { code: string }) {
@@ -55,6 +55,8 @@ export function PaymentMethodLogo({ code }: { code: string }) {
             className={logos.length > 1 ? "h-3.5 w-full object-contain" : "h-5 w-full object-contain"}
           />
         ))
+      ) : code === "invoice" ? (
+        <span className="text-sm font-bold tracking-wide text-primary">VA</span>
       ) : code === "cod" ? (
         <Banknote className="size-5 text-success" />
       ) : (
