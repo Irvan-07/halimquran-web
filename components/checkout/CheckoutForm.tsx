@@ -105,7 +105,7 @@ export function CheckoutForm({ buyNow = false }: { buyNow?: boolean }) {
       .listPaymentMethods()
       .then((methods) => {
         if (cancelled) return;
-        const availableMethods = sortPaymentMethods(methods.filter((method) => method.code !== "bank_transfer"));
+        const availableMethods = sortPaymentMethods(methods);
         setPaymentMethods(availableMethods);
         setPaymentMethod((current) =>
           availableMethods.some((method) => method.code === current)

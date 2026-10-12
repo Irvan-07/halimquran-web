@@ -3,12 +3,13 @@ import { Banknote, Landmark } from "lucide-react";
 
 // Order the payment methods are shown in. Anything Scalev adds later that is
 // not listed here goes after these, in the order Scalev returns it.
-const PAYMENT_ORDER = ["qris", "cod", "invoice", "dana", "ovo", "shopeepay"];
+const PAYMENT_ORDER = ["qris", "cod", "invoice", "dana", "ovo", "shopeepay", "bank_transfer"];
 
 // Scalev's labels are lowercase/English ("Cash on delivery"); show ours.
 const PAYMENT_LABELS: Record<string, string> = {
   qris: "QRIS",
   cod: "Cash on Delivery (COD)",
+  bank_transfer: "Transfer Bank",
 };
 
 export function sortPaymentMethods<T extends { code: string }>(methods: T[]): T[] {
