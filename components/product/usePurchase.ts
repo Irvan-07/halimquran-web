@@ -10,7 +10,7 @@ import { track } from "@/lib/analytics";
 import type { Product } from "@/types/product";
 import type { CustomizationOption } from "@/types/cart";
 
-export const WHATSAPP_NUMBER = "6281128018990";
+export { WHATSAPP_NUMBER, WHATSAPP_LINK } from "@/lib/whatsapp";
 
 export const customizationOptions: { value: CustomizationOption; label: string }[] = [
   { value: "quran-saja", label: "Quran Saja" },

@@ -2,13 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { whatsappHref } from "@/lib/whatsapp";
 
-// Matches the floating WhatsApp button present on every halimquran.com
-// page (bottom-right, all pages). Number reused from the one already
-// verified for this business in app/wakaf/page.tsx (published on
-// qurancustom.com) rather than re-guessing a different one here.
-const WHATSAPP_NUMBER = "6281128018990";
-
+// Floating WhatsApp button on every page (bottom-right). The number and the
+// pre-written first message live in lib/whatsapp.ts.
 // PDP's own mobile sticky bar (see PurchasePanel) already has a WhatsApp
 // button next to "Tambah Ke Keranjang" — this global one would just
 // duplicate it there, so it hides on PDP specifically on mobile widths
@@ -21,7 +18,7 @@ export function WhatsAppButton() {
 
   return (
     <Link
-      href={`https://wa.me/${WHATSAPP_NUMBER}`}
+      href={whatsappHref(pathname)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat via WhatsApp"

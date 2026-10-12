@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { whatsappHref } from "@/lib/whatsapp";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { customizationOptions, usePurchase, WHATSAPP_NUMBER } from "@/components/product/usePurchase";
+import { customizationOptions, usePurchase } from "@/components/product/usePurchase";
 import type { Product } from "@/types/product";
 
 interface PurchasePanelProps {
@@ -13,6 +15,7 @@ interface PurchasePanelProps {
 }
 
 export function PurchasePanel({ product }: PurchasePanelProps) {
+  const pathname = usePathname();
   const {
     allSoldOut,
     activeStock,
@@ -122,7 +125,7 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
           {allSoldOut ? "Stok Habis" : "Beli Sekarang"}
         </Button>
         <Link
-          href={`https://wa.me/${WHATSAPP_NUMBER}`}
+          href={whatsappHref(pathname, product.name)}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat via WhatsApp"

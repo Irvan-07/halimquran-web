@@ -7,7 +7,7 @@ import { ProductReviews } from "@/components/product/ProductReviews";
 import { ShippingAreaField } from "@/components/product/ShippingAreaField";
 import { StockBadge } from "@/components/product/StockBadge";
 import { TrackViewItem } from "@/components/tracking";
-import { WHATSAPP_NUMBER } from "@/components/product/usePurchase";
+import { WHATSAPP_LINK } from "@/components/product/usePurchase";
 import type { Product } from "@/types/product";
 import type { ProductDetailProps } from "../types";
 import { TokopediaGallery } from "./Gallery";
@@ -43,7 +43,7 @@ function SellerCard() {
       </div>
       <div className="flex gap-2">
         <Link
-          href={`https://wa.me/${WHATSAPP_NUMBER}`}
+          href={WHATSAPP_LINK}
           target="_blank"
           rel="noopener noreferrer"
           className="flex h-9 items-center gap-1.5 rounded-lg border border-primary px-4 text-xs font-extrabold text-primary hover:bg-accent"

@@ -7,7 +7,7 @@ import { ProductReviews } from "@/components/product/ProductReviews";
 import { ShippingAreaField } from "@/components/product/ShippingAreaField";
 import { StockBadge } from "@/components/product/StockBadge";
 import { TrackViewItem } from "@/components/tracking";
-import { WHATSAPP_NUMBER } from "@/components/product/usePurchase";
+import { WHATSAPP_LINK } from "@/components/product/usePurchase";
 import { formatIDR } from "@/lib/utils/format";
 import type { Product } from "@/types/product";
 import type { ProductDetailProps } from "../types";
@@ -33,7 +33,7 @@ function SellerCard() {
         </p>
       </div>
       <Link
-        href={`https://wa.me/${WHATSAPP_NUMBER}`}
+        href={WHATSAPP_LINK}
         target="_blank"
         rel="noopener noreferrer"
         className="flex h-9 shrink-0 items-center gap-1.5 rounded-full border border-primary px-4 text-sm font-semibold text-primary hover:bg-accent"

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MessageCircle, Minus, Plus, ShoppingCart } from "lucide-react";
 import { useProductMedia } from "@/components/product/ProductMediaContext";
-import { customizationOptions, usePurchase, WHATSAPP_NUMBER } from "@/components/product/usePurchase";
+import { customizationOptions, usePurchase, WHATSAPP_LINK } from "@/components/product/usePurchase";
 import type { Product } from "@/types/product";
 
 // One "label + control" row. Desktop: label in a fixed left column and the
@@ -206,7 +206,7 @@ export function ShopeePurchaseBox({ product }: { product: Product }) {
       {/* Phone action bar */}
       <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[3.5rem_1fr_1fr] border-t border-border bg-background pb-[env(safe-area-inset-bottom)] sm:hidden">
         <Link
-          href={`https://wa.me/${WHATSAPP_NUMBER}`}
+          href={WHATSAPP_LINK}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat via WhatsApp"

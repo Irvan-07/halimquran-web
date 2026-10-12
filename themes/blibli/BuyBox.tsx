@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Heart, MessageCircle, Minus, Plus } from "lucide-react";
 import { formatIDR } from "@/lib/utils/format";
 import { useProductMedia } from "@/components/product/ProductMediaContext";
-import { customizationOptions, usePurchase, WHATSAPP_NUMBER } from "@/components/product/usePurchase";
+import { customizationOptions, usePurchase, WHATSAPP_LINK } from "@/components/product/usePurchase";
 import type { Product } from "@/types/product";
 
 function Label({ children, value }: { children: ReactNode; value?: string }) {
@@ -216,7 +216,7 @@ export function BlibliBuyBox({ product }: { product: Product }) {
           </div>
 
           <Link
-            href={`https://wa.me/${WHATSAPP_NUMBER}`}
+            href={WHATSAPP_LINK}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat via WhatsApp"

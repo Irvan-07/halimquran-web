@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Heart, MessageCircle, Minus, Plus, Share2 } from "lucide-react";
 import { toast } from "sonner";
 import { useProductMedia } from "@/components/product/ProductMediaContext";
-import { customizationOptions, usePurchase, WHATSAPP_NUMBER } from "@/components/product/usePurchase";
+import { customizationOptions, usePurchase, WHATSAPP_LINK } from "@/components/product/usePurchase";
 import { formatIDR } from "@/lib/utils/format";
 import type { Product } from "@/types/product";
 
@@ -262,7 +262,7 @@ export function TokopediaPurchaseCard({ product }: { product: Product }) {
 
       <div className="mt-4 flex items-center justify-between text-xs font-bold text-foreground">
         <Link
-          href={`https://wa.me/${WHATSAPP_NUMBER}`}
+          href={WHATSAPP_LINK}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-1.5 hover:text-primary"
@@ -286,7 +286,7 @@ export function TokopediaMobileBar() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-2 bg-background px-3 py-2.5 pb-[calc(0.625rem+env(safe-area-inset-bottom))] shadow-[0_-1px_6px_rgba(141,150,170,0.4)] lg:hidden">
       <Link
-        href={`https://wa.me/${WHATSAPP_NUMBER}`}
+        href={WHATSAPP_LINK}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat via WhatsApp"

@@ -8,7 +8,7 @@ import { ProductReviews } from "@/components/product/ProductReviews";
 import { ShippingAreaField } from "@/components/product/ShippingAreaField";
 import { StockBadge } from "@/components/product/StockBadge";
 import { TrackViewItem } from "@/components/tracking";
-import { WHATSAPP_NUMBER } from "@/components/product/usePurchase";
+import { WHATSAPP_LINK } from "@/components/product/usePurchase";
 import type { Product } from "@/types/product";
 import type { ProductDetailProps } from "../types";
 import { ShopeeGallery } from "./Gallery";
@@ -121,7 +121,7 @@ function ShopCard() {
           <p className="truncate text-base font-medium text-foreground">Halim Qur&apos;an</p>
           <div className="flex gap-2">
             <Link
-              href={`https://wa.me/${WHATSAPP_NUMBER}`}
+              href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-8 items-center gap-1.5 rounded-sm border border-primary bg-accent px-3 text-xs text-primary hover:bg-primary/10"
