@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { clearBuyNow, useBuyNowItems } from "@/components/cart/buy-now";
 import { useCart } from "@/components/cart/CartProvider";
 import { PaymentMethodLogo, paymentLabel, sortPaymentMethods } from "@/components/checkout/PaymentMethodLogo";
-import { scalevStorefront } from "@/lib/scalev/storefront-client";
+import { scalevStorefront, ScalevApiError } from "@/lib/scalev/storefront-client";
 import { formatIDR } from "@/lib/utils/format";
 import type { CartItem, CustomizationOption } from "@/types/cart";
 import type {
@@ -41,21 +41,78 @@ function buildNotes(items: CartItem[], extra: string): string {
     .join("\n");
 }
 
+// Tell our own server what the failure really was (no name, phone or address),
+// so it shows up in the Worker logs instead of vanishing behind a generic toast.
+function reportCheckoutError(e: unknown, context: Record<string, unknown>) {
+  try {
+    const known = e instanceof ScalevApiError;
+    fetch("/api/checkout-error", {
+      method: "POST",
+      keepalive: true,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        status: known ? e.status : null,
+        body: known ? e.body.slice(0, 300) : e instanceof Error ? `${e.name}: ${e.message}`.slice(0, 300) : String(e).slice(0, 300),
+        online: typeof navigator !== "undefined" ? navigator.onLine : null,
+        ...context,
+      }),
+    }).catch(() => {});
+  } catch {
+    // reporting must never break checkout
+  }
+}
+
 function errorMessage(e: unknown): string {
   const raw = e instanceof Error ? e.message : "";
   if (/out of stock/i.test(raw)) {
     return "Ada produk di keranjang yang stoknya habis. Hapus produk tersebut dari keranjang lalu coba lagi.";
   }
   const detail = raw.match(/"error"\s*:\s*"([^"]+)"/)?.[1];
-  return detail ?? (raw ? "Terjadi kesalahan, coba lagi." : "Terjadi kesalahan, coba lagi.");
+  if (detail) return detail;
+  const status = e instanceof ScalevApiError ? e.status : undefined;
+  if (e instanceof ScalevApiError) {
+    try {
+      const fields = (JSON.parse(e.body) as { errors?: Record<string, string[]> }).errors;
+      if (fields) {
+        if (fields.customer_phone) return PHONE_HELP;
+        if (fields.customer_email) return "Email belum benar. Kosongkan saja kalau tidak punya.";
+        const first = Object.entries(fields)[0];
+        if (first) return `${first[0].replace(/_/g, " ")}: ${[first[1]].flat().join(", ")}`;
+      }
+    } catch {
+      // not JSON: fall through to the status-based messages
+    }
+  }
+  if (status === 0) return "Koneksi terputus sebelum pesanan terkirim. Periksa sinyal, lalu tekan Buat Pesanan lagi. Cek dulu di WhatsApp kalau ragu pesanan sudah masuk.";
+  if (status === 429) return "Sedang ramai. Tunggu sebentar lalu coba lagi.";
+  if (status && status >= 500) return `Server pembayaran sedang bermasalah (kode ${status}). Coba lagi sebentar lagi.`;
+  return "Terjadi kesalahan, coba lagi.";
 }
 
 // Scalev's checkout requires an email, but most buyers here only use
 // WhatsApp, so the field is optional. When it is left empty a placeholder that
 // can never receive mail (.invalid is reserved for that) is sent instead,
 // derived from the phone number so the same buyer maps to the same customer.
+const PHONE_HELP = "Nomor WhatsApp belum benar. Tulis angka saja, misalnya 081234567890.";
+
+// Scalev only accepts a plain number (digits, starting with 0). Buyers type it
+// with spaces, dashes, "+62" or "62", so tidy it up before sending.
+function normalizePhone(raw: string): string {
+  const digits = raw.replace(/\D/g, "");
+  if (digits.startsWith("62")) {
+    const rest = digits.slice(2);
+    return rest.startsWith("0") ? rest : `0${rest}`;
+  }
+  if (digits.startsWith("8")) return `0${digits}`;
+  return digits;
+}
+
+function isValidPhone(raw: string): boolean {
+  return /^08\d{8,12}$/.test(normalizePhone(raw));
+}
+
 function guestEmail(phone: string): string {
-  return `${phone.replace(/\D/g, "")}@noemail.invalid`;
+  return `${normalizePhone(phone)}@noemail.invalid`;
 }
 
 export function CheckoutForm({ buyNow = false }: { buyNow?: boolean }) {
@@ -215,16 +272,18 @@ export function CheckoutForm({ buyNow = false }: { buyNow?: boolean }) {
     setShippingLoading(/^\d{5}$/.test(value));
   }
 
-  const canSubmit =
-    !submitting &&
-    !missingVariant &&
-    name.trim() &&
-    (email.trim() === "" || /\S+@\S+\.\S+/.test(email.trim())) &&
-    phone.trim().length >= 9 &&
-    address.trim() &&
-    destination &&
-    shipping &&
-    paymentMethod;
+  // What is still missing, in the order the form is filled; shown beside the
+  // button so a greyed-out "Buat Pesanan" is never a mystery.
+  const todo: string[] = [];
+  if (!name.trim()) todo.push("Nama lengkap");
+  if (!isValidPhone(phone)) todo.push("No. WhatsApp");
+  if (email.trim() !== "" && !/\S+@\S+\.\S+/.test(email.trim())) todo.push("Email");
+  if (!destination) todo.push("Kecamatan dan kode pos");
+  if (!address.trim()) todo.push("Alamat lengkap");
+  if (destination && !shipping) todo.push("Pilihan pengiriman");
+  if (!paymentMethod) todo.push("Metode pembayaran");
+
+  const canSubmit = !submitting && !missingVariant && todo.length === 0;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -235,7 +294,7 @@ export function CheckoutForm({ buyNow = false }: { buyNow?: boolean }) {
         items: checkoutItems,
         customer_name: name.trim(),
         customer_email: email.trim() || guestEmail(phone),
-        customer_phone: phone.trim(),
+        customer_phone: normalizePhone(phone),
         shipping_address: address.trim(),
         shipping_location_id: destination.location_id,
         shipping_subdistrict: location?.subdistrict_name,
@@ -254,6 +313,7 @@ export function CheckoutForm({ buyNow = false }: { buyNow?: boolean }) {
         `/pesanan/sukses?order=${order.secret_slug}`;
       window.location.href = next;
     } catch (err) {
+      reportCheckoutError(err, { paymentMethod, courier: shipping.courier_service_id, items: checkoutItems.length });
       toast.error(`Pesanan gagal dibuat: ${errorMessage(err)}`);
       setSubmitting(false);
     }
@@ -293,7 +353,8 @@ export function CheckoutForm({ buyNow = false }: { buyNow?: boolean }) {
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="phone">No. WhatsApp</Label>
-            <Input id="phone" type="tel" className="h-11" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" placeholder="08123456789" />
+            <Input id="phone" type="tel" className="h-11" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" placeholder="08123456789" aria-invalid={phone.trim() !== "" && !isValidPhone(phone)} />
+            {phone.trim() !== "" && !isValidPhone(phone) ? <p className="text-xs text-destructive">{PHONE_HELP}</p> : null}
           </div>
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="email">
@@ -446,6 +507,11 @@ export function CheckoutForm({ buyNow = false }: { buyNow?: boolean }) {
       </section>
 
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background p-3 sm:static sm:border-0 sm:p-0">
+        {!submitting && todo.length > 0 ? (
+          <p className="mb-2 text-xs text-muted-foreground">
+            Lengkapi dulu: <span className="font-medium text-destructive">{todo.join(", ")}</span>
+          </p>
+        ) : null}
         <Button type="submit" className="w-full" disabled={!canSubmit}>
           {submitting ? "Memproses…" : `Buat Pesanan · ${formatIDR(total)}`}
         </Button>

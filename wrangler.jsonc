@@ -6,6 +6,8 @@
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": { "directory": ".open-next/assets", "binding": "ASSETS" },
   "services": [{ "binding": "WORKER_SELF_REFERENCE", "service": "halimquran-web" }],
+  // Worker logs (invocation logs), so failures reported by the pages can be read in the dashboard.
+  "observability": { "enabled": true },
   // Page/ISR cache (Next's incremental cache). Workers Paid, so no tight KV
   // write quota: the catalog revalidates at the default 60 s
   // (SCALEV_REVALIDATE_SECONDS can still override it).

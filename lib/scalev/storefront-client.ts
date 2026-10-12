@@ -70,21 +70,39 @@ function writeGuestToken(token: string) {
  * X-Scalev-Guest-Token header, not cookies). Persists any returned guest
  * token so the caller's next request reuses the same cart automatically.
  */
+/** An error from the storefront API; status 0 means the request got no answer. */
+export class ScalevApiError extends Error {
+  status: number;
+  body: string;
+  constructor(status: number, body: string) {
+    super(`Scalev storefront API error ${status}: ${body}`);
+    this.name = "ScalevApiError";
+    this.status = status;
+    this.body = body;
+  }
+}
+
 async function scalevStorefrontFetch<T>(
   path: string,
   init?: RequestInit,
 ): Promise<T> {
   const guestToken = readGuestToken();
-  const res = await fetch(`${API_BASE}/v3/stores/${storeId()}/public${path}`, {
-    ...init,
-    credentials: "omit",
-    headers: {
-      "X-Scalev-Storefront-Api-Key": storefrontApiKey(),
-      "Content-Type": "application/json",
-      ...(guestToken ? { "X-Scalev-Guest-Token": guestToken } : {}),
-      ...init?.headers,
-    },
-  });
+  let res: Response;
+  try {
+    res = await fetch(`${API_BASE}/v3/stores/${storeId()}/public${path}`, {
+      ...init,
+      credentials: "omit",
+      headers: {
+        "X-Scalev-Storefront-Api-Key": storefrontApiKey(),
+        "Content-Type": "application/json",
+        ...(guestToken ? { "X-Scalev-Guest-Token": guestToken } : {}),
+        ...init?.headers,
+      },
+    });
+  } catch (cause) {
+    // No answer at all (offline, blocked, or an error page without CORS headers).
+    throw new ScalevApiError(0, cause instanceof Error ? `${cause.name}: ${cause.message}` : "network error");
+  }
 
   const returnedGuestToken = res.headers.get("X-Scalev-Guest-Token");
   if (returnedGuestToken) {
@@ -92,7 +110,7 @@ async function scalevStorefrontFetch<T>(
   }
 
   if (!res.ok) {
-    throw new Error(`Scalev storefront API error ${res.status}: ${await res.text()}`);
+    throw new ScalevApiError(res.status, await res.text());
   }
   return res.json() as Promise<T>;
 }
