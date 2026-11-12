@@ -1274,7 +1274,7 @@ export const mockProducts: Product[] = [
     // Six actual Shopee gallery photos supplied by the owner on 12 Nov 2026.
     // Variant photos verified against the existing halimquran.com PDP on
     // 12 Nov 2026. Live Scalev variants retain precedence (including IDs).
-    // Product video is still pending.
+    // Photo-only product gallery, per the owner's direction (12 Nov 2026).
     colorVariants: [
       { hex: "#C9A227", name: "Emas", imageUrl: "https://d2kchovjbwl1tk.cloudfront.net/vendor/7907/product/IMG_6444_1777727898644.jpg" },
       { hex: "#C4D2DA", name: "Perak", imageUrl: "https://d2kchovjbwl1tk.cloudfront.net/vendor/7907/product/IMG_6445_1777727898644.jpg" },
