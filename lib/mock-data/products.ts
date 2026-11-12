@@ -1272,9 +1272,13 @@ export const mockProducts: Product[] = [
     // "Belum Ada Penilaian" (no ratings yet).
     soldCount: 50,
     // Six actual Shopee gallery photos supplied by the owner on 12 Nov 2026.
-    // The separate variant photos and product video have not been supplied yet.
-    colors: ["#C9A227", "#C4D2DA"],
-    colorNames: ["Emas", "Perak"],
+    // Variant photos verified against the existing halimquran.com PDP on
+    // 12 Nov 2026. Live Scalev variants retain precedence (including IDs).
+    // Product video is still pending.
+    colorVariants: [
+      { hex: "#C9A227", name: "Emas", imageUrl: "https://d2kchovjbwl1tk.cloudfront.net/vendor/7907/product/IMG_6444_1777727898644.jpg" },
+      { hex: "#C4D2DA", name: "Perak", imageUrl: "https://d2kchovjbwl1tk.cloudfront.net/vendor/7907/product/IMG_6445_1777727898644.jpg" },
+    ],
     imageUrl: "/products/kalimatul-ulya-a5-gallery/gallery-1-main.webp",
     galleryImages: [
       "/products/kalimatul-ulya-a5-gallery/gallery-1-main.webp",
