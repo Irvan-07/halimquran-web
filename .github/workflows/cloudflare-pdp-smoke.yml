@@ -14,10 +14,11 @@ concurrency:
 
 jobs:
   preview:
-    if: github.head_ref == 'fix/pdp-gallery-media-recovery'
+    if: github.head_ref == 'fix/pdp-gallery-media-recovery' || github.head_ref == 'fix/scalev-checkout-recovery'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
+      HALIM_SYNTHETIC_BUILD: '1'
       NEXT_PUBLIC_THEME: halim
       NEXT_PUBLIC_SITE_URL: http://127.0.0.1:8787
       NEXT_TELEMETRY_DISABLED: '1'
@@ -40,6 +41,8 @@ jobs:
         run: |
           npm ci --no-audit --no-fund
           git diff --exit-code -- package-lock.json package.json
+      - name: Storefront guard synthetic tests
+        run: npm run test:storefront
       - name: Build Cloudflare Worker
         run: npx --no-install opennextjs-cloudflare build
       - name: Smoke-test local workerd
