@@ -1,0 +1,70 @@
+name: Cloudflare PDP isolated smoke
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review, labeled]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-pdp-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    if: github.head_ref == 'fix/pdp-gallery-media-recovery'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      NEXT_PUBLIC_THEME: halim
+      NEXT_PUBLIC_SITE_URL: http://127.0.0.1:8787
+      NEXT_TELEMETRY_DISABLED: '1'
+      WRANGLER_SEND_METRICS: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      # Run #2 passed using npm 10 after a large temporary lockfile rewrite.
+      # Probe a pinned npm 11 toolchain against the original lockfile instead.
+      - name: Pin npm 11 toolchain
+        run: |
+          npm install --global npm@11.13.0 --ignore-scripts --no-audit --no-fund
+          test "$(npm --version)" = 11.13.0
+      - name: Install original locked dependencies
+        run: |
+          npm ci --no-audit --no-fund
+          git diff --exit-code -- package-lock.json package.json
+      - name: Build Cloudflare Worker
+        run: npx --no-install opennextjs-cloudflare build
+      - name: Smoke-test local workerd
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Local simulated bindings only; no deploy, credentials, or remote KV.
+          npx --no-install wrangler dev --local --ip 127.0.0.1 --port 8787 > /tmp/workerd.log 2>&1 &
+          worker=$!
+          trap 'kill "$worker" 2>/dev/null || true; tail -n 100 /tmp/workerd.log' EXIT
+          url=http://127.0.0.1:8787
+          pdp=/produk/quran-lainnya/al-quran-kalimatul-ulya-a5-resleting
+          ready=false
+          for attempt in $(seq 1 90); do
+            if ! kill -0 "$worker" 2>/dev/null; then exit 1; fi
+            if curl --max-time 10 -fsS "$url$pdp" -o /tmp/pdp.html; then ready=true; break; fi
+            sleep 2
+          done
+          test "$ready" = true
+          grep -qi 'Kalimatul Ulya' /tmp/pdp.html
+          grep -q 'kalimatul-ulya-a5-gallery/gallery-1-main.webp' /tmp/pdp.html
+          grep -q 'Emas' /tmp/pdp.html
+          grep -q 'Perak' /tmp/pdp.html
+          for file in gallery-1-main.webp gallery-2.webp gallery-3.webp gallery-4.webp gallery-5.webp gallery-6.webp; do
+            curl -fsS --max-time 15 "$url/products/kalimatul-ulya-a5-gallery/$file" -o "/tmp/$file"
+            cmp "/tmp/$file" "public/products/kalimatul-ulya-a5-gallery/$file"
+          done
+          echo "CLOUDFLARE_LOCAL_PDP_SMOKE_PASS"
