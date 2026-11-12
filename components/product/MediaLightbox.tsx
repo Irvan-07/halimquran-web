@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 export interface LightboxItem {
   type: "image" | "video";
   src: string;
+  poster?: string;
 }
 
 const MAX_SCALE = 4;
@@ -160,7 +161,7 @@ export function MediaLightbox({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Penampil foto"
+      aria-label="Penampil foto dan video"
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
@@ -181,7 +182,7 @@ export function MediaLightbox({
             type="button"
             aria-label="Sebelumnya"
             onClick={() => go(-1)}
-            className="absolute left-3 top-1/2 z-10 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25 sm:flex"
+            className="absolute bottom-3 left-3 z-10 flex size-11 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2"
           >
             <ChevronLeft className="size-6" />
           </button>
@@ -189,7 +190,7 @@ export function MediaLightbox({
             type="button"
             aria-label="Berikutnya"
             onClick={() => go(1)}
-            className="absolute right-3 top-1/2 z-10 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25 sm:flex"
+            className="absolute bottom-3 right-3 z-10 flex size-11 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2"
           >
             <ChevronRight className="size-6" />
           </button>
@@ -203,6 +204,7 @@ export function MediaLightbox({
         <video
           key={item.src}
           src={item.src}
+          poster={item.poster}
           controls
           autoPlay
           playsInline
