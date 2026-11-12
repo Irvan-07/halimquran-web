@@ -1271,7 +1271,19 @@ export const mockProducts: Product[] = [
     // this listing's own page (2 Oct 2026). No rating: this listing shows
     // "Belum Ada Penilaian" (no ratings yet).
     soldCount: 50,
-    imageUrl: "/products/al-quran-kalimatul-ulya-a5-resleting.jpg",
+    // Six actual Shopee gallery photos supplied by the owner on 12 Nov 2026.
+    // The separate variant photos and product video have not been supplied yet.
+    colors: ["#C9A227", "#C4D2DA"],
+    colorNames: ["Emas", "Perak"],
+    imageUrl: "/products/kalimatul-ulya-a5-gallery/gallery-1-main.webp",
+    galleryImages: [
+      "/products/kalimatul-ulya-a5-gallery/gallery-1-main.webp",
+      "/products/kalimatul-ulya-a5-gallery/gallery-2.webp",
+      "/products/kalimatul-ulya-a5-gallery/gallery-3.webp",
+      "/products/kalimatul-ulya-a5-gallery/gallery-4.webp",
+      "/products/kalimatul-ulya-a5-gallery/gallery-5.webp",
+      "/products/kalimatul-ulya-a5-gallery/gallery-6.webp",
+    ],
     weightGrams: 570,
     // Real PDP copy, read verbatim from halimquran.com 2 Oct 2026.
     description:
