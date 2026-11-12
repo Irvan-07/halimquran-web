@@ -41,6 +41,8 @@ export interface Product {
   colorVariants?: { hex: string; name: string; imageUrl: string; /** Scalev variant id this color maps to — needed to put the right SKU in the cart/checkout. */ variantId?: number }[];
   /** The PDP gallery's own thumbnail strip — main shot, lifestyle/detail photos, and marketing infographics (size chart etc.), in display order. Separate from `colorVariants`, which drives the "Warna" section further down the page. Only set where we've scraped a product's real gallery (currently just the PDP template product). */
   galleryImages?: string[];
+  /** Product videos in the PDP gallery; separate from photo selection and color switching. */
+  galleryVideos?: { src: string; poster?: string }[];
   /** Shown as "Cocok untuk Wakaf" on the live site's Wakaf page. */
   wakafEligible?: boolean;
   /** Shown in the live site's homepage "Hadiah/Gift" carousel. */
