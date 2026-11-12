@@ -30,19 +30,16 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-      # Existing lockfile fails npm ci with missing esbuild optional packages.
-      # Repair only in the isolated runner; preserve the diff for review.
-      - name: Reconcile lockfile in CI
-        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
-      - name: Capture lockfile changes
-        run: git diff -- package-lock.json > /tmp/pdp-lockfile.patch
-      - uses: actions/upload-artifact@v4
-        with:
-          name: pdp-lockfile-repair
-          path: /tmp/pdp-lockfile.patch
-          retention-days: 7
-      - name: Install locked dependencies
-        run: npm ci --no-audit --no-fund
+      # Run #2 passed using npm 10 after a large temporary lockfile rewrite.
+      # Probe a pinned npm 11 toolchain against the original lockfile instead.
+      - name: Pin npm 11 toolchain
+        run: |
+          npm install --global npm@11.13.0 --ignore-scripts --no-audit --no-fund
+          test "$(npm --version)" = 11.13.0
+      - name: Install original locked dependencies
+        run: |
+          npm ci --no-audit --no-fund
+          git diff --exit-code -- package-lock.json package.json
       - name: Build Cloudflare Worker
         run: npx --no-install opennextjs-cloudflare build
       - name: Smoke-test local workerd
