@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { MediaLightbox } from "@/components/product/MediaLightbox";
+import { ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { MediaLightbox, type LightboxItem } from "@/components/product/MediaLightbox";
 import { useProductMedia } from "@/components/product/ProductMediaContext";
 import type { Product } from "@/types/product";
 
@@ -24,12 +24,34 @@ export function ProductGallery({ product }: { product: Product }) {
   const { gallery, selectedImage, setSelectedImage, setAutoplayHold } = useProductMedia();
   const slides = !selectedImage || gallery.includes(selectedImage) ? gallery : [...gallery, selectedImage];
   const index = Math.max(0, slides.indexOf(selectedImage));
-  const [viewerOpen, setViewerOpen] = useState(false);
+  const [viewer, setViewer] = useState<{ items: LightboxItem[]; index: number } | null>(null);
+  const [hovering, setHovering] = useState(false);
+  const videos = product.galleryVideos ?? [];
+
+  // Snapshot the media list on open so autoplay and color selection cannot
+  // shift the video's index while the full-screen viewer is playing.
+  function openViewer(startIndex: number) {
+    const items: LightboxItem[] = [
+      ...slides.map((src) => ({ type: "image" as const, src })),
+      ...videos.map(({ src, poster }) => ({ type: "video" as const, src, poster })),
+    ];
+    if (items[startIndex]) setViewer({ items, index: startIndex });
+  }
+
+  useEffect(() => {
+    setAutoplayHold(hovering || viewer !== null);
+    return () => setAutoplayHold(false);
+  }, [hovering, viewer, setAutoplayHold]);
 
   const trackRef = useRef<HTMLDivElement>(null);
   const programmatic = useRef(false);
   const flagTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const settleTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  useEffect(() => () => {
+    clearTimeout(flagTimer.current);
+    clearTimeout(settleTimer.current);
+  }, []);
 
   // Selection changed (thumbnail, arrow, colour, auto-advance) -> slide to it.
   useEffect(() => {
@@ -65,8 +87,8 @@ export function ProductGallery({ product }: { product: Product }) {
     <div className="flex flex-col gap-3">
       <div
         className="group relative -mx-4 w-[calc(100%+2rem)] overflow-hidden bg-secondary sm:mx-0 sm:w-full sm:rounded-lg"
-        onMouseEnter={() => setAutoplayHold(true)}
-        onMouseLeave={() => setAutoplayHold(false)}
+        onMouseEnter={() => setHovering(true)}
+        onMouseLeave={() => setHovering(false)}
       >
         <div
           ref={trackRef}
@@ -77,7 +99,7 @@ export function ProductGallery({ product }: { product: Product }) {
             <div
               key={src + i}
               className="relative aspect-square w-full shrink-0 cursor-zoom-in snap-center"
-              onClick={() => setViewerOpen(true)}
+              onClick={() => openViewer(i)}
             >
               <Image
                 src={src}
@@ -117,15 +139,15 @@ export function ProductGallery({ product }: { product: Product }) {
         )}
       </div>
 
-      {viewerOpen && (
+      {viewer && (
         <MediaLightbox
-          items={slides.map((src) => ({ type: "image" as const, src }))}
-          startIndex={index}
-          onClose={() => setViewerOpen(false)}
+          items={viewer.items}
+          startIndex={viewer.index}
+          onClose={() => setViewer(null)}
         />
       )}
 
-      {gallery.length > 1 && (
+      {(gallery.length > 1 || videos.length > 0) && (
         <div className="grid grid-cols-5 gap-2">
           {gallery.map((src, i) => (
             <button
@@ -137,6 +159,24 @@ export function ProductGallery({ product }: { product: Product }) {
               }`}
             >
               <Image src={src} alt="" fill sizes="80px" className="object-cover" />
+            </button>
+          ))}
+          {videos.map((video, i) => (
+            <button
+              key={video.src}
+              type="button"
+              aria-label={`Putar video produk ${i + 1}`}
+              onClick={() => openViewer(slides.length + i)}
+              className="relative aspect-square overflow-hidden rounded-md border border-border"
+            >
+              {video.poster ? (
+                <Image src={video.poster} alt="" fill sizes="80px" className="object-cover" />
+              ) : (
+                <video src={video.src} muted playsInline preload="metadata" className="size-full object-cover" />
+              )}
+              <span className="absolute inset-0 flex items-center justify-center bg-black/25">
+                <Play className="size-6 fill-white text-white" />
+              </span>
             </button>
           ))}
         </div>
