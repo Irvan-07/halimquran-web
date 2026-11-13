@@ -4,12 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run images && next build",
+    "build": "node scripts/check-storefront-env.mjs && npm run images && next build",
     "start": "next start",
     "lint": "eslint",
     "images": "node scripts/build-image-variants.mjs",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+    "deploy": "npm run check:storefront:live && opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "check:storefront": "node scripts/check-storefront-env.mjs --release",
+    "check:storefront:live": "node scripts/check-storefront-env.mjs --verify-live",
+    "test:storefront": "node --test scripts/check-storefront-env.test.mjs"
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",
